@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Registro_Docente_360_2025/1.0.0": {
+        "runtime": {
+          "Registro_Docente_360_2025.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Registro_Docente_360_2025/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
