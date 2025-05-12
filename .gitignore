@@ -1,0 +1,23 @@
+# Archivos de usuario de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Resultados de compilación
+bin/
+obj/
+Debug/
+Release/
+
+# Archivos de configuración local
+*.userosscache
+*.sln.docstates
+
+# Paquetes NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Otros
+*.log
+*.DS_Store
