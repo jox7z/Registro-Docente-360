@@ -13,7 +13,7 @@ namespace Registro_Docente_360_2025
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuPrincipal()); // Cambia "VentanaFechas" por el nombre de tu formulario
+            Application.Run(new Horario()); // Cambia "VentanaFechas" por el nombre de tu formulario
         }
     }
 }

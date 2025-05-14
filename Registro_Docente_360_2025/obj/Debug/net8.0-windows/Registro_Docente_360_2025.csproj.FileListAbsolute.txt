@@ -21,3 +21,4 @@ Z:\Repos Progra IV\Registro_Docente_360_2025\Registro_Docente_360_2025\obj\Debug
 Z:\Repos Progra IV\Registro_Docente_360_2025\Registro_Docente_360_2025\obj\Debug\net8.0-windows\Registro_Docente_360_2025.Alumnos.resources
 Z:\Repos Progra IV\Registro_Docente_360_2025\Registro_Docente_360_2025\obj\Debug\net8.0-windows\Registro_Docente_360_2025.Horario.resources
 Z:\Repos Progra IV\Registro_Docente_360_2025\Registro_Docente_360_2025\obj\Debug\net8.0-windows\Registro_Docente_360_2025.Reportes.resources
+Z:\Repos Progra IV\Registro_Docente_360_2025\Registro_Docente_360_2025\obj\Debug\net8.0-windows\Registro_Docente_360_2025.sourcelink.json
