@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|z:\\repos progra iv\\registro_docente_360_2025\\registro_docente_360_2025\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|solutionrelative:registro_docente_360_2025\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|z:\\repos progra iv\\registro_docente_360_2025\\registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|solutionrelative:registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|z:\\repos progra iv\\registro_docente_360_2025\\registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|solutionrelative:registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|z:\\repos progra iv\\registro_docente_360_2025\\registro_docente_360_2025\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|solutionrelative:registro_docente_360_2025\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|Z:\\Repos Progra IV\\Registro_Docente_360_2025\\registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{91E06462-024C-4F62-AB95-EBFAECC1C067}|Registro_Docente_360_2025\\Registro_Docente_360_2025.csproj|solutionrelative:registro_docente_360_2025\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,21 +26,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 301,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Horario.cs",
               "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\Registro_Docente_360_2025\\Horario.cs",
               "RelativeDocumentMoniker": "Registro_Docente_360_2025\\Horario.cs",
               "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\Registro_Docente_360_2025\\Horario.cs",
               "RelativeToolTip": "Registro_Docente_360_2025\\Horario.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAuwGYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAD4v7sAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-13T23:34:43.239Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cs [Dise\u00F1o]",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\Registro_Docente_360_2025\\Login.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360_2025\\Login.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\Registro_Docente_360_2025\\Login.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Registro_Docente_360_2025\\Login.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T23:32:17.411Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Bookmark",
@@ -93,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Horario.cs [Dise\u00F1o]",
               "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360_2025\\Registro_Docente_360_2025\\Horario.cs",
               "RelativeDocumentMoniker": "Registro_Docente_360_2025\\Horario.cs",

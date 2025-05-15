@@ -41,11 +41,11 @@
             ColumnJueves = new DataGridViewTextBoxColumn();
             ColumnViernes = new DataGridViewTextBoxColumn();
             label1 = new Label();
-            lblnumseccion = new Label();
             label2 = new Label();
             lblNombreDocente = new Label();
             btnEditarhorario = new Button();
             toolTip1 = new ToolTip(components);
+            txtSeccion = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridHorario).BeginInit();
             SuspendLayout();
             // 
@@ -74,12 +74,14 @@
             // 
             // dataGridHorario
             // 
+            dataGridHorario.BorderStyle = BorderStyle.Fixed3D;
             dataGridHorario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridHorario.Columns.AddRange(new DataGridViewColumn[] { ColumLeccion, ColumnHora, ColumnLunes, ColumMartes, ColumnMiercoles, ColumnJueves, ColumnViernes });
             dataGridHorario.Location = new Point(23, 156);
             dataGridHorario.Name = "dataGridHorario";
             dataGridHorario.Size = new Size(741, 389);
             dataGridHorario.TabIndex = 27;
+            dataGridHorario.CellContentClick += dataGridHorario_CellContentClick;
             // 
             // ColumLeccion
             // 
@@ -122,28 +124,17 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(23, 124);
+            label1.Location = new Point(23, 123);
             label1.Name = "label1";
             label1.Size = new Size(85, 25);
             label1.TabIndex = 29;
             label1.Text = "Sección:";
             // 
-            // lblnumseccion
-            // 
-            lblnumseccion.AutoSize = true;
-            lblnumseccion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblnumseccion.ForeColor = Color.FromArgb(0, 192, 192);
-            lblnumseccion.Location = new Point(104, 125);
-            lblnumseccion.Name = "lblnumseccion";
-            lblnumseccion.Size = new Size(91, 25);
-            lblnumseccion.TabIndex = 30;
-            lblnumseccion.Text = "Numero ";
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(23, 100);
+            label2.Location = new Point(24, 91);
             label2.Name = "label2";
             label2.Size = new Size(96, 25);
             label2.TabIndex = 31;
@@ -154,7 +145,7 @@
             lblNombreDocente.AutoSize = true;
             lblNombreDocente.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombreDocente.ForeColor = Color.FromArgb(0, 192, 192);
-            lblNombreDocente.Location = new Point(108, 100);
+            lblNombreDocente.Location = new Point(109, 91);
             lblNombreDocente.Name = "lblNombreDocente";
             lblNombreDocente.Size = new Size(391, 25);
             lblNombreDocente.TabIndex = 32;
@@ -176,16 +167,27 @@
             btnEditarhorario.UseVisualStyleBackColor = false;
             btnEditarhorario.Click += btnEditarhorario_Click;
             // 
+            // txtSeccion
+            // 
+            txtSeccion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+            txtSeccion.ForeColor = Color.Gray;
+            txtSeccion.Location = new Point(109, 119);
+            txtSeccion.Name = "txtSeccion";
+            txtSeccion.Size = new Size(240, 33);
+            txtSeccion.TabIndex = 35;
+            txtSeccion.Text = "Inserte número de sección";
+            txtSeccion.KeyPress += txtSeccion_KeyPress;
+            // 
             // Horario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(787, 622);
+            Controls.Add(txtSeccion);
             Controls.Add(btnEditarhorario);
             Controls.Add(lblNombreDocente);
             Controls.Add(label2);
-            Controls.Add(lblnumseccion);
             Controls.Add(label1);
             Controls.Add(dataGridHorario);
             Controls.Add(lblHorario);
@@ -211,10 +213,10 @@
         private DataGridViewTextBoxColumn ColumnJueves;
         private DataGridViewTextBoxColumn ColumnViernes;
         private Label label1;
-        private Label lblnumseccion;
         private Label label2;
         private Label lblNombreDocente;
         private Button btnEditarhorario;
         private ToolTip toolTip1;
+        private TextBox txtSeccion;
     }
 }

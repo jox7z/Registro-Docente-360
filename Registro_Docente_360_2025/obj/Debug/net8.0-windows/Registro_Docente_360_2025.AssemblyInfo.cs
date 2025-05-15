@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Registro_Docente_360_2025")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f57caf8e2509176ff7d299382b1000e514b64c4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4878d284734948f9c92cfef7630de38ee6f5c3d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Registro_Docente_360_2025")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Registro_Docente_360_2025")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Drawing.Text;
 
 namespace Registro_Docente_360_2025
 {
@@ -37,12 +39,15 @@ namespace Registro_Docente_360_2025
             };
 
             //visual
+            dataGridHorario.CellValueChanged += dataGridHorario_CellValueChanged;
+            dataGridHorario.CellEndEdit += dataGridHorario_CellEndEdit;
             dataGridHorario.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridHorario.AllowUserToAddRows = false;
             dataGridHorario.ScrollBars = ScrollBars.None;
             dataGridHorario.AllowUserToResizeRows = false;
             dataGridHorario.AllowUserToResizeColumns = false;
             dataGridHorario.RowHeadersVisible = false;
+
 
             //limpiar filas por si acaso se vuelven a cargar
             dataGridHorario.Rows.Clear();
@@ -63,7 +68,12 @@ namespace Registro_Docente_360_2025
             int cantidadFilas = dataGridHorario.Rows.Count;
             dataGridHorario.Height = (altoFila * cantidadFilas) + dataGridHorario.ColumnHeadersHeight + 2;
 
+            //Bloquea la edicion, fuera del modo de edicion
+            dataGridHorario.ReadOnly = true;
+            txtSeccion.ReadOnly = true;
 
+            //permite solo numeros
+            txtSeccion.KeyPress += txtSeccion_KeyPress;
 
 
         }
@@ -86,6 +96,8 @@ namespace Registro_Docente_360_2025
                 btnEditarhorario.Text = "GUARDAR HORARIO";
                 toolTip1.SetToolTip(btnEditarhorario, "Haz clic para guardar los cambios");
                 modoEdicion = true;
+
+                txtSeccion.ReadOnly = false;
             }
             else
             {
@@ -100,11 +112,81 @@ namespace Registro_Docente_360_2025
                 btnEditarhorario.Text = "EDITAR HORARIO";
                 toolTip1.SetToolTip(btnEditarhorario, "Haz clic para editar el horario");
                 modoEdicion = false;
+
+                txtSeccion.ReadOnly = true;
             }
 
 
         }
 
-        
+        //evento de click (lo abri sin querer)
+        private void dataGridHorario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridHorario_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridHorario.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            dataGridHorario.Invalidate(); //refresca visualmente
+        }
+
+        private void dataGridHorario_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 2) return;
+
+            var celda = dataGridHorario.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            string valor = celda.Value?.ToString().Trim().ToLower() ?? "";
+
+            if (valor == "español")
+                celda.Style.BackColor = Color.IndianRed;
+            else if (valor == "matemáticas" || valor == "matematicas")
+                celda.Style.BackColor = Color.Khaki;
+            else if (valor == "ciencias")
+                celda.Style.BackColor = Color.LightGreen;
+            else if (valor == "inglés" || valor == "ingles")
+                celda.Style.BackColor = Color.DodgerBlue;
+            else if (valor == "est. sociales" || valor == "estudios sociales")
+                celda.Style.BackColor = Color.DeepSkyBlue;
+            else
+                celda.Style.BackColor = Color.White;
+
+        }
+
+        private void txtSeccion_Enter(object sender, EventArgs e)
+        {
+
+            if (modoEdicion == false) return;
+
+            if (txtSeccion.Text == "Inserte numero de seccion")
+            {
+                txtSeccion.Text = "";
+                txtSeccion.ForeColor = Color.Black;
+            }
+        }
+        private void txtSeccion_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSeccion.Text))
+            {
+                txtSeccion.Text = "Inserte numero de seccion";
+            }
+        }
+
+        private void txtSeccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; //bloquea la tecla si no es numero 
+            }
+
+            if (e.KeyChar == '-' && (sender as TextBox).Text.Contains("-"))
+            {
+                e.Handled = true;  // Solo permite un guion (no más de uno)
+            }
+
+        }
+
+
     }
 }
