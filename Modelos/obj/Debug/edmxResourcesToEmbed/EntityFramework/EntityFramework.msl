@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Registro_Docente_360ModelStoreContainer" CdmEntityContainer="Registro_Docente_360Entities">
+    <EntitySetMapping Name="Asistencia">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Asistencia">
+        <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="id_asistencia" ColumnName="id_asistencia" />
+          <ScalarProperty Name="id_clase" ColumnName="id_clase" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clases">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Clases">
+        <MappingFragment StoreEntitySet="Clases">
+          <ScalarProperty Name="id_clase" ColumnName="id_clase" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Estudiantes">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+          <ScalarProperty Name="nombre_estudiante" ColumnName="nombre_estudiante" />
+          <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+          <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="telefono_encargado" ColumnName="telefono_encargado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horarios">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Horarios">
+        <MappingFragment StoreEntitySet="Horarios">
+          <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="dia" ColumnName="dia" />
+          <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+          <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materias">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Materias">
+        <MappingFragment StoreEntitySet="Materias">
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="nombre_materia" ColumnName="nombre_materia" />
+          <ScalarProperty Name="descripcion_materia" ColumnName="descripcion_materia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="descripcion_rol" ColumnName="descripcion_rol" />
+          <ScalarProperty Name="estado_rol" ColumnName="estado_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="Registro_Docente_360Model.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="rol_usuario" ColumnName="rol_usuario" />
+          <ScalarProperty Name="estado_usuario" ColumnName="estado_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

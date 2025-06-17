@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Registro_Docente_360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Asistencia">
+    <Key>
+      <PropertyRef Name="id_asistencia" />
+    </Key>
+    <Property Name="id_asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_clase" Type="int" />
+    <Property Name="fecha" Type="date" />
+    <Property Name="estado" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Clases">
+    <Key>
+      <PropertyRef Name="id_clase" />
+    </Key>
+    <Property Name="id_clase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_materia" Type="int" />
+    <Property Name="id_estudiante" Type="int" />
+  </EntityType>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="id_estudiante" />
+    </Key>
+    <Property Name="id_estudiante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_estudiante" Type="varchar" MaxLength="100" />
+    <Property Name="primer_apellido" Type="varchar" MaxLength="100" />
+    <Property Name="segundo_apellido" Type="varchar" MaxLength="100" />
+    <Property Name="cedula" Type="varchar" MaxLength="50" />
+    <Property Name="telefono_encargado" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Horarios">
+    <Key>
+      <PropertyRef Name="id_horario" />
+    </Key>
+    <Property Name="id_horario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_materia" Type="int" />
+    <Property Name="dia" Type="varchar" MaxLength="10" />
+    <Property Name="hora_inicio" Type="time" Precision="7" />
+    <Property Name="hora_fin" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="Materias">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_materia" Type="varchar" MaxLength="100" />
+    <Property Name="descripcion_materia" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_rol" Type="varchar" MaxLength="100" />
+    <Property Name="descripcion_rol" Type="varchar" MaxLength="250" />
+    <Property Name="estado_rol" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_usuario" Type="varchar" MaxLength="100" />
+    <Property Name="correo" Type="varchar" MaxLength="100" />
+    <Property Name="contraseña" Type="varchar" MaxLength="255" />
+    <Property Name="fecha_registro" Type="datetime" />
+    <Property Name="rol_usuario" Type="int" />
+    <Property Name="estado_usuario" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <Association Name="FK__Asistenci__id_cl__4E88ABD4">
+    <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clases">
+        <PropertyRef Name="id_clase" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="id_clase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__id_estud__49C3F6B7">
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="0..1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiantes">
+        <PropertyRef Name="id_estudiante" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="id_estudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__id_mater__48CFD27E">
+    <End Role="Materias" Type="Self.Materias" Multiplicity="0..1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materias">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__id_usuar__47DBAE45">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Horarios__id_mat__44FF419A">
+    <End Role="Materias" Type="Self.Materias" Multiplicity="0..1" />
+    <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materias">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="Horarios">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Horarios__id_usu__440B1D61">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Horarios">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__rol_us__3B75D760">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="rol_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Registro_Docente_360ModelStoreContainer">
+    <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clases" EntityType="Self.Clases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materias" EntityType="Self.Materias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Asistenci__id_cl__4E88ABD4" Association="Self.FK__Asistenci__id_cl__4E88ABD4">
+      <End Role="Clases" EntitySet="Clases" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__id_estud__49C3F6B7" Association="Self.FK__Clases__id_estud__49C3F6B7">
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__id_mater__48CFD27E" Association="Self.FK__Clases__id_mater__48CFD27E">
+      <End Role="Materias" EntitySet="Materias" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__id_usuar__47DBAE45" Association="Self.FK__Clases__id_usuar__47DBAE45">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Horarios__id_mat__44FF419A" Association="Self.FK__Horarios__id_mat__44FF419A">
+      <End Role="Materias" EntitySet="Materias" />
+      <End Role="Horarios" EntitySet="Horarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Horarios__id_usu__440B1D61" Association="Self.FK__Horarios__id_usu__440B1D61">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Horarios" EntitySet="Horarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__rol_us__3B75D760" Association="Self.FK__Usuarios__rol_us__3B75D760">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

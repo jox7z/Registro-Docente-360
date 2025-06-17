@@ -1,0 +1,5 @@
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.csproj.AssemblyReference.cache
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.MenuPrincipal.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Properties.Resources.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.csproj.GenerateResource.cache
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.csproj.CoreCompileInputs.cache
