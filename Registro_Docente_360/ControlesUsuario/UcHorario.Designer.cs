@@ -50,7 +50,7 @@ namespace Registro_Docente_360.ControlesUsuario
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.pnEditarHorario, 0, 4);
@@ -116,7 +116,7 @@ namespace Registro_Docente_360.ControlesUsuario
             // 
             // txtSeccion
             // 
-            this.txtSeccion.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtSeccion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.txtSeccion.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSeccion.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.txtSeccion.ForeColor = System.Drawing.Color.Gray;

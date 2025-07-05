@@ -70,7 +70,7 @@
             // 
             // tableLayoutPanelfondo
             // 
-            this.tableLayoutPanelfondo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tableLayoutPanelfondo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.tableLayoutPanelfondo.ColumnCount = 1;
             this.tableLayoutPanelfondo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelfondo.Controls.Add(this.dataGridPerso1, 0, 1);
@@ -89,7 +89,7 @@
             // 
             // dataGridPerso1
             // 
-            this.dataGridPerso1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.dataGridPerso1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.dataGridPerso1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPerso1.EncabezadoColumna0 = "Estudiante";
             this.dataGridPerso1.Location = new System.Drawing.Point(3, 109);
@@ -100,7 +100,7 @@
             // 
             // tableLayoutPaneltitulos
             // 
-            this.tableLayoutPaneltitulos.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tableLayoutPaneltitulos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.tableLayoutPaneltitulos.ColumnCount = 1;
             this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));

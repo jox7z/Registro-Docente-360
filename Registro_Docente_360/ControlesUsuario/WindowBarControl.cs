@@ -23,11 +23,16 @@ namespace Registro_Docente_360.ControlesUsuario
             if (parent != null)
             {
                 if (parent.WindowState == FormWindowState.Maximized)
+                {
                     parent.WindowState = FormWindowState.Normal;
+                }
                 else
+                {
                     parent.WindowState = FormWindowState.Maximized;
+                }
             }
         }
+
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {

@@ -3,13 +3,6 @@ Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Modelos.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Modelos.pdb
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.SqlServer.dll
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.xml
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.SqlServer.xml
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.AssemblyReference.cache
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.CoreCompileInputs.cache
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.Up2Date
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.dll
-Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.pdb
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
@@ -25,6 +18,8 @@ Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Runtime.Compile
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Text.Encodings.Web.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Threading.Tasks.Extensions.dll
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.ValueTuple.dll
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.xml
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\EntityFramework.SqlServer.xml
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
@@ -38,3 +33,8 @@ Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Runtime.Compile
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Text.Encodings.Web.xml
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.Threading.Tasks.Extensions.xml
 Z:\Repos Progra IV\Registro_Docente_360\Modelos\bin\Debug\System.ValueTuple.xml
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.AssemblyReference.cache
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.CoreCompileInputs.cache
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.csproj.Up2Date
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.dll
+Z:\Repos Progra IV\Registro_Docente_360\Modelos\obj\Debug\Modelos.pdb
