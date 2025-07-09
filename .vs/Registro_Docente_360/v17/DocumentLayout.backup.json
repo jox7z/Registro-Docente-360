@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "Z:\\Repos Progra IV\\Registro_Docente_360\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\forms\\formevento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\forms\\formevento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\forms\\menuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\forms\\menuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|Z:\\Repos Progra IV\\Registro_Docente_360\\registro_docente_360\\controlesusuario\\uccalendario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\uccalendario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\forms\\menuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\forms\\menuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\forms\\formevento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\forms\\formevento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\controlesusuario\\botonayuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\botonayuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|Z:\\Repos Progra IV\\Registro_Docente_360\\registro_docente_360\\controlesusuario\\ucdias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\ucdias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\controlesusuario\\botonayuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\botonayuda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|Z:\\Repos Progra IV\\Registro_Docente_360\\registro_docente_360\\controlesusuario\\uccalendario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\uccalendario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\controlesusuario\\ucnotas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\ucnotas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\controlesusuario\\ucdias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\ucdias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|z:\\repos progra iv\\registro_docente_360\\registro_docente_360\\controlesusuario\\ucnotas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1FDD1F0-2845-4D55-A011-85C7F35566FD}|Registro_Docente_360\\Vistas.csproj|solutionrelative:registro_docente_360\\controlesusuario\\ucnotas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 469,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -79,76 +79,76 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FormEvento.cs",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\FormEvento.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\Forms\\FormEvento.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\FormEvento.cs",
-              "RelativeToolTip": "Registro_Docente_360\\Forms\\FormEvento.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Title": "BotonAyuda.cs",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T01:02:23.077Z",
+              "WhenOpened": "2025-07-09T00:06:13.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BotonAyuda.cs [Dise\u00F1o]",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\BotonAyuda.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T00:04:25.572Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MenuPrincipal.cs",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\MenuPrincipal.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\Forms\\MenuPrincipal.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\MenuPrincipal.cs*",
+              "RelativeToolTip": "Registro_Docente_360\\Forms\\MenuPrincipal.cs*",
+              "ViewState": "AgIAABcAAAAAAAAAAAAwwDMAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T23:48:09.989Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FormEvento.cs [Dise\u00F1o]",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\FormEvento.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\Forms\\FormEvento.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\FormEvento.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Registro_Docente_360\\Forms\\FormEvento.cs [Dise\u00F1o]",
+              "Title": "MenuPrincipal.cs [Dise\u00F1o]",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\MenuPrincipal.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\Forms\\MenuPrincipal.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\Forms\\MenuPrincipal.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "Registro_Docente_360\\Forms\\MenuPrincipal.cs [Dise\u00F1o]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T00:56:26.987Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UcDias.cs",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T00:47:05.572Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UcCalendario.cs [Dise\u00F1o]",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T00:07:23.281Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UcDias.cs [Dise\u00F1o]",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcDias.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcDias.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcDias.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T23:36:39.935Z",
+              "WhenOpened": "2025-07-08T23:48:07.009Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "UcCalendario.cs",
-              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcCalendario.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAowB0AAAAeAAAAAAAAAA==",
+              "Title": "UcNotas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcNotas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcNotas.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T23:09:50.849Z",
+              "WhenOpened": "2025-07-08T23:45:15.123Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UcNotas.cs",
+              "DocumentMoniker": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "RelativeDocumentMoniker": "Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "ToolTip": "Z:\\Repos Progra IV\\Registro_Docente_360\\Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "RelativeToolTip": "Registro_Docente_360\\ControlesUsuario\\UcNotas.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAcwHYAAAB8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T23:02:33.333Z",
               "EditorCaption": ""
             }
           ]

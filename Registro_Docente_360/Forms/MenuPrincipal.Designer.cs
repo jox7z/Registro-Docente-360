@@ -52,7 +52,6 @@
             this.btnConfiguracion = new System.Windows.Forms.Button();
             this.sidebarTransition = new System.Windows.Forms.Timer(this.components);
             this.panelContenedor = new System.Windows.Forms.Panel();
-            this.pictureAyuda = new System.Windows.Forms.PictureBox();
             this.windowBarControl1 = new Registro_Docente_360.ControlesUsuario.WindowBarControl();
             this.paneltop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHam)).BeginInit();
@@ -65,8 +64,6 @@
             this.panel2.SuspendLayout();
             this.pnSobreNosotros.SuspendLayout();
             this.pnConfiguracion.SuspendLayout();
-            this.panelContenedor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAyuda)).BeginInit();
             this.SuspendLayout();
             // 
             // paneltop
@@ -266,6 +263,7 @@
             this.btnNotas.Text = "           Notas";
             this.btnNotas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotas.UseVisualStyleBackColor = false;
+            this.btnNotas.Click += new System.EventHandler(this.btnNotas_Click);
             // 
             // panel2
             // 
@@ -358,7 +356,6 @@
             // panelContenedor
             // 
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panelContenedor.Controls.Add(this.pictureAyuda);
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedor.Location = new System.Drawing.Point(0, 0);
             this.panelContenedor.Name = "panelContenedor";
@@ -366,17 +363,6 @@
             this.panelContenedor.Size = new System.Drawing.Size(981, 555);
             this.panelContenedor.TabIndex = 3;
             this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenedor_Paint_1);
-            // 
-            // pictureAyuda
-            // 
-            this.pictureAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureAyuda.Image = ((System.Drawing.Image)(resources.GetObject("pictureAyuda.Image")));
-            this.pictureAyuda.Location = new System.Drawing.Point(930, 504);
-            this.pictureAyuda.Name = "pictureAyuda";
-            this.pictureAyuda.Size = new System.Drawing.Size(39, 39);
-            this.pictureAyuda.TabIndex = 0;
-            this.pictureAyuda.TabStop = false;
-            this.pictureAyuda.Click += new System.EventHandler(this.pictureAyuda_Click);
             // 
             // windowBarControl1
             // 
@@ -414,8 +400,6 @@
             this.panel2.ResumeLayout(false);
             this.pnSobreNosotros.ResumeLayout(false);
             this.pnConfiguracion.ResumeLayout(false);
-            this.panelContenedor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAyuda)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -445,6 +429,5 @@
         private System.Windows.Forms.Button btnNotas;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnCalendario;
-        private System.Windows.Forms.PictureBox pictureAyuda;
     }
 }

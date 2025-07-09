@@ -126,6 +126,12 @@
     <Compile Include="ControlesUsuario\dataGridPerso2.Designer.cs">
       <DependentUpon>dataGridPerso2.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlesUsuario\dataGridPersoNotas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\dataGridPersoNotas.Designer.cs">
+      <DependentUpon>dataGridPersoNotas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlesUsuario\LoginTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -143,6 +149,12 @@
     </Compile>
     <Compile Include="ControlesUsuario\UcHorario.Designer.cs">
       <DependentUpon>UcHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcNotas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcNotas.Designer.cs">
+      <DependentUpon>UcNotas.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlesUsuario\UcReportes.cs">
       <SubType>UserControl</SubType>
@@ -175,6 +187,12 @@
       <DependentUpon>WindowBarControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Eventos\FechaSeleccionadaEventArgs.cs" />
+    <Compile Include="ControlesUsuario\BotonAyuda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\BotonAyuda.Designer.cs">
+      <DependentUpon>BotonAyuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormEvento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,11 +234,17 @@
     <Compile Include="ControlesUsuario\UcDias.Designer.cs">
       <DependentUpon>UcDias.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ControlesUsuario\BotonAyuda.resx">
+      <DependentUpon>BotonAyuda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\dataGridPerso.resx">
       <DependentUpon>dataGridPerso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\dataGridPerso2.resx">
       <DependentUpon>dataGridPerso2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\dataGridPersoNotas.resx">
+      <DependentUpon>dataGridPersoNotas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\LoginTextBox.resx">
       <DependentUpon>LoginTextBox.cs</DependentUpon>
@@ -230,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\UcHorario.resx">
       <DependentUpon>UcHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\UcNotas.resx">
+      <DependentUpon>UcNotas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\UcReportes.resx">
       <DependentUpon>UcReportes.cs</DependentUpon>

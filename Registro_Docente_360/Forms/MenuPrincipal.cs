@@ -20,8 +20,8 @@ namespace Registro_Docente_360
         UcReportes ucReportes;
         UcAcercaDe ucAcercaDe;
         UcCalendario ucCalendario;
-
-        ToolTip ayudaToolTip = new ToolTip();
+        UcNotas ucNotas;
+        BotonAyuda botonAyuda;
         bool sidebarExpand = true;
 
         // ======================
@@ -47,16 +47,24 @@ namespace Registro_Docente_360
             this.WindowState = FormWindowState.Normal;
             this.Size = new System.Drawing.Size(1280, 720);
 
+            botonAyuda = new BotonAyuda();
+            botonAyuda.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            this.Controls.Add(botonAyuda);
+            botonAyuda.BringToFront();
+            botonAyuda.Location = new System.Drawing.Point(
+                this.ClientSize.Width - botonAyuda.Width - 20,
+                this.ClientSize.Height - botonAyuda.Height - 20
+            );
 
-            this.Resize += (s, e) => PosicionarBotonAyuda();
-            PosicionarBotonAyuda();
+            this.Resize += (s, e) =>
+            {
+                botonAyuda.Location = new System.Drawing.Point(
+                    this.ClientSize.Width - botonAyuda.Width - 20,
+                    this.ClientSize.Height - botonAyuda.Height - 20
+                );
+            };
 
-            ayudaToolTip.IsBalloon = true;
-            ayudaToolTip.AutoPopDelay = 5000;
-            ayudaToolTip.InitialDelay = 500;
-            ayudaToolTip.ReshowDelay = 100;
-            ayudaToolTip.ShowAlways = true;
-            ayudaToolTip.SetToolTip(pictureAyuda, "Haz clic para obtener ayuda");
+
 
             AjustarPaddingContenedor();
         }
@@ -126,15 +134,11 @@ namespace Registro_Docente_360
 
             control.Visible = true;
             control.BringToFront();
+
+          
         }
 
-        private void PosicionarBotonAyuda()
-        {
-            int margen = 20;
-            pictureAyuda.Left = this.ClientSize.Width - pictureAyuda.Width - margen;
-            pictureAyuda.Top = this.ClientSize.Height - pictureAyuda.Height - margen;
-            pictureAyuda.BringToFront(); // para que quede por encima de todo
-        }
+     
 
         // ========================
         // EVENTOS DE BOTONES DEL MENÚ
@@ -190,6 +194,14 @@ namespace Registro_Docente_360
             MostrarUserControl(ucCalendario);
         }
 
+        private void btnNotas_Click(object sender, EventArgs e)
+        {
+            if (ucNotas == null)
+                ucNotas = new UcNotas();
+
+            MostrarUserControl(ucNotas);
+        }
+
         // ========================
         // EVENTOS DE OTROS COMPONENTES
         // ========================
@@ -210,6 +222,13 @@ namespace Registro_Docente_360
             panelContenedor.Controls.Clear();
             panelContenedor.Controls.Add(ucAsistencia);
         }
+
+        private void botonAyuda1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void paneltop_MouseDown_1(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
