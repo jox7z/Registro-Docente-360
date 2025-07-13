@@ -21,6 +21,12 @@ namespace Registro_Docente_360.ControlesUsuario
         // Inicializa columnas y filas del horario
         private void UcHorario_Load(object sender, EventArgs e)
         {
+
+            // Eventos
+            dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_CellValueChanged;
+            dataGridPerso1.Grid.CellEndEdit += dataGridPerso1_CellEndEdit;
+            dataGridPerso1.Grid.CellMouseMove += Grid_CellMouseMove;
+
             string[] horas = {
                 "7:00 A 7:40", "7:40 A 8:20", "8:35 A 9:15", "9:15 A 9:55",
                 "10:05 A 10:45", "10:45 A 11:25", "11:30 A 12:10",
@@ -28,7 +34,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 "2:40 A 3:20", "3:35 A 4:15", "4:15 A 4:55", "5:00 A 5:40"
             };
 
-            string[] materias = { "", "Español", "Matemáticas", "Ciencias", "Est. Sociales" };
+            string[] materias = { "", "Español", "Matemáticas", "Ciencias", "Est. Sociales", "Complementarias" };
             string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
 
             dataGridPerso1.Grid.Columns.Clear();
@@ -89,10 +95,20 @@ namespace Registro_Docente_360.ControlesUsuario
             if (valor == "español") celda.Style.BackColor = Color.IndianRed;
             else if (valor == "matemáticas" || valor == "matematicas") celda.Style.BackColor = Color.Khaki;
             else if (valor == "ciencias") celda.Style.BackColor = Color.LightGreen;
-            else if (valor == "inglés" || valor == "ingles") celda.Style.BackColor = Color.DodgerBlue;
             else if (valor == "est. sociales" || valor == "estudios sociales") celda.Style.BackColor = Color.DeepSkyBlue;
-            else celda.Style.BackColor = Color.White;
+            else if (valor == "complementarias" ) celda.Style.BackColor = Color.MediumPurple;
+            else
+            {
+                // Si es una fila de la tarde (de la 8 en adelante)
+                if (e.RowIndex >= 7)
+                    celda.Style.BackColor = Color.LightYellow;
+                else
+                    celda.Style.BackColor = Color.White;
+            }
+  
         }
+
+
 
         private void dataGridPerso1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -152,6 +168,27 @@ namespace Registro_Docente_360.ControlesUsuario
                 tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
                 modoEdicion = false;
             }
+        }
+
+        private void Grid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!modoEdicion)
+            {
+                dataGridPerso1.Grid.Cursor = Cursors.Default;
+                return;
+            }
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 2)
+            {
+                var col = dataGridPerso1.Grid.Columns[e.ColumnIndex];
+                if (col is DataGridViewComboBoxColumn)
+                {
+                    dataGridPerso1.Grid.Cursor = Cursors.Hand;
+                    return;
+                }
+            }
+
+            dataGridPerso1.Grid.Cursor = Cursors.Default;
         }
     }
 }

@@ -138,6 +138,12 @@
     <Compile Include="ControlesUsuario\LoginTextBox.Designer.cs">
       <DependentUpon>LoginTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlesUsuario\UcCambiarContra.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcCambiarContra.Designer.cs">
+      <DependentUpon>UcCambiarContra.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlesUsuario\UcFechas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="ControlesUsuario\UcHorario.Designer.cs">
       <DependentUpon>UcHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcInfoCuenta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcInfoCuenta.Designer.cs">
+      <DependentUpon>UcInfoCuenta.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlesUsuario\UcNotas.cs">
       <SubType>UserControl</SubType>
@@ -211,6 +223,18 @@
     <Compile Include="ControlesUsuario\UcAlumnos.Designer.cs">
       <DependentUpon>UcAlumnos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlesUsuario\UcConfiguracion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcConfiguracion.Designer.cs">
+      <DependentUpon>UcConfiguracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcBienvenida.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesUsuario\UcBienvenida.Designer.cs">
+      <DependentUpon>UcBienvenida.cs</DependentUpon>
+    </Compile>
     <Compile Include="GradientPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -249,11 +273,23 @@
     <EmbeddedResource Include="ControlesUsuario\LoginTextBox.resx">
       <DependentUpon>LoginTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\UcBienvenida.resx">
+      <DependentUpon>UcBienvenida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\UcCambiarContra.resx">
+      <DependentUpon>UcCambiarContra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\UcConfiguracion.resx">
+      <DependentUpon>UcConfiguracion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\UcFechas.resx">
       <DependentUpon>UcFechas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\UcHorario.resx">
       <DependentUpon>UcHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesUsuario\UcInfoCuenta.resx">
+      <DependentUpon>UcInfoCuenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\UcNotas.resx">
       <DependentUpon>UcNotas.cs</DependentUpon>

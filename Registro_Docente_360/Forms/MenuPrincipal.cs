@@ -21,6 +21,10 @@ namespace Registro_Docente_360
         UcAcercaDe ucAcercaDe;
         UcCalendario ucCalendario;
         UcNotas ucNotas;
+        UcConfiguracion ucConfiguracion;
+        UcCambiarContra ucCambiarContra;
+        UcInfoCuenta ucInfoCuenta;
+        UcBienvenida ucBienvenida;
         BotonAyuda botonAyuda;
         bool sidebarExpand = true;
 
@@ -64,10 +68,13 @@ namespace Registro_Docente_360
                 );
             };
 
-
-
             AjustarPaddingContenedor();
+
+            // Cargar bienvenida al iniciar
+            ucBienvenida = new UcBienvenida();
+            MostrarUserControl(ucBienvenida);
         }
+
 
         private void AjustarPaddingContenedor()
         {
@@ -121,6 +128,9 @@ namespace Registro_Docente_360
         // ========================
         // MÉTODOS DE NAVEGACIÓN
         // ========================
+
+       
+
         private void MostrarUserControl(UserControl control)
         {
             foreach (Control c in panelContenedor.Controls)
@@ -135,7 +145,8 @@ namespace Registro_Docente_360
             control.Visible = true;
             control.BringToFront();
 
-          
+
+
         }
 
      
@@ -152,6 +163,19 @@ namespace Registro_Docente_360
             }
 
             MostrarUserControl(ucFechas);
+        }
+
+        private void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
+        {
+            var ucAsistencia = new UcVentanaAsistencia
+            {
+                Dock = DockStyle.Fill
+            };
+
+            ucAsistencia.ActualizarCabecera("Tomar de la ventana horario", e.Anho, e.FechaInicio, e.FechaFin);
+
+            panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Add(ucAsistencia);
         }
 
         private void btnHorario_Click(object sender, EventArgs e)
@@ -202,6 +226,33 @@ namespace Registro_Docente_360
             MostrarUserControl(ucNotas);
         }
 
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+            if (ucConfiguracion == null)
+            {
+                ucConfiguracion = new UcConfiguracion();
+                ucConfiguracion.OnSolicitarCambioContrasena += UcConfiguracion_OnSolicitarCambioContrasena;
+                ucConfiguracion.OnSolicitarInfoCuenta += UcConfiguracion_OnSolicitarInfoCuenta;
+            }
+
+            MostrarUserControl(ucConfiguracion);
+        }
+        private void UcConfiguracion_OnSolicitarCambioContrasena(object sender, EventArgs e)
+        {
+            if (ucCambiarContra == null)
+                ucCambiarContra = new UcCambiarContra();
+
+            MostrarUserControl(ucCambiarContra);
+        }
+
+        private void UcConfiguracion_OnSolicitarInfoCuenta(object sender, EventArgs e)
+        {
+            if (ucInfoCuenta == null)
+                ucInfoCuenta = new UcInfoCuenta();
+
+            MostrarUserControl(ucInfoCuenta);
+        }
+
         // ========================
         // EVENTOS DE OTROS COMPONENTES
         // ========================
@@ -209,25 +260,6 @@ namespace Registro_Docente_360
         {
             // aquí va lo que vaya a cargar en Ayuda
         }
-
-        private void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
-        {
-            var ucAsistencia = new UcVentanaAsistencia
-            {
-                Dock = DockStyle.Fill
-            };
-
-            ucAsistencia.ActualizarCabecera("Tomar de la ventana horario", e.Anho, e.FechaInicio, e.FechaFin);
-
-            panelContenedor.Controls.Clear();
-            panelContenedor.Controls.Add(ucAsistencia);
-        }
-
-        private void botonAyuda1_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void paneltop_MouseDown_1(object sender, MouseEventArgs e)
         {

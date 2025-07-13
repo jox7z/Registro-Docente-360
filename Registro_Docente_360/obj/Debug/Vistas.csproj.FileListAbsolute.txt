@@ -65,3 +65,7 @@ Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.cs
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcConfiguracion.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcCambiarContra.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcInfoCuenta.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcBienvenida.resources
