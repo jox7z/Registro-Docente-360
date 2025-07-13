@@ -1,0 +1,22 @@
+# Carpetas de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Archivos de compilación
+bin/
+obj/
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Archivos de VS Code (si usás)
+.vscode/
+
+# Archivos de configuración de entorno
+*.env
+
+# Otros comunes en C#
+*.cache
+*.pdb
