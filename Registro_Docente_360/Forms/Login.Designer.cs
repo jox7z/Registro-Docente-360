@@ -111,6 +111,7 @@ namespace Registro_Docente_360
             this.textClave.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.textClave.Size = new System.Drawing.Size(191, 41);
             this.textClave.TabIndex = 7;
+            this.textClave.Texto = "";
             // 
             // textUsuario
             // 
@@ -122,6 +123,7 @@ namespace Registro_Docente_360
             this.textUsuario.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.textUsuario.Size = new System.Drawing.Size(191, 41);
             this.textUsuario.TabIndex = 6;
+            this.textUsuario.Texto = "";
             // 
             // gradientPanel1
             // 
@@ -137,7 +139,6 @@ namespace Registro_Docente_360
             this.gradientPanel1.Name = "gradientPanel1";
             this.gradientPanel1.Size = new System.Drawing.Size(353, 397);
             this.gradientPanel1.TabIndex = 0;
-            this.gradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.gradientPanel1_Paint_1);
             // 
             // lbllogin5
             // 
@@ -222,6 +223,7 @@ namespace Registro_Docente_360
             this.Controls.Add(this.lblOlvidoContra);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio de sesión";
             this.Load += new System.EventHandler(this.Login_Load);
             this.gradientPanel1.ResumeLayout(false);

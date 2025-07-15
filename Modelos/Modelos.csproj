@@ -106,40 +106,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityFramework\Asistencia.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Bitacora_Movimientos.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Calendario.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Clases.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\EntityFramework.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityFramework.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\EntityFramework.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityFramework.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\EntityFramework.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityFramework.edmx</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Estudiantes.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Horarios.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Materias.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Notas.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\RegistroDocenteModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistroDocenteModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\RegistroDocenteModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\RegistroDocenteModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistroDocenteModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Reportes.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Roles.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Secciones.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Usuarios.cs">
-      <DependentUpon>EntityFramework.tt</DependentUpon>
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,25 +163,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="EntityFramework\EntityFramework.edmx">
+    <EntityDeploy Include="EntityFramework\RegistroDocenteModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntityFramework.Designer.cs</LastGenOutput>
+      <LastGenOutput>RegistroDocenteModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityFramework\EntityFramework.edmx.diagram">
-      <DependentUpon>EntityFramework.edmx</DependentUpon>
+    <None Include="EntityFramework\RegistroDocenteModel.edmx.diagram">
+      <DependentUpon>RegistroDocenteModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityFramework\EntityFramework.Context.tt">
+    <Content Include="EntityFramework\RegistroDocenteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityFramework.edmx</DependentUpon>
-      <LastGenOutput>EntityFramework.Context.cs</LastGenOutput>
+      <DependentUpon>RegistroDocenteModel.edmx</DependentUpon>
+      <LastGenOutput>RegistroDocenteModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EntityFramework\EntityFramework.tt">
+    <Content Include="EntityFramework\RegistroDocenteModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityFramework.edmx</DependentUpon>
-      <LastGenOutput>EntityFramework.cs</LastGenOutput>
+      <DependentUpon>RegistroDocenteModel.edmx</DependentUpon>
+      <LastGenOutput>RegistroDocenteModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

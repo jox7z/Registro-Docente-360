@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Registro_Docente_360.ControlesUsuario;
 using Registro_Docente_360.Controladores;
+using Modelos.EntityFramework;
+using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.Forms
 {
@@ -37,6 +39,7 @@ namespace Registro_Docente_360.Forms
             tablaAlumnos.Grid.Columns.Add("colApellido1", "Primer Apellido");
             tablaAlumnos.Grid.Columns.Add("colApellido2", "Segundo Apellido");
             tablaAlumnos.Grid.Columns.Add("colNombre", "Nombre");
+            tablaAlumnos.Grid.Columns.Add("colTelefono", "Telefono Encargado");
 
             tablaAlumnos.Grid.ReadOnly = true;
             tablaAlumnos.Grid.AllowUserToAddRows = false;
@@ -46,6 +49,31 @@ namespace Registro_Docente_360.Forms
 
             tablaAlumnos.Grid.EditingControlShowing += Grid_EditingControlShowing;
             tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
+
+
+
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+
+                lblNomDocente.Text = usuario.nombre_usuario;
+                label1.Text = $"{seccion.nombre_seccion}";
+
+            }
+
+            var estudiantes = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
+
+            foreach (var estudiante in estudiantes)
+            {
+                tablaAlumnos.Grid.Rows.Add(
+                    estudiante.cedula_estudiante,
+                    estudiante.primer_apellido,
+                    estudiante.segundo_apellido,
+                    estudiante.nombre_estudiante,
+                    estudiante.telefono_encargado);
+            }
+
         }
 
         /// <summary>
@@ -53,22 +81,27 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void Grid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (tablaAlumnos.Grid.CurrentCell != null &&
-                tablaAlumnos.Grid.CurrentCell.ColumnIndex == tablaAlumnos.Grid.Columns["colCedula"].Index)
+            if (e.Control is TextBox tb)
             {
-                if (e.Control is TextBox tb)
+                // Limpia todos los eventos previos para evitar duplicaciones o efectos cruzados
+                tb.KeyPress -= Cedula_KeyPress;
+                tb.KeyPress -= Telefono_KeyPress;
+
+                var currentColumn = tablaAlumnos.Grid.Columns[tablaAlumnos.Grid.CurrentCell.ColumnIndex].Name;
+
+                if (currentColumn == "colCedula")
                 {
                     tb.CharacterCasing = CharacterCasing.Upper;
-                    tb.KeyPress -= Cedula_KeyPress;
                     tb.KeyPress += Cedula_KeyPress;
                 }
-            }
-            else
-            {
-                if (e.Control is TextBox tb)
+                else if (currentColumn == "colTelefono")
                 {
                     tb.CharacterCasing = CharacterCasing.Normal;
-                    tb.KeyPress -= Cedula_KeyPress;
+                    tb.KeyPress += Telefono_KeyPress;
+                }
+                else
+                {
+                    tb.CharacterCasing = CharacterCasing.Normal;
                 }
             }
         }
@@ -101,10 +134,28 @@ namespace Registro_Docente_360.Forms
             }
         }
 
+        private void Telefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            // Solo permitir números y backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            // Limitar a 8 dígitos
+            if (!char.IsControl(e.KeyChar) && tb.Text.Length >= 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+
         /// <summary>
         /// Activa y desactiva el modo de edición en la tabla.
         /// </summary>
-        private void btnEditarHorario_Click_1(object sender, EventArgs e)
+        private void btnEditarAlumnos_Click(object sender, EventArgs e)
         {
             if (!modoEdicion)
             {
@@ -122,8 +173,8 @@ namespace Registro_Docente_360.Forms
                 }
 
                 this.BackColor = Color.FromArgb(230, 255, 245);
-                btnEditarHorario.Text = "TERMINAR EDICIÓN";
-                tooltipAlumnos.SetToolTip(btnEditarHorario, "Haz clic para guardar los cambios");
+                btnEditarAlumnos.Text = "TERMINAR EDICIÓN";
+                tooltipAlumnos.SetToolTip(btnEditarAlumnos, "Haz clic para guardar los cambios");
                 modoEdicion = true;
                 PanelAcciones.Visible = true;
             }
@@ -134,11 +185,11 @@ namespace Registro_Docente_360.Forms
                 lblAlumnos.Font = new Font("Segoe UI", 21, FontStyle.Bold);
 
                 tablaAlumnos.Grid.ReadOnly = true;
-                tooltipAlumnos.SetToolTip(btnEditarHorario, "Haz clic para editar los datos");
+                tooltipAlumnos.SetToolTip(btnEditarAlumnos, "Haz clic para editar los datos");
                 this.BackColor = SystemColors.Control;
 
                 PanelAcciones.Visible = false;
-                btnEditarHorario.Text = "EDITAR ALUMNOS";
+                btnEditarAlumnos.Text = "EDITAR ALUMNOS";
                 modoEdicion = false;
             }
         }
@@ -163,7 +214,22 @@ namespace Registro_Docente_360.Forms
                 var confirm = MessageBox.Show("¿Seguro que quiere eliminar la fila?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirm == DialogResult.Yes)
                 {
-                    tablaAlumnos.Grid.Rows.Remove(fila);
+                    string cedula = fila.Cells["colCedula"].Value?.ToString();
+
+                    if (!string.IsNullOrEmpty(cedula))
+                    {
+                        try
+                        {
+                            alumnoController.EliminarEstudiantePorCedula(cedula);
+                            tablaAlumnos.Grid.Rows.Remove(fila);
+                            MessageBox.Show("Estudiante eliminado correctamente");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al eliminar el estudiante " + ex.Message);
+                        }
+                    }
                 }
             }
             else
@@ -178,7 +244,44 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // TODO: Conectar este evento con un controlador que guarde los datos en la base de datos.
+            List<Estudiantes> listaEstudiantes = new List<Estudiantes>();
+
+            foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows)
+            {
+                if (fila.IsNewRow) continue;
+                var cedula_estudiante = fila.Cells["colCedula"].Value?.ToString()?.Trim();
+                var nombre_estudiante = fila.Cells["colNombre"].Value?.ToString()?.Trim();
+                var primer_apellido = fila.Cells["colApellido1"].Value?.ToString()?.Trim();
+                var segundo_apellido = fila.Cells["colApellido2"].Value?.ToString()?.Trim();
+                var telefono_encargado = fila.Cells["colTelefono"].Value?.ToString()?.Trim();
+
+                listaEstudiantes.Add(new Estudiantes
+                {
+                    cedula_estudiante = cedula_estudiante,
+                    nombre_estudiante = nombre_estudiante,
+                    primer_apellido = primer_apellido,
+                    segundo_apellido = segundo_apellido,
+                    telefono_encargado = telefono_encargado
+                });
+            }
+
+            try
+            {
+                int idSeccionDocente;
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    idSeccionDocente = contexto.Usuarios
+                        .Where(u => u.id_usuario == Sesion.IdUsuario)
+                        .Select(u => u.id_seccion ?? 0)
+                        .FirstOrDefault();
+                }
+                alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente);
+                MessageBox.Show("Estudiantes guardados correctamente");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar los estudiantes: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -192,10 +295,5 @@ namespace Registro_Docente_360.Forms
                 // TODO: Implementar recarga de datos desde la base de datos.
             }
         }
-
-        private void tablaAlumnos_Load(object sender, EventArgs e) { }
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
-        private void dataGridPerso1_Load(object sender, EventArgs e) { }
-        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e) { }
     }
 }

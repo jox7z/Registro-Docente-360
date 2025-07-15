@@ -90,7 +90,15 @@ namespace Registro_Docente_360
         // ========================
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            // No se usa por ahora
+            if (Sesion.IdRol == 1) //admin
+            {
+
+            }
+
+            else if (Sesion.IdRol == 2)//docente
+            {
+
+            }
         }
 
         // ========================
