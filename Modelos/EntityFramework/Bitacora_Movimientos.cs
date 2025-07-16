@@ -12,16 +12,15 @@ namespace Modelos.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Horarios
+    public partial class Bitacora_Movimientos
     {
-        public int id_horario { get; set; }
+        public int id_movimiento { get; set; }
         public Nullable<int> id_usuario { get; set; }
-        public Nullable<int> id_materia { get; set; }
-        public string dia { get; set; }
-        public Nullable<System.TimeSpan> hora_inicio { get; set; }
-        public Nullable<System.TimeSpan> hora_fin { get; set; }
+        public string accion { get; set; }
+        public string descripcion { get; set; }
+        public Nullable<System.DateTime> fecha_hora { get; set; }
+        public string modulo { get; set; }
     
-        public virtual Materias Materias { get; set; }
         public virtual Usuarios Usuarios { get; set; }
     }
 }

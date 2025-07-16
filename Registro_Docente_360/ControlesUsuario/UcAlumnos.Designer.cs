@@ -32,7 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pnEditarHorario = new System.Windows.Forms.Panel();
-            this.btnEditarHorario = new System.Windows.Forms.Button();
+            this.btnEditarAlumnos = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
@@ -86,7 +86,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 649);
             this.tableLayoutPanel1.TabIndex = 5;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // tableLayoutPanel5
             // 
@@ -109,30 +108,30 @@
             // 
             this.pnEditarHorario.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnEditarHorario.BackColor = System.Drawing.Color.Transparent;
-            this.pnEditarHorario.Controls.Add(this.btnEditarHorario);
+            this.pnEditarHorario.Controls.Add(this.btnEditarAlumnos);
             this.pnEditarHorario.ForeColor = System.Drawing.Color.Transparent;
             this.pnEditarHorario.Location = new System.Drawing.Point(386, 28);
             this.pnEditarHorario.Name = "pnEditarHorario";
             this.pnEditarHorario.Size = new System.Drawing.Size(219, 57);
             this.pnEditarHorario.TabIndex = 9;
             // 
-            // btnEditarHorario
+            // btnEditarAlumnos
             // 
-            this.btnEditarHorario.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnEditarHorario.BackColor = System.Drawing.Color.Teal;
-            this.btnEditarHorario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarHorario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditarHorario.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditarHorario.ForeColor = System.Drawing.Color.White;
-            this.btnEditarHorario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditarHorario.Location = new System.Drawing.Point(-24, -10);
-            this.btnEditarHorario.Name = "btnEditarHorario";
-            this.btnEditarHorario.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnEditarHorario.Size = new System.Drawing.Size(247, 77);
-            this.btnEditarHorario.TabIndex = 2;
-            this.btnEditarHorario.Text = "Editar Alumnos";
-            this.btnEditarHorario.UseVisualStyleBackColor = false;
-            this.btnEditarHorario.Click += new System.EventHandler(this.btnEditarHorario_Click_1);
+            this.btnEditarAlumnos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEditarAlumnos.BackColor = System.Drawing.Color.Teal;
+            this.btnEditarAlumnos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarAlumnos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditarAlumnos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarAlumnos.ForeColor = System.Drawing.Color.White;
+            this.btnEditarAlumnos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditarAlumnos.Location = new System.Drawing.Point(-24, -10);
+            this.btnEditarAlumnos.Name = "btnEditarAlumnos";
+            this.btnEditarAlumnos.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.btnEditarAlumnos.Size = new System.Drawing.Size(247, 77);
+            this.btnEditarAlumnos.TabIndex = 2;
+            this.btnEditarAlumnos.Text = "Editar Alumnos";
+            this.btnEditarAlumnos.UseVisualStyleBackColor = false;
+            this.btnEditarAlumnos.Click += new System.EventHandler(this.btnEditarAlumnos_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -158,9 +157,9 @@
             this.label1.ForeColor = System.Drawing.Color.Teal;
             this.label1.Location = new System.Drawing.Point(102, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(580, 25);
+            this.label1.Size = new System.Drawing.Size(80, 25);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Seccion (tomarlo de alguna parte para que no la ponga 2 veces)";
+            this.label1.Text = "Seccion";
             // 
             // lblSeccion
             // 
@@ -196,9 +195,9 @@
             this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
             this.lblNomDocente.Location = new System.Drawing.Point(108, 0);
             this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(391, 25);
+            this.lblNomDocente.Size = new System.Drawing.Size(202, 25);
             this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre del Docente (tomarlo del usuario)";
+            this.lblNomDocente.Text = "Nombre del Docente ";
             // 
             // label2
             // 
@@ -244,7 +243,6 @@
             this.PanelAcciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PanelAcciones.Size = new System.Drawing.Size(991, 64);
             this.PanelAcciones.TabIndex = 21;
-            this.PanelAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel4_Paint);
             // 
             // pnCancelar
             // 
@@ -378,7 +376,6 @@
             this.tablaAlumnos.Padding = new System.Windows.Forms.Padding(20);
             this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
             this.tablaAlumnos.TabIndex = 20;
-            this.tablaAlumnos.Load += new System.EventHandler(this.tablaAlumnos_Load);
             // 
             // UcAlumnos
             // 
@@ -427,6 +424,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel pnEditarHorario;
-        private System.Windows.Forms.Button btnEditarHorario;
+        private System.Windows.Forms.Button btnEditarAlumnos;
     }
 }

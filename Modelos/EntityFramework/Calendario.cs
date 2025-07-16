@@ -12,16 +12,14 @@ namespace Modelos.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Horarios
+    public partial class Calendario
     {
-        public int id_horario { get; set; }
+        public int id_evento { get; set; }
         public Nullable<int> id_usuario { get; set; }
-        public Nullable<int> id_materia { get; set; }
-        public string dia { get; set; }
-        public Nullable<System.TimeSpan> hora_inicio { get; set; }
-        public Nullable<System.TimeSpan> hora_fin { get; set; }
+        public string nombre_evento { get; set; }
+        public string descripcion_evento { get; set; }
+        public Nullable<System.DateTime> fecha_evento { get; set; }
     
-        public virtual Materias Materias { get; set; }
         public virtual Usuarios Usuarios { get; set; }
     }
 }

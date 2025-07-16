@@ -41,12 +41,13 @@
             this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblSecc = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pnAgregarNotas = new System.Windows.Forms.Panel();
             this.btnGestionarNotas = new System.Windows.Forms.Button();
             this.tableLayoutContenedor = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.tablaNotas = new Registro_Docente_360.ControlesUsuario.dataGridPersoNotas();
             this.PanelAcciones.SuspendLayout();
             this.pnExportar.SuspendLayout();
@@ -138,6 +139,7 @@
             this.btnGuardar.Text = "            Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // pnCancelar
             // 
@@ -224,30 +226,33 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 788F));
+            this.tableLayoutPanel2.Controls.Add(this.lblSecc, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSeccion, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbMateria, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 83);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(973, 34);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
-            // label1
+            // lblSecc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Teal;
-            this.label1.Location = new System.Drawing.Point(102, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(580, 25);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Seccion (tomarlo de alguna parte para que no la ponga 2 veces)";
+            this.lblSecc.AutoSize = true;
+            this.lblSecc.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSecc.ForeColor = System.Drawing.Color.Teal;
+            this.lblSecc.Location = new System.Drawing.Point(102, 0);
+            this.lblSecc.Name = "lblSecc";
+            this.lblSecc.Size = new System.Drawing.Size(80, 25);
+            this.lblSecc.TabIndex = 12;
+            this.lblSecc.Text = "Seccion";
             // 
             // lblSeccion
             // 
@@ -331,6 +336,15 @@
             this.tableLayoutContenedor.Size = new System.Drawing.Size(979, 679);
             this.tableLayoutContenedor.TabIndex = 6;
             // 
+            // cmbMateria
+            // 
+            this.cmbMateria.FormattingEnabled = true;
+            this.cmbMateria.Location = new System.Drawing.Point(188, 3);
+            this.cmbMateria.Name = "cmbMateria";
+            this.cmbMateria.Size = new System.Drawing.Size(121, 21);
+            this.cmbMateria.TabIndex = 13;
+            this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
+            // 
             // tablaNotas
             // 
             this.tablaNotas.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -338,13 +352,11 @@
             this.tablaNotas.Name = "tablaNotas";
             this.tablaNotas.Size = new System.Drawing.Size(973, 383);
             this.tablaNotas.TabIndex = 22;
-            this.tablaNotas.Load += new System.EventHandler(this.tablaNotas_Load);
             // 
             // UcNotas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Controls.Add(this.tableLayoutContenedor);
             this.Name = "UcNotas";
             this.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
@@ -378,7 +390,7 @@
         private System.Windows.Forms.Label lblNomDocente;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSecc;
         private System.Windows.Forms.Label lblSeccion;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel pnAgregarNotas;
@@ -387,5 +399,6 @@
         private dataGridPersoNotas tablaNotas;
         private System.Windows.Forms.Panel pnExportar;
         private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.ComboBox cmbMateria;
     }
 }

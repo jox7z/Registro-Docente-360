@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System.Windows.Forms;
 
 namespace Registro_Docente_360.Forms
 {
@@ -10,6 +8,12 @@ namespace Registro_Docente_360.Forms
         {
             InitializeComponent();
         }
+        public string Texto
+        {
+            get { return textBox1.Text; }
+            set { textBox1.Text = value; }
+        }
+
 
         // Campo privado para el texto del label
         private string _label = "default value";

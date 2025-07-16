@@ -12,19 +12,20 @@ namespace Modelos.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class Secciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
+        public Secciones()
         {
+            this.Estudiantes = new HashSet<Estudiantes>();
             this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public int id_rol { get; set; }
-        public string nombre_rol { get; set; }
-        public string descripcion_rol { get; set; }
-        public string estado_rol { get; set; }
+        public int id_seccion { get; set; }
+        public string nombre_seccion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Estudiantes> Estudiantes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
     }

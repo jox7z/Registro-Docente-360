@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Eventos;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace Registro_Docente_360.Controladores
 {
@@ -42,6 +42,77 @@ namespace Registro_Docente_360.Controladores
 
             return true;
         }
+
+        public void GuardarEstudiantes(List<Estudiantes> estudiantes, int idSeccion)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                foreach (var estudiante in estudiantes)
+                {
+                    estudiante.id_seccion = idSeccion;
+                    var existe = contexto.Estudiantes.FirstOrDefault(e => e.cedula_estudiante == estudiante.cedula_estudiante);
+                    if (existe == null)
+                    {
+                        contexto.Estudiantes.Add(estudiante);
+                        contexto.SaveChanges();
+
+                        var materiasDocente = contexto.Horarios
+                            .Where(h => h.id_usuario == Sesion.IdUsuario)
+                            .Select(h => h.id_materia).Distinct().ToList();
+
+                        foreach (var idMateria in materiasDocente)
+                        {
+                            contexto.Clases.Add(new Clases
+                            {
+                                id_usuario = Sesion.IdUsuario,
+                                id_materia = idMateria,
+                                id_estudiante = estudiante.id_estudiante
+                            });
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+                contexto.SaveChanges();
+            }
+        }
+
+        public List<Estudiantes> ObtenerEstudiantesPorDocente(int IdDocente)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                // Obtener la sección del profesor
+                var idSeccion = contexto.Usuarios
+                    .Where(u => u.id_usuario == IdDocente)
+                    .Select(u => u.id_seccion)
+                    .FirstOrDefault();
+
+                // Obtener los estudiantes que pertenecen a esa sección
+                var estudiantes = contexto.Estudiantes
+                    .Where(e => e.id_seccion == idSeccion)
+                    .ToList();
+
+                return estudiantes;
+            }
+        }
+
+
+        public void EliminarEstudiantePorCedula(string cedula)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var estudiante = contexto.Estudiantes.FirstOrDefault(e => e.cedula_estudiante == cedula);
+                if (estudiante != null)
+                {
+                    contexto.Estudiantes.Remove(estudiante);
+                    contexto.SaveChanges();
+                }
+            }
+
+        }
+
+
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Eventos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -34,7 +36,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 "2:40 A 3:20", "3:35 A 4:15", "4:15 A 4:55", "5:00 A 5:40"
             };
 
-            string[] materias = { "", "Español", "Matemáticas", "Ciencias", "Est. Sociales", "Complementarias" };
+            string[] materias = { "", "Español", "Matemáticas", "Ciencias", "Estudios Sociales", "Complementarias" };
             string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
 
             dataGridPerso1.Grid.Columns.Clear();
@@ -78,11 +80,56 @@ namespace Registro_Docente_360.ControlesUsuario
 
             // Estado inicial
             dataGridPerso1.Grid.ReadOnly = true;
-            txtSeccion.ReadOnly = true;
-            txtSeccion.KeyPress += txtSeccion_KeyPress;
 
             // TODO: Cargar datos de BD aquí si se quiere mostrar horario previamente guardado
+
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+
+                lblNomDocente.Text = usuario.nombre_usuario;
+                lblSecc.Text = $"{seccion.nombre_seccion}";
+
+                var horarios = (from h in contexto.Horarios
+                                join m in contexto.Materias on h.id_materia equals m.id_materia
+                                where h.id_usuario == Sesion.IdUsuario
+                                select new
+                                {
+                                    h.dia,
+                                    h.hora_inicio,
+                                    h.hora_fin,
+                                    m.nombre_materia
+                                }).ToList();
+
+                foreach (DataGridViewRow fila in dataGridPerso1.Grid.Rows)
+                {
+                    if (fila.IsNewRow) continue;
+
+                    string horaTexto = fila.Cells["colHorario"].Value?.ToString()?.Trim() ?? "";
+                    string[] partesHora = horaTexto.Split(new string[] { " A " }, StringSplitOptions.None);
+
+                    if (partesHora.Length != 2) continue;
+
+                    if (!TimeSpan.TryParse(partesHora[0], out TimeSpan horaInicio)) continue;
+                    if (!TimeSpan.TryParse(partesHora[1], out TimeSpan horaFin)) continue;
+
+                    foreach (var horario in horarios)
+                    {
+                        if (horario.hora_inicio == horaInicio && horario.hora_fin == horaFin)
+                        {
+                            string colName = "col" + horario.dia;
+                            if (dataGridPerso1.Grid.Columns.Contains(colName))
+                            {
+                                fila.Cells[colName].Value = horario.nombre_materia;
+                            }
+                        }
+                    }
+
+                }
+            }
         }
+
 
         // Pinta celdas según la materia
         private void dataGridPerso1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -108,23 +155,11 @@ namespace Registro_Docente_360.ControlesUsuario
   
         }
 
-
-
         private void dataGridPerso1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             dataGridPerso1.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             dataGridPerso1.Grid.Invalidate();
         }
-
-        // Solo números en el campo sección
-        private void txtSeccion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) e.Handled = true;
-            if (e.KeyChar == '-' && (sender as TextBox).Text.Contains("-")) e.Handled = true;
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
-        private void dataGridPerso1_Load(object sender, EventArgs e) { }
 
         // Activa/Desactiva modo edición
         private void btnEditarHorario_Click(object sender, EventArgs e)
@@ -148,14 +183,59 @@ namespace Registro_Docente_360.ControlesUsuario
                 this.BackColor = Color.FromArgb(220, 250, 253);
                 btnEditarHorario.Text = "GUARDAR HORARIO";
                 tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para guardar los cambios");
-                txtSeccion.ReadOnly = false;
                 modoEdicion = true;
             }
             else
             {
-                // TODO Aquí guardar a base de datos:
-                // 1. txtSeccion.Text guardarla como sección
-                // 2. Recorrer dataGridPerso1.Grid para extraer materias por día y hora
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    int idUsuario = Sesion.IdUsuario;
+
+                    var existentes = contexto.Horarios.Where(h => h.id_usuario == idUsuario).ToList();
+                    contexto.Horarios.RemoveRange(existentes);
+                    contexto.SaveChanges();
+
+                    foreach (DataGridViewRow fila in dataGridPerso1.Grid.Rows)
+                    {
+                        if (fila.IsNewRow) continue;
+
+                        string horaTexto = fila.Cells["colHorario"].Value?.ToString()?.Trim() ?? "";
+                        string[] partesHora = horaTexto.Split(new string[] { " A " }, StringSplitOptions.None);
+
+                        if (partesHora.Length != 2) continue;
+
+                        TimeSpan horaInicio = TimeSpan.Parse(partesHora[0]);
+                        TimeSpan horaFin = TimeSpan.Parse(partesHora[1]);
+
+                        for (int col = 2; col < dataGridPerso1.Grid.Columns.Count; col++)
+                        {
+                            string dia = dataGridPerso1.Grid.Columns[col].HeaderText;
+                            string materiaNombre = fila.Cells[col].Value?.ToString();
+
+                            if (!string.IsNullOrWhiteSpace(materiaNombre))
+                            {
+                                var materia = contexto.Materias.FirstOrDefault(m => m.nombre_materia.ToLower() == materiaNombre.ToLower());
+
+                                if (materia != null)
+                                {
+                                    Horarios nuevo = new Horarios
+                                    {
+                                        id_usuario = idUsuario,
+                                        id_materia = materia.id_materia,
+                                        dia = dia,
+                                        hora_inicio = horaInicio,
+                                        hora_fin = horaFin
+                                    };
+
+                                    contexto.Horarios.Add(nuevo);
+                                }
+                            }
+                        }
+                    }
+
+                    contexto.SaveChanges();
+                    MessageBox.Show("Horario Guardado correctamente");
+                }
 
                 lblHorario.Text = "Horario del Docente";
                 lblHorario.ForeColor = Color.Teal;
@@ -163,7 +243,6 @@ namespace Registro_Docente_360.ControlesUsuario
                 this.BackColor = SystemColors.Control;
 
                 dataGridPerso1.Grid.ReadOnly = true;
-                txtSeccion.ReadOnly = true;
                 btnEditarHorario.Text = "EDITAR HORARIO";
                 tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
                 modoEdicion = false;
