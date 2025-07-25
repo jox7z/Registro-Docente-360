@@ -82,3 +82,46 @@ D:\U\C#net\Registro docente\Registro-Docente-360\Controlador\obj\Debug\Controlad
 D:\U\C#net\Registro docente\Registro-Docente-360\Controlador\obj\Debug\Controlador.pdb
 D:\U\C#net\Registro docente\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.SqlServer.dll
 D:\U\C#net\Registro docente\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Controlador.dll.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Controlador.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Controlador.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Modelos.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Newtonsoft.Json.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\QRCoder.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\SiticoneNetFrameworkUI.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Buffers.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Collections.Immutable.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.IO.Pipelines.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Memory.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.ValueTuple.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Modelos.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Modelos.dll.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\Newtonsoft.Json.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Buffers.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Collections.Immutable.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.IO.Pipelines.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Memory.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\System.ValueTuple.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\obj\Debug\Controladores.csproj.AssemblyReference.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\obj\Debug\Controladores.csproj.CoreCompileInputs.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\obj\Debug\Controla.588FD378.Up2Date
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\obj\Debug\Controlador.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\obj\Debug\Controlador.pdb

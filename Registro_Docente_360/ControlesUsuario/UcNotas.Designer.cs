@@ -43,11 +43,11 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSecc = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
+            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pnAgregarNotas = new System.Windows.Forms.Panel();
             this.btnGestionarNotas = new System.Windows.Forms.Button();
             this.tableLayoutContenedor = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.tablaNotas = new Registro_Docente_360.ControlesUsuario.dataGridPersoNotas();
             this.PanelAcciones.SuspendLayout();
             this.pnExportar.SuspendLayout();
@@ -265,6 +265,16 @@
             this.lblSeccion.TabIndex = 11;
             this.lblSeccion.Text = "Sección:";
             // 
+            // cmbMateria
+            // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMateria.FormattingEnabled = true;
+            this.cmbMateria.Location = new System.Drawing.Point(188, 3);
+            this.cmbMateria.Name = "cmbMateria";
+            this.cmbMateria.Size = new System.Drawing.Size(121, 21);
+            this.cmbMateria.TabIndex = 13;
+            this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -335,15 +345,6 @@
             this.tableLayoutContenedor.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutContenedor.Size = new System.Drawing.Size(979, 679);
             this.tableLayoutContenedor.TabIndex = 6;
-            // 
-            // cmbMateria
-            // 
-            this.cmbMateria.FormattingEnabled = true;
-            this.cmbMateria.Location = new System.Drawing.Point(188, 3);
-            this.cmbMateria.Name = "cmbMateria";
-            this.cmbMateria.Size = new System.Drawing.Size(121, 21);
-            this.cmbMateria.TabIndex = 13;
-            this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
             // 
             // tablaNotas
             // 

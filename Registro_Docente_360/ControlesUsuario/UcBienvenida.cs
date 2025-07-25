@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Modelos.EntityFramework;
+using Registro_Docente_360.ControlesUsuario;
+using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.Forms
 {
@@ -19,6 +22,10 @@ namespace Registro_Docente_360.Forms
 
             CentrarMiniContenedor();
         }
+
+        public event EventHandler OnVerHorario;
+
+        
 
         private void CentrarMiniContenedor()
         {
@@ -65,14 +72,22 @@ namespace Registro_Docente_360.Forms
             lblFrases.Text = frases[index];
         }
 
-        private void lblFrase_Click(object sender, EventArgs e)
+        private void UcBienvenida_Load(object sender, EventArgs e)
         {
-
+            using(var contexto = new RegistroDocenteEntities()) 
+            {
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                lblDocente.Text=usuario.nombre_usuario;
+            }
         }
 
-        private void lblFrase_Click_1(object sender, EventArgs e)
+        private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-
+            OnVerHorario?.Invoke(this, EventArgs.Empty);
         }
+
+
+
+
     }
 }

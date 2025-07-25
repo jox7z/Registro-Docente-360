@@ -12,6 +12,7 @@ using Registro_Docente_360.ControlesUsuario;
 using Registro_Docente_360.Controladores;
 using Modelos.EntityFramework;
 using Registro_Docente_360.Eventos;
+using System.Data.SqlClient;
 
 namespace Registro_Docente_360.Forms
 {
@@ -20,11 +21,15 @@ namespace Registro_Docente_360.Forms
         private bool modoEdicion = false;
         private ToolTip tooltipAlumnos = new ToolTip();
         private AlumnoController alumnoController = new AlumnoController();
+        private bool evitarValidacion = false;
+        private bool estaCancelando = false;
+        private bool hayCambios = false;
 
         public UcAlumnos()
         {
             InitializeComponent();
             this.Load += UcAlumnos_Load;
+            tablaAlumnos.Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         /// <summary>
@@ -48,7 +53,9 @@ namespace Registro_Docente_360.Forms
             PanelAcciones.Visible = false;
 
             tablaAlumnos.Grid.EditingControlShowing += Grid_EditingControlShowing;
-            tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
+            //tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
+            tablaAlumnos.Grid.DataError += Grid_DataError;
+
 
 
 
@@ -111,6 +118,9 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void Grid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            // 🔁 No validar si estamos cancelando
+            if (evitarValidacion || estaCancelando) return;
+
             if (tablaAlumnos.Grid.Columns[e.ColumnIndex].Name == "colCedula")
             {
                 string cedula = e.FormattedValue?.ToString()?.Trim() ?? "";
@@ -122,6 +132,9 @@ namespace Registro_Docente_360.Forms
                 }
             }
         }
+
+
+
 
         /// <summary>
         /// Restringe los caracteres permitidos en la cédula.
@@ -180,6 +193,25 @@ namespace Registro_Docente_360.Forms
             }
             else
             {
+                if (hayCambios)
+                {
+                    DialogResult result = MessageBox.Show(
+                        "Hay cambios sin guardar. ¿Estás seguro de salir del modo edición y perder los cambios?",
+                        "Confirmar salida",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+
+                    // Si el usuario acepta salir, recargamos los datos originales
+                    tablaAlumnos.Grid.Rows.Clear();
+                    UcAlumnos_Load(this, EventArgs.Empty); // recarga los datos desde cero
+                    hayCambios = false;
+                }
+
                 lblAlumnos.Text = "Listado de Alumnos";
                 lblAlumnos.ForeColor = Color.Teal;
                 lblAlumnos.Font = new Font("Segoe UI", 21, FontStyle.Bold);
@@ -194,12 +226,14 @@ namespace Registro_Docente_360.Forms
             }
         }
 
+
         /// <summary>
         /// Agrega una nueva fila vacía.
         /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             tablaAlumnos.Grid.Rows.Add();
+            hayCambios = false;
         }
 
         /// <summary>
@@ -207,36 +241,53 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            var fila = tablaAlumnos.Grid.CurrentRow;
-
-            if (fila != null && !fila.IsNewRow)
+            if (tablaAlumnos.Grid.SelectedRows.Count > 0)
             {
-                var confirm = MessageBox.Show("¿Seguro que quiere eliminar la fila?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (confirm == DialogResult.Yes)
+                var fila = tablaAlumnos.Grid.SelectedRows[0];
+
+                var cedula = fila.Cells["colCedula"].Value?.ToString()?.Trim();
+
+                // Si no tiene cédula, asumimos que es una fila nueva, y la borramos directamente
+                if (string.IsNullOrWhiteSpace(cedula))
                 {
-                    string cedula = fila.Cells["colCedula"].Value?.ToString();
+                    tablaAlumnos.Grid.Rows.Remove(fila);
+                    hayCambios = true;
+                    return;
+                }
 
-                    if (!string.IsNullOrEmpty(cedula))
+                DialogResult result = MessageBox.Show(
+                    "¿Está seguro que desea eliminar este estudiante?",
+                    "Confirmar eliminación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    bool eliminado = alumnoController.EliminarEstudiantePorCedula(cedula);
+                    if (eliminado)
                     {
-                        try
-                        {
-                            alumnoController.EliminarEstudiantePorCedula(cedula);
-                            tablaAlumnos.Grid.Rows.Remove(fila);
-                            MessageBox.Show("Estudiante eliminado correctamente");
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error al eliminar el estudiante " + ex.Message);
-                        }
+                        MessageBox.Show("Estudiante eliminado correctamente.");
+                        tablaAlumnos.Grid.Rows.Remove(fila); // Elimina visualmente
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el estudiante. Verifique si tiene datos relacionados.");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Seleccione una fila válida para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione un estudiante para eliminar.");
             }
+            modoEdicion = false;
         }
+
+
+
+
+
+
+
 
         /// <summary>
         /// Acción de guardar alumnos. 
@@ -244,16 +295,35 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // 🔁 Asegurar que cualquier edición activa se termine
+            tablaAlumnos.Grid.EndEdit();
+            tablaAlumnos.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            tablaAlumnos.Grid.CurrentCell = null;
+
             List<Estudiantes> listaEstudiantes = new List<Estudiantes>();
 
             foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows)
             {
                 if (fila.IsNewRow) continue;
+
                 var cedula_estudiante = fila.Cells["colCedula"].Value?.ToString()?.Trim();
                 var nombre_estudiante = fila.Cells["colNombre"].Value?.ToString()?.Trim();
                 var primer_apellido = fila.Cells["colApellido1"].Value?.ToString()?.Trim();
                 var segundo_apellido = fila.Cells["colApellido2"].Value?.ToString()?.Trim();
                 var telefono_encargado = fila.Cells["colTelefono"].Value?.ToString()?.Trim();
+
+                // Validar campos obligatorios
+                if (string.IsNullOrWhiteSpace(cedula_estudiante) ||
+                    string.IsNullOrWhiteSpace(primer_apellido) ||
+                    string.IsNullOrWhiteSpace(segundo_apellido) ||
+                    string.IsNullOrWhiteSpace(nombre_estudiante) ||
+                    string.IsNullOrWhiteSpace(telefono_encargado))
+                {
+                    MessageBox.Show("Todos los campos son obligatorios. Verifique que no haya campos vacíos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tablaAlumnos.Grid.CurrentCell = fila.Cells["colCedula"];
+                    fila.Selected = true;
+                    return; // Cancelar guardado
+                }
 
                 listaEstudiantes.Add(new Estudiantes
                 {
@@ -275,6 +345,7 @@ namespace Registro_Docente_360.Forms
                         .Select(u => u.id_seccion ?? 0)
                         .FirstOrDefault();
                 }
+
                 alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente);
                 MessageBox.Show("Estudiantes guardados correctamente");
             }
@@ -282,18 +353,100 @@ namespace Registro_Docente_360.Forms
             {
                 MessageBox.Show("Error al guardar los estudiantes: " + ex.Message);
             }
+
+            hayCambios = false;
         }
+
+
+
 
         /// <summary>
         /// Cancela los cambios realizados y recarga los datos (a implementar).
         /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            // 🔒 Forzar fin de edición para evitar validación molesta
+            if (tablaAlumnos.Grid.IsCurrentCellInEditMode)
+            {
+                tablaAlumnos.Grid.EndEdit();
+            }
+
             var confirm = MessageBox.Show("¿Desea descartar todos los cambios no guardados?", "Cancelar edición", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
             {
-                // TODO: Implementar recarga de datos desde la base de datos.
+                evitarValidacion = true;
+
+                // 🔁 Salir de modo edición
+                lblAlumnos.Text = "Listado de Alumnos";
+                lblAlumnos.ForeColor = Color.Teal;
+                lblAlumnos.Font = new Font("Segoe UI", 21, FontStyle.Bold);
+                this.BackColor = SystemColors.Control;
+                PanelAcciones.Visible = false;
+                btnEditarAlumnos.Text = "EDITAR ALUMNOS";
+                modoEdicion = false;
+
+                // 🧹 Eliminar filas completamente vacías
+                foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows.Cast<DataGridViewRow>().ToList())
+                {
+                    bool vacia = true;
+                    foreach (DataGridViewCell celda in fila.Cells)
+                    {
+                        if (celda.Value != null && !string.IsNullOrWhiteSpace(celda.Value.ToString()))
+                        {
+                            vacia = false;
+                            break;
+                        }
+                    }
+
+                    if (vacia && !fila.IsNewRow)
+                    {
+                        tablaAlumnos.Grid.Rows.Remove(fila);
+                    }
+                }
+
+                // 🔄 Recargar datos desde base
+                tablaAlumnos.Grid.Rows.Clear();
+                var estudiantes = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
+                foreach (var estudiante in estudiantes)
+                {
+                    tablaAlumnos.Grid.Rows.Add(
+                        estudiante.cedula_estudiante,
+                        estudiante.primer_apellido,
+                        estudiante.segundo_apellido,
+                        estudiante.nombre_estudiante,
+                        estudiante.telefono_encargado);
+                }
+
+                evitarValidacion = false;
             }
         }
+
+
+
+        private void CancelarEdicionSinValidacion()
+        {
+            // 🔒 Eliminar el manejador de validación temporalmente
+            tablaAlumnos.Grid.CellValidating -= Grid_CellValidating;
+
+            // Forzar salida de edición y validación
+            if (tablaAlumnos.Grid.IsCurrentCellInEditMode)
+            {
+                tablaAlumnos.Grid.CancelEdit();
+                tablaAlumnos.Grid.EndEdit();
+            }
+
+            // 🔁 Volver a suscribirse
+            tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
+        }
+
+        private void Grid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Suprime errores por valores inválidos
+            e.ThrowException = false;
+            e.Cancel = true;
+        }
+
+
+
     }
 }

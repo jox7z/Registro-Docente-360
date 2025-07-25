@@ -1,6 +1,7 @@
 ﻿using Modelos.EntityFramework;
 using Registro_Docente_360.Eventos;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,19 +13,29 @@ namespace Registro_Docente_360.ControlesUsuario
     {
         private bool modoEdicion = false;
         private ToolTip tooltipNotas = new ToolTip();
+        private bool huboCambios = false;
+        private decimal valorTareas = 0;
+        private decimal valorAsistencia = 0;
+        private decimal valorCotidiano = 0;
+        private Dictionary<string, decimal> tareasPorEstudiante = new Dictionary<string, decimal>();
+        private Dictionary<string, decimal> asistenciaPorEstudiante = new Dictionary<string, decimal>();
+        private Dictionary<string, decimal> cotidianoPorEstudiante = new Dictionary<string, decimal>();
+
+
 
         public UcNotas()
         {
             InitializeComponent();
+            this.VisibleChanged += UcNotas_VisibleChanged;
             this.Load += UcNotas_Load;
+
         }
+
 
         private void UcNotas_Load(object sender, EventArgs e)
         {
             tablaNotas.Grid.CellEndEdit += Grid_CellEndEdit;
             tablaNotas.Grid.EditingControlShowing += Grid_EditingControlShowing;
-            tablaNotas.Grid.CellValidating += tablaNotas_Grid_CellValidating;
-
 
             tablaNotas.Grid.Columns.Clear();
 
@@ -37,18 +48,20 @@ namespace Registro_Docente_360.ControlesUsuario
             tablaNotas.Grid.Columns.Add("colCotidiano", "Cotidiano");
             tablaNotas.Grid.Columns.Add("colNotaFinal", "Nota Final");
 
-            //solo lectura por defecto
+            // Solo lectura por defecto
             tablaNotas.Grid.ReadOnly = true;
             tablaNotas.Grid.AllowUserToAddRows = false;
             tablaNotas.Grid.AllowUserToDeleteRows = false;
 
-            //no se pueden editar
             tablaNotas.Grid.Columns["colCedula"].ReadOnly = true;
             tablaNotas.Grid.Columns["colNombre"].ReadOnly = true;
+            tablaNotas.Grid.Columns["colNotaFinal"].ReadOnly = true;
 
-            //ocultar gestiones, hasta que se active el boton
+            // Color visual opcional para distinguir nota final
+            tablaNotas.Grid.Columns["colNotaFinal"].DefaultCellStyle.BackColor = Color.LightGray;
+
+            // Ocultar acciones hasta que se active el botón
             PanelAcciones.Visible = false;
-
 
             using (var contexto = new RegistroDocenteEntities())
             {
@@ -62,12 +75,15 @@ namespace Registro_Docente_360.ControlesUsuario
                                 join m in contexto.Materias on h.id_materia equals m.id_materia
                                 where h.id_usuario == Sesion.IdUsuario
                                 select m).Distinct().ToList();
+
                 cmbMateria.DataSource = materias;
                 cmbMateria.DisplayMember = "nombre_materia";
                 cmbMateria.ValueMember = "id_materia";
-
+                if (cmbMateria.Items.Count > 0)
+                    cmbMateria_SelectedIndexChanged(cmbMateria, EventArgs.Empty);
             }
         }
+
         private void btnGestionarNotas_Click(object sender, EventArgs e)
         {
             if (!modoEdicion)
@@ -97,48 +113,87 @@ namespace Registro_Docente_360.ControlesUsuario
             }
             else
             {
+                if (huboCambios)
+                {
+                    var confirm = MessageBox.Show(
+                        "Hay cambios no guardados. ¿Estás seguro de que deseas salir del modo edición y perder los cambios?",
+                        "Confirmar salida",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (confirm == DialogResult.No)
+                    {
+                        return; // No salir
+                    }
+                }
+
+                // Restablecer modo visual
                 lblNotas.Text = "Listado de Notas";
                 lblNotas.ForeColor = Color.Teal;
 
                 tablaNotas.Grid.ReadOnly = true;
+                foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
+                    col.ReadOnly = true;
+
                 btnGestionarNotas.Text = "Gestionar Notas";
                 tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para editar las notas");
+
                 PanelAcciones.Visible = false;
                 modoEdicion = false;
+                huboCambios = false;
+
+                // Recargar datos originales
+                tablaNotas.Grid.Rows.Clear();
+                if (cmbMateria.SelectedItem is Materias materiaSeleccionada)
+                {
+                    cmbMateria_SelectedIndexChanged(null, null);
+                }
             }
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show("¿Desea descartar todos los cambios no guardados?", "Cancelar edición", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
+            if (huboCambios)
             {
-                // Desactiva modo edición visualmente
-                lblNotas.Text = "Listado de Notas";
-                lblNotas.ForeColor = Color.Teal;
+                var confirm = MessageBox.Show("Hay cambios no guardados. ¿Estás seguro de que deseas cancelar la edición y perder los cambios?",
+                                              "Confirmar cancelación",
+                                              MessageBoxButtons.YesNo,
+                                              MessageBoxIcon.Warning);
 
-                tablaNotas.Grid.ReadOnly = true;
-
-                foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
+                if (confirm == DialogResult.No)
                 {
-                    col.ReadOnly = true;
+                    return; // El usuario decidió quedarse en modo edición
                 }
+            }
 
-                btnGestionarNotas.Text = "Gestionar Notas";
-                tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para editar las notas");
+            // Restaurar estado visual
+            lblNotas.Text = "Listado de Notas";
+            lblNotas.ForeColor = Color.Teal;
 
-                PanelAcciones.Visible = false;
-                modoEdicion = false;
+            tablaNotas.Grid.ReadOnly = true;
+            foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
+            {
+                col.ReadOnly = true;
+            }
 
-                // TODO: Recargar los datos originales desde la fuente (base de datos,)
+            btnGestionarNotas.Text = "Gestionar Notas";
+            tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para editar las notas");
 
+            PanelAcciones.Visible = false;
+            modoEdicion = false;
+            huboCambios = false;
 
-                tablaNotas.Grid.Rows.Clear();
+            tablaNotas.Grid.Rows.Clear();
 
-                //Aqui se deberia de llamar el metodo para cagar los datos a la base  (los datos anteriores sin los camibios)
+            // Recargar datos originales desde la base
+            if (cmbMateria.SelectedItem is Materias materiaSeleccionada)
+            {
+                cmbMateria_SelectedIndexChanged(null, null); // vuelve a cargar los datos para la materia actual
             }
         }
+
 
         private void cmbMateria_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -161,17 +216,35 @@ namespace Registro_Docente_360.ControlesUsuario
 
                     foreach (var item in clases)
                     {
+                        string cedula = item.Estudiante.cedula_estudiante;
+
+                        decimal examen1 = item.Nota?.primer_examen ?? 0;
+                        decimal examen2 = item.Nota?.segundo_examen ?? 0;
+
+                        // Tareas, asistencia, cotidiano: si ya están en el diccionario, se usan esos; si no, se usan los de la BD
+                        decimal tareas = tareasPorEstudiante.ContainsKey(cedula) ? tareasPorEstudiante[cedula] : item.Nota?.tareas ?? 10;
+                        decimal asistencia = asistenciaPorEstudiante.ContainsKey(cedula) ? asistenciaPorEstudiante[cedula] : item.Nota?.asistencia ?? 10;
+                        decimal cotidiano = cotidianoPorEstudiante.ContainsKey(cedula) ? cotidianoPorEstudiante[cedula] : item.Nota?.cotidiano ?? 60;
+
+                        // Guardar valores para próximos usos
+                        tareasPorEstudiante[cedula] = tareas;
+                        asistenciaPorEstudiante[cedula] = asistencia;
+                        cotidianoPorEstudiante[cedula] = cotidiano;
+
+                        decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
+
                         tablaNotas.Grid.Rows.Add(
-                            item.Estudiante.cedula_estudiante,
+                            cedula,
                             $"{item.Estudiante.nombre_estudiante} {item.Estudiante.primer_apellido}",
-                            item.Nota?.primer_examen?.ToString("0.##") ?? "",
-                            item.Nota?.segundo_examen?.ToString("0.##") ?? "",
-                            item.Nota?.tareas?.ToString("0.##") ?? "",
-                            item.Nota?.asistencia?.ToString("0.##") ?? "",
-                            item.Nota?.cotidiano?.ToString("0.##") ?? "",
-                            item.Nota?.nota_final?.ToString("0.##") ?? ""
+                            examen1.ToString("0.##"),
+                            examen2.ToString("0.##"),
+                            tareas.ToString("0.##"),
+                            asistencia.ToString("0.##"),
+                            cotidiano.ToString("0.##"),
+                            notaFinal.ToString("0.##")
                         );
                     }
+
                 }
 
 
@@ -215,7 +288,7 @@ namespace Registro_Docente_360.ControlesUsuario
                     decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal asistencia);
                     decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal cotidiano);
 
-                    decimal notaFinal = (examen1 + examen2 + tareas + asistencia + cotidiano) / 5;
+                    decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
 
                     contexto.Notas.Add(new Notas
                     {
@@ -232,35 +305,71 @@ namespace Registro_Docente_360.ControlesUsuario
                 contexto.SaveChanges();
                 MessageBox.Show("Notas guardadas exitosamente");
             }
+            huboCambios = false;
         }
 
         private void Grid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0) return;
+
+            huboCambios = true;
+
+            var fila = tablaNotas.Grid.Rows[e.RowIndex];
+            var columna = tablaNotas.Grid.Columns[e.ColumnIndex].Name;
+            string cedula = fila.Cells["colCedula"].Value?.ToString();
+
+            // Validaciones de rango
+            if (columna == "colPrimerExamen" || columna == "colSegundoExamen" || columna == "colTareas")
             {
-                var fila = tablaNotas.Grid.Rows[e.RowIndex];
-
-                decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
-                decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
-                decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal tareas);
-                decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal asistencia);
-                decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal cotidiano);
-
-                // Si todos están llenos, actualiza la nota final
-                int countFilled = 0;
-                if (!string.IsNullOrWhiteSpace(fila.Cells["colPrimerExamen"].Value?.ToString())) countFilled++;
-                if (!string.IsNullOrWhiteSpace(fila.Cells["colSegundoExamen"].Value?.ToString())) countFilled++;
-                if (!string.IsNullOrWhiteSpace(fila.Cells["colTareas"].Value?.ToString())) countFilled++;
-                if (!string.IsNullOrWhiteSpace(fila.Cells["colAsistencia"].Value?.ToString())) countFilled++;
-                if (!string.IsNullOrWhiteSpace(fila.Cells["colCotidiano"].Value?.ToString())) countFilled++;
-
-                if (countFilled == 5)
+                if (decimal.TryParse(fila.Cells[columna].Value?.ToString(), out decimal valor) && (valor < 0 || valor > 10))
                 {
-                    decimal notaFinal = (examen1 + examen2 + tareas + asistencia + cotidiano) / 5;
-                    fila.Cells["colNotaFinal"].Value = Math.Round(notaFinal, 2);
+                    MessageBox.Show("El valor debe estar entre 0 y 10.", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fila.Cells[columna].Value = 0;
                 }
             }
+            else if (columna == "colAsistencia")
+            {
+                if (decimal.TryParse(fila.Cells[columna].Value?.ToString(), out decimal valor) && (valor < 0 || valor > 10))
+                {
+                    MessageBox.Show("El valor debe estar entre 0 y 10.", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fila.Cells[columna].Value = 0;
+                }
+            }
+            else if (columna == "colCotidiano")
+            {
+                if (decimal.TryParse(fila.Cells[columna].Value?.ToString(), out decimal valor) && (valor < 0 || valor > 60))
+                {
+                    MessageBox.Show("El valor debe estar entre 0 y 60.", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fila.Cells[columna].Value = 0;
+                }
+            }
+
+            // Actualizar valores por estudiante
+            if (!string.IsNullOrWhiteSpace(cedula))
+            {
+                if (decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal t))
+                    tareasPorEstudiante[cedula] = t;
+
+                if (decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal a))
+                    asistenciaPorEstudiante[cedula] = a;
+
+                if (decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal c))
+                    cotidianoPorEstudiante[cedula] = c;
+            }
+
+            // Recalcular nota final
+            decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
+            decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
+            decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal tareas);
+            decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal asistencia);
+            decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal cotidiano);
+
+            decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
+            fila.Cells["colNotaFinal"].Value = Math.Round(notaFinal, 2);
         }
+
+
+
 
         private void Grid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -286,23 +395,12 @@ namespace Registro_Docente_360.ControlesUsuario
             }
         }
 
-        private void tablaNotas_Grid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void UcNotas_VisibleChanged(object sender, EventArgs e)
         {
-            string columnName = tablaNotas.Grid.Columns[e.ColumnIndex].Name;
-
-            // Validar solo las columnas editables
-            if (columnName == "colPrimerExamen" ||
-                columnName == "colSegundoExamen" ||
-                columnName == "colTareas" ||
-                columnName == "colAsistencia" ||
-                columnName == "colCotidiano")
+            if (this.Visible && cmbMateria.SelectedItem != null)
             {
-                if (!decimal.TryParse(e.FormattedValue.ToString(), out decimal valor) ||
-                    valor < 0 || valor > 100)
-                {
-                    e.Cancel = true;
-                    MessageBox.Show("Ingrese un número válido entre 0 y 100", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                // 🔁 Fuerza la recarga de estudiantes y notas
+                cmbMateria_SelectedIndexChanged(cmbMateria, EventArgs.Empty);
             }
         }
 

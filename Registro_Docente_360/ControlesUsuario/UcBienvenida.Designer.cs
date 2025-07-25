@@ -89,19 +89,19 @@
             this.btnConfiguracion.TabIndex = 2;
             this.btnConfiguracion.Text = "VER HORARIO";
             this.btnConfiguracion.UseVisualStyleBackColor = false;
+            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
             // lblDocente
             // 
-            this.lblDocente.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDocente.AutoSize = true;
             this.lblDocente.BackColor = System.Drawing.Color.Transparent;
             this.lblDocente.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblDocente.Location = new System.Drawing.Point(205, 11);
+            this.lblDocente.Location = new System.Drawing.Point(335, 0);
             this.lblDocente.Name = "lblDocente";
-            this.lblDocente.Size = new System.Drawing.Size(418, 47);
+            this.lblDocente.Size = new System.Drawing.Size(173, 47);
             this.lblDocente.TabIndex = 8;
-            this.lblDocente.Text = "NOMBRE DEL DOCENTE";
+            this.lblDocente.Text = "NOMBRE";
             // 
             // lbllogin2
             // 
@@ -233,6 +233,7 @@
             this.Name = "UcBienvenida";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.Size = new System.Drawing.Size(836, 749);
+            this.Load += new System.EventHandler(this.UcBienvenida_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnConfiguracion.ResumeLayout(false);
             this.panelminiContenedor.ResumeLayout(false);

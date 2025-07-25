@@ -33,9 +33,12 @@ namespace Registro_Docente_360
                     if (user.contraseña == clave)
                     {
                         Sesion.IdUsuario = user.id_usuario;
-                        Sesion.IdRol = user.id_rol;
-                        Sesion.NombreUsuario = user.nombre_usuario;
-
+                        Sesion.IdRol = user.id_rol.Value;
+                        Sesion.Nombre = user.nombre_usuario;
+                        Sesion.Correo = user.correo;
+                        Sesion.Rol = user.Roles.nombre_rol; // Asegúrate de que 'Roles' esté incluido como navegación en tu modelo
+                        Sesion.FechaRegistro = user.fecha_registro ?? DateTime.Now;
+                        Sesion.Contrasena = user.contraseña;
 
                         this.Hide();
                         MenuPrincipal menu = new MenuPrincipal();
@@ -43,13 +46,13 @@ namespace Registro_Docente_360
                     }
                     else
                     {
-                        MessageBox.Show("Contra incorrecta");
+                        MessageBox.Show("Datos incorrectos");
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show("Usuario incorrecto");
+                    MessageBox.Show("Datos incorrectos");
                 }
             }
         }

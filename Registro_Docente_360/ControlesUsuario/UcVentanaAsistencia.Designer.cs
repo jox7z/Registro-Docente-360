@@ -67,6 +67,7 @@
             this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // tableLayoutPanelfondo
             // 
@@ -97,6 +98,7 @@
             this.dataGridPerso1.Padding = new System.Windows.Forms.Padding(20);
             this.dataGridPerso1.Size = new System.Drawing.Size(1088, 451);
             this.dataGridPerso1.TabIndex = 0;
+            this.dataGridPerso1.Load += new System.EventHandler(this.dataGridPerso1_Load);
             // 
             // tableLayoutPaneltitulos
             // 
@@ -162,6 +164,7 @@
             this.Controls.Add(this.tableLayoutPanelfondo);
             this.Name = "UcVentanaAsistencia";
             this.Size = new System.Drawing.Size(1094, 615);
+            this.Load += new System.EventHandler(this.UcVentanaAsistencia_Load);
             this.pnGuardar.ResumeLayout(false);
             this.tableLayoutPanelfondo.ResumeLayout(false);
             this.tableLayoutPaneltitulos.ResumeLayout(false);

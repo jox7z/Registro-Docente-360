@@ -14,7 +14,7 @@ namespace Registro_Docente_360
         // ========================
         // CAMPOS Y REFERENCIAS
         // ========================
-        UcFechas ucFechas;
+        public UcFechas ucFechas;
         UcHorario ucHorario;
         UcAlumnos ucAlumnos;
         UcReportes ucReportes;
@@ -26,6 +26,7 @@ namespace Registro_Docente_360
         UcInfoCuenta ucInfoCuenta;
         UcBienvenida ucBienvenida;
         BotonAyuda botonAyuda;
+        UcVentanaAsistencia ucAsistencia;
         bool sidebarExpand = true;
 
         // ======================
@@ -73,6 +74,7 @@ namespace Registro_Docente_360
             // Cargar bienvenida al iniciar
             ucBienvenida = new UcBienvenida();
             MostrarUserControl(ucBienvenida);
+            ucBienvenida.OnVerHorario += AbrirHorarioDesdeBienvenida;
         }
 
 
@@ -139,7 +141,7 @@ namespace Registro_Docente_360
 
        
 
-        private void MostrarUserControl(UserControl control)
+        public void MostrarUserControl(UserControl control)
         {
             foreach (Control c in panelContenedor.Controls)
                 c.Visible = false;
@@ -173,18 +175,29 @@ namespace Registro_Docente_360
             MostrarUserControl(ucFechas);
         }
 
-        private void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
+        public void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
         {
             var ucAsistencia = new UcVentanaAsistencia
             {
                 Dock = DockStyle.Fill
             };
 
-            ucAsistencia.ActualizarCabecera("Tomar de la ventana horario", e.Anho, e.FechaInicio, e.FechaFin);
+            if (ucAsistencia == null)
+            {
+                ucAsistencia = new UcVentanaAsistencia();
+            }
 
+
+            // Actualizar la cabecera
+            ucAsistencia.ActualizarCabecera(e.Anho, e.FechaInicio, e.FechaFin);
+
+
+            // Mostrar control
             panelContenedor.Controls.Clear();
             panelContenedor.Controls.Add(ucAsistencia);
+
         }
+
 
         private void btnHorario_Click(object sender, EventArgs e)
         {
@@ -247,19 +260,66 @@ namespace Registro_Docente_360
         }
         private void UcConfiguracion_OnSolicitarCambioContrasena(object sender, EventArgs e)
         {
-            if (ucCambiarContra == null)
-                ucCambiarContra = new UcCambiarContra();
+            ucCambiarContra = new UcCambiarContra();
+
+            // Suscribirse al evento de regreso
+            ucCambiarContra.OnVolverAConfiguracion += (s2, e2) =>
+            {
+                if (ucConfiguracion == null)
+                {
+                    ucConfiguracion = new UcConfiguracion();
+                    ucConfiguracion.OnSolicitarCambioContrasena += UcConfiguracion_OnSolicitarCambioContrasena;
+                    ucConfiguracion.OnSolicitarInfoCuenta += UcConfiguracion_OnSolicitarInfoCuenta;
+                }
+
+                MostrarUserControl(ucConfiguracion);
+            };
 
             MostrarUserControl(ucCambiarContra);
         }
 
+
         private void UcConfiguracion_OnSolicitarInfoCuenta(object sender, EventArgs e)
         {
-            if (ucInfoCuenta == null)
-                ucInfoCuenta = new UcInfoCuenta();
+            ucInfoCuenta = new UcInfoCuenta();
+
+            ucInfoCuenta.OnVolverAConfiguracion += (s2, e2) =>
+            {
+                if (ucConfiguracion == null)
+                {
+                    ucConfiguracion = new UcConfiguracion();
+                    ucConfiguracion.OnSolicitarCambioContrasena += UcConfiguracion_OnSolicitarCambioContrasena;
+                    ucConfiguracion.OnSolicitarInfoCuenta += UcConfiguracion_OnSolicitarInfoCuenta;
+                }
+
+                MostrarUserControl(ucConfiguracion);
+            };
 
             MostrarUserControl(ucInfoCuenta);
         }
+
+        private void CargarHorario()
+        {
+            var horario = new UcHorario();
+            horario.Dock = DockStyle.Fill;
+
+            panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Add(horario);
+        }
+
+
+
+
+        private void AbrirHorarioDesdeBienvenida(object sender, EventArgs e)
+        {
+            var ucHorario = new UcHorario();
+            ucHorario.Dock = DockStyle.Fill;
+
+            panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Add(ucHorario);
+        }
+
+
 
         // ========================
         // EVENTOS DE OTROS COMPONENTES

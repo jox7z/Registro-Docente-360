@@ -91,6 +91,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 lblNomDocente.Text = usuario.nombre_usuario;
                 lblSecc.Text = $"{seccion.nombre_seccion}";
 
+
                 var horarios = (from h in contexto.Horarios
                                 join m in contexto.Materias on h.id_materia equals m.id_materia
                                 where h.id_usuario == Sesion.IdUsuario
