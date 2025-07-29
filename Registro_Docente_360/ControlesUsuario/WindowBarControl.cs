@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Modelos.EntityFramework;
+using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -36,9 +38,8 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Form parent = this.FindForm();
-            if (parent != null)
-                parent.Close();
+            Application.Exit();
+            RegistrarAcceso(Sesion.IdUsuario, "LOGOUT");
         }
 
         private void btnMinimizar_Click(object sender, EventArgs e)
@@ -47,5 +48,22 @@ namespace Registro_Docente_360.ControlesUsuario
             if (parent != null)
                 parent.WindowState = FormWindowState.Minimized;
         }
+
+        private void RegistrarAcceso(int idUsuario, string tipoAcceso)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var acceso = new Bitacora_Accesos
+                {
+                    id_usuario = idUsuario,
+                    tipo_acceso = tipoAcceso,
+                    fecha_acceso = DateTime.Now
+                };
+
+                contexto.Bitacora_Accesos.Add(acceso);
+                contexto.SaveChanges();
+            }
+        }
+
     }
 }

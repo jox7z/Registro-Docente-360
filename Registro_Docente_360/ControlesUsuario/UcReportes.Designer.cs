@@ -31,33 +31,32 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblVentanaReportes = new System.Windows.Forms.Label();
             this.panelReporte = new System.Windows.Forms.Panel();
-            this.lblReporte = new System.Windows.Forms.Label();
             this.comboReporte = new System.Windows.Forms.ComboBox();
+            this.lblReporte = new System.Windows.Forms.Label();
             this.panelTiempoReport = new System.Windows.Forms.Panel();
-            this.lblTiempoReporte = new System.Windows.Forms.Label();
             this.comboTiempo = new System.Windows.Forms.ComboBox();
+            this.lblTiempoReporte = new System.Windows.Forms.Label();
             this.PanelFechas = new System.Windows.Forms.Panel();
             this.tableFechas = new System.Windows.Forms.TableLayoutPanel();
-            this.lblMeses = new System.Windows.Forms.Label();
-            this.cbMeses = new System.Windows.Forms.ComboBox();
-            this.cbAnhos = new System.Windows.Forms.ComboBox();
-            this.lblAnho = new System.Windows.Forms.Label();
-            this.lblSemanas = new System.Windows.Forms.Label();
             this.cbSemanas = new System.Windows.Forms.ComboBox();
+            this.lblSemanas = new System.Windows.Forms.Label();
+            this.lblAnho = new System.Windows.Forms.Label();
+            this.cbAnhos = new System.Windows.Forms.ComboBox();
+            this.cbMeses = new System.Windows.Forms.ComboBox();
+            this.lblMeses = new System.Windows.Forms.Label();
             this.panelFiltros = new System.Windows.Forms.Panel();
-            this.lblFiltros = new System.Windows.Forms.Label();
-            this.checkboxGrupo = new System.Windows.Forms.CheckBox();
-            this.checkboxEstudiante = new System.Windows.Forms.CheckBox();
-            this.comboGrupo = new System.Windows.Forms.ComboBox();
             this.comboEstudiantes = new System.Windows.Forms.ComboBox();
+            this.checkboxEstudiante = new System.Windows.Forms.CheckBox();
+            this.checkboxGrupo = new System.Windows.Forms.CheckBox();
+            this.lblFiltros = new System.Windows.Forms.Label();
             this.panelBoton = new System.Windows.Forms.Panel();
             this.pnSobreNosotros = new System.Windows.Forms.Panel();
             this.btnGenerarReporte = new System.Windows.Forms.Button();
             this.panelPeriodo = new System.Windows.Forms.Panel();
-            this.lblPeriodo = new System.Windows.Forms.Label();
-            this.comboPeriodo = new System.Windows.Forms.ComboBox();
-            this.cbAnhos2 = new System.Windows.Forms.ComboBox();
             this.lblAnho2 = new System.Windows.Forms.Label();
+            this.cbAnhos2 = new System.Windows.Forms.ComboBox();
+            this.comboPeriodo = new System.Windows.Forms.ComboBox();
+            this.lblPeriodo = new System.Windows.Forms.Label();
             this.panelminiContenedor = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelContenidos = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
@@ -102,17 +101,6 @@
             this.panelReporte.Size = new System.Drawing.Size(535, 59);
             this.panelReporte.TabIndex = 1;
             // 
-            // lblReporte
-            // 
-            this.lblReporte.AutoSize = true;
-            this.lblReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReporte.ForeColor = System.Drawing.Color.Teal;
-            this.lblReporte.Location = new System.Drawing.Point(48, 16);
-            this.lblReporte.Name = "lblReporte";
-            this.lblReporte.Size = new System.Drawing.Size(70, 21);
-            this.lblReporte.TabIndex = 3;
-            this.lblReporte.Text = "Reporte";
-            // 
             // comboReporte
             // 
             this.comboReporte.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -128,6 +116,17 @@
             this.comboReporte.TabIndex = 16;
             this.comboReporte.Text = "Seleccione tipo de reporte";
             // 
+            // lblReporte
+            // 
+            this.lblReporte.AutoSize = true;
+            this.lblReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReporte.ForeColor = System.Drawing.Color.Teal;
+            this.lblReporte.Location = new System.Drawing.Point(48, 16);
+            this.lblReporte.Name = "lblReporte";
+            this.lblReporte.Size = new System.Drawing.Size(70, 21);
+            this.lblReporte.TabIndex = 3;
+            this.lblReporte.Text = "Reporte";
+            // 
             // panelTiempoReport
             // 
             this.panelTiempoReport.Controls.Add(this.comboTiempo);
@@ -136,17 +135,6 @@
             this.panelTiempoReport.Name = "panelTiempoReport";
             this.panelTiempoReport.Size = new System.Drawing.Size(535, 59);
             this.panelTiempoReport.TabIndex = 2;
-            // 
-            // lblTiempoReporte
-            // 
-            this.lblTiempoReporte.AutoSize = true;
-            this.lblTiempoReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTiempoReporte.ForeColor = System.Drawing.Color.Teal;
-            this.lblTiempoReporte.Location = new System.Drawing.Point(48, 16);
-            this.lblTiempoReporte.Name = "lblTiempoReporte";
-            this.lblTiempoReporte.Size = new System.Drawing.Size(156, 21);
-            this.lblTiempoReporte.TabIndex = 3;
-            this.lblTiempoReporte.Text = "Tiempo del reporte";
             // 
             // comboTiempo
             // 
@@ -163,6 +151,17 @@
             this.comboTiempo.TabIndex = 16;
             this.comboTiempo.Text = "Seleccione tiempo";
             this.comboTiempo.SelectedIndexChanged += new System.EventHandler(this.cbTiempoReporte_SelectedIndexChanged);
+            // 
+            // lblTiempoReporte
+            // 
+            this.lblTiempoReporte.AutoSize = true;
+            this.lblTiempoReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTiempoReporte.ForeColor = System.Drawing.Color.Teal;
+            this.lblTiempoReporte.Location = new System.Drawing.Point(48, 16);
+            this.lblTiempoReporte.Name = "lblTiempoReporte";
+            this.lblTiempoReporte.Size = new System.Drawing.Size(156, 21);
+            this.lblTiempoReporte.TabIndex = 3;
+            this.lblTiempoReporte.Text = "Tiempo del reporte";
             // 
             // PanelFechas
             // 
@@ -195,33 +194,44 @@
             this.tableFechas.Size = new System.Drawing.Size(495, 85);
             this.tableFechas.TabIndex = 22;
             // 
-            // lblMeses
+            // cbSemanas
             // 
-            this.lblMeses.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblMeses.AutoSize = true;
-            this.lblMeses.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMeses.ForeColor = System.Drawing.Color.Teal;
-            this.lblMeses.Location = new System.Drawing.Point(227, 10);
-            this.lblMeses.Name = "lblMeses";
-            this.lblMeses.Size = new System.Drawing.Size(41, 21);
-            this.lblMeses.TabIndex = 19;
-            this.lblMeses.Text = "Mes";
+            this.cbSemanas.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbSemanas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbSemanas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbSemanas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbSemanas.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cbSemanas.ForeColor = System.Drawing.Color.DarkGray;
+            this.cbSemanas.FormattingEnabled = true;
+            this.cbSemanas.Location = new System.Drawing.Point(342, 51);
+            this.cbSemanas.Name = "cbSemanas";
+            this.cbSemanas.Size = new System.Drawing.Size(141, 25);
+            this.cbSemanas.TabIndex = 20;
+            this.cbSemanas.Text = "Seleccione Semana";
             // 
-            // cbMeses
+            // lblSemanas
             // 
-            this.cbMeses.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cbMeses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cbMeses.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbMeses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbMeses.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cbMeses.ForeColor = System.Drawing.Color.DarkGray;
-            this.cbMeses.FormattingEnabled = true;
-            this.cbMeses.Location = new System.Drawing.Point(178, 51);
-            this.cbMeses.Name = "cbMeses";
-            this.cbMeses.Size = new System.Drawing.Size(138, 25);
-            this.cbMeses.TabIndex = 18;
-            this.cbMeses.Text = "  Seleccione Mes";
-            this.cbMeses.SelectedIndexChanged += new System.EventHandler(this.cbMeses_SelectedIndexChanged);
+            this.lblSemanas.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblSemanas.AutoSize = true;
+            this.lblSemanas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSemanas.ForeColor = System.Drawing.Color.Teal;
+            this.lblSemanas.Location = new System.Drawing.Point(377, 10);
+            this.lblSemanas.Name = "lblSemanas";
+            this.lblSemanas.Size = new System.Drawing.Size(71, 21);
+            this.lblSemanas.TabIndex = 21;
+            this.lblSemanas.Text = "Semana";
+            // 
+            // lblAnho
+            // 
+            this.lblAnho.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblAnho.AutoSize = true;
+            this.lblAnho.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnho.ForeColor = System.Drawing.Color.Teal;
+            this.lblAnho.Location = new System.Drawing.Point(34, 10);
+            this.lblAnho.Name = "lblAnho";
+            this.lblAnho.Size = new System.Drawing.Size(97, 21);
+            this.lblAnho.TabIndex = 17;
+            this.lblAnho.Text = "Año lectivo";
             // 
             // cbAnhos
             // 
@@ -239,49 +249,37 @@
             this.cbAnhos.Text = "  Seleccione Año";
             this.cbAnhos.SelectedIndexChanged += new System.EventHandler(this.cbAnhos_SelectedIndexChanged);
             // 
-            // lblAnho
+            // cbMeses
             // 
-            this.lblAnho.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblAnho.AutoSize = true;
-            this.lblAnho.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnho.ForeColor = System.Drawing.Color.Teal;
-            this.lblAnho.Location = new System.Drawing.Point(34, 10);
-            this.lblAnho.Name = "lblAnho";
-            this.lblAnho.Size = new System.Drawing.Size(97, 21);
-            this.lblAnho.TabIndex = 17;
-            this.lblAnho.Text = "Año lectivo";
+            this.cbMeses.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbMeses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbMeses.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbMeses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbMeses.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cbMeses.ForeColor = System.Drawing.Color.DarkGray;
+            this.cbMeses.FormattingEnabled = true;
+            this.cbMeses.Location = new System.Drawing.Point(178, 51);
+            this.cbMeses.Name = "cbMeses";
+            this.cbMeses.Size = new System.Drawing.Size(138, 25);
+            this.cbMeses.TabIndex = 18;
+            this.cbMeses.Text = "  Seleccione Mes";
+            this.cbMeses.SelectedIndexChanged += new System.EventHandler(this.cbMeses_SelectedIndexChanged);
             // 
-            // lblSemanas
+            // lblMeses
             // 
-            this.lblSemanas.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblSemanas.AutoSize = true;
-            this.lblSemanas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSemanas.ForeColor = System.Drawing.Color.Teal;
-            this.lblSemanas.Location = new System.Drawing.Point(377, 10);
-            this.lblSemanas.Name = "lblSemanas";
-            this.lblSemanas.Size = new System.Drawing.Size(71, 21);
-            this.lblSemanas.TabIndex = 21;
-            this.lblSemanas.Text = "Semana";
-            // 
-            // cbSemanas
-            // 
-            this.cbSemanas.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cbSemanas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cbSemanas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbSemanas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbSemanas.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cbSemanas.ForeColor = System.Drawing.Color.DarkGray;
-            this.cbSemanas.FormattingEnabled = true;
-            this.cbSemanas.Location = new System.Drawing.Point(342, 51);
-            this.cbSemanas.Name = "cbSemanas";
-            this.cbSemanas.Size = new System.Drawing.Size(141, 25);
-            this.cbSemanas.TabIndex = 20;
-            this.cbSemanas.Text = "Seleccione Semana";
+            this.lblMeses.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblMeses.AutoSize = true;
+            this.lblMeses.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMeses.ForeColor = System.Drawing.Color.Teal;
+            this.lblMeses.Location = new System.Drawing.Point(227, 10);
+            this.lblMeses.Name = "lblMeses";
+            this.lblMeses.Size = new System.Drawing.Size(41, 21);
+            this.lblMeses.TabIndex = 19;
+            this.lblMeses.Text = "Mes";
             // 
             // panelFiltros
             // 
             this.panelFiltros.Controls.Add(this.comboEstudiantes);
-            this.panelFiltros.Controls.Add(this.comboGrupo);
             this.panelFiltros.Controls.Add(this.checkboxEstudiante);
             this.panelFiltros.Controls.Add(this.checkboxGrupo);
             this.panelFiltros.Controls.Add(this.lblFiltros);
@@ -290,56 +288,6 @@
             this.panelFiltros.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
             this.panelFiltros.Size = new System.Drawing.Size(535, 128);
             this.panelFiltros.TabIndex = 19;
-            // 
-            // lblFiltros
-            // 
-            this.lblFiltros.AutoSize = true;
-            this.lblFiltros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFiltros.ForeColor = System.Drawing.Color.Teal;
-            this.lblFiltros.Location = new System.Drawing.Point(48, 20);
-            this.lblFiltros.Name = "lblFiltros";
-            this.lblFiltros.Size = new System.Drawing.Size(61, 21);
-            this.lblFiltros.TabIndex = 17;
-            this.lblFiltros.Text = "Filtros:";
-            // 
-            // checkboxGrupo
-            // 
-            this.checkboxGrupo.AutoSize = true;
-            this.checkboxGrupo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkboxGrupo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.checkboxGrupo.Location = new System.Drawing.Point(52, 52);
-            this.checkboxGrupo.Name = "checkboxGrupo";
-            this.checkboxGrupo.Size = new System.Drawing.Size(105, 25);
-            this.checkboxGrupo.TabIndex = 22;
-            this.checkboxGrupo.Text = "Por grupo";
-            this.checkboxGrupo.UseVisualStyleBackColor = true;
-            // 
-            // checkboxEstudiante
-            // 
-            this.checkboxEstudiante.AutoSize = true;
-            this.checkboxEstudiante.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkboxEstudiante.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkboxEstudiante.Location = new System.Drawing.Point(52, 95);
-            this.checkboxEstudiante.Name = "checkboxEstudiante";
-            this.checkboxEstudiante.Size = new System.Drawing.Size(140, 25);
-            this.checkboxEstudiante.TabIndex = 23;
-            this.checkboxEstudiante.Text = "Por estudiante";
-            this.checkboxEstudiante.UseVisualStyleBackColor = true;
-            // 
-            // comboGrupo
-            // 
-            this.comboGrupo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.comboGrupo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboGrupo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboGrupo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.comboGrupo.ForeColor = System.Drawing.Color.DarkGray;
-            this.comboGrupo.FormattingEnabled = true;
-            this.comboGrupo.Location = new System.Drawing.Point(302, 53);
-            this.comboGrupo.Name = "comboGrupo";
-            this.comboGrupo.Size = new System.Drawing.Size(195, 25);
-            this.comboGrupo.TabIndex = 22;
-            this.comboGrupo.Text = "        Seleccione Grupo";
             // 
             // comboEstudiantes
             // 
@@ -355,6 +303,41 @@
             this.comboEstudiantes.Size = new System.Drawing.Size(195, 25);
             this.comboEstudiantes.TabIndex = 24;
             this.comboEstudiantes.Text = "     Seleccione Estudiante";
+            // 
+            // checkboxEstudiante
+            // 
+            this.checkboxEstudiante.AutoSize = true;
+            this.checkboxEstudiante.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkboxEstudiante.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkboxEstudiante.Location = new System.Drawing.Point(52, 95);
+            this.checkboxEstudiante.Name = "checkboxEstudiante";
+            this.checkboxEstudiante.Size = new System.Drawing.Size(140, 25);
+            this.checkboxEstudiante.TabIndex = 23;
+            this.checkboxEstudiante.Text = "Por estudiante";
+            this.checkboxEstudiante.UseVisualStyleBackColor = true;
+            // 
+            // checkboxGrupo
+            // 
+            this.checkboxGrupo.AutoSize = true;
+            this.checkboxGrupo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkboxGrupo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.checkboxGrupo.Location = new System.Drawing.Point(52, 52);
+            this.checkboxGrupo.Name = "checkboxGrupo";
+            this.checkboxGrupo.Size = new System.Drawing.Size(105, 25);
+            this.checkboxGrupo.TabIndex = 22;
+            this.checkboxGrupo.Text = "Por grupo";
+            this.checkboxGrupo.UseVisualStyleBackColor = true;
+            // 
+            // lblFiltros
+            // 
+            this.lblFiltros.AutoSize = true;
+            this.lblFiltros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFiltros.ForeColor = System.Drawing.Color.Teal;
+            this.lblFiltros.Location = new System.Drawing.Point(48, 20);
+            this.lblFiltros.Name = "lblFiltros";
+            this.lblFiltros.Size = new System.Drawing.Size(61, 21);
+            this.lblFiltros.TabIndex = 17;
+            this.lblFiltros.Text = "Filtros:";
             // 
             // panelBoton
             // 
@@ -406,31 +389,16 @@
             this.panelPeriodo.Size = new System.Drawing.Size(535, 63);
             this.panelPeriodo.TabIndex = 21;
             // 
-            // lblPeriodo
+            // lblAnho2
             // 
-            this.lblPeriodo.AutoSize = true;
-            this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriodo.ForeColor = System.Drawing.Color.Teal;
-            this.lblPeriodo.Location = new System.Drawing.Point(288, 0);
-            this.lblPeriodo.Name = "lblPeriodo";
-            this.lblPeriodo.Size = new System.Drawing.Size(129, 21);
-            this.lblPeriodo.TabIndex = 18;
-            this.lblPeriodo.Text = "Periodo Lectivo";
-            // 
-            // comboPeriodo
-            // 
-            this.comboPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboPeriodo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.comboPeriodo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboPeriodo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.comboPeriodo.ForeColor = System.Drawing.Color.DarkGray;
-            this.comboPeriodo.FormattingEnabled = true;
-            this.comboPeriodo.Location = new System.Drawing.Point(278, 33);
-            this.comboPeriodo.Name = "comboPeriodo";
-            this.comboPeriodo.Size = new System.Drawing.Size(152, 25);
-            this.comboPeriodo.TabIndex = 19;
-            this.comboPeriodo.Text = " Seleccione periodo";
+            this.lblAnho2.AutoSize = true;
+            this.lblAnho2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnho2.ForeColor = System.Drawing.Color.Teal;
+            this.lblAnho2.Location = new System.Drawing.Point(124, 0);
+            this.lblAnho2.Name = "lblAnho2";
+            this.lblAnho2.Size = new System.Drawing.Size(97, 21);
+            this.lblAnho2.TabIndex = 21;
+            this.lblAnho2.Text = "Año lectivo";
             // 
             // cbAnhos2
             // 
@@ -447,16 +415,31 @@
             this.cbAnhos2.TabIndex = 20;
             this.cbAnhos2.Text = "  Seleccione Año";
             // 
-            // lblAnho2
+            // comboPeriodo
             // 
-            this.lblAnho2.AutoSize = true;
-            this.lblAnho2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnho2.ForeColor = System.Drawing.Color.Teal;
-            this.lblAnho2.Location = new System.Drawing.Point(124, 0);
-            this.lblAnho2.Name = "lblAnho2";
-            this.lblAnho2.Size = new System.Drawing.Size(97, 21);
-            this.lblAnho2.TabIndex = 21;
-            this.lblAnho2.Text = "Año lectivo";
+            this.comboPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboPeriodo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboPeriodo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboPeriodo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.comboPeriodo.ForeColor = System.Drawing.Color.DarkGray;
+            this.comboPeriodo.FormattingEnabled = true;
+            this.comboPeriodo.Location = new System.Drawing.Point(278, 33);
+            this.comboPeriodo.Name = "comboPeriodo";
+            this.comboPeriodo.Size = new System.Drawing.Size(152, 25);
+            this.comboPeriodo.TabIndex = 19;
+            this.comboPeriodo.Text = " Seleccione periodo";
+            // 
+            // lblPeriodo
+            // 
+            this.lblPeriodo.AutoSize = true;
+            this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPeriodo.ForeColor = System.Drawing.Color.Teal;
+            this.lblPeriodo.Location = new System.Drawing.Point(288, 0);
+            this.lblPeriodo.Name = "lblPeriodo";
+            this.lblPeriodo.Size = new System.Drawing.Size(129, 21);
+            this.lblPeriodo.TabIndex = 18;
+            this.lblPeriodo.Text = "Periodo Lectivo";
             // 
             // panelminiContenedor
             // 
@@ -568,7 +551,6 @@
         private System.Windows.Forms.Button btnGenerarReporte;
         private System.Windows.Forms.Panel panelFiltros;
         private System.Windows.Forms.ComboBox comboEstudiantes;
-        private System.Windows.Forms.ComboBox comboGrupo;
         private System.Windows.Forms.CheckBox checkboxEstudiante;
         private System.Windows.Forms.CheckBox checkboxGrupo;
         private System.Windows.Forms.Label lblFiltros;

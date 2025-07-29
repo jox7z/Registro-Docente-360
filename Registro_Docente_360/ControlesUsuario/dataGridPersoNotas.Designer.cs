@@ -99,6 +99,7 @@
             this.datagridview2.ReadOnly = true;
             this.datagridview2.Size = new System.Drawing.Size(1003, 501);
             this.datagridview2.TabIndex = 13;
+            this.datagridview2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridview2_CellContentClick);
             // 
             // Column1
             // 

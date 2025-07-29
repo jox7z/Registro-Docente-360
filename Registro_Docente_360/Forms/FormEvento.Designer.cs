@@ -66,6 +66,7 @@
             this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // lblEvento
             // 
@@ -101,6 +102,7 @@
             // 
             // txtFecha
             // 
+            this.txtFecha.BackColor = System.Drawing.Color.Gainsboro;
             this.txtFecha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtFecha.Location = new System.Drawing.Point(14, 33);
@@ -114,6 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(355, 185);
             this.Controls.Add(this.pnAnterior);
             this.Controls.Add(this.lblEvento);

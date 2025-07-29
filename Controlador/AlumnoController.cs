@@ -1,8 +1,11 @@
 ﻿using Modelos.EntityFramework;
 using Registro_Docente_360.Eventos;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Modelos;
 
 
 namespace Registro_Docente_360.Controladores
@@ -78,41 +81,67 @@ namespace Registro_Docente_360.Controladores
             }
         }
 
-        public List<Estudiantes> ObtenerEstudiantesPorDocente(int IdDocente)
+        public List<Estudiantes> ObtenerEstudiantesPorDocente(int idDocente)
         {
-            using (var contexto = new RegistroDocenteEntities())
+            using (var db = new RegistroDocenteEntities())
             {
-                // Obtener la sección del profesor
-                var idSeccion = contexto.Usuarios
-                    .Where(u => u.id_usuario == IdDocente)
-                    .Select(u => u.id_seccion)
-                    .FirstOrDefault();
-
-                // Obtener los estudiantes que pertenecen a esa sección
-                var estudiantes = contexto.Estudiantes
-                    .Where(e => e.id_seccion == idSeccion)
+                return db.Clases
+                    .Where(c => c.id_usuario == idDocente)
+                    .Select(c => c.Estudiantes)
+                    .Distinct()
                     .ToList();
-
-                return estudiantes;
             }
         }
 
 
-        public void EliminarEstudiantePorCedula(string cedula)
+
+
+
+        public bool EliminarEstudiantePorCedula(string cedula)
         {
             using (var contexto = new RegistroDocenteEntities())
             {
                 var estudiante = contexto.Estudiantes.FirstOrDefault(e => e.cedula_estudiante == cedula);
-                if (estudiante != null)
-                {
-                    contexto.Estudiantes.Remove(estudiante);
-                    contexto.SaveChanges();
-                }
-            }
+                if (estudiante == null) return false;
 
+                // Buscar clases asociadas al estudiante
+                var clases = contexto.Clases.Where(c => c.id_estudiante == estudiante.id_estudiante).ToList();
+
+                foreach (var clase in clases)
+                {
+                    // Eliminar notas relacionadas a esa clase
+                    var notas = contexto.Notas.Where(n => n.id_clase == clase.id_clase).ToList();
+                    contexto.Notas.RemoveRange(notas);
+                }
+
+                // Eliminar las clases del estudiante
+                contexto.Clases.RemoveRange(clases);
+
+                // Finalmente, eliminar al estudiante
+                contexto.Estudiantes.Remove(estudiante);
+
+                contexto.SaveChanges();
+                return true;
+            }
+        }
+
+
+        public List<Clases> ObtenerClasesDelDocenteYEstudiante(int idDocente, int idEstudiante)
+        {
+            using (var db = new RegistroDocenteEntities())
+            {
+                return db.Clases
+                    .Where(c => c.id_usuario == idDocente && c.id_estudiante == idEstudiante)
+                    .ToList();
+            }
         }
 
 
 
     }
 }
+
+
+
+
+    

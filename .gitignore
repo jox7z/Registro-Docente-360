@@ -1,22 +1,37 @@
-# Carpetas de Visual Studio
-.vs/
-*.user
-*.suo
-
 # Archivos de compilación
 bin/
 obj/
 
+# Archivos de usuario y config locales
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configuración de VS
+.vscode/
+*.vsp
+*.vspx
+*.vspscc
+*.vssscc
+.vs/
+
 # Archivos temporales
 *.log
 *.tmp
+*.bak
 
-# Archivos de VS Code (si usás)
-.vscode/
+# Paquetes y dependencias
+packages/
+*.nupkg
+*.snupkg
 
-# Archivos de configuración de entorno
-*.env
+# Carpetas ocultas de sistema
+Thumbs.db
+Desktop.ini
 
-# Otros comunes en C#
-*.cache
-*.pdb
+# Archivos de publicación
+publish/
+
+# Archivos PDF generados
+*.pdf

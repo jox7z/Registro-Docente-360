@@ -15,6 +15,11 @@ namespace Registro_Docente_360.ControlesUsuario
         public dataGridPerso()
         {
             InitializeComponent();
+
+            datagridview1.ReadOnly = false;
+            datagridview1.EditMode = DataGridViewEditMode.EditOnEnter;
+            datagridview1.AllowUserToAddRows = false;
+            datagridview1.AllowUserToDeleteRows = false;
         }
     
 

@@ -242,7 +242,6 @@
             this.pnCerrarSesion.Name = "pnCerrarSesion";
             this.pnCerrarSesion.Size = new System.Drawing.Size(535, 92);
             this.pnCerrarSesion.TabIndex = 8;
-            this.pnCerrarSesion.Click += new System.EventHandler(this.pnCerrarSesion_Click);
             // 
             // pictureflecha3
             // 

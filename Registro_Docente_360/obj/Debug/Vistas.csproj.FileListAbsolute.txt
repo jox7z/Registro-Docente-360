@@ -1,0 +1,222 @@
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe.config
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Registro_Docente_360.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Controlador.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\EntityFramework.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Modelos.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\QRCoder.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\SiticoneNetFrameworkUI.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Buffers.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Memory.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.ValueTuple.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Controlador.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Controlador.dll.config
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Modelos.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Modelos.dll.config
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\EntityFramework.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Buffers.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Memory.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.ValueTuple.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.AssemblyReference.cache
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.BotonAyuda.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso2.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPersoNotas.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.LoginTextBox.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcFechas.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcHorario.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcNotas.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcReportes.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcAcercaDe.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcVentanaAsistencia.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UserControlBlank.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.WindowBarControl.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormEvento.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Login.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.MenuPrincipal.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAlumnos.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Properties.Resources.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcCalendario.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcDias.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.GenerateResource.cache
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.CoreCompileInputs.cache
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcConfiguracion.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcCambiarContra.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcInfoCuenta.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcBienvenida.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe.config
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.pdb
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\QRCoder.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\SiticoneNetFrameworkUI.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Buffers.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Memory.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.ValueTuple.dll
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.pdb
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.dll.config
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.pdb
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.dll.config
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Buffers.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Memory.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.ValueTuple.xml
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.AssemblyReference.cache
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe.config
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.BotonAyuda.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso2.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPersoNotas.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.LoginTextBox.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcBienvenida.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcCambiarContra.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcConfiguracion.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcFechas.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcHorario.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcInfoCuenta.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcNotas.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcReportes.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcAcercaDe.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcVentanaAsistencia.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UserControlBlank.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.WindowBarControl.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormEvento.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Login.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.MenuPrincipal.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAlumnos.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Properties.Resources.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcCalendario.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcDias.resources
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.GenerateResource.cache
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.CoreCompileInputs.cache
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
+D:\U\C#net\Registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\QRCoder.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\SiticoneNetFrameworkUI.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Buffers.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Memory.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.ValueTuple.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Controlador.dll.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Modelos.dll.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Newtonsoft.Json.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Buffers.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Collections.Immutable.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.IO.Pipelines.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Memory.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\System.ValueTuple.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.AssemblyReference.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.BotonAyuda.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPerso2.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.dataGridPersoNotas.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.LoginTextBox.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcBienvenida.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcCambiarContra.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcConfiguracion.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcFechas.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcHorario.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcInfoCuenta.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcNotas.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcReportes.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcAcercaDe.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UcVentanaAsistencia.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.UserControlBlank.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.ControlesUsuario.WindowBarControl.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormEvento.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Login.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.MenuPrincipal.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAlumnos.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Properties.Resources.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcCalendario.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.UcDias.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.GenerateResource.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.CoreCompileInputs.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRegistroAccesos.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRolesyPermisos.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAccionesUsuario.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcUsuarios.resources
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\itextsharp.dll
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.xml
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\itextsharp.xml

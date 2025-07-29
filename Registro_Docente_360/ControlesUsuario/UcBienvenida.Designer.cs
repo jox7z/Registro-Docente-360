@@ -41,6 +41,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tblNombre = new System.Windows.Forms.TableLayoutPanel();
+            this.tblBienvenida = new System.Windows.Forms.TableLayoutPanel();
+            this.tblLogo = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnConfiguracion.SuspendLayout();
             this.panelminiContenedor.SuspendLayout();
@@ -49,13 +52,16 @@
             this.panel2.SuspendLayout();
             this.panelTitulo.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tblNombre.SuspendLayout();
+            this.tblBienvenida.SuspendLayout();
+            this.tblLogo.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(134, 190);
+            this.pictureBox1.Location = new System.Drawing.Point(123, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(571, 303);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -89,6 +95,7 @@
             this.btnConfiguracion.TabIndex = 2;
             this.btnConfiguracion.Text = "VER HORARIO";
             this.btnConfiguracion.UseVisualStyleBackColor = false;
+            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
             // lblDocente
             // 
@@ -97,11 +104,11 @@
             this.lblDocente.BackColor = System.Drawing.Color.Transparent;
             this.lblDocente.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblDocente.Location = new System.Drawing.Point(205, 11);
+            this.lblDocente.Location = new System.Drawing.Point(322, 7);
             this.lblDocente.Name = "lblDocente";
-            this.lblDocente.Size = new System.Drawing.Size(418, 47);
+            this.lblDocente.Size = new System.Drawing.Size(173, 47);
             this.lblDocente.TabIndex = 8;
-            this.lblDocente.Text = "NOMBRE DEL DOCENTE";
+            this.lblDocente.Text = "NOMBRE";
             // 
             // lbllogin2
             // 
@@ -110,7 +117,7 @@
             this.lbllogin2.BackColor = System.Drawing.Color.Transparent;
             this.lbllogin2.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbllogin2.ForeColor = System.Drawing.Color.Teal;
-            this.lbllogin2.Location = new System.Drawing.Point(171, 20);
+            this.lbllogin2.Location = new System.Drawing.Point(182, 7);
             this.lbllogin2.Name = "lbllogin2";
             this.lbllogin2.Size = new System.Drawing.Size(486, 47);
             this.lbllogin2.TabIndex = 7;
@@ -148,10 +155,10 @@
             this.siticonePanel1.BorderGradientEndColor = System.Drawing.Color.Purple;
             this.siticonePanel1.BorderGradientStartColor = System.Drawing.Color.Blue;
             this.siticonePanel1.BorderThickness = 2F;
+            this.siticonePanel1.Controls.Add(this.tblLogo);
             this.siticonePanel1.Controls.Add(this.panel4);
             this.siticonePanel1.Controls.Add(this.panel2);
             this.siticonePanel1.Controls.Add(this.panelTitulo);
-            this.siticonePanel1.Controls.Add(this.pictureBox1);
             this.siticonePanel1.CornerRadiusBottomLeft = 9F;
             this.siticonePanel1.CornerRadiusBottomRight = 9F;
             this.siticonePanel1.CornerRadiusTopLeft = 9F;
@@ -207,7 +214,7 @@
             // 
             // panelTitulo
             // 
-            this.panelTitulo.Controls.Add(this.lblDocente);
+            this.panelTitulo.Controls.Add(this.tblNombre);
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Name = "panelTitulo";
@@ -216,12 +223,56 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lbllogin2);
+            this.panel1.Controls.Add(this.tblBienvenida);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(836, 92);
             this.panel1.TabIndex = 23;
+            // 
+            // tblNombre
+            // 
+            this.tblNombre.ColumnCount = 3;
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
+            this.tblNombre.Controls.Add(this.lblDocente, 1, 0);
+            this.tblNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblNombre.Location = new System.Drawing.Point(0, 0);
+            this.tblNombre.Name = "tblNombre";
+            this.tblNombre.RowCount = 1;
+            this.tblNombre.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblNombre.Size = new System.Drawing.Size(819, 61);
+            this.tblNombre.TabIndex = 9;
+            // 
+            // tblBienvenida
+            // 
+            this.tblBienvenida.ColumnCount = 3;
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.07547F));
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.92452F));
+            this.tblBienvenida.Controls.Add(this.lbllogin2, 1, 0);
+            this.tblBienvenida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblBienvenida.Location = new System.Drawing.Point(0, 0);
+            this.tblBienvenida.Name = "tblBienvenida";
+            this.tblBienvenida.RowCount = 1;
+            this.tblBienvenida.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblBienvenida.Size = new System.Drawing.Size(836, 61);
+            this.tblBienvenida.TabIndex = 10;
+            // 
+            // tblLogo
+            // 
+            this.tblLogo.ColumnCount = 3;
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99936F));
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00064F));
+            this.tblLogo.Controls.Add(this.pictureBox1, 1, 0);
+            this.tblLogo.Location = new System.Drawing.Point(0, 172);
+            this.tblLogo.Name = "tblLogo";
+            this.tblLogo.RowCount = 1;
+            this.tblLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblLogo.Size = new System.Drawing.Size(819, 352);
+            this.tblLogo.TabIndex = 24;
             // 
             // UcBienvenida
             // 
@@ -233,6 +284,7 @@
             this.Name = "UcBienvenida";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.Size = new System.Drawing.Size(836, 749);
+            this.Load += new System.EventHandler(this.UcBienvenida_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnConfiguracion.ResumeLayout(false);
             this.panelminiContenedor.ResumeLayout(false);
@@ -240,9 +292,12 @@
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panelTitulo.ResumeLayout(false);
-            this.panelTitulo.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tblNombre.ResumeLayout(false);
+            this.tblNombre.PerformLayout();
+            this.tblBienvenida.ResumeLayout(false);
+            this.tblBienvenida.PerformLayout();
+            this.tblLogo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -261,5 +316,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelTitulo;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TableLayoutPanel tblNombre;
+        private System.Windows.Forms.TableLayoutPanel tblBienvenida;
+        private System.Windows.Forms.TableLayoutPanel tblLogo;
     }
 }

@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Registro_Docente_360.ControlesUsuario;
+using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.Forms
 {
     public partial class UcConfiguracion : UserControl
     {
        
+
 
         public UcConfiguracion()
         {
@@ -32,13 +34,16 @@ namespace Registro_Docente_360.Forms
             lblinfoCuenta2.Click += panelInfoCuenta_Click;
             pictureflecha2.Click += panelInfoCuenta_Click;
 
-            pnCerrarSesion.Click += pnCerrarSesion_Click;
-            lblCerrarSesion.Click += pnCerrarSesion_Click;
-            lblCerrarSesion2.Click += pnCerrarSesion_Click;
-            pictureflecha3.Click += pnCerrarSesion_Click; 
+            EventHandler cerrarSesion = (s, e) => EjecutarCerrarSesion();
+            pnCerrarSesion.Click += cerrarSesion;
+            lblCerrarSesion.Click += cerrarSesion;
+            lblCerrarSesion2.Click += cerrarSesion;
+            pictureflecha3.Click += cerrarSesion;
+            pnCerrarSesion.MouseDown += pnCerrarSesion_MouseDown;
+
         }
 
-      
+
 
         private void CentrarMiniContenedor()
         {
@@ -63,10 +68,67 @@ namespace Registro_Docente_360.Forms
         }
 
 
-        private void pnCerrarSesion_Click(object sender, EventArgs e)
+        private bool cerrandoSesion = false;
+
+        private void pnCerrarSesion_MouseDown(object sender, MouseEventArgs e)
         {
-            //Aqui va el Evento para cerrar sesion
+            // Validar que solo sea clic izquierdo (opcional)
+            if (e.Button == MouseButtons.Left)
+            {
+                DialogResult resultado = MessageBox.Show("¿Deseas cerrar sesión y volver al login?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // Limpiar sesión
+                    Sesion.IdUsuario = 0;
+                    Sesion.NombreUsuario = null;
+                    Sesion.UltimoAnhoSeleccionado = 0;
+                    Sesion.UltimoMesIndex = 0;
+                    Sesion.UltimaSemanaIndex = 0;
+
+                    // Abrir Login
+                    Form padre = this.FindForm();
+                    if (padre != null)
+                    {
+                        padre.Hide();
+                        new Login().Show();
+                        padre.Close();
+                    }
+                }
+            }
         }
+
+
+        private void EjecutarCerrarSesion()
+        {
+            if (cerrandoSesion) return;
+            cerrandoSesion = true;
+
+            DialogResult resultado = MessageBox.Show("¿Deseas cerrar sesión y volver al login?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Sesion.IdUsuario = 0;
+                Sesion.NombreUsuario = null;
+                Sesion.UltimoAnhoSeleccionado = 0;
+                Sesion.UltimoMesIndex = 0;
+                Sesion.UltimaSemanaIndex = 0;
+
+                Form formularioPadre = this.FindForm();
+                if (formularioPadre != null)
+                {
+                    formularioPadre.Hide();
+                }
+
+                Login loginForm = new Login();
+                loginForm.Show();
+
+                formularioPadre?.Close();
+            }
+
+            cerrandoSesion = false;
+        }
+
 
         private void panelInfoCuenta_Paint(object sender, PaintEventArgs e) { }
         

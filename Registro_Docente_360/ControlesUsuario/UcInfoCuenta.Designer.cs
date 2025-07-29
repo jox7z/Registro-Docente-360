@@ -88,7 +88,7 @@
         0F,
         0.5F,
         1F};
-            this.panelMiniContenedor.Location = new System.Drawing.Point(27, 25);
+            this.panelMiniContenedor.Location = new System.Drawing.Point(14, 14);
             this.panelMiniContenedor.Name = "panelMiniContenedor";
             this.panelMiniContenedor.Padding = new System.Windows.Forms.Padding(7);
             this.panelMiniContenedor.PatternStyle = System.Drawing.Drawing2D.HatchStyle.LargeGrid;
@@ -106,6 +106,7 @@
             this.panelMiniContenedor.UseMultiGradient = false;
             this.panelMiniContenedor.UsePatternTexture = false;
             this.panelMiniContenedor.UseRadialGradient = false;
+            this.panelMiniContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMiniContenedor_Paint);
             // 
             // panelContenidos
             // 
@@ -142,6 +143,7 @@
             this.btnVolver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnVolver.TabIndex = 3;
             this.btnVolver.TabStop = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // lblInfoCuenta
             // 
@@ -396,7 +398,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelMiniContenedor);
             this.Name = "UcInfoCuenta";
-            this.Size = new System.Drawing.Size(678, 811);
+            this.Size = new System.Drawing.Size(656, 804);
             this.Load += new System.EventHandler(this.UcInfoCuenta_Load);
             this.panelMiniContenedor.ResumeLayout(false);
             this.panelMiniContenedor.PerformLayout();

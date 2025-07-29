@@ -6,6 +6,8 @@ using Registro_Docente_360.ControlesUsuario;
 using Registro_Docente_360.Eventos;
 using Registro_Docente_360.Forms;
 using System.Runtime.InteropServices;
+using Modelos.EntityFramework;
+using Registro_Docente_360.Interfaces;
 
 namespace Registro_Docente_360
 {
@@ -14,7 +16,7 @@ namespace Registro_Docente_360
         // ========================
         // CAMPOS Y REFERENCIAS
         // ========================
-        UcFechas ucFechas;
+        public UcFechas ucFechas;
         UcHorario ucHorario;
         UcAlumnos ucAlumnos;
         UcReportes ucReportes;
@@ -26,6 +28,12 @@ namespace Registro_Docente_360
         UcInfoCuenta ucInfoCuenta;
         UcBienvenida ucBienvenida;
         BotonAyuda botonAyuda;
+        UcVentanaAsistencia ucAsistencia;
+        UcRolesyPermisos ucRolesyPermisos;
+        UcAccionesUsuario ucAccionesUsuario;
+        UcRegistroAccesos ucRegistroAccesos;
+        UcUsuarios ucUsuarios;
+
         bool sidebarExpand = true;
 
         // ======================
@@ -49,7 +57,8 @@ namespace Registro_Docente_360
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.WindowState = FormWindowState.Normal;
-            this.Size = new System.Drawing.Size(1280, 720);
+            this.Size = new System.Drawing.Size(1440, 800);
+
 
             botonAyuda = new BotonAyuda();
             botonAyuda.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -73,6 +82,7 @@ namespace Registro_Docente_360
             // Cargar bienvenida al iniciar
             ucBienvenida = new UcBienvenida();
             MostrarUserControl(ucBienvenida);
+            ucBienvenida.OnVerHorario += AbrirHorarioDesdeBienvenida;
         }
 
 
@@ -90,16 +100,22 @@ namespace Registro_Docente_360
         // ========================
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            if (Sesion.IdRol == 1) //admin
+            if (Sesion.IdRol == 1) // Docente
             {
 
-            }
+                btnMantenimiento.Visible = false;
+                pnMantenimiento.Visible = false;
 
-            else if (Sesion.IdRol == 2)//docente
+            }
+            else if (Sesion.IdRol == 2) // Administrador
             {
-
+                btnMantenimiento.Visible = true;
+                pnMantenimiento.Visible = false;
             }
+
+           
         }
+
 
         // ========================
         // MÉTODOS DE UI - SIDEBAR
@@ -137,12 +153,20 @@ namespace Registro_Docente_360
         // MÉTODOS DE NAVEGACIÓN
         // ========================
 
-       
 
-        private void MostrarUserControl(UserControl control)
+
+        public void MostrarUserControl(UserControl control)
         {
             foreach (Control c in panelContenedor.Controls)
+            {
+                if (c is IModoEdicion editable && editable.EstaEnModoEdicion)
+                {
+                    System.Windows.Forms.MessageBox.Show("Debes salir del modo edición antes de cambiar de pestaña.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 c.Visible = false;
+            }
 
             if (!panelContenedor.Controls.Contains(control))
             {
@@ -152,12 +176,10 @@ namespace Registro_Docente_360
 
             control.Visible = true;
             control.BringToFront();
-
-
-
         }
 
-     
+
+
 
         // ========================
         // EVENTOS DE BOTONES DEL MENÚ
@@ -173,18 +195,29 @@ namespace Registro_Docente_360
             MostrarUserControl(ucFechas);
         }
 
-        private void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
+        public void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
         {
             var ucAsistencia = new UcVentanaAsistencia
             {
                 Dock = DockStyle.Fill
             };
 
-            ucAsistencia.ActualizarCabecera("Tomar de la ventana horario", e.Anho, e.FechaInicio, e.FechaFin);
+            if (ucAsistencia == null)
+            {
+                ucAsistencia = new UcVentanaAsistencia();
+            }
 
+
+            // Actualizar la cabecera
+            ucAsistencia.ActualizarCabecera(e.Anho, e.FechaInicio, e.FechaFin);
+
+
+            // Mostrar control
             panelContenedor.Controls.Clear();
             panelContenedor.Controls.Add(ucAsistencia);
+
         }
+
 
         private void btnHorario_Click(object sender, EventArgs e)
         {
@@ -245,21 +278,135 @@ namespace Registro_Docente_360
 
             MostrarUserControl(ucConfiguracion);
         }
+
+
+        //TODO EL MENU DE MANTENIMIENTO AQUI EMPIEZA
+
+        Panel p = new Panel();
+
+        private void btnMantenimiento_MouseEnter(object sender, EventArgs e)
+        {
+            paneltop.Controls.Add(p);
+            p.BackColor = Color.White;
+            p.Size = new System.Drawing.Size(166, 26);
+            p.Location = new
+                System.Drawing.Point(btnMantenimiento.Location.X, btnMantenimiento.Location.Y + 26);
+        }
+
+        private void btnMantenimiento_MouseLeave(object sender, EventArgs e)
+        {
+            paneltop.Controls.Remove(p);
+        }
+
+        private void btnMantenimiento_Click(object sender, EventArgs e)
+        {
+            if (!pnMantenimiento.Visible)
+            {
+                pnMantenimiento.Visible = true;
+                pnMantenimiento.BringToFront(); 
+            }
+            else
+            {
+                pnMantenimiento.Visible = false;
+            }
+        }
+
+        private void btnRolyPerm_Click(object sender, EventArgs e)
+        {
+            if (ucRolesyPermisos == null)
+                ucRolesyPermisos = new UcRolesyPermisos();
+
+            MostrarUserControl(ucRolesyPermisos);
+        }
+
+        private void btnAccesos_Click(object sender, EventArgs e)
+        {
+            if (ucRegistroAccesos == null)
+                ucRegistroAccesos = new UcRegistroAccesos();
+
+            MostrarUserControl(ucRegistroAccesos);
+        }
+
+        private void btnAccionesUsuario_Click(object sender, EventArgs e)
+        {
+            if (ucAccionesUsuario == null)
+                ucAccionesUsuario = new UcAccionesUsuario();
+
+            MostrarUserControl(ucAccionesUsuario);
+        }
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            if (ucUsuarios == null)
+                ucUsuarios = new UcUsuarios();
+
+            MostrarUserControl(ucUsuarios);
+        }
+
+
+
+
         private void UcConfiguracion_OnSolicitarCambioContrasena(object sender, EventArgs e)
         {
-            if (ucCambiarContra == null)
-                ucCambiarContra = new UcCambiarContra();
+            ucCambiarContra = new UcCambiarContra();
+
+            // Suscribirse al evento de regreso
+            ucCambiarContra.OnVolverAConfiguracion += (s2, e2) =>
+            {
+                if (ucConfiguracion == null)
+                {
+                    ucConfiguracion = new UcConfiguracion();
+                    ucConfiguracion.OnSolicitarCambioContrasena += UcConfiguracion_OnSolicitarCambioContrasena;
+                    ucConfiguracion.OnSolicitarInfoCuenta += UcConfiguracion_OnSolicitarInfoCuenta;
+                }
+
+                MostrarUserControl(ucConfiguracion);
+            };
 
             MostrarUserControl(ucCambiarContra);
         }
 
+
         private void UcConfiguracion_OnSolicitarInfoCuenta(object sender, EventArgs e)
         {
-            if (ucInfoCuenta == null)
-                ucInfoCuenta = new UcInfoCuenta();
+            ucInfoCuenta = new UcInfoCuenta();
+
+            ucInfoCuenta.OnVolverAConfiguracion += (s2, e2) =>
+            {
+                if (ucConfiguracion == null)
+                {
+                    ucConfiguracion = new UcConfiguracion();
+                    ucConfiguracion.OnSolicitarCambioContrasena += UcConfiguracion_OnSolicitarCambioContrasena;
+                    ucConfiguracion.OnSolicitarInfoCuenta += UcConfiguracion_OnSolicitarInfoCuenta;
+                }
+
+                MostrarUserControl(ucConfiguracion);
+            };
 
             MostrarUserControl(ucInfoCuenta);
         }
+
+        private void CargarHorario()
+        {
+            var horario = new UcHorario();
+            horario.Dock = DockStyle.Fill;
+
+            panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Add(horario);
+        }
+
+
+
+
+        private void AbrirHorarioDesdeBienvenida(object sender, EventArgs e)
+        {
+            var ucHorario = new UcHorario();
+            ucHorario.Dock = DockStyle.Fill;
+
+            panelContenedor.Controls.Clear();
+            panelContenedor.Controls.Add(ucHorario);
+        }
+
+
 
         // ========================
         // EVENTOS DE OTROS COMPONENTES
@@ -275,6 +422,9 @@ namespace Registro_Docente_360
             SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
         }
 
+      
+
+
         private void formFechas_FormClosed(object sender, EventArgs e){ }
 
         private void paneltop_Paint(object sender, PaintEventArgs e) { }
@@ -283,6 +433,10 @@ namespace Registro_Docente_360
 
         private void panelContenedor_Paint_1(object sender, PaintEventArgs e) { }
 
-        
+        private void btnConfiguracion2_Click(object sender, EventArgs e) { }
+
+        private void panelContenedor_MouseEnter(object sender, EventArgs e) { }
+
+      
     }
 }

@@ -78,3 +78,43 @@ D:\U\C#net\Registro docente\Registro-Docente-360\Modelos\obj\Debug\Modelos.cspro
 D:\U\C#net\Registro docente\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.Up2Date
 D:\U\C#net\Registro docente\Registro-Docente-360\Modelos\obj\Debug\Modelos.dll
 D:\U\C#net\Registro docente\Registro-Docente-360\Modelos\obj\Debug\Modelos.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Modelos.dll.config
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Modelos.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Modelos.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\EntityFramework.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Newtonsoft.Json.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\QRCoder.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\SiticoneNetFrameworkUI.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Buffers.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Collections.Immutable.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.IO.Pipelines.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Memory.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.ValueTuple.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\EntityFramework.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\Newtonsoft.Json.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Buffers.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Collections.Immutable.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.IO.Pipelines.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Memory.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\System.ValueTuple.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.AssemblyReference.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.Up2Date
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\obj\Debug\Modelos.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\obj\Debug\Modelos.pdb

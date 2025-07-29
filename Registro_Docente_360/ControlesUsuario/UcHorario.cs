@@ -6,19 +6,23 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Registro_Docente_360.Interfaces;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
-    public partial class UcHorario : UserControl
+    public partial class UcHorario : UserControl, IModoEdicion
     {
         private bool modoEdicion = false;
         private ToolTip tooltipHorario = new ToolTip();
+        public bool EstaEnModoEdicion => modoEdicion;
 
         public UcHorario()
         {
             InitializeComponent();
             this.Load += UcHorario_Load;
         }
+
+      
 
         // Inicializa columnas y filas del horario
         private void UcHorario_Load(object sender, EventArgs e)
@@ -90,6 +94,7 @@ namespace Registro_Docente_360.ControlesUsuario
 
                 lblNomDocente.Text = usuario.nombre_usuario;
                 lblSecc.Text = $"{seccion.nombre_seccion}";
+
 
                 var horarios = (from h in contexto.Horarios
                                 join m in contexto.Materias on h.id_materia equals m.id_materia
@@ -245,6 +250,24 @@ namespace Registro_Docente_360.ControlesUsuario
                 dataGridPerso1.Grid.ReadOnly = true;
                 btnEditarHorario.Text = "EDITAR HORARIO";
                 tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
+                modoEdicion = false;
+            }
+        }
+
+        public void CancelarModoEdicion()
+        {
+            if (modoEdicion)
+            {
+                // Restablecer UI y lógica de salida del modo edición
+                lblHorario.Text = "Horario del Docente";
+                lblHorario.ForeColor = Color.Teal;
+                lblHorario.Font = new Font("Segoe UI", 21, FontStyle.Bold);
+                this.BackColor = SystemColors.Control;
+
+                dataGridPerso1.Grid.ReadOnly = true;
+                btnEditarHorario.Text = "EDITAR HORARIO";
+                tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
+
                 modoEdicion = false;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Registro_Docente_360.Eventos;
 
@@ -11,19 +12,69 @@ namespace Registro_Docente_360.ControlesUsuario
         {
             InitializeComponent();
 
+            // Evitar edición manual
+            comboAnhos.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboMeses.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboSemanas.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // Negrita y color fuerte
+            var fuenteNegrita = new Font(comboAnhos.Font, FontStyle.Bold);
+            comboAnhos.Font = fuenteNegrita;
+            comboMeses.Font = fuenteNegrita;
+            comboSemanas.Font = fuenteNegrita;
+
+            comboAnhos.ForeColor = Color.Black;
+            comboMeses.ForeColor = Color.Black;
+            comboSemanas.ForeColor = Color.Black;
+
+
             this.Resize += (s, e) => CentrarMiniContenedor();
             CentrarMiniContenedor();
 
             comboMeses.SelectedIndexChanged += comboMeses_SelectedIndexChanged;
             comboAnhos.SelectedIndexChanged += comboAnhos_SelectedIndexChanged;
 
-            UcFechas_Load(this, EventArgs.Empty);
+            InicializarFechas();
         }
 
         private void CentrarMiniContenedor()
         {
             panelminiContenedor.Left = (this.ClientSize.Width - 431) / 2;
             panelminiContenedor.Top = (this.ClientSize.Height - 523) / 2;
+        }
+
+        public void InicializarFechas(int? anhoSeleccionado = null, int? mesIndexSeleccionado = null, int? semanaIndexSeleccionada = null)
+        {
+            comboAnhos.Items.Clear();
+            for (int anho = 2025; anho <= DateTime.Now.Year + 5; anho++)
+                comboAnhos.Items.Add(anho.ToString());
+
+            // Selección de año
+            if (anhoSeleccionado != null && comboAnhos.Items.Contains(anhoSeleccionado.ToString()))
+                comboAnhos.SelectedItem = anhoSeleccionado.ToString();
+            else
+                comboAnhos.SelectedItem = DateTime.Now.Year.ToString();
+
+            // Cargar meses
+            comboMeses.Items.Clear();
+            string[] meses = { "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                       "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+            comboMeses.Items.AddRange(meses);
+
+            // Selección de mes
+            if (mesIndexSeleccionado != null && mesIndexSeleccionado >= 0 && mesIndexSeleccionado < comboMeses.Items.Count)
+                comboMeses.SelectedIndex = mesIndexSeleccionado.Value;
+            else
+                comboMeses.SelectedIndex = 0;
+
+            // Llenar semanas
+            LlenarComboSemanas();
+
+            // Selección de semana
+            if (semanaIndexSeleccionada != null && semanaIndexSeleccionada >= 0 && semanaIndexSeleccionada < comboSemanas.Items.Count)
+                comboSemanas.SelectedIndex = semanaIndexSeleccionada.Value;
+            else if (comboSemanas.Items.Count > 0)
+                comboSemanas.SelectedIndex = 0;
         }
 
 
@@ -122,18 +173,29 @@ namespace Registro_Docente_360.ControlesUsuario
             int anho = int.Parse(comboAnhos.SelectedItem.ToString());
             string mesTexto = comboMeses.SelectedItem.ToString();
             int mesNumero = comboMeses.SelectedIndex + 2;
+            int semanaIndex = comboSemanas.SelectedIndex;
 
             string[] fechas = comboSemanas.SelectedItem.ToString().Split('-');
-            string fechaInicio = fechas[0].Trim();
-            string fechaFin = fechas[1].Trim();
 
+            // ✅ Convertir a fechas completas con año
+            DateTime fechaInicio = DateTime.ParseExact($"{fechas[0].Trim()}/{anho}", "dd/MM/yyyy", null);
+            DateTime fechaFin = DateTime.ParseExact($"{fechas[1].Trim()}/{anho}", "dd/MM/yyyy", null);
+
+            // ✅ Guardar selección global para reutilizar
+            Sesion.UltimoAnhoSeleccionado = anho;
+            Sesion.UltimoMesIndex = comboMeses.SelectedIndex;
+            Sesion.UltimaSemanaIndex = semanaIndex;
+
+            // ✅ Lanzar evento con los datos seleccionados
             OnFechaSeleccionada?.Invoke(this, new FechaSeleccionadaEventArgs
             {
                 Anho = anho,
                 MesTexto = mesTexto,
-                FechaInicio = fechaInicio,
-                FechaFin = fechaFin
+                FechaInicio = fechaInicio.ToString("dd/MM/yyyy"),
+                FechaFin = fechaFin.ToString("dd/MM/yyyy")
             });
         }
+
+
     }
 }

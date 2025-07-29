@@ -47,8 +47,8 @@
             this.pnAgregarNotas = new System.Windows.Forms.Panel();
             this.btnGestionarNotas = new System.Windows.Forms.Button();
             this.tableLayoutContenedor = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.tablaNotas = new Registro_Docente_360.ControlesUsuario.dataGridPersoNotas();
+            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.PanelAcciones.SuspendLayout();
             this.pnExportar.SuspendLayout();
             this.pnGuardar.SuspendLayout();
@@ -62,7 +62,7 @@
             // 
             // PanelAcciones
             // 
-            this.PanelAcciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.PanelAcciones.BackColor = System.Drawing.Color.Gainsboro;
             this.PanelAcciones.ColumnCount = 3;
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -71,7 +71,7 @@
             this.PanelAcciones.Controls.Add(this.pnExportar, 2, 0);
             this.PanelAcciones.Controls.Add(this.pnGuardar, 0, 0);
             this.PanelAcciones.Controls.Add(this.pnCancelar, 1, 0);
-            this.PanelAcciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelAcciones.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PanelAcciones.Location = new System.Drawing.Point(3, 512);
             this.PanelAcciones.Name = "PanelAcciones";
             this.PanelAcciones.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
@@ -79,6 +79,7 @@
             this.PanelAcciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PanelAcciones.Size = new System.Drawing.Size(973, 64);
             this.PanelAcciones.TabIndex = 21;
+            this.PanelAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelAcciones_Paint);
             // 
             // pnExportar
             // 
@@ -109,6 +110,7 @@
             this.btnExportar.Text = "          Exportar";
             this.btnExportar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // pnGuardar
             // 
@@ -186,7 +188,7 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -225,7 +227,7 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -267,7 +269,7 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -314,7 +316,7 @@
             // tableLayoutContenedor
             // 
             this.tableLayoutContenedor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.tableLayoutContenedor.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutContenedor.ColumnCount = 1;
             this.tableLayoutContenedor.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutContenedor.Controls.Add(this.tableLayoutPanel5, 0, 5);
@@ -336,8 +338,18 @@
             this.tableLayoutContenedor.Size = new System.Drawing.Size(979, 679);
             this.tableLayoutContenedor.TabIndex = 6;
             // 
+            // tablaNotas
+            // 
+            this.tablaNotas.BackColor = System.Drawing.Color.Gainsboro;
+            this.tablaNotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaNotas.Location = new System.Drawing.Point(3, 123);
+            this.tablaNotas.Name = "tablaNotas";
+            this.tablaNotas.Size = new System.Drawing.Size(973, 383);
+            this.tablaNotas.TabIndex = 22;
+            // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(188, 3);
             this.cmbMateria.Name = "cmbMateria";
@@ -345,18 +357,11 @@
             this.cmbMateria.TabIndex = 13;
             this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
             // 
-            // tablaNotas
-            // 
-            this.tablaNotas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaNotas.Location = new System.Drawing.Point(3, 123);
-            this.tablaNotas.Name = "tablaNotas";
-            this.tablaNotas.Size = new System.Drawing.Size(973, 383);
-            this.tablaNotas.TabIndex = 22;
-            // 
             // UcNotas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.tableLayoutContenedor);
             this.Name = "UcNotas";
             this.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);

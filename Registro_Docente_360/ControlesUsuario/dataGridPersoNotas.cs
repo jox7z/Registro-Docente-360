@@ -26,5 +26,12 @@ namespace Registro_Docente_360.ControlesUsuario
         {
 
         }
+
+       
+
+        private void datagridview2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

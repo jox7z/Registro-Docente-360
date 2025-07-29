@@ -108,6 +108,9 @@
     <Compile Include="EntityFramework\Asistencia.cs">
       <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Bitacora_Accesos.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Bitacora_Movimientos.cs">
       <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
@@ -157,6 +160,7 @@
       <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SesionAcceso.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
