@@ -118,6 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblReporte.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DQAACw0B7QfALAAAAOZJREFUSEvdlDEOgkAQRafTQm+gF6LxIqKVlcl8PJN4BbRSay+h9hQGdjHmoxlG
+        C40veQnJ37+zBLIiXwfoCzAT1a1k2bUWKEQ1lTTt8XIfy+VYgKMA5Qv3Aoy41o1w8rC56kGARIBBtHpu
+        Bu/fexPV+cPmA45lsRgKcIpDphzbALtYTji6s1pN4pqCIxvgEsvt0zeEtygly84c2TQf0qLrujvtP8Wn
+        CRe8mnDBqwkXvJpwwasJFxpV1/W1EMxb+ccDHu+ccEdx/vsD8nrjStXNk/zjAd004YJXEy54NeGCVxMu
+        eP07bqUHAm8Hp0ZIAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnVolver.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -139,16 +149,6 @@
         ELhTYMcAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="lblReporte.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAAOZJREFUSEvdlDEOgkAQRafTQm+gF6LxIqKVlcl8PJN4BbRSay+h9hQGdjHmoxlG
-        C40veQnJ37+zBLIiXwfoCzAT1a1k2bUWKEQ1lTTt8XIfy+VYgKMA5Qv3Aoy41o1w8rC56kGARIBBtHpu
-        Bu/fexPV+cPmA45lsRgKcIpDphzbALtYTji6s1pN4pqCIxvgEsvt0zeEtygly84c2TQf0qLrujvtP8Wn
-        CRe8mnDBqwkXvJpwwasJFxpV1/W1EMxb+ccDHu+ccEdx/vsD8nrjStXNk/zjAd004YJXEy54NeGCVxMu
-        eP07bqUHAm8Hp0ZIAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="label4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -162,7 +162,7 @@
   <data name="label2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAOZJREFUSEvdlDEOgkAQRafTQm+gF6LxIqKVlcl8PJN4BbRSay+h9hQGdjHmoxlG
+        DAAACwwBP0AiyAAAAOZJREFUSEvdlDEOgkAQRafTQm+gF6LxIqKVlcl8PJN4BbRSay+h9hQGdjHmoxlG
         C40veQnJ37+zBLIiXwfoCzAT1a1k2bUWKEQ1lTTt8XIfy+VYgKMA5Qv3Aoy41o1w8rC56kGARIBBtHpu
         Bu/fexPV+cPmA45lsRgKcIpDphzbALtYTji6s1pN4pqCIxvgEsvt0zeEtygly84c2TQf0qLrujvtP8Wn
         CRe8mnDBqwkXvJpwwasJFxpV1/W1EMxb+ccDHu+ccEdx/vsD8nrjStXNk/zjAd004YJXEy54NeGCVxMu

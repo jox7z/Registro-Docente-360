@@ -38,8 +38,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.datagridRoles = new System.Windows.Forms.DataGridView();
+            this.txtBuscarUsuario = new System.Windows.Forms.TextBox();
+            this.dgMovimientos = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +49,7 @@
             this.panel1.SuspendLayout();
             this.panelCambiarContra.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridRoles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMovimientos)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMiniContenedor
@@ -129,14 +129,14 @@
             this.lblRegistrodeAccesos.ForeColor = System.Drawing.Color.Teal;
             this.lblRegistrodeAccesos.Location = new System.Drawing.Point(247, 7);
             this.lblRegistrodeAccesos.Name = "lblRegistrodeAccesos";
-            this.lblRegistrodeAccesos.Size = new System.Drawing.Size(187, 25);
+            this.lblRegistrodeAccesos.Size = new System.Drawing.Size(196, 25);
             this.lblRegistrodeAccesos.TabIndex = 2;
-            this.lblRegistrodeAccesos.Text = "Registro de Accesos";
+            this.lblRegistrodeAccesos.Text = "Registro de Acciones";
             // 
             // panelCambiarContra
             // 
             this.panelCambiarContra.Controls.Add(this.panel2);
-            this.panelCambiarContra.Controls.Add(this.datagridRoles);
+            this.panelCambiarContra.Controls.Add(this.dgMovimientos);
             this.panelCambiarContra.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelCambiarContra.Location = new System.Drawing.Point(3, 52);
             this.panelCambiarContra.Name = "panelCambiarContra";
@@ -147,7 +147,7 @@
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.txtBuscarUsuario);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -179,25 +179,25 @@
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // txtBuscarUsuario
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(221, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(210, 29);
-            this.textBox1.TabIndex = 17;
+            this.txtBuscarUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBuscarUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarUsuario.Location = new System.Drawing.Point(221, 25);
+            this.txtBuscarUsuario.Name = "txtBuscarUsuario";
+            this.txtBuscarUsuario.Size = new System.Drawing.Size(210, 29);
+            this.txtBuscarUsuario.TabIndex = 17;
             // 
-            // datagridRoles
+            // dgMovimientos
             // 
-            this.datagridRoles.AllowUserToAddRows = false;
-            this.datagridRoles.AllowUserToDeleteRows = false;
-            this.datagridRoles.AllowUserToResizeColumns = false;
-            this.datagridRoles.AllowUserToResizeRows = false;
-            this.datagridRoles.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.datagridRoles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.datagridRoles.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.datagridRoles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgMovimientos.AllowUserToAddRows = false;
+            this.dgMovimientos.AllowUserToDeleteRows = false;
+            this.dgMovimientos.AllowUserToResizeColumns = false;
+            this.dgMovimientos.AllowUserToResizeRows = false;
+            this.dgMovimientos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dgMovimientos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgMovimientos.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgMovimientos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -205,9 +205,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagridRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.datagridRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgMovimientos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMovimientos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
@@ -219,14 +219,14 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.datagridRoles.DefaultCellStyle = dataGridViewCellStyle2;
-            this.datagridRoles.EnableHeadersVisualStyles = false;
-            this.datagridRoles.Location = new System.Drawing.Point(36, 109);
-            this.datagridRoles.Name = "datagridRoles";
-            this.datagridRoles.ReadOnly = true;
-            this.datagridRoles.RowHeadersVisible = false;
-            this.datagridRoles.Size = new System.Drawing.Size(613, 391);
-            this.datagridRoles.TabIndex = 15;
+            this.dgMovimientos.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgMovimientos.EnableHeadersVisualStyles = false;
+            this.dgMovimientos.Location = new System.Drawing.Point(36, 109);
+            this.dgMovimientos.Name = "dgMovimientos";
+            this.dgMovimientos.ReadOnly = true;
+            this.dgMovimientos.RowHeadersVisible = false;
+            this.dgMovimientos.Size = new System.Drawing.Size(613, 391);
+            this.dgMovimientos.TabIndex = 15;
             // 
             // Column1
             // 
@@ -275,7 +275,7 @@
             this.panelCambiarContra.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridRoles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMovimientos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,8 +291,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridView datagridRoles;
+        private System.Windows.Forms.TextBox txtBuscarUsuario;
+        private System.Windows.Forms.DataGridView dgMovimientos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

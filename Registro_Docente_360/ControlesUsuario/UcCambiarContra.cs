@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Forms;
+using SiticoneNetFrameworkUI.Helpers.Text;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,9 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Modelos.EntityFramework;
-using Registro_Docente_360.Eventos;
-using Registro_Docente_360.Forms;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -52,11 +54,12 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            string contraActual = txtContraActual.Text;
+            AlumnoController controlador = new AlumnoController();
+            string clave = controlador.EncriptarContrasena(txtContraActual.Text);
 
-            using (var db = new RegistroDocenteEntities())
+            using (var contexto = new RegistroDocenteEntities())
             {
-                var usuario = db.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
 
                 if (usuario == null)
                 {
@@ -64,7 +67,7 @@ namespace Registro_Docente_360.ControlesUsuario
                     return;
                 }
 
-                if (usuario.contraseña == contraActual)
+                if (usuario.contraseña == clave)
                 {
                     pnNuevaContra.Visible = true;
                     panelCambiarContra.Visible = false;
@@ -106,9 +109,9 @@ namespace Registro_Docente_360.ControlesUsuario
                 return;
             }
 
-            using (var db = new RegistroDocenteEntities())
+            using (var contexto = new RegistroDocenteEntities())
             {
-                var usuario = db.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
 
                 if (usuario == null)
                 {
@@ -116,10 +119,18 @@ namespace Registro_Docente_360.ControlesUsuario
                     return;
                 }
 
-                usuario.contraseña = nueva;
-                db.SaveChanges();
+                AlumnoController controlador = new AlumnoController();
+                string nuevaEncriptada = controlador.EncriptarContrasena(nueva);
+
+                usuario.contraseña = nuevaEncriptada;
+                contexto.SaveChanges();
 
                 MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                string accion = "Actualizar contraseña";
+                string descripcion = $"Actualizacion contraseña del usuario: {usuario.nombre_usuario}";
+                string modulo = "Alumnos";
+                controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
             }
 
             // Limpiar campos
@@ -148,9 +159,5 @@ namespace Registro_Docente_360.ControlesUsuario
                 configuracionUC.Dock = DockStyle.Fill;
             }
         }
-
-        private void panelCambiarContra_Paint(object sender, PaintEventArgs e) { }
-
-        
     }
 }

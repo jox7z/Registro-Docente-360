@@ -34,13 +34,14 @@ namespace Registro_Docente_360.ControlesUsuario
             this.pnEditarHorario = new System.Windows.Forms.Panel();
             this.btnEditarHorario = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblSecc = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblNomDocente = new System.Windows.Forms.Label();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.lblHorario = new System.Windows.Forms.Label();
             this.dataGridPerso1 = new Registro_Docente_360.ControlesUsuario.dataGridPerso();
-            this.lblSecc = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnEditarHorario.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -99,9 +100,10 @@ namespace Registro_Docente_360.ControlesUsuario
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 937F));
             this.tableLayoutPanel2.Controls.Add(this.lblSecc, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSeccion, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -112,6 +114,17 @@ namespace Registro_Docente_360.ControlesUsuario
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1139, 44);
             this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // lblSecc
+            // 
+            this.lblSecc.AutoSize = true;
+            this.lblSecc.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblSecc.ForeColor = System.Drawing.Color.Teal;
+            this.lblSecc.Location = new System.Drawing.Point(111, 0);
+            this.lblSecc.Name = "lblSecc";
+            this.lblSecc.Size = new System.Drawing.Size(88, 30);
+            this.lblSecc.TabIndex = 11;
+            this.lblSecc.Text = "Seccion";
             // 
             // lblSeccion
             // 
@@ -126,30 +139,20 @@ namespace Registro_Docente_360.ControlesUsuario
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1017F));
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 53);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1139, 44);
             this.tableLayoutPanel3.TabIndex = 6;
-            // 
-            // lblNomDocente
-            // 
-            this.lblNomDocente.AutoSize = true;
-            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblNomDocente.Location = new System.Drawing.Point(117, 0);
-            this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(217, 24);
-            this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre del Docente";
             // 
             // label2
             // 
@@ -159,9 +162,28 @@ namespace Registro_Docente_360.ControlesUsuario
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.label2.Size = new System.Drawing.Size(108, 24);
+            this.label2.Size = new System.Drawing.Size(108, 30);
             this.label2.TabIndex = 9;
             this.label2.Text = "Docente:";
+            // 
+            // lblNomDocente
+            // 
+            this.lblNomDocente.AutoSize = true;
+            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
+            this.lblNomDocente.Location = new System.Drawing.Point(117, 0);
+            this.lblNomDocente.Name = "lblNomDocente";
+            this.lblNomDocente.Size = new System.Drawing.Size(2, 44);
+            this.lblNomDocente.TabIndex = 10;
+            this.lblNomDocente.Text = "Nombre";
+            // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(125, 3);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(157, 21);
+            this.cmbDocentes.TabIndex = 12;
             // 
             // lblHorario
             // 
@@ -185,17 +207,6 @@ namespace Registro_Docente_360.ControlesUsuario
             this.dataGridPerso1.Padding = new System.Windows.Forms.Padding(20);
             this.dataGridPerso1.Size = new System.Drawing.Size(1139, 396);
             this.dataGridPerso1.TabIndex = 4;
-            // 
-            // lblSecc
-            // 
-            this.lblSecc.AutoSize = true;
-            this.lblSecc.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblSecc.ForeColor = System.Drawing.Color.Teal;
-            this.lblSecc.Location = new System.Drawing.Point(111, 0);
-            this.lblSecc.Name = "lblSecc";
-            this.lblSecc.Size = new System.Drawing.Size(88, 30);
-            this.lblSecc.TabIndex = 11;
-            this.lblSecc.Text = "Seccion";
             // 
             // UcHorario
             // 
@@ -228,6 +239,7 @@ namespace Registro_Docente_360.ControlesUsuario
         private System.Windows.Forms.Panel pnEditarHorario;
         private System.Windows.Forms.Button btnEditarHorario;
         private Label lblSecc;
+        private ComboBox cmbDocentes;
     }
 }
  

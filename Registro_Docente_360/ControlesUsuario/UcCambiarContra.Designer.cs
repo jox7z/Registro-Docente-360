@@ -161,7 +161,6 @@
             this.panelCambiarContra.Name = "panelCambiarContra";
             this.panelCambiarContra.Size = new System.Drawing.Size(535, 244);
             this.panelCambiarContra.TabIndex = 1;
-            this.panelCambiarContra.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCambiarContra_Paint);
             // 
             // btnConfirmar
             // 

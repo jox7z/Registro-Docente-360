@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
 using Registro_Docente_360.Eventos;
 
 
@@ -53,17 +54,9 @@ namespace Registro_Docente_360.ControlesUsuario
             txtCorreo.Text = Sesion.Correo;
             lblTipodeRol.Text = Sesion.Rol; // Asegúrate que lblRol exista y esté en tu diseñador
             lblFechaRegistro.Text = Sesion.FechaRegistro.ToString("dd/MM/yyyy");
-
-            // Guardar la contraseña actual (simulación, normalmente estaría encriptada)
-            contraGuardada = Sesion.Contrasena;
         }
 
 
-
-        private void panelCambiarContra_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void lblEditarInfo1_Click(object sender, EventArgs e)
         {
@@ -92,27 +85,41 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (txtContra.Text == contraGuardada)
+            AlumnoController controlador = new AlumnoController();
+            string clave = controlador.EncriptarContrasena(txtContra.Text);
+
+            using (var contexto = new RegistroDocenteEntities())
             {
-                edicionHabilitada = true;
-                pnConfirmContra.Visible = false;
-                pnInfo.Visible = true;
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                if (usuario == null)
+                {
+                    MessageBox.Show("Error al cargar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                txtNombre.ReadOnly = false;
-                txtCorreo.ReadOnly = false;
+                if (usuario.contraseña == clave)
+                {
+                    edicionHabilitada = true;
+                    pnConfirmContra.Visible = false;
+                    pnInfo.Visible = true;
 
-                txtNombre.BackColor = Color.White;
-                txtCorreo.BackColor = Color.White;
+                    txtNombre.ReadOnly = false;
+                    txtCorreo.ReadOnly = false;
 
-                btnGuardarCambios.Visible = true;
+                    txtNombre.BackColor = Color.White;
+                    txtCorreo.BackColor = Color.White;
 
-                MessageBox.Show("Puedes editar tu información ahora.");
-            }
-            else
-            {
-                MessageBox.Show("Contraseña incorrecta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtContra.Clear();
-                txtContra.Focus();
+                    btnGuardarCambios.Visible = true;
+
+                    MessageBox.Show("Puedes editar tu información ahora.");
+                }
+                else
+                {
+                    MessageBox.Show("La contraseña actual es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Contraseña incorrecta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtContra.Clear();
+                    txtContra.Focus();
+                }
             }
         }
 
@@ -139,6 +146,12 @@ namespace Registro_Docente_360.ControlesUsuario
                     Sesion.Correo = nuevoCorreo;
 
                     MessageBox.Show("Datos actualizados correctamente.");
+
+                    string accion = "Actualizar Datos";
+                    string descripcion = $"Actualizacion datos del usuario: {usuario.nombre_usuario}";
+                    string modulo = "Alumnos";
+                    AlumnoController controlador = new AlumnoController();
+                    controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
                 }
                 else
                 {
@@ -163,11 +176,6 @@ namespace Registro_Docente_360.ControlesUsuario
         private void btnVolver_Click(object sender, EventArgs e)
         {
             OnVolverAConfiguracion?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void panelMiniContenedor_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

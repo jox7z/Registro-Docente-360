@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
+﻿using Registro_Docente_360.ControlesUsuario;
+using System;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
-using Registro_Docente_360.ControlesUsuario;
 
 namespace Registro_Docente_360
 {

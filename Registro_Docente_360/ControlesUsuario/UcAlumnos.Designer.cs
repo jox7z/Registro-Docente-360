@@ -49,6 +49,7 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnAgregar = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -175,11 +176,13 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 878F));
             this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 43);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -195,9 +198,9 @@
             this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
             this.lblNomDocente.Location = new System.Drawing.Point(108, 0);
             this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(202, 25);
+            this.lblNomDocente.Size = new System.Drawing.Size(2, 34);
             this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre del Docente ";
+            this.lblNomDocente.Text = "Nombre";
             // 
             // label2
             // 
@@ -367,6 +370,14 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(116, 3);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(191, 21);
+            this.cmbDocentes.TabIndex = 11;
+            // 
             // tablaAlumnos
             // 
             this.tablaAlumnos.BackColor = System.Drawing.Color.Transparent;
@@ -425,5 +436,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel pnEditarHorario;
         private System.Windows.Forms.Button btnEditarAlumnos;
+        private System.Windows.Forms.ComboBox cmbDocentes;
     }
 }

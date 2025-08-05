@@ -1,11 +1,9 @@
 ﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
 using Registro_Docente_360.Eventos;
 using System;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using System.Configuration;
-
 
 namespace Registro_Docente_360
 {
@@ -14,6 +12,7 @@ namespace Registro_Docente_360
         public Login()
         {
             InitializeComponent();
+
         }
 
 
@@ -25,7 +24,9 @@ namespace Registro_Docente_360
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             string usuario = textUsuario.Texto;
-            string clave = textClave.Texto;
+            AlumnoController controlador = new AlumnoController();
+            string clave = controlador.EncriptarContrasena(textClave.Texto);
+            //string clave = textClave.Texto;
 
             using (var contexto = new RegistroDocenteEntities())
             {
@@ -33,6 +34,12 @@ namespace Registro_Docente_360
 
                 if (user != null)
                 {
+                    if(user.estado_usuario == "I")
+                    {
+                        RegistrarAcceso(user.id_usuario, "FALLIDO");
+                        MessageBox.Show("El usuario se encuentra inactivo. Contacte al administrador.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     if (user.contraseña == clave)
                     {
                         Sesion.IdUsuario = user.id_usuario;
@@ -41,7 +48,6 @@ namespace Registro_Docente_360
                         Sesion.Correo = user.correo;
                         Sesion.Rol = user.Roles.nombre_rol;
                         Sesion.FechaRegistro = user.fecha_registro ?? DateTime.Now;
-                        Sesion.Contrasena = user.contraseña;
 
                         RegistrarAcceso(user.id_usuario, "LOGIN");
 
@@ -52,14 +58,13 @@ namespace Registro_Docente_360
                     else
                     {
                         RegistrarAcceso(user.id_usuario, "FALLIDO");
-                        MessageBox.Show("Datos incorrectos");
+                        MessageBox.Show("Contraseña incorrecta");
                     }
 
                 }
                 else
                 {
-                    RegistrarAcceso(0, "FALLIDO");
-                    MessageBox.Show("Datos incorrectos");
+                    MessageBox.Show("Usuario incorrecto");
                 }
             }
         }
@@ -84,6 +89,11 @@ namespace Registro_Docente_360
         private void cbMostrarContra_CheckedChanged(object sender, EventArgs e)
         {
             textClave.MostrarContraseña(cbMostrarContra.Checked);
+        }
+
+        private void lblOlvidoContra_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

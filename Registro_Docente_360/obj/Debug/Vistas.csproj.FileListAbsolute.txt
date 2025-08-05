@@ -220,3 +220,11 @@ Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\BouncyCas
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\itextsharp.dll
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.xml
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\itextsharp.xml
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.dll
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\itextsharp.dll
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.xml
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\bin\Debug\itextsharp.xml
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAccionesUsuario.resources
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRegistroAccesos.resources
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRolesyPermisos.resources
+D:\U\C#net\registro docente\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcUsuarios.resources

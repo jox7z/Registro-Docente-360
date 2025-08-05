@@ -1,12 +1,12 @@
 ﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
 using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Registro_Docente_360.Interfaces;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -20,15 +20,11 @@ namespace Registro_Docente_360.ControlesUsuario
         {
             InitializeComponent();
             this.Load += UcHorario_Load;
+            cmbDocentes.SelectedIndexChanged += cmbDocentes_SelectedIndexChanged;
         }
 
-      
-
-        // Inicializa columnas y filas del horario
         private void UcHorario_Load(object sender, EventArgs e)
         {
-
-            // Eventos
             dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_CellValueChanged;
             dataGridPerso1.Grid.CellEndEdit += dataGridPerso1_CellEndEdit;
             dataGridPerso1.Grid.CellMouseMove += Grid_CellMouseMove;
@@ -45,11 +41,9 @@ namespace Registro_Docente_360.ControlesUsuario
 
             dataGridPerso1.Grid.Columns.Clear();
 
-            // Lección y horario (columnas fijas)
-            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Lección", Name = "colLeccion", ReadOnly = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 10 });
-            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Horario", Name = "colHorario", ReadOnly = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 30 });
+            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Lección", Name = "colLeccion", ReadOnly = true });
+            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Horario", Name = "colHorario", ReadOnly = true });
 
-            // Columnas con ComboBox para cada día
             foreach (var dia in dias)
             {
                 dataGridPerso1.Grid.Columns.Add(new DataGridViewComboBoxColumn
@@ -57,13 +51,10 @@ namespace Registro_Docente_360.ControlesUsuario
                     HeaderText = dia,
                     Name = "col" + dia,
                     DataSource = materias.ToList(),
-                    FlatStyle = FlatStyle.Flat,
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                    FillWeight = 20
+                    FlatStyle = FlatStyle.Flat
                 });
             }
 
-            // Cargar las filas con horario
             dataGridPerso1.Grid.Rows.Clear();
             for (int i = 0; i < horas.Length; i++)
             {
@@ -74,31 +65,59 @@ namespace Registro_Docente_360.ControlesUsuario
                 dataGridPerso1.Grid.Rows.Add(fila);
             }
 
-            // Pintar horario de la tarde
             for (int i = 7; i < dataGridPerso1.Grid.Rows.Count; i++)
                 dataGridPerso1.Grid.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;
 
-            // Eventos
-            dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_CellValueChanged;
-            dataGridPerso1.Grid.CellEndEdit += dataGridPerso1_CellEndEdit;
-
-            // Estado inicial
             dataGridPerso1.Grid.ReadOnly = true;
-
-            // TODO: Cargar datos de BD aquí si se quiere mostrar horario previamente guardado
 
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                var rolAdmin = contexto.Roles.FirstOrDefault(r => r.nombre_rol == "Administrador");
 
-                lblNomDocente.Text = usuario.nombre_usuario;
-                lblSecc.Text = $"{seccion.nombre_seccion}";
+                if (usuario.id_rol == rolAdmin.id_rol)
+                {
+                    // Modo administrador
+                    lblNomDocente.Visible = false;
+                    lblSecc.Visible = false;
+                    cmbDocentes.Visible = true;
+                    lblSeccion.Visible = false;
 
+                    var docentes = contexto.Usuarios
+                        .Where(u => u.id_rol != rolAdmin.id_rol && u.estado_usuario == "A")
+                        .Select(u => new
+                        {
+                            u.id_usuario,
+                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                        }).ToList();
 
+                    cmbDocentes.DataSource = docentes;
+                    cmbDocentes.DisplayMember = "NombreCompleto";
+                    cmbDocentes.ValueMember = "id_usuario";
+                }
+                else
+                {
+                    var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                    lblNomDocente.Text = usuario.nombre_usuario;
+                    lblSecc.Text = seccion?.nombre_seccion ?? "";
+                    cmbDocentes.Visible = false;
+
+                    CargarHorario(usuario.id_usuario);
+                }
+            }
+        }
+
+        private void CargarHorario(int idUsuario)
+        {
+            foreach (DataGridViewRow fila in dataGridPerso1.Grid.Rows)
+                for (int col = 2; col < dataGridPerso1.Grid.Columns.Count; col++)
+                    fila.Cells[col].Value = "";
+
+            using (var contexto = new RegistroDocenteEntities())
+            {
                 var horarios = (from h in contexto.Horarios
                                 join m in contexto.Materias on h.id_materia equals m.id_materia
-                                where h.id_usuario == Sesion.IdUsuario
+                                where h.id_usuario == idUsuario
                                 select new
                                 {
                                     h.dia,
@@ -109,8 +128,6 @@ namespace Registro_Docente_360.ControlesUsuario
 
                 foreach (DataGridViewRow fila in dataGridPerso1.Grid.Rows)
                 {
-                    if (fila.IsNewRow) continue;
-
                     string horaTexto = fila.Cells["colHorario"].Value?.ToString()?.Trim() ?? "";
                     string[] partesHora = horaTexto.Split(new string[] { " A " }, StringSplitOptions.None);
 
@@ -130,13 +147,18 @@ namespace Registro_Docente_360.ControlesUsuario
                             }
                         }
                     }
-
                 }
             }
         }
 
+        private void cmbDocentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDocentes.SelectedValue is int idDocente)
+            {
+                CargarHorario(idDocente);
+            }
+        }
 
-        // Pinta celdas según la materia
         private void dataGridPerso1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 2) return;
@@ -147,17 +169,9 @@ namespace Registro_Docente_360.ControlesUsuario
             if (valor == "español") celda.Style.BackColor = Color.IndianRed;
             else if (valor == "matemáticas" || valor == "matematicas") celda.Style.BackColor = Color.Khaki;
             else if (valor == "ciencias") celda.Style.BackColor = Color.LightGreen;
-            else if (valor == "est. sociales" || valor == "estudios sociales") celda.Style.BackColor = Color.DeepSkyBlue;
-            else if (valor == "complementarias" ) celda.Style.BackColor = Color.MediumPurple;
-            else
-            {
-                // Si es una fila de la tarde (de la 8 en adelante)
-                if (e.RowIndex >= 7)
-                    celda.Style.BackColor = Color.LightYellow;
-                else
-                    celda.Style.BackColor = Color.White;
-            }
-  
+            else if (valor == "estudios sociales") celda.Style.BackColor = Color.DeepSkyBlue;
+            else if (valor == "complementarias") celda.Style.BackColor = Color.MediumPurple;
+            else celda.Style.BackColor = e.RowIndex >= 7 ? Color.LightYellow : Color.White;
         }
 
         private void dataGridPerso1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -165,6 +179,44 @@ namespace Registro_Docente_360.ControlesUsuario
             dataGridPerso1.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             dataGridPerso1.Grid.Invalidate();
         }
+
+        private void Grid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!modoEdicion)
+            {
+                dataGridPerso1.Grid.Cursor = Cursors.Default;
+                return;
+            }
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 2)
+            {
+                var col = dataGridPerso1.Grid.Columns[e.ColumnIndex];
+                if (col is DataGridViewComboBoxColumn)
+                {
+                    dataGridPerso1.Grid.Cursor = Cursors.Hand;
+                    return;
+                }
+            }
+
+            dataGridPerso1.Grid.Cursor = Cursors.Default;
+        }
+
+        public void CancelarModoEdicion()
+        {
+            if (modoEdicion)
+            {
+                lblHorario.Text = "Horario del Docente";
+                lblHorario.ForeColor = Color.Teal;
+                lblHorario.Font = new Font("Segoe UI", 21, FontStyle.Bold);
+                this.BackColor = SystemColors.Control;
+
+                dataGridPerso1.Grid.ReadOnly = true;
+                btnEditarHorario.Text = "EDITAR HORARIO";
+                tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
+                modoEdicion = false;
+            }
+        }
+
 
         // Activa/Desactiva modo edición
         private void btnEditarHorario_Click(object sender, EventArgs e)
@@ -195,6 +247,15 @@ namespace Registro_Docente_360.ControlesUsuario
                 using (var contexto = new RegistroDocenteEntities())
                 {
                     int idUsuario = Sesion.IdUsuario;
+
+                    var rolAdmin = contexto.Roles.FirstOrDefault(r => r.nombre_rol == "Administrador");
+                    var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+
+                    if (rolAdmin != null && usuario.id_rol == rolAdmin.id_rol && cmbDocentes.SelectedValue is int idDocenteSeleccionado)
+                    {
+                        idUsuario = idDocenteSeleccionado;
+                    }
+
 
                     var existentes = contexto.Horarios.Where(h => h.id_usuario == idUsuario).ToList();
                     contexto.Horarios.RemoveRange(existentes);
@@ -240,6 +301,13 @@ namespace Registro_Docente_360.ControlesUsuario
 
                     contexto.SaveChanges();
                     MessageBox.Show("Horario Guardado correctamente");
+
+                    string descripcion = "Horario Guardado";
+                    string accion = "Nuevo horario";
+                    string modulo = "Horario";
+
+                    AlumnoController controlador = new AlumnoController();
+                    controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
                 }
 
                 lblHorario.Text = "Horario del Docente";
@@ -252,45 +320,8 @@ namespace Registro_Docente_360.ControlesUsuario
                 tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
                 modoEdicion = false;
             }
-        }
-
-        public void CancelarModoEdicion()
-        {
-            if (modoEdicion)
-            {
-                // Restablecer UI y lógica de salida del modo edición
-                lblHorario.Text = "Horario del Docente";
-                lblHorario.ForeColor = Color.Teal;
-                lblHorario.Font = new Font("Segoe UI", 21, FontStyle.Bold);
-                this.BackColor = SystemColors.Control;
-
-                dataGridPerso1.Grid.ReadOnly = true;
-                btnEditarHorario.Text = "EDITAR HORARIO";
-                tooltipHorario.SetToolTip(btnEditarHorario, "Haz clic para editar el horario");
-
-                modoEdicion = false;
-            }
-        }
-
-        private void Grid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (!modoEdicion)
-            {
-                dataGridPerso1.Grid.Cursor = Cursors.Default;
-                return;
-            }
-
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 2)
-            {
-                var col = dataGridPerso1.Grid.Columns[e.ColumnIndex];
-                if (col is DataGridViewComboBoxColumn)
-                {
-                    dataGridPerso1.Grid.Cursor = Cursors.Hand;
-                    return;
-                }
-            }
-
-            dataGridPerso1.Grid.Cursor = Cursors.Default;
         }
     }
 }
+
+

@@ -76,6 +76,7 @@ namespace Registro_Docente_360
             this.lblOlvidoContra.Size = new System.Drawing.Size(131, 13);
             this.lblOlvidoContra.TabIndex = 3;
             this.lblOlvidoContra.Text = "¿Olvidaste tu contraseña?";
+            this.lblOlvidoContra.Click += new System.EventHandler(this.lblOlvidoContra_Click);
             // 
             // cbMostrarContra
             // 

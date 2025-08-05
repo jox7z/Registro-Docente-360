@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Modelos.EntityFramework;
-using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.Forms
 {
@@ -71,6 +72,13 @@ namespace Registro_Docente_360.Forms
 
                 // Se guardan los cambios en la base de datos
                 db.SaveChanges();
+
+                string descripcion = $"Nuevo evento : {txtEvento.Text}";
+                string accion = "Nuevo evento";
+                string modulo = "Calendario";
+
+                AlumnoController controlador = new AlumnoController();
+                controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
             }
 
             // Se muestra mensaje de éxito y se cierra el formulario

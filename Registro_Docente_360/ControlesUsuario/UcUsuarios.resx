@@ -121,7 +121,7 @@
   <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAAU1JREFUSEvtlrtKxUAURa+KjZ0fIPaCjR9gZWNhp9WtBa0FC2sRG98v7KzEyl4t
+        DAAACwwBP0AiyAAAAU1JREFUSEvtlrtKxUAURa+KjZ0fIPaCjR9gZWNhp9WtBa0FC2sRG98v7KzEyl4t
         xE4UO39ElDGQvdmSmAmT8SaTh1i5YEMe55zF5EV6vRKiKJqK43jRGDMpaTbZroqkGUnT7r4/MyeO4wUA
         b/imD+AOwCeA9SyP2bkckmckt539U39uCoBlAJHTawXvtobkuXM+ZYDgpDBY0gjJrWJbSneBpDGS18WW
         HCv4kDSehOSFX1QqkDQ06Jo69JNiAE+BbHiCYysYLs4rQvLSubmh3Dt99QRtIXn0L6iE5GGlgOSm/zkI
@@ -133,7 +133,7 @@
   <data name="btnEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAAPlJREFUSEvtljFqAmEQhW3sTZMcwOOITQpzAvEeEu+hJKCQI+QAlrETUqU0WG21
+        DAAACwwBP0AiyAAAAPlJREFUSEvtljFqAmEQhW3sTZMcwOOITQpzAvEeEu+hJKCQI+QAlrETUqU0WG21
         xf8eLwxM5HeU8Pu32Q8Ghjcz722xLNvrFSJpIOnOaxDn1Uh6ILkHcMzLNEn3cf9mADyRXEad5ArAJOp/
         klJ6JLnJC8CW5GfUTfPZmW4e0fdE27ZDO0I9W/OIvmeQfItXpdht9LvgSkBD8sv7A4Bva1xr8sWqAJIv
         AGbeP5Nc+GhG8jXsVgXY2zL1fm7lo6nP8t0uoAvoAv5nAIAPkmvv373MzLRdvlgbUExpwO/T3ozdRr8L
@@ -143,7 +143,7 @@
   <data name="btnModificar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAASJJREFUSEvF1TFKA0EUh/FoJaaySO0prGxziljYpAzeQLC0S2UhWpgDeAIlTXpP
+        DAAACwwBP0AiyAAAASJJREFUSEvF1TFKA0EUh/FoJaaySO0prGxziljYpAzeQLC0S2UhWpgDeAIlTXpP
         IYhHENRPJszAe/83u8kE0R9sM/vm282ybAaDDYAD4BH4ILrS+WbAVKvGr1xgDFx3HGOd/3/AMfDc8cw3
         0l6Q4zvTXrDrnRfaC3RDK+0FuqHHA3AEnADvZVF7gW/0OjN75mXR1yp8o+oOWAKfwATYA1blpPYC3wpu
         c/DQXOTJDmgvsMNiHTdzQ+BNh3ytQjdk98C+mUm/4kaHEl+r0A0t8cTXKmT+RR5LiqdH1cnXKmT+wqz3

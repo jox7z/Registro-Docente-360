@@ -78,7 +78,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 estudiantesCargados = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
                 DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
 
-                using (SqlConnection conn = new SqlConnection("Data Source=JOSE\\SQLEXPRESS;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
                 {
                     
                     conn.Open();
@@ -226,7 +226,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
                 int cambiosRealizados = 0;
 
-                using (SqlConnection conn = new SqlConnection("Data Source=JOSE\\SQLEXPRESS;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
                 {
                     conn.Open();
 

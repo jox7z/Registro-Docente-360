@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.ControlesUsuario;
+using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +15,6 @@ using System.Management.Instrumentation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Modelos.EntityFramework;
-using Registro_Docente_360.ControlesUsuario;
-using Registro_Docente_360.Forms;
 
 namespace Registro_Docente_360
 {
@@ -137,6 +139,13 @@ namespace Registro_Docente_360
 
                         // Notificar éxito
                         MessageBox.Show("Evento eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        string descripcion = $"Eliminacion evento: {evento.descripcion_evento}";
+                        string accion = "Eliminacion evento";
+                        string modulo = "Calendario";
+
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
                     }
                 }
             }

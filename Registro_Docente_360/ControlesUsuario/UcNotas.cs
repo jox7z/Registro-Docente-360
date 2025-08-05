@@ -1,15 +1,14 @@
 ﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
 using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Interfaces;
+using Registro_Docente_360.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Registro_Docente_360.Interfaces;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Registro_Docente_360.Utilidades;
 
 
 namespace Registro_Docente_360.ControlesUsuario
@@ -38,6 +37,8 @@ namespace Registro_Docente_360.ControlesUsuario
             this.VisibleChanged += UcNotas_VisibleChanged;
             this.Load += UcNotas_Load;
 
+
+
         }
 
 
@@ -50,11 +51,11 @@ namespace Registro_Docente_360.ControlesUsuario
 
             tablaNotas.Grid.Columns.Add("colCedula", "Cédula");
             tablaNotas.Grid.Columns.Add("colNombre", "Nombre");
-            tablaNotas.Grid.Columns.Add("colPrimerExamen", "Primer Examen");
-            tablaNotas.Grid.Columns.Add("colSegundoExamen", "Segundo Examen");
-            tablaNotas.Grid.Columns.Add("colTareas", "Tareas");
-            tablaNotas.Grid.Columns.Add("colAsistencia", "Asistencia");
-            tablaNotas.Grid.Columns.Add("colCotidiano", "Cotidiano");
+            tablaNotas.Grid.Columns.Add("colPrimerExamen", "Primer Examen 10%");
+            tablaNotas.Grid.Columns.Add("colSegundoExamen", "Segundo Examen 10%");
+            tablaNotas.Grid.Columns.Add("colTareas", "Tareas 10%");
+            tablaNotas.Grid.Columns.Add("colAsistencia", "Asistencia 10%");
+            tablaNotas.Grid.Columns.Add("colCotidiano", "Cotidiano 60%");
             tablaNotas.Grid.Columns.Add("colNotaFinal", "Nota Final");
 
             // Solo lectura por defecto
@@ -72,25 +73,54 @@ namespace Registro_Docente_360.ControlesUsuario
             // Ocultar acciones hasta que se active el botón
             PanelAcciones.Visible = false;
 
-            using (var contexto = new RegistroDocenteEntities())
-            {
+            using(var contexto = new RegistroDocenteEntities())
+{
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == usuario.id_rol);
 
-                lblNomDocente.Text = usuario.nombre_usuario;
-                lblSecc.Text = $"{seccion.nombre_seccion}";
+                if (rol != null && rol.nombre_rol == "Administrador")
+                {
+                    // Admin: puede elegir un docente
+                    cmbDocentes.Visible = true;
+                    lblNomDocente.Visible = false;
+                    lblSecc.Visible = false;
+                    lblSeccion.Text = "Materia: ";
 
-                var materias = (from h in contexto.Horarios
-                                join m in contexto.Materias on h.id_materia equals m.id_materia
-                                where h.id_usuario == Sesion.IdUsuario
-                                select m).Distinct().ToList();
+                    var docentes = contexto.Usuarios
+                        .Where(u => u.Roles.nombre_rol == "Docente")
+                        .Select(u => new
+                        {
+                            u.id_usuario,
+                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                        })
+                        .ToList();
 
-                cmbMateria.DataSource = materias;
-                cmbMateria.DisplayMember = "nombre_materia";
-                cmbMateria.ValueMember = "id_materia";
-                if (cmbMateria.Items.Count > 0)
-                    cmbMateria_SelectedIndexChanged(cmbMateria, EventArgs.Empty);
+                    cmbDocentes.DisplayMember = "NombreCompleto";
+                    cmbDocentes.ValueMember = "id_usuario";
+                    cmbDocentes.DataSource = docentes;
+
+                    cmbDocentes.SelectedIndexChanged += CmbDocentes_SelectedIndexChanged;
+
+                    if (cmbDocentes.Items.Count > 0)
+                        cmbDocentes.SelectedIndex = 0; // Carga automática
+                }
+                else
+                {
+                    // Docente: solo su propia sección y nombre
+                    cmbDocentes.Visible = false;
+
+                    lblNomDocente.Visible = true;
+                    lblSecc.Visible = true;
+
+                    lblNomDocente.Text = usuario.nombre_usuario;
+
+                    var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                    lblSecc.Text = seccion?.nombre_seccion ?? "Sin sección";
+
+                    CargarNotasDocente(usuario.id_usuario); // método que vos definís para cargar las notas
+                }
             }
+
         }
 
         private void btnGestionarNotas_Click(object sender, EventArgs e)
@@ -212,9 +242,17 @@ namespace Registro_Docente_360.ControlesUsuario
 
                 using (var contexto = new RegistroDocenteEntities())
                 {
+                    int idDocente = Sesion.IdUsuario; // por defecto es el usuario actual
+
+                    // Si es admin y hay un docente seleccionado, usar ese ID
+                    if (cmbDocentes.Visible && cmbDocentes.SelectedItem != null)
+                    {
+                        idDocente = (int)cmbDocentes.SelectedValue;
+                    }
+
                     var clases = (from c in contexto.Clases
                                   join est in contexto.Estudiantes on c.id_estudiante equals est.id_estudiante
-                                  where c.id_usuario == Sesion.IdUsuario
+                                  where c.id_usuario == idDocente
                                   && c.id_materia == materiaSeleccionada.id_materia
                                   select new
                                   {
@@ -229,13 +267,10 @@ namespace Registro_Docente_360.ControlesUsuario
 
                         decimal examen1 = item.Nota?.primer_examen ?? 0;
                         decimal examen2 = item.Nota?.segundo_examen ?? 0;
+                        decimal tareas = item.Nota?.tareas ?? 0;
+                        decimal asistencia = item.Nota?.asistencia ?? 0;
+                        decimal cotidiano = item.Nota?.cotidiano ?? 0;
 
-                        // Tareas, asistencia, cotidiano: si ya están en el diccionario, se usan esos; si no, se usan los de la BD
-                        decimal tareas = tareasPorEstudiante.ContainsKey(cedula) ? tareasPorEstudiante[cedula] : item.Nota?.tareas ?? 10;
-                        decimal asistencia = asistenciaPorEstudiante.ContainsKey(cedula) ? asistenciaPorEstudiante[cedula] : item.Nota?.asistencia ?? 10;
-                        decimal cotidiano = cotidianoPorEstudiante.ContainsKey(cedula) ? cotidianoPorEstudiante[cedula] : item.Nota?.cotidiano ?? 60;
-
-                        // Guardar valores para próximos usos
                         tareasPorEstudiante[cedula] = tareas;
                         asistenciaPorEstudiante[cedula] = asistencia;
                         cotidianoPorEstudiante[cedula] = cotidiano;
@@ -253,12 +288,10 @@ namespace Registro_Docente_360.ControlesUsuario
                             notaFinal.ToString("0.##")
                         );
                     }
-
                 }
-
-
             }
         }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             var materiaSeleccionada = cmbMateria.SelectedItem as Materias;
@@ -266,16 +299,6 @@ namespace Registro_Docente_360.ControlesUsuario
 
             using (var contexto = new RegistroDocenteEntities())
             {
-                var clases = contexto.Clases.
-                    Where(c => c.id_usuario == Sesion.IdUsuario && c.id_materia == materiaSeleccionada.id_materia).ToList();
-
-                foreach (var clase in clases)
-                {
-                    var notasExistentes = contexto.Notas.Where(n => n.id_clase == clase.id_clase);
-                    contexto.Notas.RemoveRange(notasExistentes);
-                }
-
-
                 foreach (DataGridViewRow fila in tablaNotas.Grid.Rows)
                 {
                     if (fila.IsNewRow) continue;
@@ -284,10 +307,18 @@ namespace Registro_Docente_360.ControlesUsuario
                     var estudiante = contexto.Estudiantes.FirstOrDefault(x => x.cedula_estudiante == cedula);
                     if (estudiante == null) continue;
 
+                    int idDocente = Sesion.IdUsuario;
+                    if (cmbDocentes.Visible && cmbDocentes.SelectedItem != null)
+                    {
+                        idDocente = (int)cmbDocentes.SelectedValue;
+                    }
+
                     var clase = contexto.Clases.FirstOrDefault(c =>
-                        c.id_usuario == Sesion.IdUsuario &&
+                        c.id_usuario == idDocente &&
                         c.id_estudiante == estudiante.id_estudiante &&
                         c.id_materia == materiaSeleccionada.id_materia);
+
+
 
                     if (clase == null) continue;
 
@@ -299,23 +330,59 @@ namespace Registro_Docente_360.ControlesUsuario
 
                     decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
 
-                    contexto.Notas.Add(new Notas
+                    var notaExistente = contexto.Notas.FirstOrDefault(n => n.id_clase == clase.id_clase);
+
+                    if (notaExistente != null)
                     {
-                        id_clase = clase.id_clase,
-                        primer_examen = examen1,
-                        segundo_examen = examen2,
-                        asistencia = asistencia,
-                        tareas = tareas,
-                        cotidiano = cotidiano,
-                        nota_final = notaFinal
-                    });
+                        // Actualizar la nota existente
+                        notaExistente.primer_examen = examen1;
+                        notaExistente.segundo_examen = examen2;
+                        notaExistente.tareas = tareas;
+                        notaExistente.asistencia = asistencia;
+                        notaExistente.cotidiano = cotidiano;
+                        notaExistente.nota_final = notaFinal;
+
+                        string descripcion = $"Se actualizo la nota del estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}";
+                        string accion = "Actualizar nota";
+                        string modulo = "Notas";
+
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+                    }
+                    else
+                    {
+                        // Insertar nueva nota
+                        contexto.Notas.Add(new Notas
+                        {
+                            id_clase = clase.id_clase,
+                            primer_examen = examen1,
+                            segundo_examen = examen2,
+                            asistencia = asistencia,
+                            tareas = tareas,
+                            cotidiano = cotidiano,
+                            nota_final = notaFinal
+
+
+                        });
+
+                        string descripcion = $"Se agrego la nota del estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}";
+                        string accion = "Nueva nota";
+                        string modulo = "Notas";
+
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+                    }
                 }
 
                 contexto.SaveChanges();
                 MessageBox.Show("Notas guardadas exitosamente");
+
+                
             }
+
             huboCambios = false;
         }
+
 
         private void Grid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -442,15 +509,37 @@ namespace Registro_Docente_360.ControlesUsuario
             }
         }
 
-
-
-
-
-        private void PanelAcciones_Paint(object sender, PaintEventArgs e)
+        private void CmbDocentes_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cmbDocentes.SelectedItem != null)
+            {
+                int idDocenteSeleccionado = (int)cmbDocentes.SelectedValue;
+                CargarNotasDocente(idDocenteSeleccionado);
+            }
         }
 
-        
+
+
+        private void CargarNotasDocente(int idDocente)
+        {
+            tablaNotas.Grid.Rows.Clear();
+
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var materias = (from h in contexto.Horarios
+                                join m in contexto.Materias on h.id_materia equals m.id_materia
+                                where h.id_usuario == idDocente
+                                select m).Distinct().ToList();
+
+                cmbMateria.DataSource = materias;
+                cmbMateria.DisplayMember = "nombre_materia";
+                cmbMateria.ValueMember = "id_materia";
+
+                if (cmbMateria.Items.Count > 0)
+                    cmbMateria_SelectedIndexChanged(null, null); // recarga las notas
+            }
+        }
+
+
     }
 }

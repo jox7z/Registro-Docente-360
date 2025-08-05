@@ -106,7 +106,6 @@
             this.panelMiniContenedor.UseMultiGradient = false;
             this.panelMiniContenedor.UsePatternTexture = false;
             this.panelMiniContenedor.UseRadialGradient = false;
-            this.panelMiniContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMiniContenedor_Paint);
             // 
             // panelContenidos
             // 
@@ -175,7 +174,6 @@
             this.pnInfo.Name = "pnInfo";
             this.pnInfo.Size = new System.Drawing.Size(603, 316);
             this.pnInfo.TabIndex = 1;
-            this.pnInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCambiarContra_Paint);
             // 
             // btnGuardarCambios
             // 

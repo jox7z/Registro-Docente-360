@@ -1,19 +1,13 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Registro_Docente_360.ControlesUsuario;
-using Registro_Docente_360.Controladores;
-using Modelos.EntityFramework;
-using Registro_Docente_360.Eventos;
-using System.Data.SqlClient;
-using Registro_Docente_360.Interfaces;
 
 namespace Registro_Docente_360.Forms
 {
@@ -39,7 +33,6 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void UcAlumnos_Load(object sender, EventArgs e)
         {
-            // Configuración inicial de columnas
             tablaAlumnos.Grid.Columns.Clear();
 
             tablaAlumnos.Grid.Columns.Add("colCedula", "Cedula");
@@ -53,37 +46,59 @@ namespace Registro_Docente_360.Forms
             tablaAlumnos.Grid.AllowUserToDeleteRows = false;
 
             PanelAcciones.Visible = false;
-
             tablaAlumnos.Grid.EditingControlShowing += Grid_EditingControlShowing;
-            //tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
             tablaAlumnos.Grid.DataError += Grid_DataError;
-
-
-
 
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == usuario.id_rol);
 
-                lblNomDocente.Text = usuario.nombre_usuario;
-                label1.Text = $"{seccion.nombre_seccion}";
+                if (rol != null && rol.nombre_rol == "Administrador") //administrador
+                {
+                    // Mostrar ComboBox y ocultar Label
+                    cmbDocentes.Visible = true;
+                    label1.Visible = false;
+                    lblSeccion.Visible = false;
+                    lblNomDocente.Visible = false;
 
+                    // Cargar docentes
+                    var docentes = contexto.Usuarios
+                        .Where(u => u.Roles.nombre_rol == "Docente")
+                        .Select(u => new
+                        {
+                            u.id_usuario,
+                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                        })
+                        .ToList();
+
+                    cmbDocentes.DisplayMember = "NombreCompleto";
+                    cmbDocentes.ValueMember = "id_usuario";
+                    cmbDocentes.DataSource = docentes;
+
+                    cmbDocentes.SelectedIndexChanged += CmbDocentes_SelectedIndexChanged;
+
+                    if (cmbDocentes.Items.Count > 0)
+                    {
+                        cmbDocentes.SelectedIndex = 0; // Dispara carga automática
+                    }
+                }
+                else
+                {
+                    // Usuario docente
+                    cmbDocentes.Visible = false;
+                    label1.Visible = true;
+
+                    lblNomDocente.Text = usuario.nombre_usuario;
+
+                    var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
+                    label1.Text = $"{seccion?.nombre_seccion ?? "Sin sección"}";
+
+                    CargarEstudiantes(Sesion.IdUsuario); // Cargar estudiantes del docente actual
+                }
             }
-
-            var estudiantes = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
-
-            foreach (var estudiante in estudiantes)
-            {
-                tablaAlumnos.Grid.Rows.Add(
-                    estudiante.cedula_estudiante,
-                    estudiante.primer_apellido,
-                    estudiante.segundo_apellido,
-                    estudiante.nombre_estudiante,
-                    estudiante.telefono_encargado);
-            }
-
         }
+
 
         /// <summary>
         /// Controla la edición de la celda y restringe la entrada si es necesario.
@@ -270,6 +285,14 @@ namespace Registro_Docente_360.Forms
                     {
                         MessageBox.Show("Estudiante eliminado correctamente.");
                         tablaAlumnos.Grid.Rows.Remove(fila); // Elimina visualmente
+
+                        
+                        string accion = "Eliminar estudiante";
+                        string descripcion = $"Se eliminó el estudiante con cédula: {cedula}";
+                        string modulo = "Alumnos";
+
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
                     }
                     else
                     {
@@ -339,17 +362,38 @@ namespace Registro_Docente_360.Forms
 
             try
             {
+                int idDocente = Sesion.IdUsuario;
+
+                if (cmbDocentes.Visible && cmbDocentes.SelectedValue != null)
+                {
+                    idDocente = (int)cmbDocentes.SelectedValue;
+                }
+
                 int idSeccionDocente;
                 using (var contexto = new RegistroDocenteEntities())
                 {
                     idSeccionDocente = contexto.Usuarios
-                        .Where(u => u.id_usuario == Sesion.IdUsuario)
+                        .Where(u => u.id_usuario == idDocente)
                         .Select(u => u.id_seccion ?? 0)
                         .FirstOrDefault();
                 }
 
-                alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente);
+
+                var nuevos = alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente);
+
                 MessageBox.Show("Estudiantes guardados correctamente");
+
+
+                foreach (var estudiante in nuevos)
+                {
+                    string descripcion = $"Se guardó el estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}";
+                    string accion = "Nuevo estudiante";
+                    string modulo = "Alumnos";
+
+                    alumnoController.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -456,7 +500,29 @@ namespace Registro_Docente_360.Forms
             e.Cancel = true;
         }
 
+        private void CargarEstudiantes(int idDocente)
+        {
+            tablaAlumnos.Grid.Rows.Clear();
 
+            var estudiantes = alumnoController.ObtenerEstudiantesPorDocente(idDocente);
+            foreach (var estudiante in estudiantes)
+            {
+                tablaAlumnos.Grid.Rows.Add(
+                    estudiante.cedula_estudiante,
+                    estudiante.primer_apellido,
+                    estudiante.segundo_apellido,
+                    estudiante.nombre_estudiante,
+                    estudiante.telefono_encargado);
+            }
+        }
 
+        private void CmbDocentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDocentes.SelectedItem != null)
+            {
+                int idDocenteSeleccionado = (int)cmbDocentes.SelectedValue;
+                CargarEstudiantes(idDocenteSeleccionado);
+            }
+        }
     }
 }

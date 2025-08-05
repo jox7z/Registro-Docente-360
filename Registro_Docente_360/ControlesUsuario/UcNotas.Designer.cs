@@ -43,12 +43,13 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSecc = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
+            this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pnAgregarNotas = new System.Windows.Forms.Panel();
             this.btnGestionarNotas = new System.Windows.Forms.Button();
             this.tableLayoutContenedor = new System.Windows.Forms.TableLayoutPanel();
             this.tablaNotas = new Registro_Docente_360.ControlesUsuario.dataGridPersoNotas();
-            this.cmbMateria = new System.Windows.Forms.ComboBox();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.PanelAcciones.SuspendLayout();
             this.pnExportar.SuspendLayout();
             this.pnGuardar.SuspendLayout();
@@ -79,7 +80,6 @@
             this.PanelAcciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.PanelAcciones.Size = new System.Drawing.Size(973, 64);
             this.PanelAcciones.TabIndex = 21;
-            this.PanelAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelAcciones_Paint);
             // 
             // pnExportar
             // 
@@ -189,11 +189,13 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.Gainsboro;
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 772F));
             this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 43);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -209,9 +211,9 @@
             this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
             this.lblNomDocente.Location = new System.Drawing.Point(108, 0);
             this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(391, 25);
+            this.lblNomDocente.Size = new System.Drawing.Size(86, 25);
             this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre del Docente (tomarlo del usuario)";
+            this.lblNomDocente.Text = "Nombre";
             // 
             // label2
             // 
@@ -228,10 +230,15 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 8;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 788F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.lblSecc, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSeccion, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cmbMateria, 2, 0);
@@ -266,6 +273,16 @@
             this.lblSeccion.Size = new System.Drawing.Size(85, 25);
             this.lblSeccion.TabIndex = 11;
             this.lblSeccion.Text = "Sección:";
+            // 
+            // cmbMateria
+            // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMateria.FormattingEnabled = true;
+            this.cmbMateria.Location = new System.Drawing.Point(188, 3);
+            this.cmbMateria.Name = "cmbMateria";
+            this.cmbMateria.Size = new System.Drawing.Size(121, 21);
+            this.cmbMateria.TabIndex = 13;
+            this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
             // 
             // tableLayoutPanel5
             // 
@@ -347,15 +364,13 @@
             this.tablaNotas.Size = new System.Drawing.Size(973, 383);
             this.tablaNotas.TabIndex = 22;
             // 
-            // cmbMateria
+            // cmbDocentes
             // 
-            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMateria.FormattingEnabled = true;
-            this.cmbMateria.Location = new System.Drawing.Point(188, 3);
-            this.cmbMateria.Name = "cmbMateria";
-            this.cmbMateria.Size = new System.Drawing.Size(121, 21);
-            this.cmbMateria.TabIndex = 13;
-            this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(204, 3);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(121, 21);
+            this.cmbDocentes.TabIndex = 11;
             // 
             // UcNotas
             // 
@@ -405,5 +420,6 @@
         private System.Windows.Forms.Panel pnExportar;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.ComboBox cmbMateria;
+        private System.Windows.Forms.ComboBox cmbDocentes;
     }
 }
