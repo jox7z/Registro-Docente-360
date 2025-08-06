@@ -40,6 +40,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSecc = new System.Windows.Forms.Label();
             this.lblSeccion = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.btnGestionarNotas = new System.Windows.Forms.Button();
             this.tableLayoutContenedor = new System.Windows.Forms.TableLayoutPanel();
             this.tablaNotas = new Registro_Docente_360.ControlesUsuario.dataGridPersoNotas();
-            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.PanelAcciones.SuspendLayout();
             this.pnExportar.SuspendLayout();
             this.pnGuardar.SuspendLayout();
@@ -227,6 +227,14 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Docente:";
             // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(204, 3);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(121, 21);
+            this.cmbDocentes.TabIndex = 11;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
@@ -363,14 +371,6 @@
             this.tablaNotas.Name = "tablaNotas";
             this.tablaNotas.Size = new System.Drawing.Size(973, 383);
             this.tablaNotas.TabIndex = 22;
-            // 
-            // cmbDocentes
-            // 
-            this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(204, 3);
-            this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(121, 21);
-            this.cmbDocentes.TabIndex = 11;
             // 
             // UcNotas
             // 

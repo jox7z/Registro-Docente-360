@@ -164,7 +164,7 @@ namespace Registro_Docente_360.Controladores
             {
                 return contexto.Usuarios.Include("Roles").Include("Secciones").ToList();
             }
-               
+
         }
         public void GuardarUsuarios(List<(Usuarios usuario, string nombreSeccion)> usuariosConSeccion)
         {
@@ -226,9 +226,9 @@ namespace Registro_Docente_360.Controladores
 
         public int ObtenerIdRolDesdeNombre(string nombreRol)
         {
-            using(var contexto = new RegistroDocenteEntities())
+            using (var contexto = new RegistroDocenteEntities())
             {
-                var rol =  contexto.Roles.FirstOrDefault(r=> r.nombre_rol == nombreRol);
+                var rol = contexto.Roles.FirstOrDefault(r => r.nombre_rol == nombreRol);
                 return rol != null ? rol.id_rol : 0;
             }
         }
@@ -236,12 +236,12 @@ namespace Registro_Docente_360.Controladores
 
         public int ObtenerIdSeccionDesdeNombre(string nombreSeccion)
         {
-            using (var contexto =new RegistroDocenteEntities())
+            using (var contexto = new RegistroDocenteEntities())
             {
                 var seccion = contexto.Secciones.FirstOrDefault(s => s.nombre_seccion == nombreSeccion);
                 return seccion?.id_seccion ?? 0;
             }
-           
+
         }
 
 
@@ -327,6 +327,35 @@ namespace Registro_Docente_360.Controladores
                 return contexto.Secciones.ToList();
             }
         }
+
+        public void AsignarPermisoARol(int rolId, int permisoId)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                // Ejecutar el procedimiento almacenado AgregarPermisoARol
+                contexto.Database.ExecuteSqlCommand(
+                    "EXEC AgregarPermisoARol @RolId, @PermisoId",
+                    new SqlParameter("@RolId", rolId),
+                    new SqlParameter("@PermisoId", permisoId)
+                );
+            }
+        }
+
+
+        public List<int> ObtenerPermisosPorRol(int rolId)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                // Ejecutar el procedimiento almacenado ObtenerPermisosPorRol
+                var permisos = contexto.Database.SqlQuery<int>(
+                    "EXEC ObtenerPermisosPorRol @RolId",
+                    new SqlParameter("@RolId", rolId)
+                ).ToList();
+
+                return permisos;
+            }
+        }
+
 
 
 

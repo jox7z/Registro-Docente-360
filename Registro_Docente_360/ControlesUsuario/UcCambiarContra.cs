@@ -148,16 +148,6 @@ namespace Registro_Docente_360.ControlesUsuario
             OnVolverAConfiguracion?.Invoke(this, EventArgs.Empty);
         }
 
-        private void CambiarAConfiguracion()
-        {
-            Control parent = this.Parent;
-            if (parent != null)
-            {
-                parent.Controls.Clear(); // Elimina el UC actual
-                var configuracionUC = new UcConfiguracion();
-                parent.Controls.Add(configuracionUC);
-                configuracionUC.Dock = DockStyle.Fill;
-            }
-        }
+        
     }
 }

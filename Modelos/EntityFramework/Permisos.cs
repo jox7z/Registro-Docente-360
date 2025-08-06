@@ -12,23 +12,19 @@ namespace Modelos.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class Permisos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
+        public Permisos()
         {
-            this.Usuarios = new HashSet<Usuarios>();
-            this.Permisos = new HashSet<Permisos>();
+            this.Roles = new HashSet<Roles>();
         }
     
-        public int id_rol { get; set; }
-        public string nombre_rol { get; set; }
-        public string descripcion_rol { get; set; }
-        public string estado_rol { get; set; }
+        public int id_permiso { get; set; }
+        public string nombre_permiso { get; set; }
+        public string descripcion_permiso { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Permisos> Permisos { get; set; }
+        public virtual ICollection<Roles> Roles { get; set; }
     }
 }

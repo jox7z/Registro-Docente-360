@@ -385,14 +385,7 @@ namespace Registro_Docente_360
             MostrarUserControl(ucInfoCuenta);
         }
 
-        private void CargarHorario()
-        {
-            var horario = new UcHorario();
-            horario.Dock = DockStyle.Fill;
-
-            panelContenedor.Controls.Clear();
-            panelContenedor.Controls.Add(horario);
-        }
+       
 
 
 

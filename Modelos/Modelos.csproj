@@ -132,6 +132,9 @@
     <Compile Include="EntityFramework\Notas.cs">
       <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Permisos.cs">
+      <DependentUpon>RegistroDocenteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\RegistroDocenteModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +179,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="EntityFramework\RegistroDocenteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

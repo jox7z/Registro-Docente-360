@@ -36,7 +36,16 @@ namespace Registro_Docente_360.Forms
 
         private void pictureAyuda_Click(object sender, EventArgs e)
         {
-            //Aqui cargan lo que sea que se vaya a cargar 
+            string urlArchivo = "https://drive.google.com/drive/folders/1VFuMI5kD7_Qa-1l3HJzJJz_PoyHMol8u?usp=drive_link"; // URL pública del manual
+
+            try
+            {
+                System.Diagnostics.Process.Start(urlArchivo); // Esto abrirá el archivo en el navegador web predeterminado
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo abrir el archivo. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
