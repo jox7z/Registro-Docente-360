@@ -229,3 +229,4 @@ Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\bin\Debug\System.Va
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
 Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+Z:\Repos Progra IV\Registro_Docente_360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormAgregarRol.resources

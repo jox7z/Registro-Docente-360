@@ -8,6 +8,7 @@ using Registro_Docente_360.Forms;
 using System.Runtime.InteropServices;
 using Modelos.EntityFramework;
 using Registro_Docente_360.Interfaces;
+using Registro_Docente_360.Controladores;
 
 namespace Registro_Docente_360
 {
@@ -94,26 +95,116 @@ namespace Registro_Docente_360
                 panelContenedor.Padding = new Padding(202,50,0,20);
         }
 
+        // Actualiza el estado (visibilidad, habilitación, color) de los botones del menú principal
+        // según los permisos del rol actual del usuario.
+        // - Si tiene permiso, el botón está habilitado y en blanco.
+        // - Si no tiene, el botón está deshabilitado y en gris.
+        // - Algunos botones (como btnMantenimiento) solo se muestran si corresponde.
+
+        private void ActualizarMenuPrincipal()
+        {
+            // === INICIALIZACIÓN: Todos los botones deshabilitados y visibles, menos btnMantenimiento ===
+            btnMantenimiento.Visible = false;
+            btnMantenimiento.Enabled = false;
+            btnMantenimiento.ForeColor = Color.Silver;
+
+            // Resto de botones siempre visibles, pero deshabilitados y grises por defecto
+            SetButtonState(btnUsuarios, false);
+            SetButtonState(btnAccionesUsuario, false);
+            SetButtonState(btnAccesos, false);
+            SetButtonState(btnRolyPerm, false);
+            SetButtonState(btnAsistencia, false);
+            SetButtonState(btnHorario, false);
+            SetButtonState(btnAlumnos, false);
+            SetButtonState(btnReportes, false);
+            SetButtonState(btnNotas, false);
+            SetButtonState(btnCalendario, false);
+            SetButtonState(btnAboutUs, false);
+            SetButtonState(btnConfiguracion, false);
+
+            // --- Cargar los permisos del usuario desde la BD ---
+            AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
+
+            // === ADMINISTRACIÓN: btnMantenimiento ===
+            // Solo mostrar/habilitar si el usuario tiene algún permiso de administración,
+            // modificar usuarios, o bitácoras
+            bool puedeVerMantenimiento =
+                AlumnoController.PermisosRolActual.Contains(2) || // Admin
+                AlumnoController.PermisosRolActual.Contains(3) || // Modificar Usuarios
+                AlumnoController.PermisosRolActual.Contains(6);   // Bitácoras
+
+            btnMantenimiento.Visible = puedeVerMantenimiento;
+            btnMantenimiento.Enabled = puedeVerMantenimiento;
+            btnMantenimiento.ForeColor = puedeVerMantenimiento ? Color.White : Color.Silver;
+
+            // === USUARIOS: Permiso de admin o modificar usuarios ===
+            SetButtonState(btnUsuarios,
+                AlumnoController.PermisosRolActual.Contains(2) ||
+                AlumnoController.PermisosRolActual.Contains(3)
+            );
+
+            // === ROLES Y PERMISOS: Solo admin ===
+            SetButtonState(btnRolyPerm,
+                AlumnoController.PermisosRolActual.Contains(2)
+            );
+
+            // === BITÁCORAS: Admin o bitácoras ===
+            SetButtonState(btnAccionesUsuario,
+                AlumnoController.PermisosRolActual.Contains(2) ||
+                AlumnoController.PermisosRolActual.Contains(6)
+            );
+            SetButtonState(btnAccesos,
+                AlumnoController.PermisosRolActual.Contains(2) ||
+                AlumnoController.PermisosRolActual.Contains(6)
+            );
+
+            // === MÓDULO DOCENTE: Permiso de docente ===
+            if (AlumnoController.PermisosRolActual.Contains(1))
+            {
+                SetButtonState(btnAsistencia, true);
+                SetButtonState(btnHorario, true);
+                SetButtonState(btnAlumnos, true);
+                SetButtonState(btnNotas, true);
+                SetButtonState(btnCalendario, true);
+                SetButtonState(btnAboutUs, true);
+            }
+
+            // === REPORTES: Permiso de docente, admin o explícito de reportes ===
+            SetButtonState(btnReportes,
+                AlumnoController.PermisosRolActual.Contains(1) ||
+                AlumnoController.PermisosRolActual.Contains(2) ||
+                AlumnoController.PermisosRolActual.Contains(4)
+            );
+
+            // === CONFIGURACIÓN: Permiso de docente, admin o explícito de configuración ===
+            SetButtonState(btnConfiguracion,
+                AlumnoController.PermisosRolActual.Contains(1) ||
+                AlumnoController.PermisosRolActual.Contains(2) ||
+                AlumnoController.PermisosRolActual.Contains(5)
+            );
+        }
+
+        // Helper universal: todos los botones se muestran pero se habilitan/cambian de color si tienen permiso.
+        // enabled = true  -> botón habilitado y texto blanco
+        // enabled = false -> botón deshabilitado y texto gris
+        private void SetButtonState(Button btn, bool enabled)
+        {
+            btn.Visible = true;
+            btn.Enabled = enabled;
+            btn.ForeColor = enabled ? Color.White : Color.Silver;
+        }
+
 
         // ========================
         // EVENTO LOAD DEL FORM
         // ========================
+
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            if (Sesion.IdRol == 1) // Docente
-            {
+            AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
 
-                btnMantenimiento.Visible = false;
-                pnMantenimiento.Visible = false;
+            ActualizarMenuPrincipal();
 
-            }
-            else if (Sesion.IdRol == 2) // Administrador
-            {
-                btnMantenimiento.Visible = true;
-                pnMantenimiento.Visible = false;
-            }
-
-           
         }
 
 
@@ -182,7 +273,8 @@ namespace Registro_Docente_360
 
 
         // ========================
-        // EVENTOS DE BOTONES DEL MENÚ
+        // EVENTOS DE BOTONES DEL MENÚ 
+        // MODULO DOCENTE
         // ========================
         private void button1_Click(object sender, EventArgs e) // BtnAsistencia (nombre sin cambiar)
         {
@@ -280,7 +372,7 @@ namespace Registro_Docente_360
         }
 
 
-        //TODO EL MENU DE MANTENIMIENTO AQUI EMPIEZA
+        //MODULO DE ADMINISTRADOR
 
         Panel p = new Panel();
 

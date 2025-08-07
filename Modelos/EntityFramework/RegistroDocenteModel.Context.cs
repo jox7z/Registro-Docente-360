@@ -39,6 +39,5 @@ namespace Modelos.EntityFramework
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Secciones> Secciones { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        
     }
 }

@@ -118,6 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblPermisosAsignados.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAPlJREFUSEvtlE0OATEUxyuR8sYpnMA5WLiAq1g4wwxDEBEf7XjiBBaOYc9GYsdW
+        UpkREn2dxRsSFvNPfrv/R5s0FSLX30j2uw0ZBsdSGBhCL+jYfrZSy781QgozEB9Shn7d7k5km7MiQ/9g
+        dyeyjZ9gdyeyTTCbGA+V8daaDaz1qYJRK31gNCAhPuoqdruicwCmY0eAi7oJROkemE8dAR6Aev8qJwN6
+        QQJsUK9SBrrx9WiAC6q2c6A87FNzBgBV0z0wGRFzFkqIVfdA/P4dAQ6A6iKMKbwNPD87UDMS4AKotm/l
+        jwG/Hv8jHi5JgANEi7O3iWp2f67f6Q6a2LFgtzW47QAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnAgregar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -153,7 +163,7 @@
   <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAU1JREFUSEvtlrtKxUAURa+KjZ0fIPaCjR9gZWNhp9WtBa0FC2sRG98v7KzEyl4t
+        DAAACwwBP0AiyAAAAU1JREFUSEvtlrtKxUAURa+KjZ0fIPaCjR9gZWNhp9WtBa0FC2sRG98v7KzEyl4t
         xE4UO39ElDGQvdmSmAmT8SaTh1i5YEMe55zF5EV6vRKiKJqK43jRGDMpaTbZroqkGUnT7r4/MyeO4wUA
         b/imD+AOwCeA9SyP2bkckmckt539U39uCoBlAJHTawXvtobkuXM+ZYDgpDBY0gjJrWJbSneBpDGS18WW
         HCv4kDSehOSFX1QqkDQ06Jo69JNiAE+BbHiCYysYLs4rQvLSubmh3Dt99QRtIXn0L6iE5GGlgOSm/zkI
@@ -171,14 +181,7 @@
   <metadata name="EstadoRol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="lblPermisosAsignados.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAPlJREFUSEvtlE0OATEUxyuR8sYpnMA5WLiAq1g4wwxDEBEf7XjiBBaOYc9GYsdW
-        UpkREn2dxRsSFvNPfrv/R5s0FSLX30j2uw0ZBsdSGBhCL+jYfrZSy781QgozEB9Shn7d7k5km7MiQ/9g
-        dyeyjZ9gdyeyTTCbGA+V8daaDaz1qYJRK31gNCAhPuoqdruicwCmY0eAi7oJROkemE8dAR6Aev8qJwN6
-        QQJsUK9SBrrx9WiAC6q2c6A87FNzBgBV0z0wGRFzFkqIVfdA/P4dAQ6A6iKMKbwNPD87UDMS4AKotm/l
-        jwG/Hv8jHi5JgANEi7O3iWp2f67f6Q6a2LFgtzW47QAAAABJRU5ErkJggg==
-</value>
-  </data>
+  <metadata name="DescripcionRol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

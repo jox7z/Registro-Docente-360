@@ -36,14 +36,13 @@ namespace Registro_Docente_360
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
-
         {
-
             string email = textUsuario.Texto;
             AlumnoController controlador = new AlumnoController();
-            string clave = controlador.EncriptarContrasena(textClave.Texto);
+            string clave = controlador.EncriptarContrasena(textClave.Texto); // Contraseña encriptada
             //string clave = textClave.Texto;
 
+            // Validación del correo
             if (!IsValidEmail(email))
             {
                 MessageBox.Show("Por favor ingrese un correo electrónico válido.");
@@ -56,18 +55,27 @@ namespace Registro_Docente_360
 
                 if (user != null)
                 {
-                    if(user.estado_usuario == "I")
+                    // Verificación de si el usuario está inactivo
+                    if (user.estado_usuario == "I") // Si el estado es 'Inactivo'
                     {
-                        RegistrarAcceso(user.id_usuario, "FALLIDO");
+                        RegistrarAcceso(user.id_usuario, "FALLIDO"); // Registrar el acceso fallido
                         MessageBox.Show("El usuario se encuentra inactivo. Contacte al administrador.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        return;  // Salir del método si el usuario está inactivo
                     }
 
-                    //validar contraseña
+                    // Verificación del estado del rol
+                    var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == user.id_rol);
+                    if (rol != null && rol.estado_rol == "I") // Si el rol está inactivo
+                    {
+                        RegistrarAcceso(user.id_usuario, "FALLIDO"); // Registrar acceso fallido
+                        MessageBox.Show("El rol del usuario está inactivo. Contacte al administrador.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;  // Salir si el rol está inactivo
+                    }
+
+                    // Si el usuario y su rol están activos, validamos la contraseña
                     if (user.contraseña == clave)
                     {
-
-                        //iniciar sesion
+                        // Iniciar sesión
                         Sesion.IdUsuario = user.id_usuario;
                         Sesion.IdRol = user.id_rol.Value;
                         Sesion.Nombre = user.nombre_usuario;
@@ -75,15 +83,17 @@ namespace Registro_Docente_360
                         Sesion.Rol = user.Roles.nombre_rol;
                         Sesion.FechaRegistro = user.fecha_registro ?? DateTime.Now;
 
-                        RegistrarAcceso(user.id_usuario, "LOGIN");
+                        RegistrarAcceso(user.id_usuario, "LOGIN"); // Registrar acceso exitoso
 
                         this.Hide();
-                        
+
+                        // Mostrar la ventana principal
                         MenuPrincipal menu = new MenuPrincipal();
                         menu.Show();
                     }
                     else
                     {
+                        // Contraseña incorrecta
                         RegistrarAcceso(user.id_usuario, "FALLIDO");
                         MessageBox.Show("Credenciales incorrectas. Por favor, intente nuevamente.");
                     }
@@ -91,10 +101,12 @@ namespace Registro_Docente_360
                 }
                 else
                 {
+                    // Usuario no encontrado
                     MessageBox.Show("Credenciales incorrectas. Por favor, intente nuevamente.");
                 }
             }
         }
+
 
         private void RegistrarAcceso(int idUsuario, string tipoAcceso)
         {

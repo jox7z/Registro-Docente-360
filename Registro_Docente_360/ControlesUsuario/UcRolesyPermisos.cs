@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using iTextSharp.text.pdf.codec.wmf;
 using Modelos.EntityFramework;
+using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.Forms
 {
     public partial class UcRolesyPermisos : UserControl
     {
         private bool cambiosRealizados = false;
-
 
         public UcRolesyPermisos()
         {
@@ -51,12 +51,12 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-
         public class RolPermiso
         {
-            public int IdRol { get; set; }       
+            public int IdRol { get; set; }
             public string NombreRol { get; set; }
-            public string EstadoRol { get; set; } 
+            public string EstadoRol { get; set; }
+            public string DescripcionRol { get; set; }
         }
 
         public class Permiso
@@ -64,10 +64,6 @@ namespace Registro_Docente_360.Forms
             public int IdPermiso { get; set; }
             public string NombrePermiso { get; set; }
         }
-
-
-
-
 
         private void CargarRoles()
         {
@@ -78,7 +74,8 @@ namespace Registro_Docente_360.Forms
                     {
                         IdRol = r.id_rol,
                         NombreRol = r.nombre_rol,
-                        EstadoRol = r.estado_rol
+                        EstadoRol = r.estado_rol,
+                        DescripcionRol = r.descripcion_rol
                     })
                     .ToList();
 
@@ -91,12 +88,22 @@ namespace Registro_Docente_360.Forms
                 datagridRoles.AutoGenerateColumns = false;
                 datagridRoles.DataSource = roles;
 
-                // Asegúrate de que las propiedades coincidan
                 ID.DataPropertyName = "IdRol";
                 NombreRol.DataPropertyName = "NombreRol";
                 EstadoRol.DataPropertyName = "EstadoRol";
+                DescripcionRol.DataPropertyName = "DescripcionRol";
+
+                // Seleccionar la primera fila y cargar el estado del rol
+                if (datagridRoles.Rows.Count > 0)
+                {
+                    datagridRoles.Rows[0].Selected = true;
+                    var rolId = (int)datagridRoles.Rows[0].Cells["ID"].Value;
+                    datagridRoles_CellClick(this, new DataGridViewCellEventArgs(0, 0)); // Simulamos el click en la primera fila
+                }
             }
         }
+
+
         private void CargarPermisosPorRol(int rolId)
         {
             using (var contexto = new RegistroDocenteEntities())
@@ -107,6 +114,7 @@ namespace Registro_Docente_360.Forms
                 chkModificarUsuarios.Checked = false;
                 chkAccederReportes.Checked = false;
                 chkAccederConfiguracion.Checked = false;
+                chkAccederBitacoras.Checked = false; // Añadido para el permiso "Acceder a Bitácoras"
 
                 // Ejecutar el procedimiento almacenado para obtener los permisos del rol
                 var permisosDelRol = contexto.Database.SqlQuery<int>(
@@ -122,65 +130,62 @@ namespace Registro_Docente_360.Forms
                     if (permisoId == 3) chkModificarUsuarios.Checked = true;
                     if (permisoId == 4) chkAccederReportes.Checked = true;
                     if (permisoId == 5) chkAccederConfiguracion.Checked = true;
+                    if (permisoId == 6) chkAccederBitacoras.Checked = true; 
                 }
             }
         }
 
 
-
-
-        // En el evento de cargar el rol seleccionado
         private void datagridRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            // Asegurarse de que la fila seleccionada sea válida
+            if (e.RowIndex >= 0 && datagridRoles.Rows[e.RowIndex].Cells["ID"].Value != null)
             {
-                // Obtener el ID del rol seleccionado
+                // Acceder al ID del rol de la fila seleccionada
                 var rolId = (int)datagridRoles.Rows[e.RowIndex].Cells["ID"].Value;
 
-                // Llamar a CargarPermisosPorRol para cargar los permisos
-                CargarPermisosPorRol(rolId);
-
-                // Ahora marcar el estado del rol (activo o inactivo)
                 using (var contexto = new RegistroDocenteEntities())
                 {
-                    // Obtener el estado del rol
                     var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == rolId);
                     if (rol != null)
                     {
-                        // Verificar el estado del rol y actualizar los RadioButton
+                        txtNombreRol.Text = rol.nombre_rol;
+                        txtDescripcion.Text = rol.descripcion_rol;
+
+                        // Set estado de rol
                         if (rol.estado_rol == "A")
                         {
                             rbActivo.Checked = true;
                             rbInactivo.Checked = false;
-                            rbActivo.ForeColor = Color.Green;
-                            rbInactivo.ForeColor = Color.Gray;
                         }
                         else
                         {
                             rbActivo.Checked = false;
                             rbInactivo.Checked = true;
-                            rbActivo.ForeColor = Color.Gray;
-                            rbInactivo.ForeColor = Color.Red;
                         }
 
-                        // Asignar el nombre del rol al TextBox
-                        txtNombreRol.Text = rol.nombre_rol;
+                        // Llamar al método para cargar los permisos asociados al rol
+                        CargarPermisosPorRol(rolId);
                     }
                 }
 
-                // Hacer que los checkboxes sean solo lectura
+                // Deshabilitar edición por defecto
+                txtNombreRol.ReadOnly = true;
+                txtDescripcion.ReadOnly = true;
+
+                // Deshabilitar los checkboxes y los RadioButtons por defecto
                 chkAccesoModuloDocente.Enabled = false;
                 chkAccesoModuloAdministrador.Enabled = false;
                 chkModificarUsuarios.Enabled = false;
                 chkAccederReportes.Enabled = false;
                 chkAccederConfiguracion.Enabled = false;
+                chkAccederBitacoras.Enabled = false;
 
-                // Hacer el TextBox de solo lectura
-                txtNombreRol.ReadOnly = true;
+                // Deshabilitar los RadioButtons
+                rbActivo.Enabled = false;
+                rbInactivo.Enabled = false;
             }
         }
-
-
 
 
 
@@ -193,6 +198,7 @@ namespace Registro_Docente_360.Forms
             {
                 // Permitir que el TextBox sea editable
                 txtNombreRol.ReadOnly = false;
+                txtDescripcion.ReadOnly = false;  // Permitir editar también la descripción
 
                 // Cambiar el color de los RadioButton para permitir la selección
                 rbActivo.Enabled = true;
@@ -204,9 +210,9 @@ namespace Registro_Docente_360.Forms
                 chkModificarUsuarios.Enabled = true;
                 chkAccederReportes.Enabled = true;
                 chkAccederConfiguracion.Enabled = true;
+                chkAccederBitacoras.Enabled = true;
 
-                // Cambiar el estado de cambios realizados a true
-                cambiosRealizados = true;
+                cambiosRealizados = true;  // Cambiar el estado de cambios realizados a true
             }
             else
             {
@@ -214,10 +220,6 @@ namespace Registro_Docente_360.Forms
                 MessageBox.Show("No se ha realizado ninguna modificación.");
             }
         }
-
-
-
-
 
         private void pnInfo_Paint(object sender, PaintEventArgs e)
         {
@@ -229,29 +231,34 @@ namespace Registro_Docente_360.Forms
 
         }
 
-        
-
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             var rolId = (int)datagridRoles.SelectedRows[0].Cells["ID"].Value;
             var nuevoNombreRol = txtNombreRol.Text;
+            var nuevaDescripcion = txtDescripcion.Text;
+
+            string estadoRol = rbActivo.Checked ? "A" : "I"; // Asignar el estado basado en el radio button
 
             using (var contexto = new RegistroDocenteEntities())
             {
-                // Actualizar el nombre del rol
+                // Obtener el rol actual para actualizar su nombre, descripción y estado
                 var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == rolId);
                 if (rol != null)
                 {
                     rol.nombre_rol = nuevoNombreRol;
+                    rol.descripcion_rol = nuevaDescripcion; // Guardar la descripción
+                    rol.estado_rol = estadoRol;  // Actualizar el estado del rol
                     contexto.SaveChanges(); // Guardar el cambio en la base de datos
                 }
 
-                // Actualizar los permisos seleccionados
-                // Primero eliminamos los permisos actuales del rol
+                // Guardar los permisos actuales (antes de eliminarlos)
+                var permisosActivos = contexto.Database.SqlQuery<int>(
+                    "EXEC dbo.ObtenerPermisosPorRol @RolId", new SqlParameter("@RolId", rolId)).ToList();
+
+                // Eliminar los permisos actuales del rol
                 contexto.Database.ExecuteSqlCommand("EXEC dbo.EliminarPermisosDeRol @RolId", new SqlParameter("@RolId", rolId));
 
-
-                // Insertamos los nuevos permisos
+                // Insertar los nuevos permisos seleccionados
                 if (chkAccesoModuloDocente.Checked)
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 1));
                 if (chkAccesoModuloAdministrador.Checked)
@@ -262,6 +269,8 @@ namespace Registro_Docente_360.Forms
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 4));
                 if (chkAccederConfiguracion.Checked)
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 5));
+                if (chkAccederBitacoras.Checked)
+                    contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 6));
 
                 // Guardar todos los cambios realizados
                 contexto.SaveChanges();
@@ -269,6 +278,7 @@ namespace Registro_Docente_360.Forms
 
             // Restablecer a readonly los campos y deshabilitar la edición
             txtNombreRol.ReadOnly = true;
+            txtDescripcion.ReadOnly = true;
 
             // Deshabilitar los checkboxes
             chkAccesoModuloDocente.Enabled = false;
@@ -276,10 +286,94 @@ namespace Registro_Docente_360.Forms
             chkModificarUsuarios.Enabled = false;
             chkAccederReportes.Enabled = false;
             chkAccederConfiguracion.Enabled = false;
+            chkAccederBitacoras.Enabled = false;
+
+            // Actualizar el color de los RadioButton basado en el estado
+            if (estadoRol == "A")
+            {
+                rbActivo.Checked = true;
+                rbInactivo.Checked = false;
+                rbActivo.ForeColor = Color.Green;
+                rbInactivo.ForeColor = Color.Gray;
+            }
+            else
+            {
+                rbActivo.Checked = false;
+                rbInactivo.Checked = true;
+                rbActivo.ForeColor = Color.Gray;
+                rbInactivo.ForeColor = Color.Red;
+            }
 
             // Actualizar el DataGridView con la nueva información
             CargarRoles();
             MessageBox.Show("Rol modificado exitosamente.");
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            // Abre el formulario para agregar un nuevo rol
+            FormAgregarRol formAgregar = new FormAgregarRol();
+            formAgregar.ShowDialog();  // Abrir el formulario de manera modal
+
+            // Después de cerrar el formulario, recargar los roles en el DataGridView
+            CargarRoles();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            // Verificar si hay alguna fila seleccionada
+            if (datagridRoles.SelectedRows.Count > 0)
+            {
+                // Obtener el ID del rol seleccionado
+                var rolId = (int)datagridRoles.SelectedRows[0].Cells["ID"].Value;
+
+                // Mostrar un mensaje de confirmación
+                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar este rol?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (var contexto = new RegistroDocenteEntities())
+                        {
+                            // Buscar el rol en la base de datos
+                            var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == rolId);
+                            if (rol != null)
+                            {
+                                // Eliminar el rol
+                                contexto.Roles.Remove(rol);
+                                contexto.SaveChanges(); // Guardar los cambios en la base de datos
+
+                                // Mostrar un mensaje de éxito
+                                MessageBox.Show("Rol eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                // Actualizar el DataGridView
+                                CargarRoles(); // Recargar los roles en el DataGridView
+                            }
+                            else
+                            {
+                                MessageBox.Show("El rol seleccionado no existe en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al eliminar el rol: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                // Si no se ha seleccionado ningún rol
+                MessageBox.Show("Por favor, selecciona un rol para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+
+        private void chkAccesoModuloDocente_CheckedChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

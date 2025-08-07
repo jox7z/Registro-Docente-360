@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 
 namespace Registro_Docente_360.Controladores
@@ -330,29 +331,89 @@ namespace Registro_Docente_360.Controladores
 
         public void AsignarPermisoARol(int rolId, int permisoId)
         {
-            using (var contexto = new RegistroDocenteEntities())
+            try
             {
-                // Ejecutar el procedimiento almacenado AgregarPermisoARol
-                contexto.Database.ExecuteSqlCommand(
-                    "EXEC AgregarPermisoARol @RolId, @PermisoId",
-                    new SqlParameter("@RolId", rolId),
-                    new SqlParameter("@PermisoId", permisoId)
-                );
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    // Ejecutar el procedimiento almacenado AgregarPermisoARol
+                    contexto.Database.ExecuteSqlCommand(
+                        "EXEC AgregarPermisoARol @RolId, @PermisoId",
+                        new SqlParameter("@RolId", rolId),
+                        new SqlParameter("@PermisoId", permisoId)
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones (puedes hacer logging aquí si lo deseas)
+                MessageBox.Show("Ocurrió un error al asignar el permiso: " + ex.Message);
+            }
+        }
+
+        public List<int> ObtenerPermisosPorRol(int rolId)
+        {
+            try
+            {
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    // Ejecutar el procedimiento almacenado ObtenerPermisosPorRol
+                    var permisos = contexto.Database.SqlQuery<int>(
+                        "EXEC ObtenerPermisosPorRol @RolId",
+                        new SqlParameter("@RolId", rolId)
+                    ).ToList();
+
+                    return permisos;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones (puedes hacer logging aquí si lo deseas)
+                MessageBox.Show("Ocurrió un error al obtener los permisos: " + ex.Message);
+                return new List<int>(); // Retorna una lista vacía en caso de error
+            }
+        }
+
+        public void EliminarPermisosDeRol(int rolId)
+        {
+            try
+            {
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    // Ejecutar el procedimiento almacenado EliminarPermisosDeRol
+                    contexto.Database.ExecuteSqlCommand(
+                        "EXEC EliminarPermisosDeRol @RolId",
+                        new SqlParameter("@RolId", rolId)
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                MessageBox.Show("Ocurrió un error al eliminar los permisos: " + ex.Message);
             }
         }
 
 
-        public List<int> ObtenerPermisosPorRol(int rolId)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                // Ejecutar el procedimiento almacenado ObtenerPermisosPorRol
-                var permisos = contexto.Database.SqlQuery<int>(
-                    "EXEC ObtenerPermisosPorRol @RolId",
-                    new SqlParameter("@RolId", rolId)
-                ).ToList();
+        public static List<int> PermisosRolActual { get; private set; } = new List<int>();
 
-                return permisos;
+        public static void CargarPermisosRolActual(int idRol)
+        {
+            try
+            {
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    var permisos = contexto.Database.SqlQuery<int>(
+                        "EXEC ObtenerPermisosPorRol @RolId",
+                        new SqlParameter("@RolId", idRol)
+                    ).ToList();
+
+                    PermisosRolActual = permisos;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al obtener los permisos: " + ex.Message);
+                PermisosRolActual = new List<int>();
             }
         }
 

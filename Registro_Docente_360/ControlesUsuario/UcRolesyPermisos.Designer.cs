@@ -47,7 +47,12 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnPermisosyEstados = new System.Windows.Forms.Panel();
+            this.siticoneAdvancedTextArea1 = new SiticoneNetFrameworkUI.SiticoneAdvancedTextArea();
+            this.lblDescripcion = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.lblEditarNombre = new System.Windows.Forms.Label();
             this.lblEstadoRol = new System.Windows.Forms.Label();
             this.permisosCheckListPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.lblPermisosAsignados = new System.Windows.Forms.Label();
@@ -56,10 +61,10 @@
             this.chkModificarUsuarios = new System.Windows.Forms.CheckBox();
             this.chkAccederReportes = new System.Windows.Forms.CheckBox();
             this.chkAccederConfiguracion = new System.Windows.Forms.CheckBox();
+            this.chkAccederBitacoras = new System.Windows.Forms.CheckBox();
             this.rbInactivo = new System.Windows.Forms.RadioButton();
             this.rbActivo = new System.Windows.Forms.RadioButton();
             this.txtNombreRol = new System.Windows.Forms.TextBox();
-            this.lblEditarNombre = new System.Windows.Forms.Label();
             this.panelMiniContenedor.SuspendLayout();
             this.panelContenidos.SuspendLayout();
             this.pnTitulo.SuspendLayout();
@@ -207,6 +212,7 @@
             this.btnAgregar.Text = "        Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
@@ -248,6 +254,7 @@
             this.btnEliminar.Text = "       Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnGuardar
             // 
@@ -311,7 +318,8 @@
             this.datagridRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.NombreRol,
-            this.EstadoRol});
+            this.EstadoRol,
+            this.DescripcionRol});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -353,8 +361,17 @@
             this.EstadoRol.Name = "EstadoRol";
             this.EstadoRol.ReadOnly = true;
             // 
+            // DescripcionRol
+            // 
+            this.DescripcionRol.HeaderText = "Descripcion";
+            this.DescripcionRol.Name = "DescripcionRol";
+            this.DescripcionRol.ReadOnly = true;
+            // 
             // pnPermisosyEstados
             // 
+            this.pnPermisosyEstados.Controls.Add(this.siticoneAdvancedTextArea1);
+            this.pnPermisosyEstados.Controls.Add(this.lblDescripcion);
+            this.pnPermisosyEstados.Controls.Add(this.txtDescripcion);
             this.pnPermisosyEstados.Controls.Add(this.lblEditarNombre);
             this.pnPermisosyEstados.Controls.Add(this.lblEstadoRol);
             this.pnPermisosyEstados.Controls.Add(this.permisosCheckListPanel);
@@ -366,6 +383,51 @@
             this.pnPermisosyEstados.Name = "pnPermisosyEstados";
             this.pnPermisosyEstados.Size = new System.Drawing.Size(752, 603);
             this.pnPermisosyEstados.TabIndex = 32;
+            // 
+            // siticoneAdvancedTextArea1
+            // 
+            this.siticoneAdvancedTextArea1.CurrentLineHighlightColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.siticoneAdvancedTextArea1.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.siticoneAdvancedTextArea1.Location = new System.Drawing.Point(555, 473);
+            this.siticoneAdvancedTextArea1.Margin = new System.Windows.Forms.Padding(5);
+            this.siticoneAdvancedTextArea1.MinimumSize = new System.Drawing.Size(100, 100);
+            this.siticoneAdvancedTextArea1.Name = "siticoneAdvancedTextArea1";
+            this.siticoneAdvancedTextArea1.ReadOnlyBackColor = System.Drawing.Color.WhiteSmoke;
+            this.siticoneAdvancedTextArea1.Size = new System.Drawing.Size(400, 200);
+            this.siticoneAdvancedTextArea1.TabIndex = 33;
+            // 
+            // lblDescripcion
+            // 
+            this.lblDescripcion.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDescripcion.AutoSize = true;
+            this.lblDescripcion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcion.ForeColor = System.Drawing.Color.Teal;
+            this.lblDescripcion.Location = new System.Drawing.Point(499, 390);
+            this.lblDescripcion.Name = "lblDescripcion";
+            this.lblDescripcion.Size = new System.Drawing.Size(178, 25);
+            this.lblDescripcion.TabIndex = 32;
+            this.lblDescripcion.Text = "Descripcion del rol";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripcion.Location = new System.Drawing.Point(504, 427);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(225, 25);
+            this.txtDescripcion.TabIndex = 31;
+            // 
+            // lblEditarNombre
+            // 
+            this.lblEditarNombre.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblEditarNombre.AutoSize = true;
+            this.lblEditarNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEditarNombre.ForeColor = System.Drawing.Color.Teal;
+            this.lblEditarNombre.Location = new System.Drawing.Point(499, 312);
+            this.lblEditarNombre.Name = "lblEditarNombre";
+            this.lblEditarNombre.Size = new System.Drawing.Size(153, 25);
+            this.lblEditarNombre.TabIndex = 30;
+            this.lblEditarNombre.Text = "Nombre del rol:";
             // 
             // lblEstadoRol
             // 
@@ -388,6 +450,7 @@
             this.permisosCheckListPanel.Controls.Add(this.chkModificarUsuarios);
             this.permisosCheckListPanel.Controls.Add(this.chkAccederReportes);
             this.permisosCheckListPanel.Controls.Add(this.chkAccederConfiguracion);
+            this.permisosCheckListPanel.Controls.Add(this.chkAccederBitacoras);
             this.permisosCheckListPanel.Location = new System.Drawing.Point(5, 231);
             this.permisosCheckListPanel.Name = "permisosCheckListPanel";
             this.permisosCheckListPanel.Size = new System.Drawing.Size(488, 269);
@@ -413,10 +476,11 @@
             this.chkAccesoModuloDocente.ForeColor = System.Drawing.Color.Teal;
             this.chkAccesoModuloDocente.Location = new System.Drawing.Point(3, 28);
             this.chkAccesoModuloDocente.Name = "chkAccesoModuloDocente";
-            this.chkAccesoModuloDocente.Size = new System.Drawing.Size(267, 29);
+            this.chkAccesoModuloDocente.Size = new System.Drawing.Size(262, 29);
             this.chkAccesoModuloDocente.TabIndex = 17;
-            this.chkAccesoModuloDocente.Text = " Acceso a Módulo Docente";
+            this.chkAccesoModuloDocente.Text = "Acceso a Módulo Docente";
             this.chkAccesoModuloDocente.UseVisualStyleBackColor = true;
+            this.chkAccesoModuloDocente.CheckedChanged += new System.EventHandler(this.chkAccesoModuloDocente_CheckedChanged);
             // 
             // chkAccesoModuloAdministrador
             // 
@@ -466,6 +530,18 @@
             this.chkAccederConfiguracion.Text = "Puede acceder a Configuración";
             this.chkAccederConfiguracion.UseVisualStyleBackColor = true;
             // 
+            // chkAccederBitacoras
+            // 
+            this.chkAccederBitacoras.AutoSize = true;
+            this.chkAccederBitacoras.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.chkAccederBitacoras.ForeColor = System.Drawing.Color.Teal;
+            this.chkAccederBitacoras.Location = new System.Drawing.Point(3, 203);
+            this.chkAccederBitacoras.Name = "chkAccederBitacoras";
+            this.chkAccederBitacoras.Size = new System.Drawing.Size(261, 29);
+            this.chkAccederBitacoras.TabIndex = 22;
+            this.chkAccederBitacoras.Text = "Puede acceder a Bitácoras";
+            this.chkAccederBitacoras.UseVisualStyleBackColor = true;
+            // 
             // rbInactivo
             // 
             this.rbInactivo.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -498,22 +574,10 @@
             // 
             this.txtNombreRol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombreRol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreRol.Location = new System.Drawing.Point(504, 366);
+            this.txtNombreRol.Location = new System.Drawing.Point(504, 349);
             this.txtNombreRol.Name = "txtNombreRol";
             this.txtNombreRol.Size = new System.Drawing.Size(225, 25);
             this.txtNombreRol.TabIndex = 22;
-            // 
-            // lblEditarNombre
-            // 
-            this.lblEditarNombre.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblEditarNombre.AutoSize = true;
-            this.lblEditarNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditarNombre.ForeColor = System.Drawing.Color.Teal;
-            this.lblEditarNombre.Location = new System.Drawing.Point(499, 329);
-            this.lblEditarNombre.Name = "lblEditarNombre";
-            this.lblEditarNombre.Size = new System.Drawing.Size(153, 25);
-            this.lblEditarNombre.TabIndex = 30;
-            this.lblEditarNombre.Text = "Nombre del rol:";
             // 
             // UcRolesyPermisos
             // 
@@ -522,7 +586,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelMiniContenedor);
             this.Name = "UcRolesyPermisos";
-            this.Size = new System.Drawing.Size(790, 689);
+            this.Size = new System.Drawing.Size(785, 689);
             this.panelMiniContenedor.ResumeLayout(false);
             this.panelMiniContenedor.PerformLayout();
             this.panelContenidos.ResumeLayout(false);
@@ -568,10 +632,15 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel pnRolExistente;
         private System.Windows.Forms.Panel pnPermisosyEstados;
+        private System.Windows.Forms.Label lblEditarNombre;
+        private System.Windows.Forms.TextBox txtNombreRol;
+        private SiticoneNetFrameworkUI.SiticoneAdvancedTextArea siticoneAdvancedTextArea1;
+        private System.Windows.Forms.Label lblDescripcion;
+        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreRol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoRol;
-        private System.Windows.Forms.Label lblEditarNombre;
-        private System.Windows.Forms.TextBox txtNombreRol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionRol;
+        private System.Windows.Forms.CheckBox chkAccederBitacoras;
     }
 }
