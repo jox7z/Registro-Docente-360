@@ -39,7 +39,9 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.lblAlumnos = new System.Windows.Forms.Label();
+            this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
             this.pnCancelar = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -49,8 +51,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnAgregar = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.cmbDocentes = new System.Windows.Forms.ComboBox();
-            this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.pnEditarHorario.SuspendLayout();
@@ -66,7 +66,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 5);
@@ -90,7 +90,7 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -136,7 +136,7 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -175,7 +175,7 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -214,6 +214,14 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Docente:";
             // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(116, 3);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(191, 21);
+            this.cmbDocentes.TabIndex = 11;
+            // 
             // lblAlumnos
             // 
             this.lblAlumnos.AutoSize = true;
@@ -226,9 +234,19 @@
             this.lblAlumnos.TabIndex = 7;
             this.lblAlumnos.Text = "Listado de Alumnos";
             // 
+            // tablaAlumnos
+            // 
+            this.tablaAlumnos.BackColor = System.Drawing.Color.Gainsboro;
+            this.tablaAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaAlumnos.Location = new System.Drawing.Point(3, 123);
+            this.tablaAlumnos.Name = "tablaAlumnos";
+            this.tablaAlumnos.Padding = new System.Windows.Forms.Padding(20);
+            this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
+            this.tablaAlumnos.TabIndex = 20;
+            // 
             // PanelAcciones
             // 
-            this.PanelAcciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.PanelAcciones.BackColor = System.Drawing.Color.Gainsboro;
             this.PanelAcciones.ColumnCount = 4;
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -370,29 +388,11 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // cmbDocentes
-            // 
-            this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(116, 3);
-            this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(191, 21);
-            this.cmbDocentes.TabIndex = 11;
-            // 
-            // tablaAlumnos
-            // 
-            this.tablaAlumnos.BackColor = System.Drawing.Color.Transparent;
-            this.tablaAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaAlumnos.Location = new System.Drawing.Point(3, 123);
-            this.tablaAlumnos.Name = "tablaAlumnos";
-            this.tablaAlumnos.Padding = new System.Windows.Forms.Padding(20);
-            this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
-            this.tablaAlumnos.TabIndex = 20;
-            // 
             // UcAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UcAlumnos";
             this.Size = new System.Drawing.Size(997, 649);

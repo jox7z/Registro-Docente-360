@@ -71,7 +71,7 @@
             // 
             // tableLayoutPanelfondo
             // 
-            this.tableLayoutPanelfondo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanelfondo.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanelfondo.ColumnCount = 1;
             this.tableLayoutPanelfondo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelfondo.Controls.Add(this.dataGridPerso1, 0, 1);
@@ -90,7 +90,7 @@
             // 
             // dataGridPerso1
             // 
-            this.dataGridPerso1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridPerso1.BackColor = System.Drawing.Color.Gainsboro;
             this.dataGridPerso1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dataGridPerso1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPerso1.EncabezadoColumna0 = "Estudiante";
@@ -103,7 +103,7 @@
             // 
             // tableLayoutPaneltitulos
             // 
-            this.tableLayoutPaneltitulos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPaneltitulos.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPaneltitulos.ColumnCount = 1;
             this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -124,6 +124,7 @@
             // lblSemana
             // 
             this.lblSemana.AutoSize = true;
+            this.lblSemana.BackColor = System.Drawing.Color.Gainsboro;
             this.lblSemana.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSemana.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSemana.ForeColor = System.Drawing.Color.Teal;
@@ -136,7 +137,7 @@
             // lblGrupo
             // 
             this.lblGrupo.AutoSize = true;
-            this.lblGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblGrupo.BackColor = System.Drawing.Color.Gainsboro;
             this.lblGrupo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGrupo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGrupo.ForeColor = System.Drawing.Color.Teal;

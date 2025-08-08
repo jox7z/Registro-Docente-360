@@ -23,6 +23,7 @@ namespace Modelos.EntityFramework
         public Nullable<decimal> cotidiano { get; set; }
         public Nullable<decimal> nota_final { get; set; }
         public Nullable<int> id_estudiante { get; set; }
+        public string periodo { get; set; }
     
         public virtual Clases Clases { get; set; }
         public virtual Estudiantes Estudiantes { get; set; }

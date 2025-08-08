@@ -29,86 +29,28 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcBienvenida));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pnConfiguracion = new System.Windows.Forms.Panel();
-            this.btnConfiguracion = new System.Windows.Forms.Button();
-            this.lblDocente = new System.Windows.Forms.Label();
             this.lbllogin2 = new System.Windows.Forms.Label();
-            this.lblFrases = new System.Windows.Forms.Label();
             this.panelminiContenedor = new System.Windows.Forms.Panel();
-            this.siticonePanel1 = new SiticoneNetFrameworkUI.SiticonePanel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelTitulo = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tblNombre = new System.Windows.Forms.TableLayoutPanel();
             this.tblBienvenida = new System.Windows.Forms.TableLayoutPanel();
+            this.panelTitulo = new System.Windows.Forms.Panel();
+            this.tblNombre = new System.Windows.Forms.TableLayoutPanel();
+            this.lblDocente = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblFrases = new System.Windows.Forms.Label();
             this.tblLogo = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnConfiguracion.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.siticonePanel1 = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelminiContenedor.SuspendLayout();
-            this.siticonePanel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panelTitulo.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tblNombre.SuspendLayout();
             this.tblBienvenida.SuspendLayout();
+            this.panelTitulo.SuspendLayout();
+            this.tblNombre.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tblLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.siticonePanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(123, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(571, 303);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pnConfiguracion
-            // 
-            this.pnConfiguracion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnConfiguracion.BackColor = System.Drawing.Color.Transparent;
-            this.pnConfiguracion.Controls.Add(this.btnConfiguracion);
-            this.pnConfiguracion.ForeColor = System.Drawing.Color.Transparent;
-            this.pnConfiguracion.Location = new System.Drawing.Point(221, 19);
-            this.pnConfiguracion.Name = "pnConfiguracion";
-            this.pnConfiguracion.Size = new System.Drawing.Size(379, 61);
-            this.pnConfiguracion.TabIndex = 9;
-            // 
-            // btnConfiguracion
-            // 
-            this.btnConfiguracion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnConfiguracion.BackColor = System.Drawing.Color.Teal;
-            this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfiguracion.ForeColor = System.Drawing.Color.White;
-            this.btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfiguracion.Location = new System.Drawing.Point(-22, -29);
-            this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnConfiguracion.Size = new System.Drawing.Size(416, 115);
-            this.btnConfiguracion.TabIndex = 2;
-            this.btnConfiguracion.Text = "VER HORARIO";
-            this.btnConfiguracion.UseVisualStyleBackColor = false;
-            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
-            // 
-            // lblDocente
-            // 
-            this.lblDocente.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblDocente.AutoSize = true;
-            this.lblDocente.BackColor = System.Drawing.Color.Transparent;
-            this.lblDocente.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblDocente.Location = new System.Drawing.Point(322, 7);
-            this.lblDocente.Name = "lblDocente";
-            this.lblDocente.Size = new System.Drawing.Size(173, 47);
-            this.lblDocente.TabIndex = 8;
-            this.lblDocente.Text = "NOMBRE";
             // 
             // lbllogin2
             // 
@@ -124,6 +66,86 @@
             this.lbllogin2.Text = "TE DAMOS LA BIENVENIDA ";
             this.lbllogin2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelminiContenedor
+            // 
+            this.panelminiContenedor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelminiContenedor.Controls.Add(this.siticonePanel1);
+            this.panelminiContenedor.Location = new System.Drawing.Point(3, 114);
+            this.panelminiContenedor.Name = "panelminiContenedor";
+            this.panelminiContenedor.Padding = new System.Windows.Forms.Padding(7);
+            this.panelminiContenedor.Size = new System.Drawing.Size(833, 635);
+            this.panelminiContenedor.TabIndex = 22;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tblBienvenida);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(836, 92);
+            this.panel1.TabIndex = 23;
+            // 
+            // tblBienvenida
+            // 
+            this.tblBienvenida.ColumnCount = 3;
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.07547F));
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.92452F));
+            this.tblBienvenida.Controls.Add(this.lbllogin2, 1, 0);
+            this.tblBienvenida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblBienvenida.Location = new System.Drawing.Point(0, 0);
+            this.tblBienvenida.Name = "tblBienvenida";
+            this.tblBienvenida.RowCount = 1;
+            this.tblBienvenida.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblBienvenida.Size = new System.Drawing.Size(836, 61);
+            this.tblBienvenida.TabIndex = 10;
+            // 
+            // panelTitulo
+            // 
+            this.panelTitulo.Controls.Add(this.tblNombre);
+            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitulo.Location = new System.Drawing.Point(0, 0);
+            this.panelTitulo.Name = "panelTitulo";
+            this.panelTitulo.Size = new System.Drawing.Size(819, 61);
+            this.panelTitulo.TabIndex = 19;
+            // 
+            // tblNombre
+            // 
+            this.tblNombre.ColumnCount = 3;
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
+            this.tblNombre.Controls.Add(this.lblDocente, 1, 0);
+            this.tblNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblNombre.Location = new System.Drawing.Point(0, 0);
+            this.tblNombre.Name = "tblNombre";
+            this.tblNombre.RowCount = 1;
+            this.tblNombre.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblNombre.Size = new System.Drawing.Size(819, 61);
+            this.tblNombre.TabIndex = 9;
+            // 
+            // lblDocente
+            // 
+            this.lblDocente.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDocente.AutoSize = true;
+            this.lblDocente.BackColor = System.Drawing.Color.Transparent;
+            this.lblDocente.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDocente.ForeColor = System.Drawing.Color.Teal;
+            this.lblDocente.Location = new System.Drawing.Point(322, 7);
+            this.lblDocente.Name = "lblDocente";
+            this.lblDocente.Size = new System.Drawing.Size(173, 47);
+            this.lblDocente.TabIndex = 8;
+            this.lblDocente.Text = "NOMBRE";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.lblFrases);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 518);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(819, 103);
+            this.panel4.TabIndex = 23;
+            // 
             // lblFrases
             // 
             this.lblFrases.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -136,15 +158,30 @@
             this.lblFrases.Text = "Una mente una vez iluminada no puede volver a la oscuridad. — Thomas Paine";
             this.lblFrases.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panelminiContenedor
+            // tblLogo
             // 
-            this.panelminiContenedor.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelminiContenedor.Controls.Add(this.siticonePanel1);
-            this.panelminiContenedor.Location = new System.Drawing.Point(3, 114);
-            this.panelminiContenedor.Name = "panelminiContenedor";
-            this.panelminiContenedor.Padding = new System.Windows.Forms.Padding(7);
-            this.panelminiContenedor.Size = new System.Drawing.Size(833, 635);
-            this.panelminiContenedor.TabIndex = 22;
+            this.tblLogo.ColumnCount = 3;
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99936F));
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00064F));
+            this.tblLogo.Controls.Add(this.pictureBox1, 1, 0);
+            this.tblLogo.Location = new System.Drawing.Point(0, 67);
+            this.tblLogo.Name = "tblLogo";
+            this.tblLogo.RowCount = 1;
+            this.tblLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblLogo.Size = new System.Drawing.Size(819, 457);
+            this.tblLogo.TabIndex = 24;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(123, 77);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(571, 303);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // siticonePanel1
             // 
@@ -157,7 +194,6 @@
             this.siticonePanel1.BorderThickness = 2F;
             this.siticonePanel1.Controls.Add(this.tblLogo);
             this.siticonePanel1.Controls.Add(this.panel4);
-            this.siticonePanel1.Controls.Add(this.panel2);
             this.siticonePanel1.Controls.Add(this.panelTitulo);
             this.siticonePanel1.CornerRadiusBottomLeft = 9F;
             this.siticonePanel1.CornerRadiusBottomRight = 9F;
@@ -194,86 +230,6 @@
             this.siticonePanel1.UsePatternTexture = false;
             this.siticonePanel1.UseRadialGradient = false;
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.lblFrases);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 518);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(819, 103);
-            this.panel4.TabIndex = 23;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pnConfiguracion);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 61);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(819, 112);
-            this.panel2.TabIndex = 21;
-            // 
-            // panelTitulo
-            // 
-            this.panelTitulo.Controls.Add(this.tblNombre);
-            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitulo.Location = new System.Drawing.Point(0, 0);
-            this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(819, 61);
-            this.panelTitulo.TabIndex = 19;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tblBienvenida);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(836, 92);
-            this.panel1.TabIndex = 23;
-            // 
-            // tblNombre
-            // 
-            this.tblNombre.ColumnCount = 3;
-            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblNombre.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
-            this.tblNombre.Controls.Add(this.lblDocente, 1, 0);
-            this.tblNombre.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblNombre.Location = new System.Drawing.Point(0, 0);
-            this.tblNombre.Name = "tblNombre";
-            this.tblNombre.RowCount = 1;
-            this.tblNombre.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblNombre.Size = new System.Drawing.Size(819, 61);
-            this.tblNombre.TabIndex = 9;
-            // 
-            // tblBienvenida
-            // 
-            this.tblBienvenida.ColumnCount = 3;
-            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.07547F));
-            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblBienvenida.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.92452F));
-            this.tblBienvenida.Controls.Add(this.lbllogin2, 1, 0);
-            this.tblBienvenida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblBienvenida.Location = new System.Drawing.Point(0, 0);
-            this.tblBienvenida.Name = "tblBienvenida";
-            this.tblBienvenida.RowCount = 1;
-            this.tblBienvenida.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblBienvenida.Size = new System.Drawing.Size(836, 61);
-            this.tblBienvenida.TabIndex = 10;
-            // 
-            // tblLogo
-            // 
-            this.tblLogo.ColumnCount = 3;
-            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99936F));
-            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblLogo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00064F));
-            this.tblLogo.Controls.Add(this.pictureBox1, 1, 0);
-            this.tblLogo.Location = new System.Drawing.Point(0, 172);
-            this.tblLogo.Name = "tblLogo";
-            this.tblLogo.RowCount = 1;
-            this.tblLogo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblLogo.Size = new System.Drawing.Size(819, 352);
-            this.tblLogo.TabIndex = 24;
-            // 
             // UcBienvenida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,39 +241,33 @@
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.Size = new System.Drawing.Size(836, 749);
             this.Load += new System.EventHandler(this.UcBienvenida_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnConfiguracion.ResumeLayout(false);
             this.panelminiContenedor.ResumeLayout(false);
-            this.siticonePanel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panelTitulo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.tblNombre.ResumeLayout(false);
-            this.tblNombre.PerformLayout();
             this.tblBienvenida.ResumeLayout(false);
             this.tblBienvenida.PerformLayout();
+            this.panelTitulo.ResumeLayout(false);
+            this.tblNombre.ResumeLayout(false);
+            this.tblNombre.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tblLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.siticonePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel pnConfiguracion;
-        private System.Windows.Forms.Button btnConfiguracion;
-        private System.Windows.Forms.Label lblDocente;
         private System.Windows.Forms.Label lbllogin2;
-        private System.Windows.Forms.Label lblFrases;
         private System.Windows.Forms.Panel panelminiContenedor;
-        private SiticoneNetFrameworkUI.SiticonePanel siticonePanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panelTitulo;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tblNombre;
         private System.Windows.Forms.TableLayoutPanel tblBienvenida;
+        private SiticoneNetFrameworkUI.SiticonePanel siticonePanel1;
         private System.Windows.Forms.TableLayoutPanel tblLogo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblFrases;
+        private System.Windows.Forms.Panel panelTitulo;
+        private System.Windows.Forms.TableLayoutPanel tblNombre;
+        private System.Windows.Forms.Label lblDocente;
     }
 }

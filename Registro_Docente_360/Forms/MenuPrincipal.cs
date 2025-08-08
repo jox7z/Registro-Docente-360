@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using Modelos.EntityFramework;
 using Registro_Docente_360.Interfaces;
 using Registro_Docente_360.Controladores;
+using System.Windows.Forms;
 
 namespace Registro_Docente_360
 {
@@ -18,6 +19,7 @@ namespace Registro_Docente_360
         // CAMPOS Y REFERENCIAS
         // ========================
         public UcFechas ucFechas;
+       
         UcHorario ucHorario;
         UcAlumnos ucAlumnos;
         UcReportes ucReportes;
@@ -78,6 +80,8 @@ namespace Registro_Docente_360
                 );
             };
 
+           
+
             AjustarPaddingContenedor();
 
             // Cargar bienvenida al iniciar
@@ -85,6 +89,9 @@ namespace Registro_Docente_360
             MostrarUserControl(ucBienvenida);
             ucBienvenida.OnVerHorario += AbrirHorarioDesdeBienvenida;
         }
+
+
+
 
 
         private void AjustarPaddingContenedor()
@@ -103,7 +110,7 @@ namespace Registro_Docente_360
 
         private void ActualizarMenuPrincipal()
         {
-            // === INICIALIZACIÓN: Todos los botones deshabilitados y visibles, menos btnMantenimiento ===
+            // --- Inicialización: Todos los botones deshabilitados y visibles, menos btnMantenimiento ---
             btnMantenimiento.Visible = false;
             btnMantenimiento.Enabled = false;
             btnMantenimiento.ForeColor = Color.Silver;
@@ -116,18 +123,16 @@ namespace Registro_Docente_360
             SetButtonState(btnAsistencia, false);
             SetButtonState(btnHorario, false);
             SetButtonState(btnAlumnos, false);
-            SetButtonState(btnReportes, false);
+            SetButtonState(btnReportes, false); // Deshabilitado por defecto
             SetButtonState(btnNotas, false);
             SetButtonState(btnCalendario, false);
             SetButtonState(btnAboutUs, false);
             SetButtonState(btnConfiguracion, false);
 
-            // --- Cargar los permisos del usuario desde la BD ---
+            // --- Cargar los permisos del rol actual desde la base de datos ---
             AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
 
-            // === ADMINISTRACIÓN: btnMantenimiento ===
-            // Solo mostrar/habilitar si el usuario tiene algún permiso de administración,
-            // modificar usuarios, o bitácoras
+            // --- Mostrar btnMantenimiento SOLO si tiene admin, usuarios o bitácoras ---
             bool puedeVerMantenimiento =
                 AlumnoController.PermisosRolActual.Contains(2) || // Admin
                 AlumnoController.PermisosRolActual.Contains(3) || // Modificar Usuarios
@@ -137,18 +142,18 @@ namespace Registro_Docente_360
             btnMantenimiento.Enabled = puedeVerMantenimiento;
             btnMantenimiento.ForeColor = puedeVerMantenimiento ? Color.White : Color.Silver;
 
-            // === USUARIOS: Permiso de admin o modificar usuarios ===
+            // --- USUARIOS: Permiso de admin o modificar usuarios ---
             SetButtonState(btnUsuarios,
                 AlumnoController.PermisosRolActual.Contains(2) ||
                 AlumnoController.PermisosRolActual.Contains(3)
             );
 
-            // === ROLES Y PERMISOS: Solo admin ===
+            // --- ROLES Y PERMISOS: Solo admin ---
             SetButtonState(btnRolyPerm,
                 AlumnoController.PermisosRolActual.Contains(2)
             );
 
-            // === BITÁCORAS: Admin o bitácoras ===
+            // --- BITÁCORAS: Admin o bitácoras ---
             SetButtonState(btnAccionesUsuario,
                 AlumnoController.PermisosRolActual.Contains(2) ||
                 AlumnoController.PermisosRolActual.Contains(6)
@@ -158,7 +163,7 @@ namespace Registro_Docente_360
                 AlumnoController.PermisosRolActual.Contains(6)
             );
 
-            // === MÓDULO DOCENTE: Permiso de docente ===
+            // --- MÓDULO DOCENTE: Permiso de docente ---
             if (AlumnoController.PermisosRolActual.Contains(1))
             {
                 SetButtonState(btnAsistencia, true);
@@ -169,14 +174,13 @@ namespace Registro_Docente_360
                 SetButtonState(btnAboutUs, true);
             }
 
-            // === REPORTES: Permiso de docente, admin o explícito de reportes ===
+            // --- REPORTES: Solo visible y habilitado para Docente (1) y Admin (2) ---
             SetButtonState(btnReportes,
-                AlumnoController.PermisosRolActual.Contains(1) ||
-                AlumnoController.PermisosRolActual.Contains(2) ||
-                AlumnoController.PermisosRolActual.Contains(4)
+                AlumnoController.PermisosRolActual.Contains(1) ||  // Permiso para Docente
+                AlumnoController.PermisosRolActual.Contains(2)    // Permiso para Admin
             );
 
-            // === CONFIGURACIÓN: Permiso de docente, admin o explícito de configuración ===
+            // --- CONFIGURACIÓN: Permiso de docente, admin o explícito de configuración ---
             SetButtonState(btnConfiguracion,
                 AlumnoController.PermisosRolActual.Contains(1) ||
                 AlumnoController.PermisosRolActual.Contains(2) ||
@@ -193,6 +197,7 @@ namespace Registro_Docente_360
             btn.Enabled = enabled;
             btn.ForeColor = enabled ? Color.White : Color.Silver;
         }
+
 
 
         // ========================
@@ -240,11 +245,14 @@ namespace Registro_Docente_360
             sidebarTransition.Start();
         }
 
+
+
         // ========================
         // MÉTODOS DE NAVEGACIÓN
         // ========================
 
 
+       
 
         public void MostrarUserControl(UserControl control)
         {
@@ -269,7 +277,7 @@ namespace Registro_Docente_360
             control.BringToFront();
         }
 
-
+       
 
 
         // ========================

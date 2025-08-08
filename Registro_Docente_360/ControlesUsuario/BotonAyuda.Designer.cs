@@ -35,7 +35,7 @@
             // 
             // pictureAyuda
             // 
-            this.pictureAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.pictureAyuda.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureAyuda.Image = ((System.Drawing.Image)(resources.GetObject("pictureAyuda.Image")));
             this.pictureAyuda.Location = new System.Drawing.Point(6, 3);
@@ -49,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.pictureAyuda);
             this.Name = "BotonAyuda";
             this.Size = new System.Drawing.Size(52, 45);

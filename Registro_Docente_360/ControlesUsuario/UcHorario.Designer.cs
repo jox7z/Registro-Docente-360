@@ -51,7 +51,7 @@ namespace Registro_Docente_360.ControlesUsuario
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.pnEditarHorario, 0, 4);
@@ -199,7 +199,7 @@ namespace Registro_Docente_360.ControlesUsuario
             // 
             // dataGridPerso1
             // 
-            this.dataGridPerso1.BackColor = System.Drawing.Color.Transparent;
+            this.dataGridPerso1.BackColor = System.Drawing.Color.Gainsboro;
             this.dataGridPerso1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPerso1.EncabezadoColumna0 = "Lección";
             this.dataGridPerso1.Location = new System.Drawing.Point(3, 153);
@@ -212,6 +212,7 @@ namespace Registro_Docente_360.ControlesUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UcHorario";
             this.Size = new System.Drawing.Size(1145, 616);

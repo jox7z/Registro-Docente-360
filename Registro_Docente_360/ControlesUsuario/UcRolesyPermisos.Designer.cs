@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcRolesyPermisos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelMiniContenedor = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelContenidos = new System.Windows.Forms.FlowLayoutPanel();
             this.pnTitulo = new System.Windows.Forms.Panel();
@@ -59,7 +59,6 @@
             this.chkAccesoModuloDocente = new System.Windows.Forms.CheckBox();
             this.chkAccesoModuloAdministrador = new System.Windows.Forms.CheckBox();
             this.chkModificarUsuarios = new System.Windows.Forms.CheckBox();
-            this.chkAccederReportes = new System.Windows.Forms.CheckBox();
             this.chkAccederConfiguracion = new System.Windows.Forms.CheckBox();
             this.chkAccederBitacoras = new System.Windows.Forms.CheckBox();
             this.rbInactivo = new System.Windows.Forms.RadioButton();
@@ -306,28 +305,28 @@
             this.datagridRoles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridRoles.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.datagridRoles.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagridRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagridRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.datagridRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.NombreRol,
             this.EstadoRol,
             this.DescripcionRol});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.datagridRoles.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.datagridRoles.DefaultCellStyle = dataGridViewCellStyle2;
             this.datagridRoles.EnableHeadersVisualStyles = false;
             this.datagridRoles.Location = new System.Drawing.Point(13, 28);
             this.datagridRoles.Name = "datagridRoles";
@@ -448,7 +447,6 @@
             this.permisosCheckListPanel.Controls.Add(this.chkAccesoModuloDocente);
             this.permisosCheckListPanel.Controls.Add(this.chkAccesoModuloAdministrador);
             this.permisosCheckListPanel.Controls.Add(this.chkModificarUsuarios);
-            this.permisosCheckListPanel.Controls.Add(this.chkAccederReportes);
             this.permisosCheckListPanel.Controls.Add(this.chkAccederConfiguracion);
             this.permisosCheckListPanel.Controls.Add(this.chkAccederBitacoras);
             this.permisosCheckListPanel.Location = new System.Drawing.Point(5, 231);
@@ -506,24 +504,12 @@
             this.chkModificarUsuarios.Text = "Puede modificar Usuarios";
             this.chkModificarUsuarios.UseVisualStyleBackColor = true;
             // 
-            // chkAccederReportes
-            // 
-            this.chkAccederReportes.AutoSize = true;
-            this.chkAccederReportes.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.chkAccederReportes.ForeColor = System.Drawing.Color.Teal;
-            this.chkAccederReportes.Location = new System.Drawing.Point(3, 133);
-            this.chkAccederReportes.Name = "chkAccederReportes";
-            this.chkAccederReportes.Size = new System.Drawing.Size(260, 29);
-            this.chkAccederReportes.TabIndex = 20;
-            this.chkAccederReportes.Text = "Puede acceder a Reportes";
-            this.chkAccederReportes.UseVisualStyleBackColor = true;
-            // 
             // chkAccederConfiguracion
             // 
             this.chkAccederConfiguracion.AutoSize = true;
             this.chkAccederConfiguracion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.chkAccederConfiguracion.ForeColor = System.Drawing.Color.Teal;
-            this.chkAccederConfiguracion.Location = new System.Drawing.Point(3, 168);
+            this.chkAccederConfiguracion.Location = new System.Drawing.Point(3, 133);
             this.chkAccederConfiguracion.Name = "chkAccederConfiguracion";
             this.chkAccederConfiguracion.Size = new System.Drawing.Size(308, 29);
             this.chkAccederConfiguracion.TabIndex = 21;
@@ -535,7 +521,7 @@
             this.chkAccederBitacoras.AutoSize = true;
             this.chkAccederBitacoras.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.chkAccederBitacoras.ForeColor = System.Drawing.Color.Teal;
-            this.chkAccederBitacoras.Location = new System.Drawing.Point(3, 203);
+            this.chkAccederBitacoras.Location = new System.Drawing.Point(3, 168);
             this.chkAccederBitacoras.Name = "chkAccederBitacoras";
             this.chkAccederBitacoras.Size = new System.Drawing.Size(261, 29);
             this.chkAccederBitacoras.TabIndex = 22;
@@ -620,7 +606,6 @@
         private System.Windows.Forms.CheckBox chkAccesoModuloDocente;
         private System.Windows.Forms.CheckBox chkAccesoModuloAdministrador;
         private System.Windows.Forms.CheckBox chkModificarUsuarios;
-        private System.Windows.Forms.CheckBox chkAccederReportes;
         private System.Windows.Forms.CheckBox chkAccederConfiguracion;
         private System.Windows.Forms.DataGridView datagridRoles;
         private System.Windows.Forms.Label lblLista;

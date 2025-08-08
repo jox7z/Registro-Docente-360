@@ -96,6 +96,7 @@
           <Property Name="cotidiano" Type="decimal" Precision="5" Scale="2" />
           <Property Name="nota_final" Type="decimal" Precision="5" Scale="2" />
           <Property Name="id_estudiante" Type="int" />
+          <Property Name="periodo" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Permisos">
           <Key>
@@ -579,6 +580,7 @@
           <Property Name="id_estudiante" Type="Int32" />
           <NavigationProperty Name="Clases" Relationship="Self.FK__Notas__id_clase__5CD6CB2B" FromRole="Notas" ToRole="Clases" />
           <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Notas_id_estud" FromRole="Notas" ToRole="Estudiantes" />
+          <Property Name="periodo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Permisos">
           <Key>
@@ -1023,6 +1025,7 @@
           <EntitySetMapping Name="Notas">
             <EntityTypeMapping TypeName="RegistroDocenteModel.Notas">
               <MappingFragment StoreEntitySet="Notas">
+                <ScalarProperty Name="periodo" ColumnName="periodo" />
                 <ScalarProperty Name="id_nota" ColumnName="id_nota" />
                 <ScalarProperty Name="id_clase" ColumnName="id_clase" />
                 <ScalarProperty Name="primer_examen" ColumnName="primer_examen" />

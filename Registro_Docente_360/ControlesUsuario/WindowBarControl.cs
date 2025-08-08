@@ -35,12 +35,24 @@ namespace Registro_Docente_360.ControlesUsuario
             }
         }
 
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-            RegistrarAcceso(Sesion.IdUsuario, "LOGOUT");
+            // Mostrar la alerta de confirmación antes de cerrar la aplicación
+            DialogResult result = MessageBox.Show("¿Seguro que quieres salir?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Si el usuario selecciona Sí, cerrar la aplicación y registrar el cierre
+                Application.Exit();
+                RegistrarAcceso(Sesion.IdUsuario, "LOGOUT");
+            }
+            else
+            {
+                // Si el usuario selecciona No, no hacer nada
+                return;
+            }
         }
+
 
         private void btnMinimizar_Click(object sender, EventArgs e)
         {

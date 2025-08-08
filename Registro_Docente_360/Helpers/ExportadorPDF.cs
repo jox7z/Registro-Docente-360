@@ -11,7 +11,7 @@ namespace Registro_Docente_360.Utilidades
         /// <summary>
         /// Exporta el contenido de un DataGridView a un archivo PDF con encabezado de docente, sección y materia.
         /// </summary>
-        public static void Exportar(DataGridView dgv, string nombreDocente, string seccion, string materia, string nombreArchivo)
+        public static void Exportar(DataGridView dgv, string nombreDocente, string seccion, string materia, string periodo, string nombreArchivo)
         {
             Document doc = new Document(PageSize.A4.Rotate(), 10f, 10f, 20f, 20f);
 
@@ -20,11 +20,12 @@ namespace Registro_Docente_360.Utilidades
                 PdfWriter.GetInstance(doc, new FileStream(nombreArchivo, FileMode.Create));
                 doc.Open();
 
-                // Encabezado con nombre, sección y materia
+                // Agregar el periodo al encabezado
                 Paragraph encabezado = new Paragraph(
                     $"Docente: {nombreDocente}\n" +
                     $"Sección: {seccion}\n" +
-                    $"Materia: {materia}\n\n",
+                    $"Materia: {materia}\n" +
+                    $"Periodo: {periodo}\n\n",  // Aquí incluimos el periodo
                     FontFactory.GetFont("Arial", 12, Font.BOLD)
                 );
                 encabezado.Alignment = Element.ALIGN_LEFT;

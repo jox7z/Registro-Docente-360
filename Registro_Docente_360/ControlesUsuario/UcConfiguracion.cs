@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Modelos.EntityFramework;
 using Registro_Docente_360.ControlesUsuario;
 using Registro_Docente_360.Eventos;
 
@@ -14,7 +15,7 @@ namespace Registro_Docente_360.Forms
 {
     public partial class UcConfiguracion : UserControl
     {
-       
+
 
 
         public UcConfiguracion()
@@ -75,28 +76,10 @@ namespace Registro_Docente_360.Forms
             // Validar que solo sea clic izquierdo (opcional)
             if (e.Button == MouseButtons.Left)
             {
-                DialogResult resultado = MessageBox.Show("¿Deseas cerrar sesión y volver al login?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.Yes)
-                {
-                    // Limpiar sesión
-                    Sesion.IdUsuario = 0;
-                    Sesion.NombreUsuario = null;
-                    Sesion.UltimoAnhoSeleccionado = 0;
-                    Sesion.UltimoMesIndex = 0;
-                    Sesion.UltimaSemanaIndex = 0;
-
-                    // Abrir Login
-                    Form padre = this.FindForm();
-                    if (padre != null)
-                    {
-                        padre.Hide();
-                        new Login().Show();
-                        padre.Close();
-                    }
-                }
+                EjecutarCerrarSesion();
             }
         }
+
 
 
         private void EjecutarCerrarSesion()
@@ -108,12 +91,20 @@ namespace Registro_Docente_360.Forms
 
             if (resultado == DialogResult.Yes)
             {
+                // Debug: Verificar el valor de Sesion.IdUsuario
+                System.Diagnostics.Debug.WriteLine($"Cerrando sesión para el usuario con ID: {Sesion.IdUsuario}");
+
+                // Registrar el LOGOUT en la bitácora
+                RegistrarAcceso(Sesion.IdUsuario, "LOGOUT");
+
+                // Limpiar sesión
                 Sesion.IdUsuario = 0;
                 Sesion.NombreUsuario = null;
                 Sesion.UltimoAnhoSeleccionado = 0;
                 Sesion.UltimoMesIndex = 0;
                 Sesion.UltimaSemanaIndex = 0;
 
+                // Abrir Login
                 Form formularioPadre = this.FindForm();
                 if (formularioPadre != null)
                 {
@@ -130,15 +121,35 @@ namespace Registro_Docente_360.Forms
         }
 
 
+        private void RegistrarAcceso(int idUsuario, string tipoAcceso)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var acceso = new Bitacora_Accesos
+                {
+                    id_usuario = idUsuario,
+                    tipo_acceso = tipoAcceso,
+                    fecha_acceso = DateTime.Now
+                };
+
+                contexto.Bitacora_Accesos.Add(acceso);
+                contexto.SaveChanges();
+            }
+        }
+
+
+
+
+
         private void panelInfoCuenta_Paint(object sender, PaintEventArgs e) { }
-        
+
 
         private void panelCambiarContra_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
 
-        
+
     }
 }

@@ -19,6 +19,16 @@ namespace Registro_Docente_360.Forms
     {
         private bool cambiosRealizados = false;
 
+        // Variables para almacenar los valores originales
+        private string originalNombreRol;
+        private string originalDescripcion;
+        private string originalEstadoRol;
+        private bool originalAccesoModuloDocente;
+        private bool originalAccesoModuloAdministrador;
+        private bool originalModificarUsuarios;
+        private bool originalAccederConfiguracion;
+        private bool originalAccederBitacoras;
+
         public UcRolesyPermisos()
         {
             InitializeComponent();
@@ -30,6 +40,88 @@ namespace Registro_Docente_360.Forms
             CentrarMiniContenedor();
 
             CargarRoles();
+
+            // Manejamos el evento de cambio de ventana (al intentar cambiar a otro UserControl o ventana)
+            this.Leave += new EventHandler(UcRolesyPermisos_Leave);
+        }
+
+        // Método que maneja el evento Leave (al cambiar de ventana)
+        private void UcRolesyPermisos_Leave(object sender, EventArgs e)
+        {
+            if (cambiosRealizados)
+            {
+                // Mostrar alerta de confirmación
+                DialogResult result = MessageBox.Show("Tienes cambios no guardados. ¿Estás seguro deseas terminar la edición?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No)
+                {
+                    // Cancela el cambio de ventana si el usuario selecciona No
+                    this.Focus(); // Mantiene el foco en el control actual para evitar el cambio de ventana
+                    return;
+                }
+                else
+                {
+                    // Restaurar los valores originales si el usuario decide salir sin guardar
+                    RestablecerCampos();
+                }
+            }
+            else
+            {
+                // Si no hay cambios realizados, se restablecen los campos y el estado de los botones a readonly
+                RestablecerCampos();
+            }
+        }
+
+        // Método para restablecer los valores originales de los campos
+        private void RestablecerCampos()
+        {
+            // Restaurar los valores de los campos a su estado original antes de la modificación
+            txtNombreRol.Text = originalNombreRol;
+            txtDescripcion.Text = originalDescripcion;
+            rbActivo.Checked = originalEstadoRol == "A";
+            rbInactivo.Checked = originalEstadoRol == "I";
+
+            // Restaurar los permisos a su estado original
+            chkAccesoModuloDocente.Checked = originalAccesoModuloDocente;
+            chkAccesoModuloAdministrador.Checked = originalAccesoModuloAdministrador;
+            chkModificarUsuarios.Checked = originalModificarUsuarios;
+            chkAccederConfiguracion.Checked = originalAccederConfiguracion;
+            chkAccederBitacoras.Checked = originalAccederBitacoras;
+
+            // Desmarcar cambios
+            cambiosRealizados = false;
+
+            // Poner todo en readonly y deshabilitar los botones
+            txtNombreRol.ReadOnly = true;
+            txtDescripcion.ReadOnly = true;
+
+            // Deshabilitar los checkboxes
+            chkAccesoModuloDocente.Enabled = false;
+            chkAccesoModuloAdministrador.Enabled = false;
+            chkModificarUsuarios.Enabled = false;
+            chkAccederConfiguracion.Enabled = false;
+            chkAccederBitacoras.Enabled = false;
+
+            // Deshabilitar los RadioButtons
+            rbActivo.Enabled = false;
+            rbInactivo.Enabled = false;
+
+            // Restablecer el botón de "Modificar"
+            btnModificar.Enabled = true;
+        }
+
+
+        // Cuando el formulario carga, guarda los valores originales antes de realizar modificaciones
+        private void CargarDatosOriginales()
+        {
+            originalNombreRol = txtNombreRol.Text;
+            originalDescripcion = txtDescripcion.Text;
+            originalEstadoRol = rbActivo.Checked ? "A" : "I";
+            originalAccesoModuloDocente = chkAccesoModuloDocente.Checked;
+            originalAccesoModuloAdministrador = chkAccesoModuloAdministrador.Checked;
+            originalModificarUsuarios = chkModificarUsuarios.Checked;
+            originalAccederConfiguracion = chkAccederConfiguracion.Checked;
+            originalAccederBitacoras = chkAccederBitacoras.Checked;
         }
 
         private void CentrarMiniContenedor()
@@ -103,7 +195,6 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-
         private void CargarPermisosPorRol(int rolId)
         {
             using (var contexto = new RegistroDocenteEntities())
@@ -112,7 +203,6 @@ namespace Registro_Docente_360.Forms
                 chkAccesoModuloDocente.Checked = false;
                 chkAccesoModuloAdministrador.Checked = false;
                 chkModificarUsuarios.Checked = false;
-                chkAccederReportes.Checked = false;
                 chkAccederConfiguracion.Checked = false;
                 chkAccederBitacoras.Checked = false; // Añadido para el permiso "Acceder a Bitácoras"
 
@@ -128,13 +218,11 @@ namespace Registro_Docente_360.Forms
                     if (permisoId == 1) chkAccesoModuloDocente.Checked = true;
                     if (permisoId == 2) chkAccesoModuloAdministrador.Checked = true;
                     if (permisoId == 3) chkModificarUsuarios.Checked = true;
-                    if (permisoId == 4) chkAccederReportes.Checked = true;
                     if (permisoId == 5) chkAccederConfiguracion.Checked = true;
-                    if (permisoId == 6) chkAccederBitacoras.Checked = true; 
+                    if (permisoId == 6) chkAccederBitacoras.Checked = true;
                 }
             }
         }
-
 
         private void datagridRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -177,7 +265,6 @@ namespace Registro_Docente_360.Forms
                 chkAccesoModuloDocente.Enabled = false;
                 chkAccesoModuloAdministrador.Enabled = false;
                 chkModificarUsuarios.Enabled = false;
-                chkAccederReportes.Enabled = false;
                 chkAccederConfiguracion.Enabled = false;
                 chkAccederBitacoras.Enabled = false;
 
@@ -187,8 +274,6 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-
-
         private void btnModificar_Click_1(object sender, EventArgs e)
         {
             // Mostrar la alerta de confirmación
@@ -196,9 +281,12 @@ namespace Registro_Docente_360.Forms
 
             if (result == DialogResult.Yes)
             {
+                // Guardamos los valores originales antes de la edición
+                CargarDatosOriginales();
+
                 // Permitir que el TextBox sea editable
                 txtNombreRol.ReadOnly = false;
-                txtDescripcion.ReadOnly = false;  // Permitir editar también la descripción
+                txtDescripcion.ReadOnly = false;
 
                 // Cambiar el color de los RadioButton para permitir la selección
                 rbActivo.Enabled = true;
@@ -208,7 +296,6 @@ namespace Registro_Docente_360.Forms
                 chkAccesoModuloDocente.Enabled = true;
                 chkAccesoModuloAdministrador.Enabled = true;
                 chkModificarUsuarios.Enabled = true;
-                chkAccederReportes.Enabled = true;
                 chkAccederConfiguracion.Enabled = true;
                 chkAccederBitacoras.Enabled = true;
 
@@ -219,16 +306,6 @@ namespace Registro_Docente_360.Forms
                 // Si el usuario no desea modificar, no hacer nada
                 MessageBox.Show("No se ha realizado ninguna modificación.");
             }
-        }
-
-        private void pnInfo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void PanelAcciones_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnGuardar_Click_1(object sender, EventArgs e)
@@ -246,8 +323,8 @@ namespace Registro_Docente_360.Forms
                 if (rol != null)
                 {
                     rol.nombre_rol = nuevoNombreRol;
-                    rol.descripcion_rol = nuevaDescripcion; // Guardar la descripción
-                    rol.estado_rol = estadoRol;  // Actualizar el estado del rol
+                    rol.descripcion_rol = nuevaDescripcion;
+                    rol.estado_rol = estadoRol;
                     contexto.SaveChanges(); // Guardar el cambio en la base de datos
                 }
 
@@ -265,8 +342,7 @@ namespace Registro_Docente_360.Forms
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 2));
                 if (chkModificarUsuarios.Checked)
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 3));
-                if (chkAccederReportes.Checked)
-                    contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 4));
+
                 if (chkAccederConfiguracion.Checked)
                     contexto.Database.ExecuteSqlCommand("EXEC dbo.AgregarPermisoARol @RolId, @PermisoId", new SqlParameter("@RolId", rolId), new SqlParameter("@PermisoId", 5));
                 if (chkAccederBitacoras.Checked)
@@ -284,7 +360,7 @@ namespace Registro_Docente_360.Forms
             chkAccesoModuloDocente.Enabled = false;
             chkAccesoModuloAdministrador.Enabled = false;
             chkModificarUsuarios.Enabled = false;
-            chkAccederReportes.Enabled = false;
+
             chkAccederConfiguracion.Enabled = false;
             chkAccederBitacoras.Enabled = false;
 
@@ -307,6 +383,8 @@ namespace Registro_Docente_360.Forms
             // Actualizar el DataGridView con la nueva información
             CargarRoles();
             MessageBox.Show("Rol modificado exitosamente.");
+
+            cambiosRealizados = false;  // Restablecer a falso cuando se guardan los cambios
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -369,11 +447,19 @@ namespace Registro_Docente_360.Forms
             }
         }
 
+        private void pnInfo_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
+
+        private void PanelAcciones_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void chkAccesoModuloDocente_CheckedChanged(object sender, EventArgs e)
         {
-           
+
         }
     }
 }

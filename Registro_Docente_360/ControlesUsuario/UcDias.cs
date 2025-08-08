@@ -72,7 +72,7 @@ namespace Registro_Docente_360
             // Construye la fecha a partir del año, mes y día
             string fecha = UcCalendario.static_year + "-" + UcCalendario.static_month + "-" + lbldias.Text;
 
-            // Validar que la fecha esté en formato correcto el tryparse hace la conversion en todo caso
+            // Validar que la fecha esté en formato correcto
             if (!DateTime.TryParse(fecha, out DateTime fechaSeleccionada))
             {
                 return;
@@ -80,9 +80,12 @@ namespace Registro_Docente_360
 
             using (var contexto = new RegistroDocenteEntities())
             {
-                // Busca evento que coincida exactamente con la fecha (ignorando hora)
+                // Busca evento que coincida exactamente con la fecha Y el usuario en sesión
                 var evento = contexto.Calendario
-                    .FirstOrDefault(e => DbFunctions.TruncateTime(e.fecha_evento) == fechaSeleccionada.Date);
+                    .FirstOrDefault(e =>
+                        DbFunctions.TruncateTime(e.fecha_evento) == fechaSeleccionada.Date
+                        && e.id_usuario == Sesion.IdUsuario // ← SOLO los eventos de este usuario
+                    );
 
                 if (evento != null)
                 {
@@ -101,7 +104,7 @@ namespace Registro_Docente_360
             }
         }
 
-       
+
         // Evento de clic en el botón de eliminar evento
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -122,9 +125,12 @@ namespace Registro_Docente_360
 
                 using (var contexto = new RegistroDocenteEntities())
                 {
-                    // Buscar evento por fecha exacta (ignorando hora)
+                    // Buscar evento por fecha exacta (ignorando hora) Y usuario en sesión
                     var evento = contexto.Calendario
-                        .FirstOrDefault(ev => DbFunctions.TruncateTime(ev.fecha_evento) == fecha.Date);
+                        .FirstOrDefault(ev =>
+                            DbFunctions.TruncateTime(ev.fecha_evento) == fecha.Date
+                            && ev.id_usuario == Sesion.IdUsuario // ← SOLO el evento del usuario actual
+                        );
 
                     if (evento != null)
                     {
