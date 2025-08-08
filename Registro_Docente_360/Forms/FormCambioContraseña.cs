@@ -20,10 +20,8 @@ namespace Registro_Docente_360.Forms
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(
-                (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 3 + 250
-            );
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             this.WindowState = FormWindowState.Normal;
             this.idUsuario = idUsuario;
 
@@ -271,6 +269,14 @@ namespace Registro_Docente_360.Forms
 
         }
 
-       
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            // Cierra el formulario actual (UcVentanaAsistencia o cualquier otro formulario).
+            this.Close();
+
+            // Muestra el formulario de login.
+            Login loginForm = new Login();
+            loginForm.Show();
+        }
     }
 }

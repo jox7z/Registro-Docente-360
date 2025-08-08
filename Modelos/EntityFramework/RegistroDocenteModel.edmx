@@ -4,15 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RegistroDocenteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RegistroDocenteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistencia">
           <Key>
             <PropertyRef Name="id_asistencia" />
           </Key>
           <Property Name="id_asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_estudiante" Type="int" />
+          <Property Name="id_clase" Type="int" />
           <Property Name="fecha" Type="date" />
           <Property Name="estado" Type="varchar" MaxLength="15" />
+          <Property Name="id_estudiante" Type="int" />
         </EntityType>
         <EntityType Name="Bitacora_Accesos">
           <Key>
@@ -42,7 +43,6 @@
           <Property Name="id_usuario" Type="int" />
           <Property Name="descripcion_evento" Type="text" />
           <Property Name="fecha_evento" Type="date" />
-          <Property Name="nombre_evento" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Clases">
           <Key>
@@ -154,51 +154,15 @@
           <Property Name="cedula_usuario" Type="varchar" MaxLength="50" />
           <Property Name="id_seccion" Type="int" />
         </EntityType>
-        <Association Name="FK__Asistenci__id_es__00200768">
-          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="0..1" />
+        <Association Name="FK__Asistenci__id_cl__59FA5E80">
+          <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Estudiantes">
-              <PropertyRef Name="id_estudiante" />
+            <Principal Role="Clases">
+              <PropertyRef Name="id_clase" />
             </Principal>
             <Dependent Role="Asistencia">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Asistenci__id_es__0F624AF8">
-          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="0..1" />
-          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estudiantes">
-              <PropertyRef Name="id_estudiante" />
-            </Principal>
-            <Dependent Role="Asistencia">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Bitacora___id_us__10566F31">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Bitacora_Accesos" Type="Self.Bitacora_Accesos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Bitacora_Accesos">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Bitacora___id_us__114A936A">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Bitacora_Movimientos" Type="Self.Bitacora_Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Bitacora_Movimientos">
-              <PropertyRef Name="id_usuario" />
+              <PropertyRef Name="id_clase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,18 +190,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Calendari__id_us__123EB7A3">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Calendario" Type="Self.Calendario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Calendario">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Calendari__id_us__5DCAEF64">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Calendario" Type="Self.Calendario" Multiplicity="*" />
@@ -247,18 +199,6 @@
             </Principal>
             <Dependent Role="Calendario">
               <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Clases__id_mater__1332DBDC">
-          <End Role="Materias" Type="Self.Materias" Multiplicity="0..1" />
-          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materias">
-              <PropertyRef Name="id_materia" />
-            </Principal>
-            <Dependent Role="Clases">
-              <PropertyRef Name="id_materia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -274,18 +214,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Clases__id_usuar__14270015">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Clases">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Clases__id_usuar__5FB337D6">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
@@ -295,18 +223,6 @@
             </Principal>
             <Dependent Role="Clases">
               <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Estudiant__id_se__151B244E">
-          <End Role="Secciones" Type="Self.Secciones" Multiplicity="0..1" />
-          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Secciones">
-              <PropertyRef Name="id_seccion" />
-            </Principal>
-            <Dependent Role="Estudiantes">
-              <PropertyRef Name="id_seccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -322,18 +238,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Horarios__id_mat__160F4887">
-          <End Role="Materias" Type="Self.Materias" Multiplicity="0..1" />
-          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materias">
-              <PropertyRef Name="id_materia" />
-            </Principal>
-            <Dependent Role="Horarios">
-              <PropertyRef Name="id_materia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Horarios__id_mat__628FA481">
           <End Role="Materias" Type="Self.Materias" Multiplicity="0..1" />
           <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
@@ -343,18 +247,6 @@
             </Principal>
             <Dependent Role="Horarios">
               <PropertyRef Name="id_materia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Horarios__id_usu__17036CC0">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Horarios">
-              <PropertyRef Name="id_usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -370,18 +262,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Notas__id_clase__17F790F9">
-          <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
-          <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clases">
-              <PropertyRef Name="id_clase" />
-            </Principal>
-            <Dependent Role="Notas">
-              <PropertyRef Name="id_clase" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Notas__id_clase__6477ECF3">
           <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
           <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
@@ -391,18 +271,6 @@
             </Principal>
             <Dependent Role="Notas">
               <PropertyRef Name="id_clase" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reportes__id_usu__18EBB532">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Reportes" Type="Self.Reportes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Reportes">
-              <PropertyRef Name="id_usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -418,18 +286,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Roles_Per__id_pe__19DFD96B">
-          <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
-          <End Role="Roles_Permisos" Type="Self.Roles_Permisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Permisos">
-              <PropertyRef Name="id_permiso" />
-            </Principal>
-            <Dependent Role="Roles_Permisos">
-              <PropertyRef Name="id_permiso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Roles_Per__id_pe__6754599E">
           <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
           <End Role="Roles_Permisos" Type="Self.Roles_Permisos" Multiplicity="*" />
@@ -442,18 +298,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Roles_Per__id_ro__1AD3FDA4">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Roles_Permisos" Type="Self.Roles_Permisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="id_rol" />
-            </Principal>
-            <Dependent Role="Roles_Permisos">
-              <PropertyRef Name="id_rol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Roles_Per__id_ro__68487DD7">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Roles_Permisos" Type="Self.Roles_Permisos" Multiplicity="*" />
@@ -462,18 +306,6 @@
               <PropertyRef Name="id_rol" />
             </Principal>
             <Dependent Role="Roles_Permisos">
-              <PropertyRef Name="id_rol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Usuarios__id_rol__1BC821DD">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="id_rol" />
-            </Principal>
-            <Dependent Role="Usuarios">
               <PropertyRef Name="id_rol" />
             </Dependent>
           </ReferentialConstraint>
@@ -490,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuarios__id_sec__1CBC4616">
+        <Association Name="FK__Usuarios__id_sec__6A30C649">
           <End Role="Secciones" Type="Self.Secciones" Multiplicity="0..1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -502,15 +334,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuarios__id_sec__6A30C649">
-          <End Role="Secciones" Type="Self.Secciones" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+        <Association Name="FK_Asistencia_id_estud">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Secciones">
-              <PropertyRef Name="id_seccion" />
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="id_estudiante" />
             </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="id_seccion" />
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_estudiante" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,41 +383,10 @@
         <Function Name="EliminarPermisosDeRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RolId" Type="int" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="ObtenerPermisosPorRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RolId" Type="int" Mode="In" />
         </Function>
         <Function Name="ObtenerRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RegistroDocenteModelStoreContainer">
           <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bitacora_Accesos" EntityType="Self.Bitacora_Accesos" Schema="dbo" store:Type="Tables" />
@@ -600,21 +403,9 @@
           <EntitySet Name="Roles_Permisos" EntityType="Self.Roles_Permisos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Secciones" EntityType="Self.Secciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Asistenci__id_es__00200768" Association="Self.FK__Asistenci__id_es__00200768">
-            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          <AssociationSet Name="FK__Asistenci__id_cl__59FA5E80" Association="Self.FK__Asistenci__id_cl__59FA5E80">
+            <End Role="Clases" EntitySet="Clases" />
             <End Role="Asistencia" EntitySet="Asistencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Asistenci__id_es__0F624AF8" Association="Self.FK__Asistenci__id_es__0F624AF8">
-            <End Role="Estudiantes" EntitySet="Estudiantes" />
-            <End Role="Asistencia" EntitySet="Asistencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Bitacora___id_us__10566F31" Association="Self.FK__Bitacora___id_us__10566F31">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Bitacora_Accesos" EntitySet="Bitacora_Accesos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Bitacora___id_us__114A936A" Association="Self.FK__Bitacora___id_us__114A936A">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Bitacora_Movimientos" EntitySet="Bitacora_Movimientos" />
           </AssociationSet>
           <AssociationSet Name="FK__Bitacora___id_us__5BE2A6F2" Association="Self.FK__Bitacora___id_us__5BE2A6F2">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -624,101 +415,57 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Bitacora_Movimientos" EntitySet="Bitacora_Movimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Calendari__id_us__123EB7A3" Association="Self.FK__Calendari__id_us__123EB7A3">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Calendario" EntitySet="Calendario" />
-          </AssociationSet>
           <AssociationSet Name="FK__Calendari__id_us__5DCAEF64" Association="Self.FK__Calendari__id_us__5DCAEF64">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Calendario" EntitySet="Calendario" />
           </AssociationSet>
-          <AssociationSet Name="FK__Clases__id_mater__1332DBDC" Association="Self.FK__Clases__id_mater__1332DBDC">
-            <End Role="Materias" EntitySet="Materias" />
-            <End Role="Clases" EntitySet="Clases" />
-          </AssociationSet>
           <AssociationSet Name="FK__Clases__id_mater__5EBF139D" Association="Self.FK__Clases__id_mater__5EBF139D">
             <End Role="Materias" EntitySet="Materias" />
-            <End Role="Clases" EntitySet="Clases" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Clases__id_usuar__14270015" Association="Self.FK__Clases__id_usuar__14270015">
-            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clases" EntitySet="Clases" />
           </AssociationSet>
           <AssociationSet Name="FK__Clases__id_usuar__5FB337D6" Association="Self.FK__Clases__id_usuar__5FB337D6">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clases" EntitySet="Clases" />
           </AssociationSet>
-          <AssociationSet Name="FK__Estudiant__id_se__151B244E" Association="Self.FK__Estudiant__id_se__151B244E">
-            <End Role="Secciones" EntitySet="Secciones" />
-            <End Role="Estudiantes" EntitySet="Estudiantes" />
-          </AssociationSet>
           <AssociationSet Name="FK__Estudiant__id_se__619B8048" Association="Self.FK__Estudiant__id_se__619B8048">
             <End Role="Secciones" EntitySet="Secciones" />
             <End Role="Estudiantes" EntitySet="Estudiantes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Horarios__id_mat__160F4887" Association="Self.FK__Horarios__id_mat__160F4887">
-            <End Role="Materias" EntitySet="Materias" />
-            <End Role="Horarios" EntitySet="Horarios" />
-          </AssociationSet>
           <AssociationSet Name="FK__Horarios__id_mat__628FA481" Association="Self.FK__Horarios__id_mat__628FA481">
             <End Role="Materias" EntitySet="Materias" />
-            <End Role="Horarios" EntitySet="Horarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Horarios__id_usu__17036CC0" Association="Self.FK__Horarios__id_usu__17036CC0">
-            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Horarios" EntitySet="Horarios" />
           </AssociationSet>
           <AssociationSet Name="FK__Horarios__id_usu__6383C8BA" Association="Self.FK__Horarios__id_usu__6383C8BA">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Horarios" EntitySet="Horarios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Notas__id_clase__17F790F9" Association="Self.FK__Notas__id_clase__17F790F9">
-            <End Role="Clases" EntitySet="Clases" />
-            <End Role="Notas" EntitySet="Notas" />
-          </AssociationSet>
           <AssociationSet Name="FK__Notas__id_clase__6477ECF3" Association="Self.FK__Notas__id_clase__6477ECF3">
             <End Role="Clases" EntitySet="Clases" />
             <End Role="Notas" EntitySet="Notas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reportes__id_usu__18EBB532" Association="Self.FK__Reportes__id_usu__18EBB532">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Reportes" EntitySet="Reportes" />
           </AssociationSet>
           <AssociationSet Name="FK__Reportes__id_usu__66603565" Association="Self.FK__Reportes__id_usu__66603565">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Reportes" EntitySet="Reportes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Roles_Per__id_pe__19DFD96B" Association="Self.FK__Roles_Per__id_pe__19DFD96B">
-            <End Role="Permisos" EntitySet="Permisos" />
-            <End Role="Roles_Permisos" EntitySet="Roles_Permisos" />
-          </AssociationSet>
           <AssociationSet Name="FK__Roles_Per__id_pe__6754599E" Association="Self.FK__Roles_Per__id_pe__6754599E">
             <End Role="Permisos" EntitySet="Permisos" />
-            <End Role="Roles_Permisos" EntitySet="Roles_Permisos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Roles_Per__id_ro__1AD3FDA4" Association="Self.FK__Roles_Per__id_ro__1AD3FDA4">
-            <End Role="Roles" EntitySet="Roles" />
             <End Role="Roles_Permisos" EntitySet="Roles_Permisos" />
           </AssociationSet>
           <AssociationSet Name="FK__Roles_Per__id_ro__68487DD7" Association="Self.FK__Roles_Per__id_ro__68487DD7">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Roles_Permisos" EntitySet="Roles_Permisos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuarios__id_rol__1BC821DD" Association="Self.FK__Usuarios__id_rol__1BC821DD">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
           <AssociationSet Name="FK__Usuarios__id_rol__693CA210" Association="Self.FK__Usuarios__id_rol__693CA210">
             <End Role="Roles" EntitySet="Roles" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuarios__id_sec__1CBC4616" Association="Self.FK__Usuarios__id_sec__1CBC4616">
-            <End Role="Secciones" EntitySet="Secciones" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK__Usuarios__id_sec__6A30C649" Association="Self.FK__Usuarios__id_sec__6A30C649">
             <End Role="Secciones" EntitySet="Secciones" />
             <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistencia_id_estud" Association="Self.FK_Asistencia_id_estud">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
           </AssociationSet>
           <AssociationSet Name="FK_Clases_id_estud" Association="Self.FK_Clases_id_estud">
             <End Role="Estudiantes" EntitySet="Estudiantes" />
@@ -729,8 +476,7 @@
             <End Role="Notas" EntitySet="Notas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RegistroDocenteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -744,6 +490,8 @@
           <Property Name="estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estudiantes" Relationship="Self.FK__Asistenci__id_es__00200768" FromRole="Asistencia" ToRole="Estudiantes" />
           <NavigationProperty Name="Estudiantes1" Relationship="Self.FK__Asistenci__id_es__0F624AF8" FromRole="Asistencia" ToRole="Estudiantes" />
+          <Property Name="id_clase" Type="Int32" />
+          <NavigationProperty Name="Clases" Relationship="RegistroDocenteModel.FK__Asistenci__id_cl__59FA5E80" FromRole="Asistencia" ToRole="Clases" />
         </EntityType>
         <EntityType Name="Bitacora_Accesos">
           <Key>
@@ -777,7 +525,6 @@
           <Property Name="id_usuario" Type="Int32" />
           <Property Name="descripcion_evento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="fecha_evento" Type="DateTime" Precision="0" />
-          <Property Name="nombre_evento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK__Calendari__id_us__123EB7A3" FromRole="Calendario" ToRole="Usuarios" />
           <NavigationProperty Name="Usuarios1" Relationship="Self.FK__Calendari__id_us__5DCAEF64" FromRole="Calendario" ToRole="Usuarios" />
         </EntityType>
@@ -796,6 +543,7 @@
           <NavigationProperty Name="Notas" Relationship="Self.FK__Notas__id_clase__17F790F9" FromRole="Clases" ToRole="Notas" />
           <NavigationProperty Name="Notas1" Relationship="Self.FK__Notas__id_clase__6477ECF3" FromRole="Clases" ToRole="Notas" />
           <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Clases_id_estud" FromRole="Clases" ToRole="Estudiantes" />
+          <NavigationProperty Name="Asistencia" Relationship="RegistroDocenteModel.FK__Asistenci__id_cl__59FA5E80" FromRole="Clases" ToRole="Asistencia" />
         </EntityType>
         <EntityType Name="Estudiantes">
           <Key>
@@ -1484,10 +1232,10 @@
             <Parameter Name="PermisoId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EliminarPermisosDeRol">
-            <Parameter Name="RolId" Mode="In" Type="Int32" />
+          <Parameter Name="RolId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ObtenerPermisosPorRol" ReturnType="Collection(Int32)">
-            <Parameter Name="RolId" Mode="In" Type="Int32" />
+          <Parameter Name="RolId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ObtenerRoles" ReturnType="Collection(RegistroDocenteModel.ObtenerRoles_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -1520,6 +1268,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK__Asistenci__id_cl__59FA5E80" Association="RegistroDocenteModel.FK__Asistenci__id_cl__59FA5E80">
+            <End Role="Clases" EntitySet="Clases" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ObtenerRoles_Result">
           <Property Type="Int32" Name="id_rol" Nullable="false" />
@@ -1537,6 +1289,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK__Asistenci__id_cl__59FA5E80">
+          <End Type="RegistroDocenteModel.Clases" Role="Clases" Multiplicity="0..1" />
+          <End Type="RegistroDocenteModel.Asistencia" Role="Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clases">
+              <PropertyRef Name="id_clase" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_clase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1546,6 +1310,7 @@
           <EntitySetMapping Name="Asistencia">
             <EntityTypeMapping TypeName="RegistroDocenteModel.Asistencia">
               <MappingFragment StoreEntitySet="Asistencia">
+                <ScalarProperty Name="id_clase" ColumnName="id_clase" />
                 <ScalarProperty Name="id_asistencia" ColumnName="id_asistencia" />
                 <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
@@ -1582,7 +1347,6 @@
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="descripcion_evento" ColumnName="descripcion_evento" />
                 <ScalarProperty Name="fecha_evento" ColumnName="fecha_evento" />
-                <ScalarProperty Name="nombre_evento" ColumnName="nombre_evento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1718,31 +1482,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="RegistroDocenteModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="RegistroDocenteModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="RegistroDocenteModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="RegistroDocenteModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RegistroDocenteModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="RegistroDocenteModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RegistroDocenteModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="RegistroDocenteModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="RegistroDocenteModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

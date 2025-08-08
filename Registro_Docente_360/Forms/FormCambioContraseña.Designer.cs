@@ -144,6 +144,7 @@
             this.btnVolver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnVolver.TabIndex = 3;
             this.btnVolver.TabStop = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // lblCambiarContra
             // 

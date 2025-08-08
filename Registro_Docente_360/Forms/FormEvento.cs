@@ -20,7 +20,15 @@ namespace Registro_Docente_360.Forms
         public FormEvento()
         {
             InitializeComponent();
-            this.Load += FormEvento_Load; // Se ejecuta cuando el formulario termina de cargarse
+            this.Load += FormEvento_Load;
+
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(
+                (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 3 + 250
+            );
+            this.WindowState = FormWindowState.Normal;
+            // Se ejecuta cuando el formulario termina de cargarse
         }
 
         // Carga inicial del formulario

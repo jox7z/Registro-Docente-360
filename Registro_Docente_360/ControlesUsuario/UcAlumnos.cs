@@ -61,7 +61,7 @@ namespace Registro_Docente_360.Forms
                     cmbDocentes.Visible = true;
                     label1.Visible = false;
                     lblSeccion.Visible = false;
-                    lblNomDocente.Visible = false;
+                    //lblNomDocente.Visible = false;
 
                     // Cargar docentes
                     var docentes = contexto.Usuarios
@@ -92,7 +92,7 @@ namespace Registro_Docente_360.Forms
                     cmbDocentes.Visible = false;
                     label1.Visible = true;
 
-                    lblNomDocente.Text = usuario.nombre_usuario;
+                    //lblNomDocente.Text = usuario.nombre_usuario;
 
                     var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
                     label1.Text = $"{seccion?.nombre_seccion ?? "Sin sección"}";
@@ -480,22 +480,7 @@ namespace Registro_Docente_360.Forms
         }
 
 
-        private void CancelarEdicionSinValidacion()
-        {
-            // 🔒 Eliminar el manejador de validación temporalmente
-            tablaAlumnos.Grid.CellValidating -= Grid_CellValidating;
-
-            // Forzar salida de edición y validación
-            if (tablaAlumnos.Grid.IsCurrentCellInEditMode)
-            {
-                tablaAlumnos.Grid.CancelEdit();
-                tablaAlumnos.Grid.EndEdit();
-            }
-
-            // 🔁 Volver a suscribirse
-            tablaAlumnos.Grid.CellValidating += Grid_CellValidating;
-        }
-
+     
         private void Grid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // Suprime errores por valores inválidos

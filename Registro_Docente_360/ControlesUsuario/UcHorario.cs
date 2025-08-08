@@ -86,7 +86,7 @@ namespace Registro_Docente_360.ControlesUsuario
 
                     // Cargar docentes
                     var docentes = contexto.Usuarios
-                        .Where(u => u.Roles.nombre_rol =="Docente" && u.estado_usuario == "A") //cambiar a que agarre el permiso no el rol
+                        .Where(u => u.Roles.nombre_rol == "Docente" && u.estado_usuario == "A") //cambiar a que agarre el permiso no el rol
                         .Select(u => new
                         {
                             u.id_usuario,
@@ -246,19 +246,16 @@ namespace Registro_Docente_360.ControlesUsuario
             }
             else
             {
+
                 using (var contexto = new RegistroDocenteEntities())
                 {
                     int idUsuario = Sesion.IdUsuario;
 
-                    var rolAdmin = contexto.Roles.FirstOrDefault(r => r.nombre_rol == "Administrador");
-                    var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-
-                    if (rolAdmin != null && usuario.id_rol == rolAdmin.id_rol && cmbDocentes.SelectedValue is int idDocenteSeleccionado)
+                    if (cmbDocentes.Visible && cmbDocentes.SelectedValue != null)
                     {
-                        idUsuario = idDocenteSeleccionado;
+                        idUsuario = (int)cmbDocentes.SelectedValue;
                     }
-
-
+                   
                     var existentes = contexto.Horarios.Where(h => h.id_usuario == idUsuario).ToList();
                     contexto.Horarios.RemoveRange(existentes);
                     contexto.SaveChanges();
@@ -294,7 +291,7 @@ namespace Registro_Docente_360.ControlesUsuario
                                         hora_inicio = horaInicio,
                                         hora_fin = horaFin
                                     };
-
+                                    
                                     contexto.Horarios.Add(nuevo);
                                 }
                             }

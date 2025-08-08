@@ -224,6 +224,9 @@ namespace Registro_Docente_360.Forms
             }
         }
 
+
+
+
         private void datagridRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Asegurarse de que la fila seleccionada sea válida
@@ -418,9 +421,15 @@ namespace Registro_Docente_360.Forms
                             var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == rolId);
                             if (rol != null)
                             {
+                                // Eliminar la relación entre el rol y los permisos
+                                var relacionesPermisos = contexto.Roles_Permisos.Where(rp => rp.id_rol == rolId).ToList();
+                                contexto.Roles_Permisos.RemoveRange(relacionesPermisos);  // Elimina las relaciones
+
                                 // Eliminar el rol
                                 contexto.Roles.Remove(rol);
-                                contexto.SaveChanges(); // Guardar los cambios en la base de datos
+
+                                // Guardar los cambios en la base de datos
+                                contexto.SaveChanges();
 
                                 // Mostrar un mensaje de éxito
                                 MessageBox.Show("Rol eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -446,6 +455,7 @@ namespace Registro_Docente_360.Forms
                 MessageBox.Show("Por favor, selecciona un rol para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void pnInfo_Paint(object sender, PaintEventArgs e)
         {

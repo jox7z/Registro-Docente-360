@@ -66,7 +66,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 estudiantesCargados = alumnoController.ObtenerEstudiantesPorDocente(docente);
                 DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
 
-                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("data source=192.168.195.168\\SQLEXPRESS;Initial Catalog=RegistroDocente;User Id=Admin;Password=12345;MultipleActiveResultSets=True;Encrypt=False;Application Name=EntityFramework"))
                 {
 
                     conn.Open();
@@ -253,7 +253,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
                 int docenteId = esAdministrador ? (int)cmbDocentes.SelectedValue : Sesion.IdUsuario;
 
-                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("data source=192.168.195.168\\SQLEXPRESS;Initial Catalog=RegistroDocente;User Id=Admin;Password=12345;MultipleActiveResultSets=True;Encrypt=False;Application Name=EntityFramework"))
                 {
                     conn.Open();
 

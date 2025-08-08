@@ -32,16 +32,16 @@
             this.pnGuardar = new System.Windows.Forms.Panel();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.tableLayoutPanelfondo = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPaneltitulos = new System.Windows.Forms.TableLayoutPanel();
-            this.lblSemana = new System.Windows.Forms.Label();
             this.lblGrupo = new System.Windows.Forms.Label();
+            this.lblSemana = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.PictureBox();
             this.cmbDocentes = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPaneltitulos = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridPerso1 = new Registro_Docente_360.ControlesUsuario.dataGridPerso();
             this.pnGuardar.SuspendLayout();
             this.tableLayoutPanelfondo.SuspendLayout();
-            this.tableLayoutPaneltitulos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).BeginInit();
+            this.tableLayoutPaneltitulos.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnGuardar
@@ -50,7 +50,7 @@
             this.pnGuardar.BackColor = System.Drawing.Color.Transparent;
             this.pnGuardar.Controls.Add(this.btnGuardar);
             this.pnGuardar.ForeColor = System.Drawing.Color.Transparent;
-            this.pnGuardar.Location = new System.Drawing.Point(449, 566);
+            this.pnGuardar.Location = new System.Drawing.Point(449, 622);
             this.pnGuardar.Name = "pnGuardar";
             this.pnGuardar.Size = new System.Drawing.Size(196, 46);
             this.pnGuardar.TabIndex = 18;
@@ -75,75 +75,53 @@
             this.tableLayoutPanelfondo.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanelfondo.ColumnCount = 1;
             this.tableLayoutPanelfondo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelfondo.Controls.Add(this.dataGridPerso1, 0, 1);
             this.tableLayoutPanelfondo.Controls.Add(this.pnGuardar, 0, 2);
             this.tableLayoutPanelfondo.Controls.Add(this.tableLayoutPaneltitulos, 0, 0);
+            this.tableLayoutPanelfondo.Controls.Add(this.dataGridPerso1, 0, 1);
             this.tableLayoutPanelfondo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelfondo.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelfondo.Name = "tableLayoutPanelfondo";
             this.tableLayoutPanelfondo.RowCount = 3;
-            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelfondo.Size = new System.Drawing.Size(1094, 615);
+            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.30753F));
+            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.69809F));
+            this.tableLayoutPanelfondo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.99438F));
+            this.tableLayoutPanelfondo.Size = new System.Drawing.Size(1094, 705);
             this.tableLayoutPanelfondo.TabIndex = 19;
-            // 
-            // tableLayoutPaneltitulos
-            // 
-            this.tableLayoutPaneltitulos.BackColor = System.Drawing.Color.Gainsboro;
-            this.tableLayoutPaneltitulos.ColumnCount = 1;
-            this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPaneltitulos.Controls.Add(this.lblSemana, 0, 2);
-            this.tableLayoutPaneltitulos.Controls.Add(this.lblGrupo, 0, 1);
-            this.tableLayoutPaneltitulos.Controls.Add(this.btnVolver, 0, 0);
-            this.tableLayoutPaneltitulos.Controls.Add(this.cmbDocentes, 0, 3);
-            this.tableLayoutPaneltitulos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPaneltitulos.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPaneltitulos.Name = "tableLayoutPaneltitulos";
-            this.tableLayoutPaneltitulos.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.tableLayoutPaneltitulos.RowCount = 4;
-            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPaneltitulos.Size = new System.Drawing.Size(1088, 100);
-            this.tableLayoutPaneltitulos.TabIndex = 20;
-            // 
-            // lblSemana
-            // 
-            this.lblSemana.AutoSize = true;
-            this.lblSemana.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblSemana.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSemana.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSemana.ForeColor = System.Drawing.Color.Teal;
-            this.lblSemana.Location = new System.Drawing.Point(18, 60);
-            this.lblSemana.Name = "lblSemana";
-            this.lblSemana.Size = new System.Drawing.Size(1067, 20);
-            this.lblSemana.TabIndex = 1;
-            this.lblSemana.Text = "label2";
             // 
             // lblGrupo
             // 
+            this.lblGrupo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblGrupo.AutoSize = true;
             this.lblGrupo.BackColor = System.Drawing.Color.Gainsboro;
-            this.lblGrupo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGrupo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGrupo.ForeColor = System.Drawing.Color.Teal;
-            this.lblGrupo.Location = new System.Drawing.Point(18, 30);
+            this.lblGrupo.Location = new System.Drawing.Point(18, 36);
             this.lblGrupo.Name = "lblGrupo";
-            this.lblGrupo.Size = new System.Drawing.Size(1067, 30);
+            this.lblGrupo.Size = new System.Drawing.Size(57, 21);
             this.lblGrupo.TabIndex = 0;
             this.lblGrupo.Text = "label1";
             // 
+            // lblSemana
+            // 
+            this.lblSemana.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSemana.AutoSize = true;
+            this.lblSemana.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblSemana.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSemana.ForeColor = System.Drawing.Color.Teal;
+            this.lblSemana.Location = new System.Drawing.Point(18, 58);
+            this.lblSemana.Name = "lblSemana";
+            this.lblSemana.Size = new System.Drawing.Size(52, 21);
+            this.lblSemana.TabIndex = 1;
+            this.lblSemana.Text = "label2";
+            // 
             // btnVolver
             // 
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolver.Image = ((System.Drawing.Image)(resources.GetObject("btnVolver.Image")));
             this.btnVolver.Location = new System.Drawing.Point(18, 3);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(37, 24);
+            this.btnVolver.Size = new System.Drawing.Size(34, 30);
             this.btnVolver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnVolver.TabIndex = 2;
             this.btnVolver.TabStop = false;
@@ -152,12 +130,35 @@
             // cmbDocentes
             // 
             this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;
             this.cmbDocentes.Location = new System.Drawing.Point(18, 83);
             this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(191, 21);
+            this.cmbDocentes.Size = new System.Drawing.Size(157, 25);
             this.cmbDocentes.TabIndex = 12;
             this.cmbDocentes.SelectedIndexChanged += new System.EventHandler(this.cmbDocentes_SelectedIndexChanged);
+            // 
+            // tableLayoutPaneltitulos
+            // 
+            this.tableLayoutPaneltitulos.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPaneltitulos.ColumnCount = 2;
+            this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPaneltitulos.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 910F));
+            this.tableLayoutPaneltitulos.Controls.Add(this.lblSemana, 0, 2);
+            this.tableLayoutPaneltitulos.Controls.Add(this.lblGrupo, 0, 1);
+            this.tableLayoutPaneltitulos.Controls.Add(this.cmbDocentes, 0, 3);
+            this.tableLayoutPaneltitulos.Controls.Add(this.btnVolver, 0, 0);
+            this.tableLayoutPaneltitulos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPaneltitulos.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPaneltitulos.Name = "tableLayoutPaneltitulos";
+            this.tableLayoutPaneltitulos.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.tableLayoutPaneltitulos.RowCount = 4;
+            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.44444F));
+            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.2963F));
+            this.tableLayoutPaneltitulos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPaneltitulos.Size = new System.Drawing.Size(1088, 108);
+            this.tableLayoutPaneltitulos.TabIndex = 20;
             // 
             // dataGridPerso1
             // 
@@ -165,10 +166,10 @@
             this.dataGridPerso1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dataGridPerso1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPerso1.EncabezadoColumna0 = "Estudiante";
-            this.dataGridPerso1.Location = new System.Drawing.Point(3, 109);
+            this.dataGridPerso1.Location = new System.Drawing.Point(3, 117);
             this.dataGridPerso1.Name = "dataGridPerso1";
             this.dataGridPerso1.Padding = new System.Windows.Forms.Padding(20);
-            this.dataGridPerso1.Size = new System.Drawing.Size(1088, 451);
+            this.dataGridPerso1.Size = new System.Drawing.Size(1088, 499);
             this.dataGridPerso1.TabIndex = 0;
             // 
             // UcVentanaAsistencia
@@ -177,13 +178,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanelfondo);
             this.Name = "UcVentanaAsistencia";
-            this.Size = new System.Drawing.Size(1094, 615);
+            this.Size = new System.Drawing.Size(1094, 705);
             this.Load += new System.EventHandler(this.UcVentanaAsistencia_Load);
             this.pnGuardar.ResumeLayout(false);
             this.tableLayoutPanelfondo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             this.tableLayoutPaneltitulos.ResumeLayout(false);
             this.tableLayoutPaneltitulos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnVolver)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -195,9 +196,9 @@
         private dataGridPerso dataGridPerso1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelfondo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPaneltitulos;
-        private System.Windows.Forms.Label lblGrupo;
-        private System.Windows.Forms.Label lblSemana;
         private System.Windows.Forms.PictureBox btnVolver;
+        private System.Windows.Forms.Label lblSemana;
+        private System.Windows.Forms.Label lblGrupo;
         private System.Windows.Forms.ComboBox cmbDocentes;
     }
 }
