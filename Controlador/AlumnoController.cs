@@ -48,7 +48,7 @@ namespace Registro_Docente_360.Controladores
             return true;
         }
 
-        public List<Estudiantes> GuardarEstudiantes(List<Estudiantes> estudiantes, int idSeccion)
+        public List<Estudiantes> GuardarEstudiantes(List<Estudiantes> estudiantes, int idSeccion,int docente)
         {
             var nuevosEstudiantes = new List<Estudiantes>();
 
@@ -63,10 +63,10 @@ namespace Registro_Docente_360.Controladores
                     if (existe == null)
                     {
                         contexto.Estudiantes.Add(estudiante);
-                        contexto.SaveChanges(); // Guardamos para que se genere el ID antes de usarlo
+                        contexto.SaveChanges();
 
                         var materiasDocente = contexto.Horarios
-                            .Where(h => h.id_usuario == Sesion.IdUsuario)
+                            .Where(h => h.id_usuario == docente)
                             .Select(h => h.id_materia)
                             .Distinct()
                             .ToList();
@@ -75,13 +75,13 @@ namespace Registro_Docente_360.Controladores
                         {
                             contexto.Clases.Add(new Clases
                             {
-                                id_usuario = Sesion.IdUsuario,
+                                id_usuario = docente,
                                 id_materia = idMateria,
                                 id_estudiante = estudiante.id_estudiante
                             });
                         }
 
-                        nuevosEstudiantes.Add(estudiante); // ✅ solo los nuevos
+                        nuevosEstudiantes.Add(estudiante);
                     }
                 }
 
@@ -129,8 +129,6 @@ namespace Registro_Docente_360.Controladores
                 foreach (var clase in clases)
                 {
                     // ✅ 1. Eliminar asistencias
-                    var asistencias = contexto.Asistencia.Where(a => a.id_clase == clase.id_clase).ToList();
-                    contexto.Asistencia.RemoveRange(asistencias);
 
                     // ✅ 2. Eliminar notas
                     var notas = contexto.Notas.Where(n => n.id_clase == clase.id_clase).ToList();
@@ -417,7 +415,16 @@ namespace Registro_Docente_360.Controladores
             }
         }
 
-
+        // Función para verificar si el usuario es administrador
+        public static bool VerificarSiEsAdministrador(int idUsuario)
+        {
+            AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
+            if (AlumnoController.PermisosRolActual.Contains(2))
+            {
+                return true;
+            }
+            return false;
+        }
 
 
     }

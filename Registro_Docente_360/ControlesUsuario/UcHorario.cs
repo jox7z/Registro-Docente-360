@@ -70,12 +70,13 @@ namespace Registro_Docente_360.ControlesUsuario
 
             dataGridPerso1.Grid.ReadOnly = true;
 
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var rolAdmin = contexto.Roles.FirstOrDefault(r => r.nombre_rol == "Administrador");
 
-                if (usuario.id_rol == rolAdmin.id_rol)
+                if (esAdministrador)
                 {
                     // Modo administrador
                     lblNomDocente.Visible = false;
@@ -83,8 +84,9 @@ namespace Registro_Docente_360.ControlesUsuario
                     cmbDocentes.Visible = true;
                     lblSeccion.Visible = false;
 
+                    // Cargar docentes
                     var docentes = contexto.Usuarios
-                        .Where(u => u.id_rol != rolAdmin.id_rol && u.estado_usuario == "A")
+                        .Where(u => u.Roles.nombre_rol =="Docente" && u.estado_usuario == "A") //cambiar a que agarre el permiso no el rol
                         .Select(u => new
                         {
                             u.id_usuario,

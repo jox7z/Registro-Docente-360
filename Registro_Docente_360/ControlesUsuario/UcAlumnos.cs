@@ -49,12 +49,13 @@ namespace Registro_Docente_360.Forms
             tablaAlumnos.Grid.EditingControlShowing += Grid_EditingControlShowing;
             tablaAlumnos.Grid.DataError += Grid_DataError;
 
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == usuario.id_rol);
-
-                if (rol != null && rol.nombre_rol == "Administrador") //administrador
+                AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+                if (esAdministrador) //administrador
                 {
                     // Mostrar ComboBox y ocultar Label
                     cmbDocentes.Visible = true;
@@ -82,6 +83,8 @@ namespace Registro_Docente_360.Forms
                     {
                         cmbDocentes.SelectedIndex = 0; // Dispara carga automática
                     }
+                    int idDocenteSeleccionado = (int)cmbDocentes.SelectedValue;
+                    CargarEstudiantes(idDocenteSeleccionado);
                 }
                 else
                 {
@@ -320,7 +323,7 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // 🔁 Asegurar que cualquier edición activa se termine
+            //Asegurar que cualquier edición activa se termine
             tablaAlumnos.Grid.EndEdit();
             tablaAlumnos.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             tablaAlumnos.Grid.CurrentCell = null;
@@ -379,7 +382,7 @@ namespace Registro_Docente_360.Forms
                 }
 
 
-                var nuevos = alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente);
+                var nuevos = alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente,idDocente);
 
                 MessageBox.Show("Estudiantes guardados correctamente");
 

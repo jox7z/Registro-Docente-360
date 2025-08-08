@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Forms;
-using System.Drawing;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
 using Registro_Docente_360.ControlesUsuario;
 using Registro_Docente_360.Eventos;
 using Registro_Docente_360.Forms;
-using System.Runtime.InteropServices;
-using Modelos.EntityFramework;
 using Registro_Docente_360.Interfaces;
-using Registro_Docente_360.Controladores;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Registro_Docente_360
 {
@@ -107,7 +107,16 @@ namespace Registro_Docente_360
         // - Si tiene permiso, el botón está habilitado y en blanco.
         // - Si no tiene, el botón está deshabilitado y en gris.
         // - Algunos botones (como btnMantenimiento) solo se muestran si corresponde.
-
+        private bool VerificarHorarioDocente(int idDocente)
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                // Comprobar si hay un horario asignado al docente
+                var horarioDocente = contexto.Horarios
+                                              .FirstOrDefault(h => h.id_usuario == idDocente);
+                return horarioDocente != null; // Retorna true si tiene horario, false si no
+            }
+        }
         private void ActualizarMenuPrincipal()
         {
             // --- Inicialización: Todos los botones deshabilitados y visibles, menos btnMantenimiento ---
@@ -128,6 +137,7 @@ namespace Registro_Docente_360
             SetButtonState(btnCalendario, false);
             SetButtonState(btnAboutUs, false);
             SetButtonState(btnConfiguracion, false);
+
 
             // --- Cargar los permisos del rol actual desde la base de datos ---
             AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
@@ -284,8 +294,26 @@ namespace Registro_Docente_360
         // EVENTOS DE BOTONES DEL MENÚ 
         // MODULO DOCENTE
         // ========================
-        private void button1_Click(object sender, EventArgs e) // BtnAsistencia (nombre sin cambiar)
+        private void btnAsistencia_Click(object sender, EventArgs e) // BtnAsistencia (nombre sin cambiar)
         {
+            // Verificar si el usuario es un administrador
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
+            // Si no es administrador, verificar si tiene horario asignado
+            if (!esAdministrador)
+            {
+                bool tieneHorario = VerificarHorarioDocente(Sesion.IdUsuario);  // Llamada a una función que verifica si el docente tiene horario
+
+                if (!tieneHorario)
+                {
+                    // Si el docente no tiene horario asignado, mostrar mensaje
+                    MessageBox.Show("Primero crea un horario para acceder a los alumnos",
+                                     "Error de horario",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+                    return; // Detener la ejecución del código si no tiene horario
+                }
+            }
             if (ucFechas == null)
             {
                 ucFechas = new UcFechas();
@@ -329,15 +357,51 @@ namespace Registro_Docente_360
 
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
+            // Verificar si el usuario es un administrador
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
+            // Si no es administrador, verificar si tiene horario asignado
+            if (!esAdministrador)
+            {
+                bool tieneHorario = VerificarHorarioDocente(Sesion.IdUsuario);  // Llamada a una función que verifica si el docente tiene horario
+
+                if (!tieneHorario)
+                {
+                    // Si el docente no tiene horario asignado, mostrar mensaje
+                    MessageBox.Show("Primero crea un horario para acceder a los alumnos",
+                                     "Error de horario",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+                    return; // Detener la ejecución del código si no tiene horario
+                }
+               
+            }
             if (ucAlumnos == null)
                 ucAlumnos = new UcAlumnos();
-
             MostrarUserControl(ucAlumnos);
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            if (ucReportes == null)
+            // Verificar si el usuario es un administrador
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
+            // Si no es administrador, verificar si tiene horario asignado
+            if (!esAdministrador)
+            {
+                bool tieneHorario = VerificarHorarioDocente(Sesion.IdUsuario);  // Llamada a una función que verifica si el docente tiene horario
+
+                if (!tieneHorario)
+                {
+                    // Si el docente no tiene horario asignado, mostrar mensaje
+                    MessageBox.Show("Primero crea un horario para acceder a los alumnos",
+                                     "Error de horario",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+                    return; // Detener la ejecución del código si no tiene horario
+                }
+            }
+                if (ucReportes == null)
                 ucReportes = new UcReportes();
 
             MostrarUserControl(ucReportes);
@@ -361,7 +425,25 @@ namespace Registro_Docente_360
 
         private void btnNotas_Click(object sender, EventArgs e)
         {
-            if (ucNotas == null)
+            // Verificar si el usuario es un administrador
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
+            // Si no es administrador, verificar si tiene horario asignado
+            if (!esAdministrador)
+            {
+                bool tieneHorario = VerificarHorarioDocente(Sesion.IdUsuario);  // Llamada a una función que verifica si el docente tiene horario
+
+                if (!tieneHorario)
+                {
+                    // Si el docente no tiene horario asignado, mostrar mensaje
+                    MessageBox.Show("Primero crea un horario para acceder a los alumnos",
+                                     "Error de horario",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Error);
+                    return; // Detener la ejecución del código si no tiene horario
+                }
+            }
+                if (ucNotas == null)
                 ucNotas = new UcNotas();
 
             MostrarUserControl(ucNotas);
@@ -515,21 +597,7 @@ namespace Registro_Docente_360
             SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
         }
 
-      
 
 
-        private void formFechas_FormClosed(object sender, EventArgs e){ }
-
-        private void paneltop_Paint(object sender, PaintEventArgs e) { }
-
-        private void sidebar_Paint(object sender, PaintEventArgs e) { }
-
-        private void panelContenedor_Paint_1(object sender, PaintEventArgs e) { }
-
-        private void btnConfiguracion2_Click(object sender, EventArgs e) { }
-
-        private void panelContenedor_MouseEnter(object sender, EventArgs e) { }
-
-      
     }
 }

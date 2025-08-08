@@ -12,14 +12,14 @@ namespace Modelos.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Reportes
+    public partial class Roles_Permisos
     {
-        public int id_reporte { get; set; }
-        public Nullable<int> id_usuario { get; set; }
-        public string tipo_reporte { get; set; }
-        public Nullable<System.DateTime> fecha_generado { get; set; }
+        public int id_rol { get; set; }
+        public int id_permiso { get; set; }
     
-        public virtual Usuarios Usuarios { get; set; }
-        public virtual Usuarios Usuarios1 { get; set; }
+        public virtual Permisos Permisos { get; set; }
+        public virtual Permisos Permisos1 { get; set; }
+        public virtual Roles Roles { get; set; }
+        public virtual Roles Roles1 { get; set; }
     }
 }

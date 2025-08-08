@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Modelos;
-using Modelos.EntityFramework;
-using Registro_Docente_360.Controladores;
-using Registro_Docente_360.Eventos;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -20,15 +16,11 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private AlumnoController alumnoController = new AlumnoController();
         private List<Estudiantes> estudiantesCargados = new List<Estudiantes>();
-        public DataGridView dataGridPerso => dataGridPerso1.Grid;
 
         private int anhoSeleccionado;
         private string fechaInicioSeleccionada;
         private string fechaFinSeleccionada;
         private string SeccionGuardada;
-
-
-
 
         public UcVentanaAsistencia()
         {
@@ -37,12 +29,7 @@ namespace Registro_Docente_360.ControlesUsuario
             dataGridPerso1.Grid.EditingControlShowing += Grid_EditingControlShowing;
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        public void CargarAsistenciaDesdeBD()
+        private void CargarAsistenciaDesdeBD(int docente)
         {
             try
             {
@@ -76,11 +63,12 @@ namespace Registro_Docente_360.ControlesUsuario
                 }
 
                 // Obtener estudiantes
-                estudiantesCargados = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
+                estudiantesCargados = alumnoController.ObtenerEstudiantesPorDocente(docente);
                 DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
 
-                using (SqlConnection conn = new SqlConnection("Data Source=JOSE\\SQLEXPRESS;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
                 {
+
                     conn.Open();
 
                     foreach (var estudiante in estudiantesCargados)
@@ -89,7 +77,7 @@ namespace Registro_Docente_360.ControlesUsuario
                         object[] fila = new object[6];
                         fila[0] = nombreCompleto;
 
-                        var clases = alumnoController.ObtenerClasesDelDocenteYEstudiante(Sesion.IdUsuario, estudiante.id_estudiante);
+                        var clases = alumnoController.ObtenerClasesDelDocenteYEstudiante(docente, estudiante.id_estudiante);
 
                         for (int i = 0; i < 5; i++)
                         {
@@ -99,11 +87,10 @@ namespace Registro_Docente_360.ControlesUsuario
                             foreach (var clase in clases)
                             {
                                 using (SqlCommand cmd = new SqlCommand(
-                                    "SELECT estado FROM Asistencia WHERE id_estudiante = @idest AND fecha = @fecha AND id_clase = @idclase", conn))
+                                    "SELECT estado FROM Asistencia WHERE id_estudiante = @idest AND fecha = @fecha", conn))
                                 {
                                     cmd.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
                                     cmd.Parameters.AddWithValue("@fecha", fechaDia);
-                                    cmd.Parameters.AddWithValue("@idclase", clase.id_clase);
 
                                     var result = cmd.ExecuteScalar();
                                     if (result != null)
@@ -120,18 +107,6 @@ namespace Registro_Docente_360.ControlesUsuario
                         // Agregar fila y aplicar color
                         int rowIndex = dataGridPerso1.Grid.Rows.Add(fila);
 
-                        // Aplicar color a las celdas
-                        for (int colIndex = 1; colIndex <= 5; colIndex++)
-                        {
-                            var cell = dataGridPerso1.Grid.Rows[rowIndex].Cells[colIndex];
-                            string valor = cell.Value?.ToString().Trim().ToLower() ?? "";
-
-                            if (valor == "ausente") cell.Style.BackColor = Color.IndianRed;
-                            else if (valor == "tarde") cell.Style.BackColor = Color.Khaki;
-                            else if (valor == "presente") cell.Style.BackColor = Color.LightGreen;
-                            else if (valor == "justificado") cell.Style.BackColor = Color.DeepSkyBlue;
-                            else cell.Style.BackColor = Color.White;
-                        }
                     }
 
                     conn.Close();
@@ -142,7 +117,6 @@ namespace Registro_Docente_360.ControlesUsuario
                 MessageBox.Show("Error al cargar asistencia: " + ex.Message);
             }
         }
-
 
 
 
@@ -221,14 +195,50 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private void UcVentanaAsistencia_Load(object sender, EventArgs e)
         {
-            CargarAsistenciaDesdeBD();
-            dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
+            //CargarAsistenciaDesdeBD();
+            //dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
 
-        }
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
 
-        private void dataGridPerso1_Load(object sender, EventArgs e)
-        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+                AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+                if (esAdministrador) //administrador
+                {
+                    // Mostrar ComboBox y ocultar Label
+                    cmbDocentes.Visible = true;
+                    lblGrupo.Visible= false;
 
+                    // Cargar docentes
+                    var docentes = contexto.Usuarios
+                        .Where(u => u.Roles.nombre_rol == "Docente")
+                        .Select(u => new
+                        {
+                            u.id_usuario,
+                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                        })
+                        .ToList();
+
+                    cmbDocentes.DisplayMember = "NombreCompleto";
+                    cmbDocentes.ValueMember = "id_usuario";
+                    cmbDocentes.DataSource = docentes;
+
+                    cmbDocentes.SelectedIndexChanged += cmbDocentes_SelectedIndexChanged;
+
+                    if (cmbDocentes.Items.Count > 0)
+                    {
+                        cmbDocentes.SelectedIndex = 0; // Dispara carga automática
+                    }
+                }
+                else
+                {
+                    // Usuario docente
+                    cmbDocentes.Visible = false;
+                    CargarAsistenciaDesdeBD(Sesion.IdUsuario);
+                    dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -239,31 +249,29 @@ namespace Registro_Docente_360.ControlesUsuario
                 DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
                 int cambiosRealizados = 0;
 
-                using (SqlConnection conn = new SqlConnection("Data Source=JOSE\\SQLEXPRESS;Initial Catalog=RegistroDocente;Integrated Security=True"))
+                // Verificar si el usuario es administrador o docente
+                bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+                int docenteId = esAdministrador ? (int)cmbDocentes.SelectedValue : Sesion.IdUsuario;
+
+                using (SqlConnection conn = new SqlConnection("Data Source=DEREK\\SQLEXPRESS01;Initial Catalog=RegistroDocente;Integrated Security=True"))
                 {
                     conn.Open();
-
-                    StringBuilder debugLog = new StringBuilder();
-                    debugLog.AppendLine($"Estudiantes cargados: {estudiantesCargados.Count}");
 
                     foreach (DataGridViewRow fila in dataGridPerso1.Grid.Rows)
                     {
                         if (fila.IsNewRow) continue;
 
                         string nombreEstudiante = fila.Cells[0].Value?.ToString()?.Trim().ToLower();
-                        debugLog.AppendLine($"\nFila: {nombreEstudiante}");
 
-                        // Comparación corregida con coma y minúsculas
                         var estudiante = estudiantesCargados.FirstOrDefault(est =>
                             $"{est.primer_apellido} {est.segundo_apellido}, {est.nombre_estudiante}".ToLower() == nombreEstudiante);
 
                         if (estudiante == null)
                         {
-                            debugLog.AppendLine("❌ No se encontró coincidencia en estudiantes.");
                             continue;
                         }
 
-                        var clases = alumnoController.ObtenerClasesDelDocenteYEstudiante(Sesion.IdUsuario, estudiante.id_estudiante);
+                        var clases = alumnoController.ObtenerClasesDelDocenteYEstudiante(docenteId, estudiante.id_estudiante);
 
                         foreach (var clase in clases)
                         {
@@ -275,33 +283,32 @@ namespace Registro_Docente_360.ControlesUsuario
                                 DateTime fechaDia = fechaInicio.AddDays(i - 1);
 
                                 using (SqlCommand check = new SqlCommand(
-                                    "SELECT COUNT(*) FROM Asistencia WHERE id_estudiante = @idest AND fecha = @fecha AND id_clase = @idclase", conn))
+                                    "SELECT COUNT(*) FROM Asistencia WHERE id_estudiante = @idest AND fecha = @fecha", conn))
                                 {
                                     check.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
                                     check.Parameters.AddWithValue("@fecha", fechaDia);
-                                    check.Parameters.AddWithValue("@idclase", clase.id_clase);
 
                                     int count = (int)check.ExecuteScalar();
 
+                                    // Si ya existe el registro, se actualiza
                                     if (count > 0)
                                     {
                                         using (SqlCommand update = new SqlCommand(
-                                            "UPDATE Asistencia SET estado = @estado WHERE id_estudiante = @idest AND fecha = @fecha AND id_clase = @idclase", conn))
+                                            "UPDATE Asistencia SET estado = @estado WHERE id_estudiante = @idest AND fecha = @fecha", conn))
                                         {
                                             update.Parameters.AddWithValue("@estado", estado);
                                             update.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
                                             update.Parameters.AddWithValue("@fecha", fechaDia);
-                                            update.Parameters.AddWithValue("@idclase", clase.id_clase);
                                             cambiosRealizados += update.ExecuteNonQuery();
                                         }
                                     }
                                     else
                                     {
+                                        // Si no existe, se inserta un nuevo registro de asistencia
                                         using (SqlCommand insert = new SqlCommand(
-                                            "INSERT INTO Asistencia (id_estudiante, id_clase, fecha, estado) VALUES (@idest, @idclase, @fecha, @estado)", conn))
+                                            "INSERT INTO Asistencia (id_estudiante, fecha, estado) VALUES (@idest, @fecha, @estado)", conn))
                                         {
                                             insert.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
-                                            insert.Parameters.AddWithValue("@idclase", clase.id_clase);
                                             insert.Parameters.AddWithValue("@fecha", fechaDia);
                                             insert.Parameters.AddWithValue("@estado", estado);
                                             cambiosRealizados += insert.ExecuteNonQuery();
@@ -311,6 +318,7 @@ namespace Registro_Docente_360.ControlesUsuario
                             }
                         }
                     }
+
                     MessageBox.Show("Asistencia guardada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -321,49 +329,22 @@ namespace Registro_Docente_360.ControlesUsuario
         }
 
 
+
         private void Grid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (e.Control is ComboBox comboBox)
             {
                 comboBox.Cursor = Cursors.Hand;
-                comboBox.DrawMode = DrawMode.OwnerDrawFixed; // Habilitar el evento de dibujo
-                comboBox.DrawItem += ComboBox_DrawItem; // Asignar el evento de dibujo
             }
         }
 
-        private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        private void cmbDocentes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-
-            // Verificar si el índice es válido
-            if (e.Index < 0 || e.Index >= comboBox.Items.Count) return;
-
-            string itemText = comboBox.Items[e.Index].ToString();
-
-            // Define los colores según el texto del item
-            Color itemColor = Color.White; // Color predeterminado
-
-            if (itemText == "Presente") itemColor = Color.LightGreen;
-            else if (itemText == "Ausente") itemColor = Color.IndianRed;
-            else if (itemText == "Justificado") itemColor = Color.DeepSkyBlue;
-            else if (itemText == "Tarde") itemColor = Color.Khaki;
-
-            // Dibuja el fondo del item
-            e.DrawBackground();
-
-            // Dibuja el texto del item con el color de fondo definido
-            using (Brush brush = new SolidBrush(itemColor))
+            if (cmbDocentes.SelectedItem != null)
             {
-                e.Graphics.FillRectangle(brush, e.Bounds);
+                int idDocenteSeleccionado = (int)cmbDocentes.SelectedValue;
+                CargarAsistenciaDesdeBD(idDocenteSeleccionado);
             }
-
-            // Dibuja el texto
-            using (Brush textBrush = new SolidBrush(e.ForeColor))
-            {
-                e.Graphics.DrawString(itemText, e.Font, textBrush, e.Bounds);
-            }
-
-
         }
     }
 }

@@ -251,7 +251,7 @@
             this.cmbPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPeriodo.FormattingEnabled = true;
-            this.cmbPeriodo.Location = new System.Drawing.Point(11, 3);
+            this.cmbPeriodo.Location = new System.Drawing.Point(11, 4);
             this.cmbPeriodo.Name = "cmbPeriodo";
             this.cmbPeriodo.Size = new System.Drawing.Size(126, 25);
             this.cmbPeriodo.TabIndex = 14;
@@ -351,9 +351,10 @@
             // cmbDocentes
             // 
             this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(11, 6);
+            this.cmbDocentes.Location = new System.Drawing.Point(11, 4);
             this.cmbDocentes.Name = "cmbDocentes";
             this.cmbDocentes.Size = new System.Drawing.Size(126, 25);
             this.cmbDocentes.TabIndex = 11;

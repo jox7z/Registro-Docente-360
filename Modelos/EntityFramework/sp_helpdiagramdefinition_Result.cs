@@ -10,16 +10,10 @@
 namespace Modelos.EntityFramework
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Reportes
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int id_reporte { get; set; }
-        public Nullable<int> id_usuario { get; set; }
-        public string tipo_reporte { get; set; }
-        public Nullable<System.DateTime> fecha_generado { get; set; }
-    
-        public virtual Usuarios Usuarios { get; set; }
-        public virtual Usuarios Usuarios1 { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

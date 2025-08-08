@@ -4,38 +4,54 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20597840e535420d99057e300e28b686" Name="Diagram1" ZoomLevel="66">
-        <EntityTypeShape EntityType="RegistroDocenteModel.Asistencia" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Bitacora_Accesos" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Bitacora_Movimientos" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Calendario" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Clases" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Estudiantes" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Horarios" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Materias" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Notas" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Permisos" Width="1.5" PointX="1.5" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Reportes" Width="1.5" PointX="10.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Roles" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Secciones" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistroDocenteModel.Usuarios" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Asistenci__id_cl__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK_Asistencia_id_estud" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Calendari__id_us__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_mater__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_usuar__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Notas__id_clase__5CD6CB2B" ManuallyRouted="false" />
+      <Diagram DiagramId="95d62ae6dce2444b93c09037a2e81fad" Name="Diagram1">
+        <EntityTypeShape EntityType="RegistroDocenteModel.Asistencia" Width="1.5" PointX="11.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Bitacora_Accesos" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Bitacora_Movimientos" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Calendario" Width="1.5" PointX="8.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Clases" Width="1.5" PointX="11.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Estudiantes" Width="1.5" PointX="9" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Horarios" Width="1.5" PointX="11.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Materias" Width="1.5" PointX="9" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Notas" Width="1.5" PointX="13.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Permisos" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Reportes" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Roles" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Roles_Permisos" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Secciones" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistroDocenteModel.Usuarios" Width="1.5" PointX="6" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Asistenci__id_es__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Asistenci__id_es__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Bitacora___id_us__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Calendari__id_us__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Calendari__id_us__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_mater__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_mater__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_usuar__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Clases__id_usuar__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Notas__id_clase__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Notas__id_clase__6477ECF3" ManuallyRouted="false" />
         <AssociationConnector Association="RegistroDocenteModel.FK_Clases_id_estud" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Estudiant__id_se__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Estudiant__id_se__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Estudiant__id_se__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="RegistroDocenteModel.FK_Notas_id_estud" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_mat__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_usu__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Reportes__id_usu__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_rol__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_sec__60A75C0F" ManuallyRouted="false" />
-        <AssociationConnector Association="RegistroDocenteModel.Roles_Permisos" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_mat__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_mat__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_usu__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Horarios__id_usu__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Roles_Per__id_pe__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Roles_Per__id_pe__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Reportes__id_usu__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Reportes__id_usu__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Roles_Per__id_ro__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Roles_Per__id_ro__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_rol__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_rol__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_sec__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistroDocenteModel.FK__Usuarios__id_sec__6A30C649" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

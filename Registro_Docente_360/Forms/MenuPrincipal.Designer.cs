@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.paneltop = new System.Windows.Forms.Panel();
             this.windowBarControl1 = new Registro_Docente_360.ControlesUsuario.WindowBarControl();
+            this.btnMantenimiento = new System.Windows.Forms.Button();
             this.lblMenuPrincipal = new System.Windows.Forms.Label();
             this.btnHam = new System.Windows.Forms.PictureBox();
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
@@ -58,7 +59,6 @@
             this.btnRolyPerm = new System.Windows.Forms.Button();
             this.btnAccionesUsuario = new System.Windows.Forms.Button();
             this.btnAccesos = new System.Windows.Forms.Button();
-            this.btnMantenimiento = new System.Windows.Forms.Button();
             this.paneltop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHam)).BeginInit();
             this.sidebar.SuspendLayout();
@@ -88,7 +88,6 @@
             this.paneltop.Name = "paneltop";
             this.paneltop.Size = new System.Drawing.Size(990, 31);
             this.paneltop.TabIndex = 0;
-            this.paneltop.Paint += new System.Windows.Forms.PaintEventHandler(this.paneltop_Paint);
             this.paneltop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paneltop_MouseDown_1);
             // 
             // windowBarControl1
@@ -99,6 +98,27 @@
             this.windowBarControl1.Name = "windowBarControl1";
             this.windowBarControl1.Size = new System.Drawing.Size(100, 31);
             this.windowBarControl1.TabIndex = 14;
+            // 
+            // btnMantenimiento
+            // 
+            this.btnMantenimiento.FlatAppearance.BorderSize = 0;
+            this.btnMantenimiento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnMantenimiento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnMantenimiento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMantenimiento.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMantenimiento.ForeColor = System.Drawing.Color.White;
+            this.btnMantenimiento.Image = ((System.Drawing.Image)(resources.GetObject("btnMantenimiento.Image")));
+            this.btnMantenimiento.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMantenimiento.Location = new System.Drawing.Point(347, 0);
+            this.btnMantenimiento.Name = "btnMantenimiento";
+            this.btnMantenimiento.Size = new System.Drawing.Size(166, 28);
+            this.btnMantenimiento.TabIndex = 13;
+            this.btnMantenimiento.Text = "Mantenimiento";
+            this.btnMantenimiento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMantenimiento.UseVisualStyleBackColor = true;
+            this.btnMantenimiento.Click += new System.EventHandler(this.btnMantenimiento_Click);
+            this.btnMantenimiento.MouseEnter += new System.EventHandler(this.btnMantenimiento_MouseEnter);
+            this.btnMantenimiento.MouseLeave += new System.EventHandler(this.btnMantenimiento_MouseLeave);
             // 
             // lblMenuPrincipal
             // 
@@ -141,7 +161,6 @@
             this.sidebar.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
             this.sidebar.Size = new System.Drawing.Size(203, 716);
             this.sidebar.TabIndex = 1;
-            this.sidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.sidebar_Paint);
             // 
             // pnAsistencia
             // 
@@ -170,7 +189,7 @@
             this.btnAsistencia.Text = "           Asistencia";
             this.btnAsistencia.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAsistencia.UseVisualStyleBackColor = false;
-            this.btnAsistencia.Click += new System.EventHandler(this.button1_Click);
+            this.btnAsistencia.Click += new System.EventHandler(this.btnAsistencia_Click);
             // 
             // pnHorario
             // 
@@ -397,8 +416,7 @@
             this.panelContenedor.Padding = new System.Windows.Forms.Padding(200, 50, 200, 20);
             this.panelContenedor.Size = new System.Drawing.Size(990, 747);
             this.panelContenedor.TabIndex = 3;
-            this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenedor_Paint_1);
-            this.panelContenedor.MouseEnter += new System.EventHandler(this.panelContenedor_MouseEnter);
+            this.panelContenedor.Click += new System.EventHandler(this.btnAsistencia_Click);
             // 
             // pnMantenimiento
             // 
@@ -488,27 +506,6 @@
             this.btnAccesos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAccesos.UseVisualStyleBackColor = true;
             this.btnAccesos.Click += new System.EventHandler(this.btnAccesos_Click);
-            // 
-            // btnMantenimiento
-            // 
-            this.btnMantenimiento.FlatAppearance.BorderSize = 0;
-            this.btnMantenimiento.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnMantenimiento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnMantenimiento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMantenimiento.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMantenimiento.ForeColor = System.Drawing.Color.White;
-            this.btnMantenimiento.Image = ((System.Drawing.Image)(resources.GetObject("btnMantenimiento.Image")));
-            this.btnMantenimiento.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMantenimiento.Location = new System.Drawing.Point(347, 0);
-            this.btnMantenimiento.Name = "btnMantenimiento";
-            this.btnMantenimiento.Size = new System.Drawing.Size(166, 28);
-            this.btnMantenimiento.TabIndex = 13;
-            this.btnMantenimiento.Text = "Mantenimiento";
-            this.btnMantenimiento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMantenimiento.UseVisualStyleBackColor = true;
-            this.btnMantenimiento.Click += new System.EventHandler(this.btnMantenimiento_Click);
-            this.btnMantenimiento.MouseEnter += new System.EventHandler(this.btnMantenimiento_MouseEnter);
-            this.btnMantenimiento.MouseLeave += new System.EventHandler(this.btnMantenimiento_MouseLeave);
             // 
             // MenuPrincipal
             // 

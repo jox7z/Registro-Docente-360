@@ -4,7 +4,6 @@ using Registro_Docente_360.Eventos;
 using Registro_Docente_360.Interfaces;
 using Registro_Docente_360.Utilidades;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -65,12 +64,13 @@ namespace Registro_Docente_360.ControlesUsuario
             cmbPeriodo.SelectedIndexChanged += CmbPeriodo_SelectedIndexChanged;
             PanelAcciones.Visible = false;
 
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                var rol = contexto.Roles.FirstOrDefault(r => r.id_rol == usuario.id_rol);
 
-                if (rol != null && rol.nombre_rol == "Administrador")
+                if (esAdministrador)
                 {
                     cmbDocentes.Visible = true;
                     lblNomDocente.Visible = false;
@@ -259,7 +259,6 @@ namespace Registro_Docente_360.ControlesUsuario
                     // Obtener las asistencias de ese estudiante en ese periodo
                     var asistencias = contexto.Asistencia
                         .Where(a => a.id_estudiante == item.Estudiante.id_estudiante
-                                    && clasesDocente.Contains(a.id_clase.Value)  // Usar .Value para acceder al valor de id_clase (int?)
                                     && a.fecha >= fechaInicio && a.fecha <= fechaFin)  // Filtrar por fechas del periodo
                         .ToList();
 
@@ -316,12 +315,15 @@ namespace Registro_Docente_360.ControlesUsuario
                 foreach (DataGridViewRow fila in tablaNotas.Grid.Rows)
                 {
                     if (fila.IsNewRow) continue;
+
                     string cedula = fila.Cells["colCedula"].Value?.ToString();
                     var estudiante = contexto.Estudiantes.FirstOrDefault(x => x.cedula_estudiante == cedula);
                     if (estudiante == null) continue;
+
                     int idDocente = Sesion.IdUsuario;
                     if (cmbDocentes.Visible && cmbDocentes.SelectedItem != null)
                         idDocente = (int)cmbDocentes.SelectedValue;
+
                     var clases = contexto.Clases
                         .Where(c => c.id_usuario == idDocente && c.id_estudiante == estudiante.id_estudiante)
                         .ToList();
@@ -330,6 +332,7 @@ namespace Registro_Docente_360.ControlesUsuario
                     {
                         var periodo = cmbPeriodo.SelectedItem?.ToString();
                         if (string.IsNullOrEmpty(periodo)) continue;
+
                         // ASISTENCIA viene calculada, así que tomar la del grid
                         decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
                         decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
@@ -369,7 +372,9 @@ namespace Registro_Docente_360.ControlesUsuario
                                 nota_final = (clase.id_materia == materiaSeleccionada.id_materia ? examen1 : 0)
                                             + (clase.id_materia == materiaSeleccionada.id_materia ? examen2 : 0)
                                             + tareas + asistenciaFinal + cotidiano,
-                                periodo = periodo
+                                periodo = periodo,
+                                // Asigna el id_estudiante correctamente a la nota nueva
+                                id_estudiante = estudiante.id_estudiante  // Esta es la clave para guardar el id_estudiante
                             });
                         }
                     }
@@ -379,6 +384,7 @@ namespace Registro_Docente_360.ControlesUsuario
             }
             huboCambios = false;
         }
+
 
         // El resto de eventos siguen igual (NO se puede editar asistencia, y todo se recalcula)
         private void Grid_CellEndEdit(object sender, DataGridViewCellEventArgs e)

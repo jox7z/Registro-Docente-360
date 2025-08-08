@@ -39,9 +39,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.lblAlumnos = new System.Windows.Forms.Label();
-            this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
             this.pnCancelar = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -51,6 +49,8 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnAgregar = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
+            this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.pnEditarHorario.SuspendLayout();
@@ -180,9 +180,9 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 878F));
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 43);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -214,14 +214,6 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Docente:";
             // 
-            // cmbDocentes
-            // 
-            this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(116, 3);
-            this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(191, 21);
-            this.cmbDocentes.TabIndex = 11;
-            // 
             // lblAlumnos
             // 
             this.lblAlumnos.AutoSize = true;
@@ -233,16 +225,6 @@
             this.lblAlumnos.Size = new System.Drawing.Size(216, 30);
             this.lblAlumnos.TabIndex = 7;
             this.lblAlumnos.Text = "Listado de Alumnos";
-            // 
-            // tablaAlumnos
-            // 
-            this.tablaAlumnos.BackColor = System.Drawing.Color.Gainsboro;
-            this.tablaAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaAlumnos.Location = new System.Drawing.Point(3, 123);
-            this.tablaAlumnos.Name = "tablaAlumnos";
-            this.tablaAlumnos.Padding = new System.Windows.Forms.Padding(20);
-            this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
-            this.tablaAlumnos.TabIndex = 20;
             // 
             // PanelAcciones
             // 
@@ -387,6 +369,27 @@
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(116, 4);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(150, 25);
+            this.cmbDocentes.TabIndex = 12;
+            // 
+            // tablaAlumnos
+            // 
+            this.tablaAlumnos.BackColor = System.Drawing.Color.Gainsboro;
+            this.tablaAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaAlumnos.Location = new System.Drawing.Point(3, 123);
+            this.tablaAlumnos.Name = "tablaAlumnos";
+            this.tablaAlumnos.Padding = new System.Windows.Forms.Padding(20);
+            this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
+            this.tablaAlumnos.TabIndex = 20;
             // 
             // UcAlumnos
             // 

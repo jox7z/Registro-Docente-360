@@ -10,16 +10,11 @@
 namespace Modelos.EntityFramework
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Reportes
+    public partial class ObtenerRoles_Result
     {
-        public int id_reporte { get; set; }
-        public Nullable<int> id_usuario { get; set; }
-        public string tipo_reporte { get; set; }
-        public Nullable<System.DateTime> fecha_generado { get; set; }
-    
-        public virtual Usuarios Usuarios { get; set; }
-        public virtual Usuarios Usuarios1 { get; set; }
+        public int id_rol { get; set; }
+        public string nombre_rol { get; set; }
+        public string estado_rol { get; set; }
     }
 }
