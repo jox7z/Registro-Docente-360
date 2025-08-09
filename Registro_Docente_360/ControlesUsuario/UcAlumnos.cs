@@ -61,6 +61,7 @@ namespace Registro_Docente_360.Forms
                     cmbDocentes.Visible = true;
                     label1.Visible = false;
                     lblSeccion.Visible = false;
+                    lblNomDocente.Visible = false;
                     //lblNomDocente.Visible = false;
 
                     // Cargar docentes
@@ -92,7 +93,7 @@ namespace Registro_Docente_360.Forms
                     cmbDocentes.Visible = false;
                     label1.Visible = true;
 
-                    //lblNomDocente.Text = usuario.nombre_usuario;
+                    lblNomDocente.Text = usuario.nombre_usuario;
 
                     var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
                     label1.Text = $"{seccion?.nombre_seccion ?? "Sin sección"}";

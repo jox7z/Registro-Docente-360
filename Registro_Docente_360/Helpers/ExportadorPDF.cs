@@ -674,7 +674,7 @@ namespace Registro_Docente_360.Utilidades
                 $"Sección: {Seccion}\n" +
                 $"Mes: {mesSeleccionado} \n" +
                 $"Docente: {nomDocente} {apeDocente}\n" +
-                $"Ausencias: {totalAusentes}  |  Presentes: {totalPresentes}\n" + // Mostrar los totales
+                $"Ausencias: {totalAusentes}  |  Presentes: {totalPresentes}\n\n" ,// Mostrar los totales
                 FontFactory.GetFont("Arial", 12, Font.BOLD)
             );
             encabezado.Alignment = Element.ALIGN_LEFT;

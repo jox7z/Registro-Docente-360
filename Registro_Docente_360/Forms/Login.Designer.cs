@@ -118,7 +118,7 @@ namespace Registro_Docente_360
             // 
             this.textUsuario.BackColor = System.Drawing.Color.Teal;
             this.textUsuario.isPassword = false;
-            this.textUsuario.label = "Usuario";
+            this.textUsuario.label = "Correo Electrónico";
             this.textUsuario.Location = new System.Drawing.Point(412, 95);
             this.textUsuario.Name = "textUsuario";
             this.textUsuario.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);

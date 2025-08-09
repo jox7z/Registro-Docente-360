@@ -456,20 +456,5 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-
-        private void pnInfo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void PanelAcciones_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void chkAccesoModuloDocente_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
