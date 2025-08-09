@@ -91,9 +91,6 @@ namespace Registro_Docente_360
         }
 
 
-
-
-
         private void AjustarPaddingContenedor()
         {
             if (sidebar.Width <= 50)
@@ -262,18 +259,21 @@ namespace Registro_Docente_360
         // ========================
 
 
-       
+
 
         public void MostrarUserControl(UserControl control)
         {
+            // Ocultar el panel de mantenimiento al cambiar de vista
+            pnMantenimiento.Visible = false;
+
             foreach (Control c in panelContenedor.Controls)
             {
                 if (c is IModoEdicion editable && editable.EstaEnModoEdicion)
                 {
-                    System.Windows.Forms.MessageBox.Show("Debes salir del modo edición antes de cambiar de pestaña.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Debes salir del modo edición antes de cambiar de pestaña.",
+                                   "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
                 c.Visible = false;
             }
 
@@ -285,9 +285,11 @@ namespace Registro_Docente_360
 
             control.Visible = true;
             control.BringToFront();
+
+            // Asegurar que el panel de mantenimiento esté siempre disponible
+            pnMantenimiento.BringToFront();
         }
 
-       
 
 
         // ========================
@@ -296,6 +298,9 @@ namespace Registro_Docente_360
         // ========================
         private void btnAsistencia_Click(object sender, EventArgs e) // BtnAsistencia (nombre sin cambiar)
         {
+            // Asegurarse de que el panel de opciones siempre esté al frente
+            pnMantenimiento.BringToFront();
+
             // Verificar si el usuario es un administrador
             bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
 
@@ -314,6 +319,18 @@ namespace Registro_Docente_360
                     return; // Detener la ejecución del código si no tiene horario
                 }
             }
+
+            bool ExisteDocentes = ExistenDocentes();
+            if (!ExisteDocentes)
+            {
+                // Si no existen docentes, mostrar mensaje
+                MessageBox.Show("Primero debes ingresar un docente.",
+                                 "Error de docente",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
+                return; // Detener la ejecución del código si no existe el docente
+            }
+
             if (ucFechas == null)
             {
                 ucFechas = new UcFechas();
@@ -321,6 +338,8 @@ namespace Registro_Docente_360
             }
 
             MostrarUserControl(ucFechas);
+
+
         }
 
         public void UcFechas_OnFechaSeleccionada(object sender, FechaSeleccionadaEventArgs e)
@@ -340,15 +359,37 @@ namespace Registro_Docente_360
             ucAsistencia.ActualizarCabecera(e.Anho, e.FechaInicio, e.FechaFin);
 
 
-            // Mostrar control
-            panelContenedor.Controls.Clear();
-            panelContenedor.Controls.Add(ucAsistencia);
+            foreach (Control control in panelContenedor.Controls)
+            {
+                control.Visible = false;
+            }
+
+            // Agregar/mostrar el nuevo
+            if (!panelContenedor.Controls.Contains(ucAsistencia))
+            {
+                panelContenedor.Controls.Add(ucAsistencia);
+            }
+
+            ucAsistencia.Visible = true;
+            ucAsistencia.BringToFront();
 
         }
 
 
         private void btnHorario_Click(object sender, EventArgs e)
         {
+       
+            bool ExisteDocentes = ExistenDocentes();
+            if (!ExisteDocentes)
+            {
+                // Si no existen docentes, mostrar mensaje
+                MessageBox.Show("Primero debes ingresar un docente.",
+                                 "Error de docente",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
+                return; // Detener la ejecución del código si no existe el docente
+            }
+
             if (ucHorario == null)
                 ucHorario = new UcHorario();
 
@@ -357,6 +398,7 @@ namespace Registro_Docente_360
 
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
+            
             // Verificar si el usuario es un administrador
             bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
 
@@ -374,7 +416,17 @@ namespace Registro_Docente_360
                                      MessageBoxIcon.Error);
                     return; // Detener la ejecución del código si no tiene horario
                 }
-               
+            }
+
+            bool ExisteDocentes = ExistenDocentes();
+            if (!ExisteDocentes)
+            {
+                // Si no existen docentes, mostrar mensaje
+                MessageBox.Show("Primero debes ingresar un docente.",
+                                 "Error de docente",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
+                return; // Detener la ejecución del código si no existe el docente
             }
             if (ucAlumnos == null)
                 ucAlumnos = new UcAlumnos();
@@ -401,7 +453,18 @@ namespace Registro_Docente_360
                     return; // Detener la ejecución del código si no tiene horario
                 }
             }
-                if (ucReportes == null)
+
+            bool ExisteDocentes = ExistenDocentes();
+            if (!ExisteDocentes)
+            {
+                // Si no existen docentes, mostrar mensaje
+                MessageBox.Show("Primero debes ingresar un docente.",
+                                 "Error de docente",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
+                return; // Detener la ejecución del código si no existe el docente
+            }
+            if (ucReportes == null)
                 ucReportes = new UcReportes();
 
             MostrarUserControl(ucReportes);
@@ -443,7 +506,18 @@ namespace Registro_Docente_360
                     return; // Detener la ejecución del código si no tiene horario
                 }
             }
-                if (ucNotas == null)
+
+            bool ExisteDocentes = ExistenDocentes();
+            if (!ExisteDocentes)
+            {
+                // Si no existen docentes, mostrar mensaje
+                MessageBox.Show("Primero debes ingresar un docente.",
+                                 "Error de docente",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
+                return; // Detener la ejecución del código si no existe el docente
+            }
+            if (ucNotas == null)
                 ucNotas = new UcNotas();
 
             MostrarUserControl(ucNotas);
@@ -478,18 +552,20 @@ namespace Registro_Docente_360
         private void btnMantenimiento_MouseLeave(object sender, EventArgs e)
         {
             paneltop.Controls.Remove(p);
+
         }
 
         private void btnMantenimiento_Click(object sender, EventArgs e)
         {
-            if (!pnMantenimiento.Visible)
+            // Forzar que el panel de mantenimiento esté siempre encima
+            pnMantenimiento.BringToFront();
+
+            pnMantenimiento.Visible = !pnMantenimiento.Visible;
+
+            // Si se está mostrando, asegurarse que esté encima de todo
+            if (pnMantenimiento.Visible)
             {
-                pnMantenimiento.Visible = true;
-                pnMantenimiento.BringToFront(); 
-            }
-            else
-            {
-                pnMantenimiento.Visible = false;
+                pnMantenimiento.BringToFront();
             }
         }
 
@@ -567,10 +643,6 @@ namespace Registro_Docente_360
             MostrarUserControl(ucInfoCuenta);
         }
 
-       
-
-
-
 
         private void AbrirHorarioDesdeBienvenida(object sender, EventArgs e)
         {
@@ -597,6 +669,18 @@ namespace Registro_Docente_360
             SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
         }
 
+        private bool ExistenDocentes()
+        {
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                // Verificar si existe al menos un usuario cuyo rol tenga el permiso de docente (id_permiso == 1)
+                // y asegurarse de que el usuario no tenga el permiso de administrador (id_permiso == 2)
+                return contexto.Roles_Permisos
+                .Any(rp => rp.id_permiso == 1 && contexto.Usuarios
+                .Any(u => u.id_rol == rp.id_rol && // Verificar si el usuario tiene el rol asociado al permiso de docente
+                !contexto.Roles_Permisos.Any(rpAdmin => rpAdmin.id_rol == u.id_rol && rpAdmin.id_permiso == 2))); // Excluir usuarios con el permiso de administrador
+            }
+        }
 
 
     }

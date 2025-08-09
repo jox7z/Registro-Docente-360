@@ -20,7 +20,10 @@ namespace Registro_Docente_360.Forms
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.Manual;
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Location = new Point(
+                (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 3 + 250
+            );
 
             this.WindowState = FormWindowState.Normal;
             this.idUsuario = idUsuario;
@@ -45,11 +48,11 @@ namespace Registro_Docente_360.Forms
             // Ajustar el tamaño del formulario según el panel mostrado
             if (panelMostrar == pnConfirmarCorreo)
             {
-                this.Size = new System.Drawing.Size(490,300);
+                this.Size = new System.Drawing.Size(490,200);
             }
             else if (panelMostrar == pnConfirmarCodigo)
             {
-                this.Size = new System.Drawing.Size(490, 300);
+                this.Size = new System.Drawing.Size(490, 250);
             }
             else if (panelMostrar == pnConfirmarCodigo)
             {
@@ -274,9 +277,18 @@ namespace Registro_Docente_360.Forms
             // Cierra el formulario actual (UcVentanaAsistencia o cualquier otro formulario).
             this.Close();
 
-            // Muestra el formulario de login.
-            Login loginForm = new Login();
-            loginForm.Show();
+            // Verifica si ya existe una instancia de Login abierta
+            Form Login = Application.OpenForms["Login"];
+            if (Login == null) // Si no existe, abre un nuevo formulario de login
+            {
+                Login = new Login();
+                Login.Show();
+            }
+            else
+            {
+                Login.BringToFront(); // Si ya está abierto, solo lo trae al frente
+            }
         }
+
     }
 }

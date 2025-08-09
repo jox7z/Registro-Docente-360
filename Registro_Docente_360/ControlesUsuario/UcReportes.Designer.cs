@@ -62,6 +62,10 @@
             this.lblPeriodo = new System.Windows.Forms.Label();
             this.panelminiContenedor = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelContenidos = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.panelReporte.SuspendLayout();
             this.panelTiempoReport.SuspendLayout();
@@ -73,11 +77,16 @@
             this.panelPeriodo.SuspendLayout();
             this.panelminiContenedor.SuspendLayout();
             this.panelContenidos.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblVentanaReportes);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
@@ -89,7 +98,7 @@
             this.lblVentanaReportes.AutoSize = true;
             this.lblVentanaReportes.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVentanaReportes.ForeColor = System.Drawing.Color.Teal;
-            this.lblVentanaReportes.Location = new System.Drawing.Point(158, 8);
+            this.lblVentanaReportes.Location = new System.Drawing.Point(174, 6);
             this.lblVentanaReportes.Name = "lblVentanaReportes";
             this.lblVentanaReportes.Size = new System.Drawing.Size(197, 25);
             this.lblVentanaReportes.TabIndex = 2;
@@ -97,12 +106,11 @@
             // 
             // panelReporte
             // 
-            this.panelReporte.Controls.Add(this.cmbDocentes);
-            this.panelReporte.Controls.Add(this.cmbTipoReporte);
-            this.panelReporte.Controls.Add(this.lblReporte);
+            this.panelReporte.Controls.Add(this.tableLayoutPanel3);
             this.panelReporte.Location = new System.Drawing.Point(3, 50);
             this.panelReporte.Name = "panelReporte";
-            this.panelReporte.Size = new System.Drawing.Size(535, 59);
+            this.panelReporte.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
+            this.panelReporte.Size = new System.Drawing.Size(535, 90);
             this.panelReporte.TabIndex = 1;
             // 
             // cmbDocentes
@@ -115,9 +123,9 @@
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbDocentes.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(128, 16);
+            this.cmbDocentes.Location = new System.Drawing.Point(273, 39);
             this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(160, 25);
+            this.cmbDocentes.Size = new System.Drawing.Size(195, 25);
             this.cmbDocentes.TabIndex = 17;
             this.cmbDocentes.SelectedIndexChanged += new System.EventHandler(this.cmbDocentes_SelectedIndexChanged);
             // 
@@ -131,7 +139,7 @@
             this.cmbTipoReporte.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbTipoReporte.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbTipoReporte.FormattingEnabled = true;
-            this.cmbTipoReporte.Location = new System.Drawing.Point(302, 16);
+            this.cmbTipoReporte.Location = new System.Drawing.Point(273, 5);
             this.cmbTipoReporte.Name = "cmbTipoReporte";
             this.cmbTipoReporte.Size = new System.Drawing.Size(195, 25);
             this.cmbTipoReporte.TabIndex = 16;
@@ -139,10 +147,11 @@
             // 
             // lblReporte
             // 
+            this.lblReporte.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblReporte.AutoSize = true;
             this.lblReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReporte.ForeColor = System.Drawing.Color.Teal;
-            this.lblReporte.Location = new System.Drawing.Point(48, 16);
+            this.lblReporte.Location = new System.Drawing.Point(89, 7);
             this.lblReporte.Name = "lblReporte";
             this.lblReporte.Size = new System.Drawing.Size(70, 21);
             this.lblReporte.TabIndex = 3;
@@ -150,11 +159,11 @@
             // 
             // panelTiempoReport
             // 
-            this.panelTiempoReport.Controls.Add(this.cmbTiempo);
-            this.panelTiempoReport.Controls.Add(this.lblTiempoReporte);
-            this.panelTiempoReport.Location = new System.Drawing.Point(3, 115);
+            this.panelTiempoReport.Controls.Add(this.tableLayoutPanel2);
+            this.panelTiempoReport.Location = new System.Drawing.Point(3, 146);
             this.panelTiempoReport.Name = "panelTiempoReport";
-            this.panelTiempoReport.Size = new System.Drawing.Size(535, 59);
+            this.panelTiempoReport.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.panelTiempoReport.Size = new System.Drawing.Size(535, 46);
             this.panelTiempoReport.TabIndex = 2;
             // 
             // cmbTiempo
@@ -167,7 +176,7 @@
             this.cmbTiempo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbTiempo.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbTiempo.FormattingEnabled = true;
-            this.cmbTiempo.Location = new System.Drawing.Point(302, 16);
+            this.cmbTiempo.Location = new System.Drawing.Point(273, 10);
             this.cmbTiempo.Name = "cmbTiempo";
             this.cmbTiempo.Size = new System.Drawing.Size(195, 25);
             this.cmbTiempo.TabIndex = 16;
@@ -175,10 +184,11 @@
             // 
             // lblTiempoReporte
             // 
+            this.lblTiempoReporte.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTiempoReporte.AutoSize = true;
             this.lblTiempoReporte.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTiempoReporte.ForeColor = System.Drawing.Color.Teal;
-            this.lblTiempoReporte.Location = new System.Drawing.Point(48, 16);
+            this.lblTiempoReporte.Location = new System.Drawing.Point(46, 12);
             this.lblTiempoReporte.Name = "lblTiempoReporte";
             this.lblTiempoReporte.Size = new System.Drawing.Size(156, 21);
             this.lblTiempoReporte.TabIndex = 3;
@@ -188,14 +198,15 @@
             // 
             this.PanelFechas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PanelFechas.Controls.Add(this.tableFechas);
-            this.PanelFechas.Location = new System.Drawing.Point(3, 180);
+            this.PanelFechas.Location = new System.Drawing.Point(3, 198);
             this.PanelFechas.Name = "PanelFechas";
             this.PanelFechas.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
-            this.PanelFechas.Size = new System.Drawing.Size(535, 85);
+            this.PanelFechas.Size = new System.Drawing.Size(535, 113);
             this.PanelFechas.TabIndex = 18;
             // 
             // tableFechas
             // 
+            this.tableFechas.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableFechas.ColumnCount = 3;
             this.tableFechas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableFechas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -212,7 +223,7 @@
             this.tableFechas.RowCount = 2;
             this.tableFechas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableFechas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableFechas.Size = new System.Drawing.Size(495, 85);
+            this.tableFechas.Size = new System.Drawing.Size(495, 113);
             this.tableFechas.TabIndex = 22;
             // 
             // cmbSemanas
@@ -225,7 +236,7 @@
             this.cmbSemanas.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbSemanas.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbSemanas.FormattingEnabled = true;
-            this.cmbSemanas.Location = new System.Drawing.Point(342, 51);
+            this.cmbSemanas.Location = new System.Drawing.Point(341, 72);
             this.cmbSemanas.Name = "cmbSemanas";
             this.cmbSemanas.Size = new System.Drawing.Size(141, 25);
             this.cmbSemanas.TabIndex = 20;
@@ -236,7 +247,7 @@
             this.lblSemanas.AutoSize = true;
             this.lblSemanas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSemanas.ForeColor = System.Drawing.Color.Teal;
-            this.lblSemanas.Location = new System.Drawing.Point(377, 10);
+            this.lblSemanas.Location = new System.Drawing.Point(376, 18);
             this.lblSemanas.Name = "lblSemanas";
             this.lblSemanas.Size = new System.Drawing.Size(71, 21);
             this.lblSemanas.TabIndex = 21;
@@ -248,7 +259,7 @@
             this.lblAnho.AutoSize = true;
             this.lblAnho.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnho.ForeColor = System.Drawing.Color.Teal;
-            this.lblAnho.Location = new System.Drawing.Point(34, 10);
+            this.lblAnho.Location = new System.Drawing.Point(34, 18);
             this.lblAnho.Name = "lblAnho";
             this.lblAnho.Size = new System.Drawing.Size(97, 21);
             this.lblAnho.TabIndex = 17;
@@ -264,7 +275,7 @@
             this.cmbAnhos.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbAnhos.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbAnhos.FormattingEnabled = true;
-            this.cmbAnhos.Location = new System.Drawing.Point(13, 51);
+            this.cmbAnhos.Location = new System.Drawing.Point(13, 72);
             this.cmbAnhos.Name = "cmbAnhos";
             this.cmbAnhos.Size = new System.Drawing.Size(138, 25);
             this.cmbAnhos.TabIndex = 16;
@@ -279,7 +290,7 @@
             this.cmbMeses.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbMeses.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbMeses.FormattingEnabled = true;
-            this.cmbMeses.Location = new System.Drawing.Point(178, 51);
+            this.cmbMeses.Location = new System.Drawing.Point(177, 72);
             this.cmbMeses.Name = "cmbMeses";
             this.cmbMeses.Size = new System.Drawing.Size(138, 25);
             this.cmbMeses.TabIndex = 18;
@@ -290,7 +301,7 @@
             this.lblMeses.AutoSize = true;
             this.lblMeses.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMeses.ForeColor = System.Drawing.Color.Teal;
-            this.lblMeses.Location = new System.Drawing.Point(227, 10);
+            this.lblMeses.Location = new System.Drawing.Point(226, 18);
             this.lblMeses.Name = "lblMeses";
             this.lblMeses.Size = new System.Drawing.Size(41, 21);
             this.lblMeses.TabIndex = 19;
@@ -298,16 +309,11 @@
             // 
             // panelFiltros
             // 
-            this.panelFiltros.Controls.Add(this.cmbFiltro);
-            this.panelFiltros.Controls.Add(this.cmbMaterias);
-            this.panelFiltros.Controls.Add(this.lblEstudiante);
-            this.panelFiltros.Controls.Add(this.lblMateria);
-            this.panelFiltros.Controls.Add(this.cmbEstudiantes);
-            this.panelFiltros.Controls.Add(this.lblFiltros);
-            this.panelFiltros.Location = new System.Drawing.Point(3, 340);
+            this.panelFiltros.Controls.Add(this.tableLayoutPanel4);
+            this.panelFiltros.Location = new System.Drawing.Point(3, 405);
             this.panelFiltros.Name = "panelFiltros";
-            this.panelFiltros.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.panelFiltros.Size = new System.Drawing.Size(535, 128);
+            this.panelFiltros.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.panelFiltros.Size = new System.Drawing.Size(535, 115);
             this.panelFiltros.TabIndex = 19;
             // 
             // cmbFiltro
@@ -320,7 +326,7 @@
             this.cmbFiltro.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbFiltro.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Location = new System.Drawing.Point(149, 16);
+            this.cmbFiltro.Location = new System.Drawing.Point(273, 6);
             this.cmbFiltro.Name = "cmbFiltro";
             this.cmbFiltro.Size = new System.Drawing.Size(195, 25);
             this.cmbFiltro.TabIndex = 31;
@@ -336,17 +342,18 @@
             this.cmbMaterias.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbMaterias.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbMaterias.FormattingEnabled = true;
-            this.cmbMaterias.Location = new System.Drawing.Point(149, 57);
+            this.cmbMaterias.Location = new System.Drawing.Point(273, 43);
             this.cmbMaterias.Name = "cmbMaterias";
             this.cmbMaterias.Size = new System.Drawing.Size(195, 25);
             this.cmbMaterias.TabIndex = 30;
             // 
             // lblEstudiante
             // 
+            this.lblEstudiante.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblEstudiante.AutoSize = true;
             this.lblEstudiante.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstudiante.ForeColor = System.Drawing.Color.Teal;
-            this.lblEstudiante.Location = new System.Drawing.Point(48, 95);
+            this.lblEstudiante.Location = new System.Drawing.Point(76, 84);
             this.lblEstudiante.Name = "lblEstudiante";
             this.lblEstudiante.Size = new System.Drawing.Size(95, 21);
             this.lblEstudiante.TabIndex = 29;
@@ -354,10 +361,11 @@
             // 
             // lblMateria
             // 
+            this.lblMateria.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMateria.AutoSize = true;
             this.lblMateria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMateria.ForeColor = System.Drawing.Color.Teal;
-            this.lblMateria.Location = new System.Drawing.Point(48, 57);
+            this.lblMateria.Location = new System.Drawing.Point(87, 45);
             this.lblMateria.Name = "lblMateria";
             this.lblMateria.Size = new System.Drawing.Size(73, 21);
             this.lblMateria.TabIndex = 28;
@@ -373,17 +381,18 @@
             this.cmbEstudiantes.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbEstudiantes.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbEstudiantes.FormattingEnabled = true;
-            this.cmbEstudiantes.Location = new System.Drawing.Point(149, 95);
+            this.cmbEstudiantes.Location = new System.Drawing.Point(273, 82);
             this.cmbEstudiantes.Name = "cmbEstudiantes";
             this.cmbEstudiantes.Size = new System.Drawing.Size(195, 25);
             this.cmbEstudiantes.TabIndex = 24;
             // 
             // lblFiltros
             // 
+            this.lblFiltros.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFiltros.AutoSize = true;
             this.lblFiltros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltros.ForeColor = System.Drawing.Color.Teal;
-            this.lblFiltros.Location = new System.Drawing.Point(48, 20);
+            this.lblFiltros.Location = new System.Drawing.Point(93, 8);
             this.lblFiltros.Name = "lblFiltros";
             this.lblFiltros.Size = new System.Drawing.Size(61, 21);
             this.lblFiltros.TabIndex = 17;
@@ -392,10 +401,11 @@
             // panelBoton
             // 
             this.panelBoton.Controls.Add(this.pnSobreNosotros);
-            this.panelBoton.Location = new System.Drawing.Point(3, 474);
+            this.panelBoton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBoton.Location = new System.Drawing.Point(3, 526);
             this.panelBoton.Name = "panelBoton";
             this.panelBoton.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.panelBoton.Size = new System.Drawing.Size(535, 85);
+            this.panelBoton.Size = new System.Drawing.Size(535, 75);
             this.panelBoton.TabIndex = 20;
             // 
             // pnSobreNosotros
@@ -404,7 +414,7 @@
             this.pnSobreNosotros.BackColor = System.Drawing.Color.Transparent;
             this.pnSobreNosotros.Controls.Add(this.btnGenerarReporte);
             this.pnSobreNosotros.ForeColor = System.Drawing.Color.Transparent;
-            this.pnSobreNosotros.Location = new System.Drawing.Point(139, 30);
+            this.pnSobreNosotros.Location = new System.Drawing.Point(134, 12);
             this.pnSobreNosotros.Name = "pnSobreNosotros";
             this.pnSobreNosotros.Size = new System.Drawing.Size(267, 46);
             this.pnSobreNosotros.TabIndex = 9;
@@ -430,22 +440,20 @@
             // 
             // panelPeriodo
             // 
-            this.panelPeriodo.Controls.Add(this.lblAnho2);
-            this.panelPeriodo.Controls.Add(this.cmbAnhos2);
-            this.panelPeriodo.Controls.Add(this.cmbPeriodo);
-            this.panelPeriodo.Controls.Add(this.lblPeriodo);
-            this.panelPeriodo.Location = new System.Drawing.Point(3, 271);
+            this.panelPeriodo.Controls.Add(this.tableLayoutPanel1);
+            this.panelPeriodo.Location = new System.Drawing.Point(3, 317);
             this.panelPeriodo.Name = "panelPeriodo";
             this.panelPeriodo.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
-            this.panelPeriodo.Size = new System.Drawing.Size(535, 63);
+            this.panelPeriodo.Size = new System.Drawing.Size(535, 82);
             this.panelPeriodo.TabIndex = 21;
             // 
             // lblAnho2
             // 
+            this.lblAnho2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAnho2.AutoSize = true;
             this.lblAnho2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnho2.ForeColor = System.Drawing.Color.Teal;
-            this.lblAnho2.Location = new System.Drawing.Point(124, 0);
+            this.lblAnho2.Location = new System.Drawing.Point(75, 10);
             this.lblAnho2.Name = "lblAnho2";
             this.lblAnho2.Size = new System.Drawing.Size(97, 21);
             this.lblAnho2.TabIndex = 21;
@@ -461,9 +469,9 @@
             this.cmbAnhos2.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbAnhos2.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbAnhos2.FormattingEnabled = true;
-            this.cmbAnhos2.Location = new System.Drawing.Point(111, 33);
+            this.cmbAnhos2.Location = new System.Drawing.Point(54, 48);
             this.cmbAnhos2.Name = "cmbAnhos2";
-            this.cmbAnhos2.Size = new System.Drawing.Size(138, 25);
+            this.cmbAnhos2.Size = new System.Drawing.Size(139, 25);
             this.cmbAnhos2.TabIndex = 20;
             // 
             // cmbPeriodo
@@ -476,17 +484,18 @@
             this.cmbPeriodo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbPeriodo.ForeColor = System.Drawing.Color.DarkGray;
             this.cmbPeriodo.FormattingEnabled = true;
-            this.cmbPeriodo.Location = new System.Drawing.Point(278, 33);
+            this.cmbPeriodo.Location = new System.Drawing.Point(301, 48);
             this.cmbPeriodo.Name = "cmbPeriodo";
-            this.cmbPeriodo.Size = new System.Drawing.Size(152, 25);
+            this.cmbPeriodo.Size = new System.Drawing.Size(139, 25);
             this.cmbPeriodo.TabIndex = 19;
             // 
             // lblPeriodo
             // 
+            this.lblPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPeriodo.AutoSize = true;
             this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPeriodo.ForeColor = System.Drawing.Color.Teal;
-            this.lblPeriodo.Location = new System.Drawing.Point(288, 0);
+            this.lblPeriodo.Location = new System.Drawing.Point(306, 10);
             this.lblPeriodo.Name = "lblPeriodo";
             this.lblPeriodo.Size = new System.Drawing.Size(129, 21);
             this.lblPeriodo.TabIndex = 18;
@@ -530,7 +539,7 @@
             this.panelminiContenedor.RippleMaxSize = 600F;
             this.panelminiContenedor.RippleSpeed = 15F;
             this.panelminiContenedor.ShowBorder = false;
-            this.panelminiContenedor.Size = new System.Drawing.Size(555, 576);
+            this.panelminiContenedor.Size = new System.Drawing.Size(555, 618);
             this.panelminiContenedor.TabIndex = 0;
             this.panelminiContenedor.TabStop = true;
             this.panelminiContenedor.TrackSystemTheme = false;
@@ -553,9 +562,86 @@
             this.panelContenidos.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panelContenidos.Location = new System.Drawing.Point(7, 7);
             this.panelContenidos.Name = "panelContenidos";
-            this.panelContenidos.Size = new System.Drawing.Size(541, 562);
+            this.panelContenidos.Size = new System.Drawing.Size(541, 604);
             this.panelContenidos.TabIndex = 1;
             this.panelContenidos.WrapContents = false;
+            this.panelContenidos.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenidos_Paint);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.cmbPeriodo, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblPeriodo, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblAnho2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmbAnhos2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(495, 82);
+            this.tableLayoutPanel1.TabIndex = 22;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblTiempoReporte, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbTiempo, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(495, 46);
+            this.tableLayoutPanel2.TabIndex = 17;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.cmbTipoReporte, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblReporte, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(495, 70);
+            this.tableLayoutPanel3.TabIndex = 18;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.lblEstudiante, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.cmbMaterias, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.lblMateria, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.cmbFiltro, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cmbEstudiantes, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.lblFiltros, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(495, 115);
+            this.tableLayoutPanel4.TabIndex = 32;
             // 
             // UcReportes
             // 
@@ -566,26 +652,30 @@
             this.Controls.Add(this.panelminiContenedor);
             this.Name = "UcReportes";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(575, 608);
+            this.Size = new System.Drawing.Size(575, 664);
             this.Load += new System.EventHandler(this.UcReportes_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelReporte.ResumeLayout(false);
-            this.panelReporte.PerformLayout();
             this.panelTiempoReport.ResumeLayout(false);
-            this.panelTiempoReport.PerformLayout();
             this.PanelFechas.ResumeLayout(false);
             this.tableFechas.ResumeLayout(false);
             this.tableFechas.PerformLayout();
             this.panelFiltros.ResumeLayout(false);
-            this.panelFiltros.PerformLayout();
             this.panelBoton.ResumeLayout(false);
             this.pnSobreNosotros.ResumeLayout(false);
             this.panelPeriodo.ResumeLayout(false);
-            this.panelPeriodo.PerformLayout();
             this.panelminiContenedor.ResumeLayout(false);
             this.panelminiContenedor.PerformLayout();
             this.panelContenidos.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,5 +716,9 @@
         private System.Windows.Forms.ComboBox cmbFiltro;
         private System.Windows.Forms.ComboBox cmbMaterias;
         private System.Windows.Forms.ComboBox cmbDocentes;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }

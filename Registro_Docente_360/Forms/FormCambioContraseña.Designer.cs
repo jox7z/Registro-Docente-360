@@ -217,7 +217,7 @@
             this.pnConfirmarCodigo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnConfirmarCodigo.Location = new System.Drawing.Point(3, 205);
             this.pnConfirmarCodigo.Name = "pnConfirmarCodigo";
-            this.pnConfirmarCodigo.Size = new System.Drawing.Size(468, 187);
+            this.pnConfirmarCodigo.Size = new System.Drawing.Size(468, 176);
             this.pnConfirmarCodigo.TabIndex = 3;
             // 
             // btnConfirmarCodigo
@@ -228,7 +228,7 @@
             this.btnConfirmarCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmarCodigo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarCodigo.ForeColor = System.Drawing.Color.White;
-            this.btnConfirmarCodigo.Location = new System.Drawing.Point(173, 118);
+            this.btnConfirmarCodigo.Location = new System.Drawing.Point(183, 108);
             this.btnConfirmarCodigo.Name = "btnConfirmarCodigo";
             this.btnConfirmarCodigo.Size = new System.Drawing.Size(115, 33);
             this.btnConfirmarCodigo.TabIndex = 12;
@@ -241,7 +241,7 @@
             this.txtCodigo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodigo.Location = new System.Drawing.Point(106, 69);
+            this.txtCodigo.Location = new System.Drawing.Point(114, 67);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(253, 22);
             this.txtCodigo.TabIndex = 7;
@@ -255,7 +255,7 @@
             this.lblCodigo.ForeColor = System.Drawing.Color.Teal;
             this.lblCodigo.Image = ((System.Drawing.Image)(resources.GetObject("lblCodigo.Image")));
             this.lblCodigo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblCodigo.Location = new System.Drawing.Point(102, 34);
+            this.lblCodigo.Location = new System.Drawing.Point(110, 29);
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(257, 21);
             this.lblCodigo.TabIndex = 6;
@@ -270,9 +270,9 @@
             this.pnNuevaContra.Controls.Add(this.txtNuevaContra);
             this.pnNuevaContra.Controls.Add(this.lblNuevaContra);
             this.pnNuevaContra.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnNuevaContra.Location = new System.Drawing.Point(3, 398);
+            this.pnNuevaContra.Location = new System.Drawing.Point(3, 387);
             this.pnNuevaContra.Name = "pnNuevaContra";
-            this.pnNuevaContra.Size = new System.Drawing.Size(468, 305);
+            this.pnNuevaContra.Size = new System.Drawing.Size(468, 316);
             this.pnNuevaContra.TabIndex = 4;
             // 
             // btnGuardar
@@ -283,7 +283,7 @@
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(173, 235);
+            this.btnGuardar.Location = new System.Drawing.Point(173, 241);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(115, 33);
             this.btnGuardar.TabIndex = 13;
@@ -298,7 +298,7 @@
             this.cbMostrarContra.BackColor = System.Drawing.Color.Transparent;
             this.cbMostrarContra.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbMostrarContra.ForeColor = System.Drawing.Color.Teal;
-            this.cbMostrarContra.Location = new System.Drawing.Point(114, 184);
+            this.cbMostrarContra.Location = new System.Drawing.Point(114, 190);
             this.cbMostrarContra.Name = "cbMostrarContra";
             this.cbMostrarContra.Size = new System.Drawing.Size(118, 17);
             this.cbMostrarContra.TabIndex = 11;
@@ -311,7 +311,7 @@
             this.txtConfirmarContra.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtConfirmarContra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConfirmarContra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmarContra.Location = new System.Drawing.Point(114, 146);
+            this.txtConfirmarContra.Location = new System.Drawing.Point(114, 152);
             this.txtConfirmarContra.Name = "txtConfirmarContra";
             this.txtConfirmarContra.Size = new System.Drawing.Size(245, 22);
             this.txtConfirmarContra.TabIndex = 9;
@@ -325,7 +325,7 @@
             this.lblConfirmeSuContra.ForeColor = System.Drawing.Color.Teal;
             this.lblConfirmeSuContra.Image = ((System.Drawing.Image)(resources.GetObject("lblConfirmeSuContra.Image")));
             this.lblConfirmeSuContra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblConfirmeSuContra.Location = new System.Drawing.Point(110, 109);
+            this.lblConfirmeSuContra.Location = new System.Drawing.Point(110, 115);
             this.lblConfirmeSuContra.Name = "lblConfirmeSuContra";
             this.lblConfirmeSuContra.Size = new System.Drawing.Size(218, 21);
             this.lblConfirmeSuContra.TabIndex = 8;
@@ -336,7 +336,7 @@
             this.txtNuevaContra.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtNuevaContra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNuevaContra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNuevaContra.Location = new System.Drawing.Point(114, 71);
+            this.txtNuevaContra.Location = new System.Drawing.Point(114, 77);
             this.txtNuevaContra.Name = "txtNuevaContra";
             this.txtNuevaContra.Size = new System.Drawing.Size(245, 22);
             this.txtNuevaContra.TabIndex = 7;
@@ -350,7 +350,7 @@
             this.lblNuevaContra.ForeColor = System.Drawing.Color.Teal;
             this.lblNuevaContra.Image = ((System.Drawing.Image)(resources.GetObject("lblNuevaContra.Image")));
             this.lblNuevaContra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNuevaContra.Location = new System.Drawing.Point(110, 34);
+            this.lblNuevaContra.Location = new System.Drawing.Point(110, 40);
             this.lblNuevaContra.Name = "lblNuevaContra";
             this.lblNuevaContra.Size = new System.Drawing.Size(249, 21);
             this.lblNuevaContra.TabIndex = 6;
@@ -361,7 +361,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(488, 722);
             this.Controls.Add(this.panelMiniContenedor);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCambioContraseña";
             this.Load += new System.EventHandler(this.FormCambioContraseña_Load_1);

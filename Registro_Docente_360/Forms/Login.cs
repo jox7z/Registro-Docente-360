@@ -145,6 +145,9 @@ namespace Registro_Docente_360
             textClave.MostrarContraseña(cbMostrarContra.Checked);
         }
 
-        
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

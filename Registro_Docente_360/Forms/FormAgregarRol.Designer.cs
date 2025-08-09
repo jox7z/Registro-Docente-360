@@ -43,7 +43,7 @@
             this.lblAgregarRol.AutoSize = true;
             this.lblAgregarRol.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAgregarRol.ForeColor = System.Drawing.Color.Teal;
-            this.lblAgregarRol.Location = new System.Drawing.Point(97, 9);
+            this.lblAgregarRol.Location = new System.Drawing.Point(71, 9);
             this.lblAgregarRol.Name = "lblAgregarRol";
             this.lblAgregarRol.Size = new System.Drawing.Size(146, 32);
             this.lblAgregarRol.TabIndex = 3;
@@ -55,7 +55,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Teal;
-            this.label1.Location = new System.Drawing.Point(44, 87);
+            this.label1.Location = new System.Drawing.Point(32, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 25);
             this.label1.TabIndex = 4;
@@ -65,7 +65,7 @@
             // 
             this.txtNombreRol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombreRol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreRol.Location = new System.Drawing.Point(49, 115);
+            this.txtNombreRol.Location = new System.Drawing.Point(37, 115);
             this.txtNombreRol.Name = "txtNombreRol";
             this.txtNombreRol.Size = new System.Drawing.Size(225, 25);
             this.txtNombreRol.TabIndex = 23;
@@ -76,7 +76,7 @@
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescripcion.ForeColor = System.Drawing.Color.Teal;
-            this.lblDescripcion.Location = new System.Drawing.Point(44, 162);
+            this.lblDescripcion.Location = new System.Drawing.Point(32, 163);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(174, 25);
             this.lblDescripcion.TabIndex = 24;
@@ -86,7 +86,7 @@
             // 
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(49, 192);
+            this.txtDescripcion.Location = new System.Drawing.Point(37, 196);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(225, 25);
             this.txtDescripcion.TabIndex = 25;
@@ -102,7 +102,7 @@
             this.btnListo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListo.ForeColor = System.Drawing.Color.White;
             this.btnListo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListo.Location = new System.Drawing.Point(91, 252);
+            this.btnListo.Location = new System.Drawing.Point(77, 249);
             this.btnListo.Name = "btnListo";
             this.btnListo.Size = new System.Drawing.Size(129, 40);
             this.btnListo.TabIndex = 28;
@@ -114,13 +114,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 318);
+            this.ClientSize = new System.Drawing.Size(299, 318);
             this.Controls.Add(this.btnListo);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblAgregarRol);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAgregarRol";
             this.Text = "Crea un nuevo rol";

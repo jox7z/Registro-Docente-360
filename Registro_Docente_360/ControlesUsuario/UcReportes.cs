@@ -913,5 +913,10 @@ namespace Registro_Docente_360.ControlesUsuario
             cmbTiempo.Items.Add("Mensual");
             cmbTiempo.SelectedIndex = 0;
         }
+
+        private void panelContenidos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

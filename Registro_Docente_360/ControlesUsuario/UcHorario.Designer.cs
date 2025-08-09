@@ -38,10 +38,10 @@ namespace Registro_Docente_360.ControlesUsuario
             this.lblSeccion = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblNomDocente = new System.Windows.Forms.Label();
             this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.lblHorario = new System.Windows.Forms.Label();
             this.dataGridPerso1 = new Registro_Docente_360.ControlesUsuario.dataGridPerso();
-            this.lblNomDocente = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnEditarHorario.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -167,12 +167,24 @@ namespace Registro_Docente_360.ControlesUsuario
             this.label2.TabIndex = 9;
             this.label2.Text = "Docente:";
             // 
+            // lblNomDocente
+            // 
+            this.lblNomDocente.AutoSize = true;
+            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
+            this.lblNomDocente.Location = new System.Drawing.Point(117, 0);
+            this.lblNomDocente.Name = "lblNomDocente";
+            this.lblNomDocente.Size = new System.Drawing.Size(94, 30);
+            this.lblNomDocente.TabIndex = 10;
+            this.lblNomDocente.Text = "Nombre";
+            // 
             // cmbDocentes
             // 
             this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(223, 11);
+            this.cmbDocentes.Location = new System.Drawing.Point(223, 9);
             this.cmbDocentes.Name = "cmbDocentes";
             this.cmbDocentes.Size = new System.Drawing.Size(157, 25);
             this.cmbDocentes.TabIndex = 12;
@@ -199,17 +211,6 @@ namespace Registro_Docente_360.ControlesUsuario
             this.dataGridPerso1.Padding = new System.Windows.Forms.Padding(20);
             this.dataGridPerso1.Size = new System.Drawing.Size(1139, 396);
             this.dataGridPerso1.TabIndex = 4;
-            // 
-            // lblNomDocente
-            // 
-            this.lblNomDocente.AutoSize = true;
-            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblNomDocente.Location = new System.Drawing.Point(117, 0);
-            this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(94, 30);
-            this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre";
             // 
             // UcHorario
             // 

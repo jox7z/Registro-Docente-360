@@ -25,7 +25,7 @@ namespace Registro_Docente_360.Forms
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(
                 (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 3 + 250
+                (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2
             );
             this.WindowState = FormWindowState.Normal;
             // Se ejecuta cuando el formulario termina de cargarse

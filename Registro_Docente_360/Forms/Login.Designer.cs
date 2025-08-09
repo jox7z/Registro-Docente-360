@@ -46,9 +46,11 @@ namespace Registro_Docente_360
             this.lbllogin2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbllogin4 = new System.Windows.Forms.Label();
+            this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnIniciar
@@ -58,7 +60,7 @@ namespace Registro_Docente_360
             this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIniciar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar.ForeColor = System.Drawing.Color.White;
-            this.btnIniciar.Location = new System.Drawing.Point(412, 273);
+            this.btnIniciar.Location = new System.Drawing.Point(391, 273);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(200, 41);
             this.btnIniciar.TabIndex = 2;
@@ -71,7 +73,7 @@ namespace Registro_Docente_360
             this.lblOlvidoContra.AutoSize = true;
             this.lblOlvidoContra.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblOlvidoContra.ForeColor = System.Drawing.Color.Teal;
-            this.lblOlvidoContra.Location = new System.Drawing.Point(450, 330);
+            this.lblOlvidoContra.Location = new System.Drawing.Point(429, 330);
             this.lblOlvidoContra.Name = "lblOlvidoContra";
             this.lblOlvidoContra.Size = new System.Drawing.Size(131, 13);
             this.lblOlvidoContra.TabIndex = 3;
@@ -84,7 +86,7 @@ namespace Registro_Docente_360
             this.cbMostrarContra.BackColor = System.Drawing.Color.Transparent;
             this.cbMostrarContra.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbMostrarContra.ForeColor = System.Drawing.Color.Teal;
-            this.cbMostrarContra.Location = new System.Drawing.Point(412, 210);
+            this.cbMostrarContra.Location = new System.Drawing.Point(391, 210);
             this.cbMostrarContra.Name = "cbMostrarContra";
             this.cbMostrarContra.Size = new System.Drawing.Size(118, 17);
             this.cbMostrarContra.TabIndex = 4;
@@ -96,7 +98,7 @@ namespace Registro_Docente_360
             // 
             this.lbllogin1.AutoSize = true;
             this.lbllogin1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbllogin1.Location = new System.Drawing.Point(407, 22);
+            this.lbllogin1.Location = new System.Drawing.Point(386, 36);
             this.lbllogin1.Name = "lbllogin1";
             this.lbllogin1.Size = new System.Drawing.Size(201, 25);
             this.lbllogin1.TabIndex = 5;
@@ -107,7 +109,7 @@ namespace Registro_Docente_360
             this.textClave.BackColor = System.Drawing.Color.Teal;
             this.textClave.isPassword = true;
             this.textClave.label = "Contraseña";
-            this.textClave.Location = new System.Drawing.Point(412, 153);
+            this.textClave.Location = new System.Drawing.Point(391, 153);
             this.textClave.Name = "textClave";
             this.textClave.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.textClave.Size = new System.Drawing.Size(191, 41);
@@ -119,7 +121,7 @@ namespace Registro_Docente_360
             this.textUsuario.BackColor = System.Drawing.Color.Teal;
             this.textUsuario.isPassword = false;
             this.textUsuario.label = "Correo Electrónico";
-            this.textUsuario.Location = new System.Drawing.Point(412, 95);
+            this.textUsuario.Location = new System.Drawing.Point(391, 95);
             this.textUsuario.Name = "textUsuario";
             this.textUsuario.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.textUsuario.Size = new System.Drawing.Size(191, 41);
@@ -159,7 +161,7 @@ namespace Registro_Docente_360
             this.lbllogin3.BackColor = System.Drawing.Color.Transparent;
             this.lbllogin3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lbllogin3.ForeColor = System.Drawing.Color.White;
-            this.lbllogin3.Location = new System.Drawing.Point(66, 210);
+            this.lbllogin3.Location = new System.Drawing.Point(66, 238);
             this.lbllogin3.Name = "lbllogin3";
             this.lbllogin3.Size = new System.Drawing.Size(193, 25);
             this.lbllogin3.TabIndex = 8;
@@ -169,7 +171,7 @@ namespace Registro_Docente_360
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(75, 67);
+            this.pictureBox2.Location = new System.Drawing.Point(75, 95);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(149, 127);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -182,7 +184,7 @@ namespace Registro_Docente_360
             this.lbllogin2.BackColor = System.Drawing.Color.Transparent;
             this.lbllogin2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbllogin2.ForeColor = System.Drawing.Color.White;
-            this.lbllogin2.Location = new System.Drawing.Point(12, 22);
+            this.lbllogin2.Location = new System.Drawing.Point(12, 36);
             this.lbllogin2.Name = "lbllogin2";
             this.lbllogin2.Size = new System.Drawing.Size(273, 25);
             this.lbllogin2.TabIndex = 6;
@@ -205,16 +207,28 @@ namespace Registro_Docente_360
             this.lbllogin4.BackColor = System.Drawing.Color.Transparent;
             this.lbllogin4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lbllogin4.ForeColor = System.Drawing.Color.White;
-            this.lbllogin4.Location = new System.Drawing.Point(131, 235);
+            this.lbllogin4.Location = new System.Drawing.Point(131, 263);
             this.lbllogin4.Name = "lbllogin4";
             this.lbllogin4.Size = new System.Drawing.Size(45, 25);
             this.lbllogin4.TabIndex = 7;
             this.lbllogin4.Text = "360";
             // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
+            this.btnCerrar.Location = new System.Drawing.Point(618, 12);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(20, 20);
+            this.btnCerrar.TabIndex = 8;
+            this.btnCerrar.TabStop = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
             // Login
             // 
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(650, 396);
+            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.textClave);
             this.Controls.Add(this.textUsuario);
             this.Controls.Add(this.lbllogin1);
@@ -232,6 +246,7 @@ namespace Registro_Docente_360
             this.gradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,5 +271,6 @@ namespace Registro_Docente_360
         private Label lbllogin5;
         private Forms.LoginTextBox textUsuario;
         private Forms.LoginTextBox textClave;
+        private PictureBox btnCerrar;
     }
 }

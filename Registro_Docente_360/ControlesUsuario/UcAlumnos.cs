@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Registro_Docente_360.Forms
@@ -24,13 +26,28 @@ namespace Registro_Docente_360.Forms
         public UcAlumnos()
         {
             InitializeComponent();
+
+            ConfigurarAutoformateoCedula();
             this.Load += UcAlumnos_Load;
             tablaAlumnos.Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            tablaAlumnos.Grid.CellEndEdit += (sender, e) =>
+            {
+                if (e.ColumnIndex == tablaAlumnos.Grid.Columns["colCedula"].Index)
+                {
+                    var celda = tablaAlumnos.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    string cedula = celda.Value?.ToString()?.Replace("-", "") ?? "";
+                    if (cedula.Length == 9)
+                        celda.Value = $"{cedula[0]}-{cedula.Substring(1, 4)}-{cedula.Substring(5)}";
+                }
+            };
+
         }
 
         /// <summary>
         /// Configura la tabla de alumnos al cargar el control.
         /// </summary>
+        /// 
         private void UcAlumnos_Load(object sender, EventArgs e)
         {
             tablaAlumnos.Grid.Columns.Clear();
@@ -111,11 +128,14 @@ namespace Registro_Docente_360.Forms
         {
             if (e.Control is TextBox tb)
             {
-                // Limpia todos los eventos previos para evitar duplicaciones o efectos cruzados
+                // Limpia suscripciones previas
                 tb.KeyPress -= Cedula_KeyPress;
                 tb.KeyPress -= Telefono_KeyPress;
+                tb.KeyPress -= Nombres_KeyPress;
+                tb.Leave -= Nombres_Leave;
 
-                var currentColumn = tablaAlumnos.Grid.Columns[tablaAlumnos.Grid.CurrentCell.ColumnIndex].Name;
+                var currentColumn = tablaAlumnos.Grid
+                    .Columns[tablaAlumnos.Grid.CurrentCell.ColumnIndex].Name;
 
                 if (currentColumn == "colCedula")
                 {
@@ -127,12 +147,21 @@ namespace Registro_Docente_360.Forms
                     tb.CharacterCasing = CharacterCasing.Normal;
                     tb.KeyPress += Telefono_KeyPress;
                 }
+                else if (currentColumn == "colNombre" ||
+                         currentColumn == "colApellido1" ||
+                         currentColumn == "colApellido2")
+                {
+                    tb.CharacterCasing = CharacterCasing.Normal;
+                    tb.KeyPress += Nombres_KeyPress;
+                    tb.Leave += Nombres_Leave;  
+                }
                 else
                 {
                     tb.CharacterCasing = CharacterCasing.Normal;
                 }
             }
         }
+
 
         /// <summary>
         /// Cuando uno termina de editar una celda de cédula, se valida el dato escrito.
@@ -155,14 +184,22 @@ namespace Registro_Docente_360.Forms
         }
 
 
-
-
         /// <summary>
         /// Restringe los caracteres permitidos en la cédula.
         /// </summary>
         private void Cedula_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox tb = sender as TextBox;
+
+            // Caracteres permitidos
             if (!char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Validar longitud máxima (20)
+            if (!char.IsControl(e.KeyChar) && tb.Text.Length >= 20)
             {
                 e.Handled = true;
             }
@@ -184,7 +221,6 @@ namespace Registro_Docente_360.Forms
                 e.Handled = true;
             }
         }
-
 
         /// <summary>
         /// Activa y desactiva el modo de edición en la tabla.
@@ -312,102 +348,123 @@ namespace Registro_Docente_360.Forms
         }
 
 
-
-
-
-
-
-
         /// <summary>
-        /// Acción de guardar alumnos. 
-        /// Debe validarse desde AlumnoController antes de guardar en la base.
+        /// Acción de guardar alumnos validando solo duplicados en el grid
         /// </summary>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Asegurar que cualquier edición activa se termine
-            tablaAlumnos.Grid.EndEdit();
-            tablaAlumnos.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            tablaAlumnos.Grid.CurrentCell = null;
-
-            List<Estudiantes> listaEstudiantes = new List<Estudiantes>();
-
-            foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows)
-            {
-                if (fila.IsNewRow) continue;
-
-                var cedula_estudiante = fila.Cells["colCedula"].Value?.ToString()?.Trim();
-                var nombre_estudiante = fila.Cells["colNombre"].Value?.ToString()?.Trim();
-                var primer_apellido = fila.Cells["colApellido1"].Value?.ToString()?.Trim();
-                var segundo_apellido = fila.Cells["colApellido2"].Value?.ToString()?.Trim();
-                var telefono_encargado = fila.Cells["colTelefono"].Value?.ToString()?.Trim();
-
-                // Validar campos obligatorios
-                if (string.IsNullOrWhiteSpace(cedula_estudiante) ||
-                    string.IsNullOrWhiteSpace(primer_apellido) ||
-                    string.IsNullOrWhiteSpace(segundo_apellido) ||
-                    string.IsNullOrWhiteSpace(nombre_estudiante) ||
-                    string.IsNullOrWhiteSpace(telefono_encargado))
-                {
-                    MessageBox.Show("Todos los campos son obligatorios. Verifique que no haya campos vacíos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tablaAlumnos.Grid.CurrentCell = fila.Cells["colCedula"];
-                    fila.Selected = true;
-                    return; // Cancelar guardado
-                }
-
-                listaEstudiantes.Add(new Estudiantes
-                {
-                    cedula_estudiante = cedula_estudiante,
-                    nombre_estudiante = nombre_estudiante,
-                    primer_apellido = primer_apellido,
-                    segundo_apellido = segundo_apellido,
-                    telefono_encargado = telefono_encargado
-                });
-            }
-
             try
             {
-                int idDocente = Sesion.IdUsuario;
+                // 1. Finalizar edición actual
+                tablaAlumnos.Grid.EndEdit();
+                tablaAlumnos.Grid.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                tablaAlumnos.Grid.CurrentCell = null;
 
-                if (cmbDocentes.Visible && cmbDocentes.SelectedValue != null)
+                // 2. Preparar estructuras
+                var listaEstudiantes = new List<Estudiantes>();
+                var cedulasVistas = new Dictionary<string, int>(); // <cedula_normalizada, numero_fila>
+                var errores = new List<string>();
+
+                // 3. Validación de datos
+                foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows)
                 {
-                    idDocente = (int)cmbDocentes.SelectedValue;
+                    if (fila.IsNewRow) continue;
+
+                    // Obtener valores
+                    var cedula = fila.Cells["colCedula"].Value?.ToString()?.Trim();
+                    var nombre = fila.Cells["colNombre"].Value?.ToString()?.Trim();
+                    var apellido1 = fila.Cells["colApellido1"].Value?.ToString()?.Trim();
+                    var apellido2 = fila.Cells["colApellido2"].Value?.ToString()?.Trim();
+                    var telefono = fila.Cells["colTelefono"].Value?.ToString()?.Trim();
+
+                    // Normalizar cédula (ignorar guiones)
+                    string cedulaNormalizada = NormalizarCedula(cedula);
+
+                    // Validar campos obligatorios
+                    if (string.IsNullOrWhiteSpace(cedula) ||
+                        string.IsNullOrWhiteSpace(nombre) ||
+                        string.IsNullOrWhiteSpace(apellido1) ||
+                        string.IsNullOrWhiteSpace(apellido2) ||
+                        string.IsNullOrWhiteSpace(telefono))
+                    {
+                        errores.Add($"Fila {fila.Index + 1}: Todos los campos son obligatorios");
+                        continue;
+                    }
+
+                    // Validar formato cédula (opcional)
+                    if (cedulaNormalizada.Length < 5) // Ejemplo: mínimo 5 caracteres
+                    {
+                        errores.Add($"Fila {fila.Index + 1}: Cédula demasiado corta");
+                        continue;
+                    }
+
+                    // Validar duplicados EN EL GRID
+                    if (cedulasVistas.ContainsKey(cedulaNormalizada))
+                    {
+                        errores.Add($"Fila {fila.Index + 1}: Cédula duplicada con la fila {cedulasVistas[cedulaNormalizada]}");
+                        continue;
+                    }
+
+                    // Registrar cédula
+                    cedulasVistas.Add(cedulaNormalizada, fila.Index + 1);
+
+                    // Agregar a lista para guardar
+                    listaEstudiantes.Add(new Estudiantes
+                    {
+                        cedula_estudiante = cedula,
+                        nombre_estudiante = nombre,
+                        primer_apellido = apellido1,
+                        segundo_apellido = apellido2,
+                        telefono_encargado = telefono
+                    });
                 }
 
-                int idSeccionDocente;
-                using (var contexto = new RegistroDocenteEntities())
+                // 4. Mostrar errores si existen
+                if (errores.Count > 0)
                 {
-                    idSeccionDocente = contexto.Usuarios
-                        .Where(u => u.id_usuario == idDocente)
-                        .Select(u => u.id_seccion ?? 0)
-                        .FirstOrDefault();
+                    MessageBox.Show($"Errores encontrados:\n\n{string.Join("\n", errores)}",
+                                  "Validación fallida",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Error);
+                    return;
                 }
 
-
-                var nuevos = alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccionDocente,idDocente);
-
-                MessageBox.Show("Estudiantes guardados correctamente");
-
-
-                foreach (var estudiante in nuevos)
+                // 5. Guardar en BD (sin validar duplicados contra BD)
+                try
                 {
-                    string descripcion = $"Se guardó el estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}";
-                    string accion = "Nuevo estudiante";
-                    string modulo = "Alumnos";
+                    int idDocente = cmbDocentes.Visible && cmbDocentes.SelectedValue != null
+                        ? (int)cmbDocentes.SelectedValue
+                        : Sesion.IdUsuario;
 
-                    alumnoController.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+                    using (var contexto = new RegistroDocenteEntities())
+                    {
+                        int idSeccion = contexto.Usuarios
+                            .Where(u => u.id_usuario == idDocente)
+                            .Select(u => u.id_seccion ?? 0)
+                            .FirstOrDefault();
+
+                        alumnoController.GuardarEstudiantes(listaEstudiantes, idSeccion, idDocente);
+                    }
+
+                    MessageBox.Show("Estudiantes guardados correctamente");
+                    hayCambios = false;
                 }
-
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al guardar: {ex.Message}",
+                                  "Error",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar los estudiantes: " + ex.Message);
+                MessageBox.Show($"Error inesperado: {ex.Message}",
+                              "Error",
+                              MessageBoxButtons.OK,
+                              MessageBoxIcon.Error);
             }
-
-            hayCambios = false;
         }
-
-
 
 
         /// <summary>
@@ -415,7 +472,7 @@ namespace Registro_Docente_360.Forms
         /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            // 🔒 Forzar fin de edición para evitar validación molesta
+            //Forzar fin de edición para evitar validación molesta
             if (tablaAlumnos.Grid.IsCurrentCellInEditMode)
             {
                 tablaAlumnos.Grid.EndEdit();
@@ -426,7 +483,7 @@ namespace Registro_Docente_360.Forms
             {
                 evitarValidacion = true;
 
-                // 🔁 Salir de modo edición
+                // Salir de modo edición
                 lblAlumnos.Text = "Listado de Alumnos";
                 lblAlumnos.ForeColor = Color.Teal;
                 lblAlumnos.Font = new Font("Segoe UI", 21, FontStyle.Bold);
@@ -454,7 +511,7 @@ namespace Registro_Docente_360.Forms
                     }
                 }
 
-                // 🔄 Recargar datos desde base
+                // Recargar datos desde base
                 tablaAlumnos.Grid.Rows.Clear();
                 var estudiantes = alumnoController.ObtenerEstudiantesPorDocente(Sesion.IdUsuario);
                 foreach (var estudiante in estudiantes)
@@ -513,5 +570,131 @@ namespace Registro_Docente_360.Forms
                 CargarEstudiantes(idDocenteSeleccionado);
             }
         }
+
+        private void ConfigurarAutoformateoCedula()
+        {
+            tablaAlumnos.Grid.CellEndEdit += (sender, e) =>
+            {
+                if (e.ColumnIndex == tablaAlumnos.Grid.Columns["colCedula"].Index)
+                {
+                    var celda = tablaAlumnos.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    string cedula = celda.Value?.ToString()?.Replace("-", "") ?? "";
+
+                    // Autoformateo (9 dígitos → formato #-####-####)
+                    if (cedula.Length == 9)
+                    {
+                        celda.Value = $"{cedula[0]}-{cedula.Substring(1, 4)}-{cedula.Substring(5)}";
+
+                        // Validación de duplicados EN TIEMPO REAL
+                        ValidarDuplicadosEnGrid(e.RowIndex, cedula);
+                    }
+                }
+            };
+        }
+
+        private string NormalizarCedula(string cedula)
+        {
+            // Elimina todos los caracteres no numéricos
+            return Regex.Replace(cedula ?? "", "[^0-9]", "");
+        }
+
+
+        private void ValidarDuplicadosEnGrid(int filaActual, string cedulaNormalizada)
+        {
+            foreach (DataGridViewRow fila in tablaAlumnos.Grid.Rows)
+            {
+                if (fila.Index != filaActual && !fila.IsNewRow)
+                {
+                    string otraCedula = fila.Cells["colCedula"].Value?.ToString()?.Replace("-", "") ?? "";
+
+                    if (otraCedula == cedulaNormalizada)
+                    {
+                        MessageBox.Show($"¡ALERTA! La cédula {cedulaNormalizada} ya existe en la fila {fila.Index + 1}",
+                                      "Duplicado detectado",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+
+                        // Enfoca la celda problemática
+                        tablaAlumnos.Grid.CurrentCell = tablaAlumnos.Grid.Rows[filaActual].Cells["colCedula"];
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Nombres_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var tb = sender as TextBox;
+
+            // Permitir teclas de control (Backspace, etc.)
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Permitir letras con acentos (tildes) y la letra ñ
+            if (char.IsLetter(e.KeyChar) ||
+                "áéíóúÁÉÍÓÚñÑ".Contains(e.KeyChar))
+                return;
+
+            // Espacio: no permitir al inicio ni dobles espacios
+            if (e.KeyChar == ' ')
+            {
+                int pos = tb.SelectionStart;
+                string text = tb.Text;
+
+                // espacio al inicio
+                if (pos == 0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                // doble espacio (carácter anterior es espacio)
+                if (pos > 0 && text.Length > 0 && text[pos - 1] == ' ')
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                return; // permitir un solo espacio
+            }
+
+            // Permitir guion/apóstrofe para apellidos compuestos (O'Neill, María-José)
+            if (e.KeyChar == '-' || e.KeyChar == '\'')
+            {
+                // no permitir como primer caracter
+                if ((sender as TextBox).SelectionStart == 0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+                return;
+            }
+
+            // Bloquear todo lo demás (números, signos, etc.)
+            e.Handled = true;
+        }
+
+        // Al salir del control, normaliza espacios y aplica TitleCase.
+        private void Nombres_Leave(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb == null) return;
+
+            // Trim y colapsar espacios múltiples
+            string texto = tb.Text.Trim();
+            texto = Regex.Replace(texto, "\\s+", " ");
+
+            // TitleCase 
+            var culture = new CultureInfo("es-CR");
+            var ti = culture.TextInfo;
+
+            // ToTitleCase ponerlo en mayuscula primera letra
+            texto = ti.ToTitleCase(texto.ToLower(culture));
+
+            tb.Text = texto;
+        }
+
+
+
     }
 }

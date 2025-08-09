@@ -38,6 +38,7 @@
             this.lblSeccion = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbDocentes = new System.Windows.Forms.ComboBox();
+            this.lblNomDocente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblAlumnos = new System.Windows.Forms.Label();
             this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
@@ -49,7 +50,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnAgregar = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.lblNomDocente = new System.Windows.Forms.Label();
             this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -125,10 +125,10 @@
             this.btnEditarAlumnos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditarAlumnos.ForeColor = System.Drawing.Color.White;
             this.btnEditarAlumnos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditarAlumnos.Location = new System.Drawing.Point(-24, -10);
+            this.btnEditarAlumnos.Location = new System.Drawing.Point(-40, -11);
             this.btnEditarAlumnos.Name = "btnEditarAlumnos";
             this.btnEditarAlumnos.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnEditarAlumnos.Size = new System.Drawing.Size(247, 77);
+            this.btnEditarAlumnos.Size = new System.Drawing.Size(273, 80);
             this.btnEditarAlumnos.TabIndex = 2;
             this.btnEditarAlumnos.Text = "Editar Alumnos";
             this.btnEditarAlumnos.UseVisualStyleBackColor = false;
@@ -179,8 +179,8 @@
             this.tableLayoutPanel3.ColumnCount = 4;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 653F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 628F));
             this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblNomDocente, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 0);
@@ -198,10 +198,21 @@
             this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(185, 4);
+            this.cmbDocentes.Location = new System.Drawing.Point(207, 4);
             this.cmbDocentes.Name = "cmbDocentes";
             this.cmbDocentes.Size = new System.Drawing.Size(150, 25);
             this.cmbDocentes.TabIndex = 12;
+            // 
+            // lblNomDocente
+            // 
+            this.lblNomDocente.AutoSize = true;
+            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
+            this.lblNomDocente.Location = new System.Drawing.Point(108, 0);
+            this.lblNomDocente.Name = "lblNomDocente";
+            this.lblNomDocente.Size = new System.Drawing.Size(86, 25);
+            this.lblNomDocente.TabIndex = 10;
+            this.lblNomDocente.Text = "Nombre";
             // 
             // label2
             // 
@@ -370,17 +381,6 @@
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // lblNomDocente
-            // 
-            this.lblNomDocente.AutoSize = true;
-            this.lblNomDocente.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomDocente.ForeColor = System.Drawing.Color.Teal;
-            this.lblNomDocente.Location = new System.Drawing.Point(108, 0);
-            this.lblNomDocente.Name = "lblNomDocente";
-            this.lblNomDocente.Size = new System.Drawing.Size(68, 34);
-            this.lblNomDocente.TabIndex = 10;
-            this.lblNomDocente.Text = "Nombre";
             // 
             // tablaAlumnos
             // 
