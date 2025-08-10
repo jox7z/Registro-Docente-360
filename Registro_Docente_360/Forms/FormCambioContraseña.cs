@@ -14,7 +14,7 @@ namespace Registro_Docente_360.Forms
 
         private int idUsuario; // Declarar una variable para guardar el id
 
-     
+
         public FormCambioContraseña(int idUsuario)
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace Registro_Docente_360.Forms
         {
             MostrarPanel(pnConfirmarCorreo);
         }
-       
+
 
         private void MostrarPanel(Panel panelMostrar)
         {
@@ -48,7 +48,7 @@ namespace Registro_Docente_360.Forms
             // Ajustar el tamaño del formulario según el panel mostrado
             if (panelMostrar == pnConfirmarCorreo)
             {
-                this.Size = new System.Drawing.Size(490,200);
+                this.Size = new System.Drawing.Size(490, 200);
             }
             else if (panelMostrar == pnConfirmarCodigo)
             {
@@ -118,7 +118,7 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-       
+
 
         private string GenerarCodigoAleatorio()
         {
@@ -202,36 +202,44 @@ namespace Registro_Docente_360.Forms
             string nuevaContraseña = txtNuevaContra.Text;
             string confirmarContraseña = txtConfirmarContra.Text;
 
-            if (nuevaContraseña == confirmarContraseña)
-            {
-                // Verificar si el correo existe y obtener el ID
-                string correo = txtCorreo.Text; // Usamos el correo del formulario
-                using (var contexto = new RegistroDocenteEntities())
-                {
-                    var usuario = contexto.Usuarios.FirstOrDefault(u => u.correo == correo);
-
-                    if (usuario != null)
-                    {
-                        // Encriptar la nueva contraseña usando el controlador
-                        AlumnoController controlador = new AlumnoController();
-                        string contrasenaEncriptada = controlador.EncriptarContrasena(nuevaContraseña);
-
-                        // Actualizar la contraseña
-                        ActualizarContraseña(usuario.id_usuario, contrasenaEncriptada);
-                        MessageBox.Show("Contraseña actualizada correctamente.","Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo encontrar el usuario asociado a este correo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
+            // Validar si las contraseñas coinciden
+            if (nuevaContraseña != confirmarContraseña)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar longitud mínima de la nueva contraseña (6 caracteres)
+            if (nuevaContraseña.Length < 6)
+            {
+                MessageBox.Show("La nueva contraseña debe tener al menos 6 caracteres.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verificar si el correo existe y obtener el ID
+            string correo = txtCorreo.Text; // Usamos el correo del formulario
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var usuario = contexto.Usuarios.FirstOrDefault(u => u.correo == correo);
+
+                if (usuario != null)
+                {
+                    // Encriptar la nueva contraseña usando el controlador
+                    AlumnoController controlador = new AlumnoController();
+                    string contrasenaEncriptada = controlador.EncriptarContrasena(nuevaContraseña);
+
+                    // Actualizar la contraseña
+                    ActualizarContraseña(usuario.id_usuario, contrasenaEncriptada);
+                    MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo encontrar el usuario asociado a este correo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
 
 

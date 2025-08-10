@@ -166,6 +166,18 @@ namespace Registro_Docente_360.ControlesUsuario
                         // Agregar fila y aplicar color
                         int rowIndex = dataGridPerso1.Grid.Rows.Add(fila);
 
+                        // Aplicar color a las celdas
+                        for (int colIndex = 1; colIndex <= 5; colIndex++)
+                        {
+                            var cell = dataGridPerso1.Grid.Rows[rowIndex].Cells[colIndex];
+                            string valor = cell.Value?.ToString().Trim().ToLower() ?? "";
+
+                            if (valor == "ausente") cell.Style.BackColor = Color.IndianRed;
+                            else if (valor == "tarde") cell.Style.BackColor = Color.Khaki;
+                            else if (valor == "presente") cell.Style.BackColor = Color.LightGreen;
+                            else if (valor == "justificado") cell.Style.BackColor = Color.DeepSkyBlue;
+                            else cell.Style.BackColor = Color.White;
+                        }
                     }
 
                     conn.Close();
@@ -341,7 +353,45 @@ namespace Registro_Docente_360.ControlesUsuario
             if (e.Control is ComboBox comboBox)
             {
                 comboBox.Cursor = Cursors.Hand;
+                comboBox.DrawMode = DrawMode.OwnerDrawFixed; // Habilitar el evento de dibujo
+                comboBox.DrawItem += ComboBox_DrawItem; // Asignar el evento de dibujo
             }
+        }
+
+        private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            // Verificar si el índice es válido
+            if (e.Index < 0 || e.Index >= comboBox.Items.Count) return;
+
+            string itemText = comboBox.Items[e.Index].ToString();
+
+            // Define los colores según el texto del item
+            Color itemColor = Color.White; // Color predeterminado
+
+            if (itemText == "Presente") itemColor = Color.LightGreen;
+            else if (itemText == "Ausente") itemColor = Color.IndianRed;
+            else if (itemText == "Justificado") itemColor = Color.DeepSkyBlue;
+            else if (itemText == "Tarde") itemColor = Color.Khaki;
+
+            // Dibuja el fondo del item
+            e.DrawBackground();
+
+            // Dibuja el texto del item con el color de fondo definido
+            using (Brush brush = new SolidBrush(itemColor))
+            {
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            // Dibuja el texto
+            using (Brush textBrush = new SolidBrush(e.ForeColor))
+            {
+                e.Graphics.DrawString(itemText, e.Font, textBrush, e.Bounds);
+            }
+
+            // Dibuja el borde del item
+            e.DrawFocusRectangle();
         }
 
         private void cmbDocentes_SelectedIndexChanged(object sender, EventArgs e)

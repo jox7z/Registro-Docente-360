@@ -4,6 +4,7 @@ using Modelos.EntityFramework;
 using Registro_Docente_360.Controladores;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -21,7 +22,8 @@ namespace Registro_Docente_360.Utilidades
 
             try
             {
-                PdfWriter.GetInstance(doc, new FileStream(nombreArchivo, FileMode.Create));
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(nombreArchivo, FileMode.Create));
+                writer.PageEvent = new FooterHelper();
                 doc.Open();
 
                 // Agregar el periodo al encabezado
@@ -34,6 +36,10 @@ namespace Registro_Docente_360.Utilidades
                 );
                 encabezado.Alignment = Element.ALIGN_LEFT;
                 doc.Add(encabezado);
+
+                // Línea divisoria
+                doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                doc.Add(new Paragraph(" "));
 
                 // Tabla PDF con columnas del DataGridView
                 PdfPTable tabla = new PdfPTable(dgv.Columns.Count);
@@ -76,11 +82,11 @@ namespace Registro_Docente_360.Utilidades
             try
             {
                 // Crear el documento PDF
-                Document doc = new Document(PageSize.A4.Rotate());
-                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create)); // Usa la ruta proporcionada
-
-                // Abrir el documento para escribir
+                Document doc = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                writer.PageEvent = new FooterHelper();
                 doc.Open();
+
                 // Encabezado con nombre, sección y materia
                 Paragraph encabezado = new Paragraph(
                     "Reporte de notas\n" +
@@ -92,6 +98,10 @@ namespace Registro_Docente_360.Utilidades
 
                 encabezado.Alignment = Element.ALIGN_LEFT;
                 doc.Add(encabezado);
+
+                // Línea divisoria
+                doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                doc.Add(new Paragraph(" "));
 
                 // Crear la tabla
                 PdfPTable table = new PdfPTable(9);
@@ -184,11 +194,12 @@ namespace Registro_Docente_360.Utilidades
         public static void ExportarNotasPorEstudiante(List<Clases> clases, Estudiantes estudiante, string filePath, string Seccion, string nomDocente, string apeDocente, string periodoSeleccionado)
         {
             // Crear el documento PDF
-            Document doc = new Document(PageSize.A4.Rotate(), 10f, 10f, 20f, 20f);
-            PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));  // Usar la ruta proporcionada
-
-            // Abrir el documento para escribir
+            Document doc = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+            writer.PageEvent = new FooterHelper();
             doc.Open();
+
+       
 
             // Encabezado con nombre, sección y materia
             Paragraph encabezado = new Paragraph(
@@ -202,6 +213,10 @@ namespace Registro_Docente_360.Utilidades
 
             encabezado.Alignment = Element.ALIGN_LEFT;
             doc.Add(encabezado);
+
+            // Línea divisoria
+            doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(new Paragraph(" "));
 
             // Crear la tabla
             PdfPTable table = new PdfPTable(7);
@@ -319,7 +334,8 @@ namespace Registro_Docente_360.Utilidades
         {
             // Crear el documento PDF
             Document doc = new Document(PageSize.A4);
-            PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+            writer.PageEvent = new FooterHelper();
             doc.Open();
             // Crear el estilo para los titulos
             Font fontEncabezado = FontFactory.GetFont("Arial", 10, Font.BOLD);
@@ -335,6 +351,10 @@ namespace Registro_Docente_360.Utilidades
             );
             encabezado.Alignment = Element.ALIGN_LEFT;
             doc.Add(encabezado);
+
+            // Línea divisoria
+            doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(new Paragraph(" "));
 
             // Si es semanal, agregamos solo 5 columnas (Lunes a Viernes), si es mensual agregamos una columna por día
             if (Tiempo == "Semanal")
@@ -457,39 +477,45 @@ namespace Registro_Docente_360.Utilidades
             }
             else if (Tiempo == "Periodo académico")
             {
-                int anho = fechaInicioSemana.Year;
-                // Agrupar los meses según el periodo seleccionado
-                List<int> mesesDelPeriodo = new List<int>();
+                // Obtener las fechas exactas del periodo
+                DateTime fechaInicioPeriodo = mesSeleccionado == "Primer Periodo"
+                    ? new DateTime(fechaInicioSemana.Year, 2, 3)
+                    : new DateTime(fechaInicioSemana.Year, 5, 26);
 
-                if (mesSeleccionado == "Primer Periodo")
-                {
-                    mesesDelPeriodo.AddRange(new List<int> { 2, 3, 4, 5, 6 });
-                }
-                else if (mesSeleccionado == "Segundo Periodo")
-                {
-                    mesesDelPeriodo.AddRange(new List<int> { 7, 8, 9, 10, 11, 12 });
-                }
+                DateTime fechaFinPeriodo = mesSeleccionado == "Primer Periodo"
+                    ? new DateTime(fechaInicioSemana.Year, 5, 25)
+                    : new DateTime(fechaInicioSemana.Year, 12, 10);
 
+                // Obtener los meses involucrados en el periodo
+                List<int> mesesDelPeriodo = Enumerable.Range(fechaInicioPeriodo.Month,
+                    (fechaFinPeriodo.Month - fechaInicioPeriodo.Month) + 1).ToList();
 
                 foreach (var mes in mesesDelPeriodo)
                 {
                     doc.Add(new Paragraph(" "));
                     doc.Add(new Paragraph($"Mes: {new DateTime(fechaInicioSemana.Year, mes, 1).ToString("MMMM", new System.Globalization.CultureInfo("es-ES"))}"));
                     doc.Add(new Paragraph(" "));
-                    // Obtener todos los días laborables del mes
-                    DateTime primerDiaMes = new DateTime(anho, mes, 1);
 
+                    // Calcular el primer y último día del mes que caen dentro del periodo
+                    DateTime primerDiaMes = new DateTime(fechaInicioSemana.Year, mes, 1);
+                    DateTime ultimoDiaMes = new DateTime(fechaInicioSemana.Year, mes, DateTime.DaysInMonth(fechaInicioSemana.Year, mes));
+
+                    // Ajustar para que no salgan del rango del periodo
+                    DateTime inicioMes = primerDiaMes < fechaInicioPeriodo ? fechaInicioPeriodo : primerDiaMes;
+                    DateTime finMes = ultimoDiaMes > fechaFinPeriodo ? fechaFinPeriodo : ultimoDiaMes;
 
                     List<DateTime> diasLaborables = new List<DateTime>();
 
-                    for (DateTime dia = primerDiaMes; dia.Month == mes; dia = dia.AddDays(1))
+                    for (DateTime dia = inicioMes; dia <= finMes; dia = dia.AddDays(1))
                     {
                         if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
                         {
                             diasLaborables.Add(dia);
                         }
                     }
+
                     diasLaborables = diasLaborables.OrderBy(d => d).ToList();
+
                     // Agrupar días por semana
                     List<List<DateTime>> semanas = AgruparDiasEnSemanasPeriodo(diasLaborables);
 
@@ -527,21 +553,17 @@ namespace Registro_Docente_360.Utilidades
                             foreach (var dia in semana)
                             {
                                 string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, dia);
-
                                 fila.Add(estadoAsistencia);
-
-
                             }
+
                             foreach (var valor in fila)
                             {
                                 PdfPCell celdaAsistencia = new PdfPCell(new Phrase(valor));
-                                celdaAsistencia.FixedHeight = alturaFila;  // Altura fija para la celda de asistencia
+                                celdaAsistencia.FixedHeight = alturaFila;
                                 table.AddCell(celdaAsistencia);
                             }
-
                         }
                         doc.Add(table);
-
                     }
                 }
             }
@@ -608,264 +630,293 @@ namespace Registro_Docente_360.Utilidades
         {
             // Crear el documento PDF
             Document doc = new Document(PageSize.A4);
-            PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+            writer.PageEvent = new FooterHelper();
             doc.Open();
             var estudiante = estudiantes.FirstOrDefault();
 
-            // Inicializar contadores de presencia y ausencia
-            int totalPresentes = 0;
-            int totalAusentes = 0;
-
-            // Contar los días presentes y ausentes en el caso de "Semanal", "Mensual" y "Periodo académico"
-            if (Tiempo == "Semanal")
-            {
-                // Calcular los días presentes y ausentes para la semana
-                for (int i = 0; i < 5; i++)
-                {
-                    DateTime fechaDia = fechaInicioSemana.AddDays(i); // Día correspondiente de la semana
-                    string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, fechaDia);
-                    if (estadoAsistencia == "Presente")
-                        totalPresentes++;
-                    else if (estadoAsistencia == "Ausente")
-                        totalAusentes++;
-                    else if (estadoAsistencia == "Tarde")
-                        totalAusentes++;
-                    else if (estadoAsistencia == "Justificado")
-                        totalPresentes++;
-                }
-            }
-            else if (Tiempo == "Mensual")
-            {
-                foreach (var dia in diasDelMes)
-                {
-                    string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, dia);
-                    if (estadoAsistencia == "Presente")
-                        totalPresentes++;
-                    else if (estadoAsistencia == "Ausente")
-                        totalAusentes++;
-                }
-            }
-            else if (Tiempo == "Periodo académico")
-            {
-                foreach (var mes in mesesPeriodo)
-                {
-                    DateTime primerDiaMes = new DateTime(fechaInicioSemana.Year, mes, 1);
-                    var diasLaborables = new List<DateTime>();
-
-                    for (DateTime dia = primerDiaMes; dia.Month == mes; dia = dia.AddDays(1))
-                    {
-                        if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
-                        {
-                            diasLaborables.Add(dia);
-                            string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, dia);
-                            if (estadoAsistencia == "Presente")
-                                totalPresentes++;
-                            else if (estadoAsistencia == "Ausente")
-                                totalAusentes++;
-                        }
-                    }
-                }
-            }
-
-            // Encabezado con los totales de presencia y ausencia
+            // 1. ENCABEZADO PRINCIPAL
             Paragraph encabezado = new Paragraph(
-                $"Reporte de asistencia\n" +
+                "REPORTE DE ASISTENCIA INDIVIDUAL\n\n" +
                 $"Estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}\n" +
+                $"Cédula: {estudiante.cedula_estudiante}\n" +
                 $"Sección: {Seccion}\n" +
-                $"Mes: {mesSeleccionado} \n" +
                 $"Docente: {nomDocente} {apeDocente}\n" +
-                $"Ausencias: {totalAusentes}  |  Presentes: {totalPresentes}\n\n" ,// Mostrar los totales
+                $"Periodo: {mesSeleccionado}\n\n",
                 FontFactory.GetFont("Arial", 12, Font.BOLD)
             );
             encabezado.Alignment = Element.ALIGN_LEFT;
             doc.Add(encabezado);
 
-            // Crear el estilo para los titulos
+            // Línea divisoria
+            doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(new Paragraph(" "));
+
+            // 2. INICIALIZAR CONTADORES
+            int totalPresentes = 0;
+            int totalAusentes = 0;
+            int anho = fechaInicioSemana.Year;
+
+            // 3. CONFIGURACIÓN DE ESTILOS
             Font fontEncabezado = FontFactory.GetFont("Arial", 10, Font.BOLD);
             BaseColor colorFondo = BaseColor.LIGHT_GRAY;
 
+            // 4. PROCESAR POR TIPO DE REPORTE
             if (Tiempo == "Semanal")
             {
-                // Si es semanal, se necesita solo una tabla que tenga Lunes a Viernes
-                PdfPTable table = new PdfPTable(5); // Incluye cédula, nombre y los 5 días de la semana (lunes a viernes)
-                table.WidthPercentage = 110;
+                // TABLA SEMANAL
+                PdfPTable table = new PdfPTable(5);
+                table.WidthPercentage = 100;
                 float alturaFila = 20f;
 
-
-                // Títulos de columna
-                string[] diasSemana = new string[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
-                foreach (var dia in diasSemana) //pone el estilo a cada titulo
+                // Encabezados de días
+                string[] diasSemana = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
+                foreach (var dia in diasSemana)
                 {
-                    // Calcular la fecha de cada día basado en la fecha de inicio de la semana
-                    DateTime fechaDia = fechaInicioSemana.AddDays(Array.IndexOf(diasSemana, dia)); // Calcula el día sumando días a la fecha de inicio de la semana
-                    string titulos = $"{dia} {fechaDia.Day}";
-                    PdfPCell celdaEncabezado = new PdfPCell(new Phrase(titulos, fontEncabezado));
-                    celdaEncabezado.BackgroundColor = colorFondo;
-                    celdaEncabezado.FixedHeight = alturaFila;
-                    table.AddCell(celdaEncabezado);
-                }
-                if (estudiante != null)
-                {
-                    // Crear la fila con los días de la semana (lunes a viernes)
-                    var fila = new List<string>();
-
-                    // Agregar los días de la semana (lunes a viernes) a la fila
-                    for (int i = 0; i < 5; i++)
-                    {
-                        DateTime fechaDia = fechaInicioSemana.AddDays(i); // Día correspondiente de la semana
-                        string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, fechaDia);
-                        fila.Add(estadoAsistencia);  // Agregar el estado de asistencia al día correspondiente
-                    }
-
-                    // Agregar los valores a la tabla
-                    foreach (var valor in fila)
-                    {
-                        PdfPCell celdaAsistencia = new PdfPCell(new Phrase(valor));
-                        celdaAsistencia.FixedHeight = alturaFila;  // Altura fija para la celda de asistencia
-                        table.AddCell(celdaAsistencia);
-                    }
+                    DateTime fechaDia = fechaInicioSemana.AddDays(Array.IndexOf(diasSemana, dia));
+                    PdfPCell celda = new PdfPCell(new Phrase($"{dia} {fechaDia.Day}", fontEncabezado));
+                    celda.BackgroundColor = colorFondo;
+                    celda.HorizontalAlignment = Element.ALIGN_CENTER;
+                    celda.FixedHeight = alturaFila;
+                    table.AddCell(celda);
                 }
 
-                // Agregar la tabla al documento
+                // Datos de asistencia
+                for (int i = 0; i < 5; i++)
+                {
+                    DateTime fechaDia = fechaInicioSemana.AddDays(i);
+                    string estado = "";
+
+                    // Obtener estado de asistencia directamente
+                    using (var contexto = new RegistroDocenteEntities())
+                    {
+                        var asistencia = contexto.Asistencia
+                            .FirstOrDefault(a => a.id_estudiante == estudiante.id_estudiante && a.fecha == fechaDia.Date);
+                        estado = asistencia?.estado ?? "No registrado";
+                    }
+
+                    // Actualizar contadores
+                    if (estado == "Presente" || estado == "Justificado") totalPresentes++;
+                    else if (estado == "Ausente" || estado == "Tarde") totalAusentes++;
+
+                    PdfPCell celda = new PdfPCell(new Phrase(estado, FontFactory.GetFont("Arial", 9)));
+                    celda.HorizontalAlignment = Element.ALIGN_CENTER;
+                    celda.FixedHeight = alturaFila;
+                    table.AddCell(celda);
+                }
+
                 doc.Add(table);
             }
-            else if (Tiempo == "Mensual")// Si es mensual
+            else if (Tiempo == "Mensual")
             {
-                // Agrupar los días en semanas
-                List<List<DateTime>> semanas = AgruparDiasEnSemanas(diasDelMes);
+                // TABLAS MENSUALES - Agrupación directa sin método auxiliar
+                List<List<DateTime>> semanas = new List<List<DateTime>>();
+                List<DateTime> semanaActual = new List<DateTime>();
 
-                // Por cada semana, crear una nueva tabla
+                foreach (var dia in diasDelMes)
+                {
+                    semanaActual.Add(dia);
+
+                    if (semanaActual.Count == 5) // Semana completa (L-V)
+                    {
+                        semanas.Add(new List<DateTime>(semanaActual));
+                        semanaActual.Clear();
+                    }
+                }
+
+                if (semanaActual.Count > 0)
+                {
+                    semanas.Add(semanaActual);
+                }
+
+                // Generar tablas
                 foreach (var semana in semanas)
                 {
-                    // Crear una nueva tabla para la semana actual
                     PdfPTable table = new PdfPTable(semana.Count);
-
-                    table.WidthPercentage = 110;
+                    table.WidthPercentage = 100;
                     float alturaFila = 20f;
 
-
-                    // Títulos de los días (por ejemplo "Lunes 1", "Martes 2", etc.)
+                    // Encabezados
                     foreach (var dia in semana)
                     {
-                        string tituloDia = $"{dia:dddd dd}"; // Formato: "Lunes 01"
-                        PdfPCell celdaEncabezado = new PdfPCell(new Phrase(tituloDia, fontEncabezado));
-                        celdaEncabezado.BackgroundColor = colorFondo;
-                        celdaEncabezado.FixedHeight = alturaFila;
-                        table.AddCell(celdaEncabezado);
+                        PdfPCell celda = new PdfPCell(new Phrase($"{dia:dddd dd}", fontEncabezado));
+                        celda.BackgroundColor = colorFondo;
+                        celda.HorizontalAlignment = Element.ALIGN_CENTER;
+                        celda.FixedHeight = alturaFila;
+                        table.AddCell(celda);
                     }
 
-                    if (estudiante != null)
+                    // Datos
+                    foreach (var dia in semana)
                     {
-                        // Crear la fila con los días de la semana (lunes a viernes)
-                        var fila = new List<string>();
+                        string estado = "";
 
-                        // Agregar los días de la semana (en la semana actual)
-                        foreach (var dia in semana)
+                        // Obtener estado de asistencia directamente
+                        using (var contexto = new RegistroDocenteEntities())
                         {
-                            string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, dia);
-                            fila.Add(estadoAsistencia);  // Agregar el estado de asistencia para el día correspondiente
+                            var asistencia = contexto.Asistencia
+                                .FirstOrDefault(a => a.id_estudiante == estudiante.id_estudiante && a.fecha == dia.Date);
+                            estado = asistencia?.estado ?? "No registrado";
                         }
 
-                        // Agregar los valores a la tabla
-                        foreach (var valor in fila)
-                        {
-                            PdfPCell celdaAsistencia = new PdfPCell(new Phrase(valor));
-                            celdaAsistencia.FixedHeight = alturaFila;  // Altura fija para la celda de asistencia
-                            table.AddCell(celdaAsistencia);
-                        }
+                        // Actualizar contadores
+                        if (estado == "Presente" || estado == "Justificado") totalPresentes++;
+                        else if (estado == "Ausente" || estado == "Tarde") totalAusentes++;
+
+                        PdfPCell celda = new PdfPCell(new Phrase(estado, FontFactory.GetFont("Arial", 9)));
+                        celda.HorizontalAlignment = Element.ALIGN_CENTER;
+                        celda.FixedHeight = alturaFila;
+                        table.AddCell(celda);
                     }
 
-                    // Agregar la tabla al documento
                     doc.Add(table);
-
-                    // Agregar un espacio (salto de línea) entre las tablas de cada semana
-                    doc.Add(new Paragraph(" "));  // Esto agrega un salto de línea entre las tablas de las semanas
+                    doc.Add(new Paragraph(" ")); // Espacio entre semanas
                 }
             }
             else if (Tiempo == "Periodo académico")
             {
-                int anho = fechaInicioSemana.Year;
-                // Agrupar los meses según el periodo seleccionado
-                List<int> mesesDelPeriodo = new List<int>();
-
-                if (mesSeleccionado == "Primer Periodo")
-                {
-                    mesesDelPeriodo.AddRange(new List<int> { 2, 3, 4, 5, 6 });
-                }
-                else if (mesSeleccionado == "Segundo Periodo")
-                {
-                    mesesDelPeriodo.AddRange(new List<int> { 7, 8, 9, 10, 11, 12 });
-                }
+                // DEFINIR MESES DEL PERIODO
+                List<int> mesesDelPeriodo = mesSeleccionado == "Primer Periodo" ?
+                    new List<int> { 2, 3, 4, 5 } : // Febrero a Mayo
+                    new List<int> { 8, 9, 10, 11 }; // Agosto a Noviembre
 
                 foreach (var mes in mesesDelPeriodo)
                 {
+                    // TÍTULO DEL MES
+                    doc.Add(new Paragraph($"MES: {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes).ToUpper()}",
+                        FontFactory.GetFont("Arial", 11, Font.BOLD)));
                     doc.Add(new Paragraph(" "));
-                    doc.Add(new Paragraph($"Mes: {new DateTime(fechaInicioSemana.Year, mes, 1).ToString("MMMM", new System.Globalization.CultureInfo("es-ES"))}\n\n"));
 
-                    // Obtener todos los días laborables del mes
+                    // OBTENER DÍAS LABORABLES DEL MES
                     DateTime primerDiaMes = new DateTime(anho, mes, 1);
+                    DateTime ultimoDiaMes = new DateTime(anho, mes, DateTime.DaysInMonth(anho, mes));
 
-
-                    List<DateTime> diasLaborables = new List<DateTime>();
-
-                    for (DateTime dia = primerDiaMes; dia.Month == mes; dia = dia.AddDays(1))
+                    var diasLaborables = new List<DateTime>();
+                    for (DateTime dia = primerDiaMes; dia <= ultimoDiaMes; dia = dia.AddDays(1))
                     {
                         if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
                         {
                             diasLaborables.Add(dia);
                         }
                     }
-                    diasLaborables = diasLaborables.OrderBy(d => d).ToList();
-                    // Agrupar días por semana
-                    List<List<DateTime>> semanas = AgruparDiasEnSemanasPeriodo(diasLaborables);
 
+                    // AGRUPAR POR SEMANAS NATURALES (sin método auxiliar)
+                    var semanas = new List<List<DateTime>>();
+                    var semanaActual = new List<DateTime>();
+
+                    foreach (var dia in diasLaborables)
+                    {
+                        semanaActual.Add(dia);
+
+                        if (dia.DayOfWeek == DayOfWeek.Friday || dia == diasLaborables.Last())
+                        {
+                            semanas.Add(semanaActual);
+                            semanaActual = new List<DateTime>();
+                        }
+                    }
+
+                    // GENERAR TABLAS
                     foreach (var semana in semanas)
                     {
-                        doc.Add(new Paragraph(" "));
-                        PdfPTable table = new PdfPTable(semana.Count); // Cédula + Nombre + días
-                        table.WidthPercentage = 110;
+                        PdfPTable table = new PdfPTable(semana.Count);
+                        table.WidthPercentage = 100;
                         float alturaFila = 20f;
 
+                        // ENCABEZADOS
                         foreach (var dia in semana)
                         {
-                            string tituloDia = $"{dia:dddd dd}"; // Ej: "Lunes 03"
-                            PdfPCell celda = new PdfPCell(new Phrase(tituloDia, fontEncabezado));
+                            PdfPCell celda = new PdfPCell(new Phrase($"{dia:dddd dd}", fontEncabezado));
                             celda.BackgroundColor = colorFondo;
+                            celda.HorizontalAlignment = Element.ALIGN_CENTER;
                             celda.FixedHeight = alturaFila;
                             table.AddCell(celda);
                         }
 
-                        // Cargar asistencia
-                        if (estudiante != null)
+                        // DATOS
+                        foreach (var dia in semana)
                         {
-                            var fila = new List<string>();
+                            string estado = "";
 
-                            foreach (var dia in semana)
+                            // Obtener estado de asistencia directamente
+                            using (var contexto = new RegistroDocenteEntities())
                             {
-                                string estadoAsistencia = ObtenerEstadoAsistencia(estudiante.id_estudiante, dia);
-                                fila.Add(estadoAsistencia);
-
-
+                                var asistencia = contexto.Asistencia
+                                    .FirstOrDefault(a => a.id_estudiante == estudiante.id_estudiante && a.fecha == dia.Date);
+                                estado = asistencia?.estado ?? "No registrado";
                             }
-                            foreach (var valor in fila)
-                            {
-                                PdfPCell celdaAsistencia = new PdfPCell(new Phrase(valor));
-                                celdaAsistencia.FixedHeight = alturaFila;  // Altura fija para la celda de asistencia
-                                table.AddCell(celdaAsistencia);
-                            }
-                            doc.Add(table);
+
+                            // Actualizar contadores
+                            if (estado == "Presente" || estado == "Justificado") totalPresentes++;
+                            else if (estado == "Ausente" || estado == "Tarde") totalAusentes++;
+
+                            PdfPCell celda = new PdfPCell(new Phrase(estado, FontFactory.GetFont("Arial", 9)));
+                            celda.HorizontalAlignment = Element.ALIGN_CENTER;
+                            celda.FixedHeight = alturaFila;
+                            table.AddCell(celda);
                         }
+
+                        doc.Add(table);
+                        doc.Add(new Paragraph(" ")); // Espacio entre semanas
                     }
-
                 }
-
             }
 
-            // Cerrar el documento
             doc.Close();
         }
 
+        // Clase para el footer
+        public class FooterHelper : PdfPageEventHelper
+        {
+            private PdfTemplate template;
+            private BaseFont baseFont;
 
+            public override void OnOpenDocument(PdfWriter writer, Document document)
+            {
+                baseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                template = writer.DirectContent.CreateTemplate(50, 50);
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                base.OnEndPage(writer, document);
+
+                // Configurar el footer
+                PdfContentByte cb = writer.DirectContent;
+                cb.SetColorFill(BaseColor.DARK_GRAY);
+                cb.SetFontAndSize(baseFont, 10);
+
+                // Texto del footer (izquierda)
+                string footerText = "Registro Docente 360";
+                float x = document.LeftMargin;
+                float y = document.BottomMargin - 10;
+                cb.BeginText();
+                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, footerText, x, y, 0);
+                cb.EndText();
+
+                // Número de página (derecha)
+                string pageText = "Página " + writer.PageNumber + " de ";
+                float len = baseFont.GetWidthPoint(pageText, 10);
+                float pageX = document.Right - len - 20;
+                cb.BeginText();
+                cb.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, pageText, pageX, y, 0);
+                cb.EndText();
+
+                // Agregar el total de páginas
+                cb.AddTemplate(template, pageX + len, y);
+            }
+
+            public override void OnCloseDocument(PdfWriter writer, Document document)
+            {
+                base.OnCloseDocument(writer, document);
+
+                // Establecer el total de páginas
+                template.BeginText();
+                template.SetFontAndSize(baseFont, 10);
+                template.SetTextMatrix(0, 0);
+                template.ShowText("" + (writer.PageNumber));
+                template.EndText();
+            }
+        }
 
         public static string ObtenerEstadoAsistencia(int idEstudiante, DateTime fecha)
         {

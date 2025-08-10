@@ -31,12 +31,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblVentanaReportes = new System.Windows.Forms.Label();
             this.panelReporte = new System.Windows.Forms.Panel();
-            this.cmbDocentes = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbTipoReporte = new System.Windows.Forms.ComboBox();
             this.lblReporte = new System.Windows.Forms.Label();
+            this.cmbDocentes = new System.Windows.Forms.ComboBox();
             this.panelTiempoReport = new System.Windows.Forms.Panel();
-            this.cmbTiempo = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTiempoReporte = new System.Windows.Forms.Label();
+            this.cmbTiempo = new System.Windows.Forms.ComboBox();
             this.PanelFechas = new System.Windows.Forms.Panel();
             this.tableFechas = new System.Windows.Forms.TableLayoutPanel();
             this.cmbSemanas = new System.Windows.Forms.ComboBox();
@@ -46,41 +48,39 @@
             this.cmbMeses = new System.Windows.Forms.ComboBox();
             this.lblMeses = new System.Windows.Forms.Label();
             this.panelFiltros = new System.Windows.Forms.Panel();
-            this.cmbFiltro = new System.Windows.Forms.ComboBox();
-            this.cmbMaterias = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblEstudiante = new System.Windows.Forms.Label();
+            this.cmbMaterias = new System.Windows.Forms.ComboBox();
             this.lblMateria = new System.Windows.Forms.Label();
+            this.cmbFiltro = new System.Windows.Forms.ComboBox();
             this.cmbEstudiantes = new System.Windows.Forms.ComboBox();
             this.lblFiltros = new System.Windows.Forms.Label();
             this.panelBoton = new System.Windows.Forms.Panel();
             this.pnSobreNosotros = new System.Windows.Forms.Panel();
             this.btnGenerarReporte = new System.Windows.Forms.Button();
             this.panelPeriodo = new System.Windows.Forms.Panel();
-            this.lblAnho2 = new System.Windows.Forms.Label();
-            this.cmbAnhos2 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbPeriodo = new System.Windows.Forms.ComboBox();
             this.lblPeriodo = new System.Windows.Forms.Label();
+            this.lblAnho2 = new System.Windows.Forms.Label();
+            this.cmbAnhos2 = new System.Windows.Forms.ComboBox();
             this.panelminiContenedor = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelContenidos = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.panelReporte.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.panelTiempoReport.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.PanelFechas.SuspendLayout();
             this.tableFechas.SuspendLayout();
             this.panelFiltros.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.panelBoton.SuspendLayout();
             this.pnSobreNosotros.SuspendLayout();
             this.panelPeriodo.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.panelminiContenedor.SuspendLayout();
             this.panelContenidos.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -113,21 +113,23 @@
             this.panelReporte.Size = new System.Drawing.Size(535, 90);
             this.panelReporte.TabIndex = 1;
             // 
-            // cmbDocentes
+            // tableLayoutPanel3
             // 
-            this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbDocentes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cmbDocentes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDocentes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbDocentes.ForeColor = System.Drawing.Color.DarkGray;
-            this.cmbDocentes.FormattingEnabled = true;
-            this.cmbDocentes.Location = new System.Drawing.Point(273, 39);
-            this.cmbDocentes.Name = "cmbDocentes";
-            this.cmbDocentes.Size = new System.Drawing.Size(195, 25);
-            this.cmbDocentes.TabIndex = 17;
-            this.cmbDocentes.SelectedIndexChanged += new System.EventHandler(this.cmbDocentes_SelectedIndexChanged);
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.cmbTipoReporte, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblReporte, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(495, 70);
+            this.tableLayoutPanel3.TabIndex = 18;
             // 
             // cmbTipoReporte
             // 
@@ -137,7 +139,7 @@
             this.cmbTipoReporte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbTipoReporte.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbTipoReporte.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbTipoReporte.ForeColor = System.Drawing.Color.Black;
             this.cmbTipoReporte.FormattingEnabled = true;
             this.cmbTipoReporte.Location = new System.Drawing.Point(273, 5);
             this.cmbTipoReporte.Name = "cmbTipoReporte";
@@ -157,6 +159,22 @@
             this.lblReporte.TabIndex = 3;
             this.lblReporte.Text = "Reporte";
             // 
+            // cmbDocentes
+            // 
+            this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbDocentes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cmbDocentes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDocentes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbDocentes.ForeColor = System.Drawing.Color.Black;
+            this.cmbDocentes.FormattingEnabled = true;
+            this.cmbDocentes.Location = new System.Drawing.Point(273, 39);
+            this.cmbDocentes.Name = "cmbDocentes";
+            this.cmbDocentes.Size = new System.Drawing.Size(195, 25);
+            this.cmbDocentes.TabIndex = 17;
+            this.cmbDocentes.SelectedIndexChanged += new System.EventHandler(this.cmbDocentes_SelectedIndexChanged);
+            // 
             // panelTiempoReport
             // 
             this.panelTiempoReport.Controls.Add(this.tableLayoutPanel2);
@@ -166,21 +184,22 @@
             this.panelTiempoReport.Size = new System.Drawing.Size(535, 46);
             this.panelTiempoReport.TabIndex = 2;
             // 
-            // cmbTiempo
+            // tableLayoutPanel2
             // 
-            this.cmbTiempo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbTiempo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cmbTiempo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbTiempo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTiempo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbTiempo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbTiempo.ForeColor = System.Drawing.Color.DarkGray;
-            this.cmbTiempo.FormattingEnabled = true;
-            this.cmbTiempo.Location = new System.Drawing.Point(273, 10);
-            this.cmbTiempo.Name = "cmbTiempo";
-            this.cmbTiempo.Size = new System.Drawing.Size(195, 25);
-            this.cmbTiempo.TabIndex = 16;
-            this.cmbTiempo.SelectedIndexChanged += new System.EventHandler(this.cbTiempoReporte_SelectedIndexChanged);
+            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblTiempoReporte, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbTiempo, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(495, 46);
+            this.tableLayoutPanel2.TabIndex = 17;
             // 
             // lblTiempoReporte
             // 
@@ -193,6 +212,22 @@
             this.lblTiempoReporte.Size = new System.Drawing.Size(156, 21);
             this.lblTiempoReporte.TabIndex = 3;
             this.lblTiempoReporte.Text = "Tiempo del reporte";
+            // 
+            // cmbTiempo
+            // 
+            this.cmbTiempo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbTiempo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cmbTiempo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbTiempo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTiempo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbTiempo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbTiempo.ForeColor = System.Drawing.Color.Black;
+            this.cmbTiempo.FormattingEnabled = true;
+            this.cmbTiempo.Location = new System.Drawing.Point(273, 10);
+            this.cmbTiempo.Name = "cmbTiempo";
+            this.cmbTiempo.Size = new System.Drawing.Size(195, 25);
+            this.cmbTiempo.TabIndex = 16;
+            this.cmbTiempo.SelectedIndexChanged += new System.EventHandler(this.cbTiempoReporte_SelectedIndexChanged);
             // 
             // PanelFechas
             // 
@@ -234,7 +269,7 @@
             this.cmbSemanas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSemanas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSemanas.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbSemanas.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbSemanas.ForeColor = System.Drawing.Color.Black;
             this.cmbSemanas.FormattingEnabled = true;
             this.cmbSemanas.Location = new System.Drawing.Point(341, 72);
             this.cmbSemanas.Name = "cmbSemanas";
@@ -273,7 +308,7 @@
             this.cmbAnhos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAnhos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbAnhos.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbAnhos.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbAnhos.ForeColor = System.Drawing.Color.Black;
             this.cmbAnhos.FormattingEnabled = true;
             this.cmbAnhos.Location = new System.Drawing.Point(13, 72);
             this.cmbAnhos.Name = "cmbAnhos";
@@ -288,7 +323,7 @@
             this.cmbMeses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMeses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMeses.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbMeses.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbMeses.ForeColor = System.Drawing.Color.Black;
             this.cmbMeses.FormattingEnabled = true;
             this.cmbMeses.Location = new System.Drawing.Point(177, 72);
             this.cmbMeses.Name = "cmbMeses";
@@ -316,21 +351,39 @@
             this.panelFiltros.Size = new System.Drawing.Size(535, 115);
             this.panelFiltros.TabIndex = 19;
             // 
-            // cmbFiltro
+            // tableLayoutPanel4
             // 
-            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbFiltro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cmbFiltro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbFiltro.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbFiltro.ForeColor = System.Drawing.Color.DarkGray;
-            this.cmbFiltro.FormattingEnabled = true;
-            this.cmbFiltro.Location = new System.Drawing.Point(273, 6);
-            this.cmbFiltro.Name = "cmbFiltro";
-            this.cmbFiltro.Size = new System.Drawing.Size(195, 25);
-            this.cmbFiltro.TabIndex = 31;
-            this.cmbFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.lblEstudiante, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.cmbMaterias, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.lblMateria, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.cmbFiltro, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.cmbEstudiantes, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.lblFiltros, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(495, 115);
+            this.tableLayoutPanel4.TabIndex = 32;
+            // 
+            // lblEstudiante
+            // 
+            this.lblEstudiante.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblEstudiante.AutoSize = true;
+            this.lblEstudiante.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstudiante.ForeColor = System.Drawing.Color.Teal;
+            this.lblEstudiante.Location = new System.Drawing.Point(76, 85);
+            this.lblEstudiante.Name = "lblEstudiante";
+            this.lblEstudiante.Size = new System.Drawing.Size(95, 21);
+            this.lblEstudiante.TabIndex = 29;
+            this.lblEstudiante.Text = "Estudiante:";
             // 
             // cmbMaterias
             // 
@@ -340,24 +393,12 @@
             this.cmbMaterias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMaterias.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbMaterias.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbMaterias.ForeColor = System.Drawing.Color.Black;
             this.cmbMaterias.FormattingEnabled = true;
-            this.cmbMaterias.Location = new System.Drawing.Point(273, 43);
+            this.cmbMaterias.Location = new System.Drawing.Point(273, 45);
             this.cmbMaterias.Name = "cmbMaterias";
             this.cmbMaterias.Size = new System.Drawing.Size(195, 25);
             this.cmbMaterias.TabIndex = 30;
-            // 
-            // lblEstudiante
-            // 
-            this.lblEstudiante.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblEstudiante.AutoSize = true;
-            this.lblEstudiante.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstudiante.ForeColor = System.Drawing.Color.Teal;
-            this.lblEstudiante.Location = new System.Drawing.Point(76, 84);
-            this.lblEstudiante.Name = "lblEstudiante";
-            this.lblEstudiante.Size = new System.Drawing.Size(95, 21);
-            this.lblEstudiante.TabIndex = 29;
-            this.lblEstudiante.Text = "Estudiante:";
             // 
             // lblMateria
             // 
@@ -365,11 +406,27 @@
             this.lblMateria.AutoSize = true;
             this.lblMateria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMateria.ForeColor = System.Drawing.Color.Teal;
-            this.lblMateria.Location = new System.Drawing.Point(87, 45);
+            this.lblMateria.Location = new System.Drawing.Point(87, 47);
             this.lblMateria.Name = "lblMateria";
             this.lblMateria.Size = new System.Drawing.Size(73, 21);
             this.lblMateria.TabIndex = 28;
             this.lblMateria.Text = "Materia:";
+            // 
+            // cmbFiltro
+            // 
+            this.cmbFiltro.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbFiltro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cmbFiltro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbFiltro.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbFiltro.ForeColor = System.Drawing.Color.Black;
+            this.cmbFiltro.FormattingEnabled = true;
+            this.cmbFiltro.Location = new System.Drawing.Point(273, 7);
+            this.cmbFiltro.Name = "cmbFiltro";
+            this.cmbFiltro.Size = new System.Drawing.Size(195, 25);
+            this.cmbFiltro.TabIndex = 31;
+            this.cmbFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
             // 
             // cmbEstudiantes
             // 
@@ -379,9 +436,9 @@
             this.cmbEstudiantes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstudiantes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbEstudiantes.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbEstudiantes.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbEstudiantes.ForeColor = System.Drawing.Color.Black;
             this.cmbEstudiantes.FormattingEnabled = true;
-            this.cmbEstudiantes.Location = new System.Drawing.Point(273, 82);
+            this.cmbEstudiantes.Location = new System.Drawing.Point(273, 83);
             this.cmbEstudiantes.Name = "cmbEstudiantes";
             this.cmbEstudiantes.Size = new System.Drawing.Size(195, 25);
             this.cmbEstudiantes.TabIndex = 24;
@@ -392,7 +449,7 @@
             this.lblFiltros.AutoSize = true;
             this.lblFiltros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltros.ForeColor = System.Drawing.Color.Teal;
-            this.lblFiltros.Location = new System.Drawing.Point(93, 8);
+            this.lblFiltros.Location = new System.Drawing.Point(93, 9);
             this.lblFiltros.Name = "lblFiltros";
             this.lblFiltros.Size = new System.Drawing.Size(61, 21);
             this.lblFiltros.TabIndex = 17;
@@ -447,6 +504,52 @@
             this.panelPeriodo.Size = new System.Drawing.Size(535, 82);
             this.panelPeriodo.TabIndex = 21;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.cmbPeriodo, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblPeriodo, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblAnho2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmbAnhos2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(495, 82);
+            this.tableLayoutPanel1.TabIndex = 22;
+            // 
+            // cmbPeriodo
+            // 
+            this.cmbPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbPeriodo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cmbPeriodo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPeriodo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbPeriodo.ForeColor = System.Drawing.Color.Black;
+            this.cmbPeriodo.FormattingEnabled = true;
+            this.cmbPeriodo.Location = new System.Drawing.Point(301, 48);
+            this.cmbPeriodo.Name = "cmbPeriodo";
+            this.cmbPeriodo.Size = new System.Drawing.Size(139, 25);
+            this.cmbPeriodo.TabIndex = 19;
+            // 
+            // lblPeriodo
+            // 
+            this.lblPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPeriodo.AutoSize = true;
+            this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPeriodo.ForeColor = System.Drawing.Color.Teal;
+            this.lblPeriodo.Location = new System.Drawing.Point(306, 10);
+            this.lblPeriodo.Name = "lblPeriodo";
+            this.lblPeriodo.Size = new System.Drawing.Size(129, 21);
+            this.lblPeriodo.TabIndex = 18;
+            this.lblPeriodo.Text = "Periodo Lectivo";
+            // 
             // lblAnho2
             // 
             this.lblAnho2.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -467,39 +570,12 @@
             this.cmbAnhos2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAnhos2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbAnhos2.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbAnhos2.ForeColor = System.Drawing.Color.DarkGray;
+            this.cmbAnhos2.ForeColor = System.Drawing.Color.Black;
             this.cmbAnhos2.FormattingEnabled = true;
             this.cmbAnhos2.Location = new System.Drawing.Point(54, 48);
             this.cmbAnhos2.Name = "cmbAnhos2";
             this.cmbAnhos2.Size = new System.Drawing.Size(139, 25);
             this.cmbAnhos2.TabIndex = 20;
-            // 
-            // cmbPeriodo
-            // 
-            this.cmbPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbPeriodo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cmbPeriodo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPeriodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbPeriodo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbPeriodo.ForeColor = System.Drawing.Color.DarkGray;
-            this.cmbPeriodo.FormattingEnabled = true;
-            this.cmbPeriodo.Location = new System.Drawing.Point(301, 48);
-            this.cmbPeriodo.Name = "cmbPeriodo";
-            this.cmbPeriodo.Size = new System.Drawing.Size(139, 25);
-            this.cmbPeriodo.TabIndex = 19;
-            // 
-            // lblPeriodo
-            // 
-            this.lblPeriodo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblPeriodo.AutoSize = true;
-            this.lblPeriodo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriodo.ForeColor = System.Drawing.Color.Teal;
-            this.lblPeriodo.Location = new System.Drawing.Point(306, 10);
-            this.lblPeriodo.Name = "lblPeriodo";
-            this.lblPeriodo.Size = new System.Drawing.Size(129, 21);
-            this.lblPeriodo.TabIndex = 18;
-            this.lblPeriodo.Text = "Periodo Lectivo";
             // 
             // panelminiContenedor
             // 
@@ -567,82 +643,6 @@
             this.panelContenidos.WrapContents = false;
             this.panelContenidos.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenidos_Paint);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.cmbPeriodo, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblPeriodo, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblAnho2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cmbAnhos2, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(495, 82);
-            this.tableLayoutPanel1.TabIndex = 22;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.lblTiempoReporte, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cmbTiempo, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(495, 46);
-            this.tableLayoutPanel2.TabIndex = 17;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.cmbTipoReporte, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lblReporte, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cmbDocentes, 1, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(20, 20);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(495, 70);
-            this.tableLayoutPanel3.TabIndex = 18;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.lblEstudiante, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.cmbMaterias, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.lblMateria, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.cmbFiltro, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.cmbEstudiantes, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.lblFiltros, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(20, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(495, 115);
-            this.tableLayoutPanel4.TabIndex = 32;
-            // 
             // UcReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -657,25 +657,25 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelReporte.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.panelTiempoReport.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.PanelFechas.ResumeLayout(false);
             this.tableFechas.ResumeLayout(false);
             this.tableFechas.PerformLayout();
             this.panelFiltros.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.panelBoton.ResumeLayout(false);
             this.pnSobreNosotros.ResumeLayout(false);
             this.panelPeriodo.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.panelminiContenedor.ResumeLayout(false);
             this.panelminiContenedor.PerformLayout();
             this.panelContenidos.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

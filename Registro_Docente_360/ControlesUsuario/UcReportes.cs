@@ -154,23 +154,23 @@ namespace Registro_Docente_360.ControlesUsuario
             {
                 // Obtener el tipo de reporte
                 string tipoReporte = cmbTipoReporte.SelectedItem.ToString();
-                DateTime fechaInicioSemana = ObtenerFechaInicio(anhoSeleccionado, mesSeleccionado, semanaSeleccionada);  // +1 para que la semana empiece desde 1
+                DateTime fechaInicioSemana = ObtenerFechaInicio(anhoSeleccionado, mesSeleccionado, semanaSeleccionada);
 
                 //*****************NOTAS*************************
-
                 if (tipoReporte == "Notas")
                 {
                     // Comprobar si no se ha seleccionado un filtro
                     if (cmbFiltro.SelectedItem == null)
                     {
                         MessageBox.Show("Debes de seleccionar un filtro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;  // Detener la ejecución del código si no se ha seleccionado un filtro
+                        return;
                     }
                     if (cmbPeriodo.SelectedItem == null)
                     {
                         MessageBox.Show("Debes de seleccionar un periodo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;  // Detener la ejecución del código si no se ha seleccionado un filtro
+                        return;
                     }
+
                     // Comprobar si el filtro es "Por Grupo" o "Por Estudiante"
                     if (cmbFiltro.SelectedItem.ToString() == "Por Grupo" && cmbMaterias.SelectedItem != null)
                     {
@@ -182,14 +182,12 @@ namespace Registro_Docente_360.ControlesUsuario
                             SaveFileDialog sfd = new SaveFileDialog
                             {
                                 Filter = "PDF files (*.pdf)|*.pdf",
-                                FileName = $"Notas_{materiaSeleccionada.nombre_materia}.pdf" // Nombre por defecto basado en la materia
+                                FileName = $"Notas_{materiaSeleccionada.nombre_materia}.pdf" // Nombre basado en la materia
                             };
 
-                            // Si el usuario confirma guardar
                             if (sfd.ShowDialog() == DialogResult.OK)
                             {
-                                // Exportar el contenido a PDF con la ruta seleccionada por el usuario
-                                GenerarReportePorGrupo(materiaSeleccionada, sfd.FileName);  // Pasar la ruta seleccionada
+                                GenerarReportePorGrupo(materiaSeleccionada, sfd.FileName);
                             }
                         }
                     }
@@ -199,83 +197,74 @@ namespace Registro_Docente_360.ControlesUsuario
                         var estudianteSeleccionado = cmbEstudiantes.SelectedItem as Estudiantes;
                         if (estudianteSeleccionado != null)
                         {
-                            // Mostrar cuadro para guardar el archivo
                             SaveFileDialog sfd = new SaveFileDialog
                             {
                                 Filter = "PDF files (*.pdf)|*.pdf",
                                 FileName = $"Notas_{estudianteSeleccionado.nombre_estudiante}_{estudianteSeleccionado.primer_apellido}.pdf"
                             };
 
-                            // Si el usuario confirma guardar
                             if (sfd.ShowDialog() == DialogResult.OK)
                             {
-                                // Generar el reporte para el estudiante seleccionado
-                                GenerarReportePorEstudiante(estudianteSeleccionado, sfd.FileName);  // Pasar la ruta seleccionada
+                                GenerarReportePorEstudiante(estudianteSeleccionado, sfd.FileName);
                             }
                         }
                     }
                 }
-
-                //*************ASISTENCIA*****************
-
+                //*****************ASISTENCIA*****************
                 else if (tipoReporte == "Asistencia")
                 {
                     if (cmbTiempo.SelectedItem == null)
                     {
                         MessageBox.Show("Debes seleccionar un tiempo del reporte", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;  // Detener la ejecución si no se ha seleccionado un periodo
+                        return;
                     }
-                    // Comprobar si el tiempo seleccionado es "Periodo académico" y el periodo no ha sido seleccionado
                     else if (cmbTiempo.SelectedItem.ToString() == "Periodo académico" && cmbPeriodo.SelectedItem == null)
                     {
                         MessageBox.Show("Debes seleccionar un periodo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;  // Detener la ejecución si no se ha seleccionado un periodo
+                        return;
                     }
-                    // Comprobar si no se ha seleccionado un filtro
+
                     if (cmbFiltro.SelectedItem == null)
                     {
                         MessageBox.Show("Debes de seleccionar un filtro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;  // Detener la ejecución del código si no se ha seleccionado un filtro
+                        return;
                     }
+
                     // Comprobar si el filtro es "Por Grupo" o "Por Estudiante"
                     if (cmbFiltro.SelectedItem.ToString() == "Por Grupo" && cmbMaterias.SelectedItem != null)
                     {
-                        // Obtener la materia seleccionada
                         var materiaSeleccionada = cmbMaterias.SelectedItem as Materias;
                         if (materiaSeleccionada != null)
                         {
-                            // Mostrar cuadro para guardar el archivo
+                            // Obtener el periodo seleccionado (ej: "Primer Periodo" o "Segundo Periodo")
+                            string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
+
                             SaveFileDialog sfd = new SaveFileDialog
                             {
                                 Filter = "PDF files (*.pdf)|*.pdf",
-                                FileName = $"Asistencia_{materiaSeleccionada.nombre_materia}.pdf" // Nombre por defecto basado en la materia
+                                // Nombre del archivo basado en el periodo: "Asistencia_PrimerPeriodo.pdf"
+                                FileName = $"Asistencia_{periodoSeleccionado.Replace(" ", "")}.pdf"
                             };
 
-                            // Si el usuario confirma guardar
                             if (sfd.ShowDialog() == DialogResult.OK)
                             {
-                                // Generar el reporte para el grupo de la materia seleccionada
                                 GenerarReporteAsistenciaPorGrupo(materiaSeleccionada, sfd.FileName);
                             }
                         }
                     }
                     else if (cmbFiltro.SelectedItem.ToString() == "Por Estudiante" && cmbEstudiantes.SelectedItem != null)
                     {
-                        // Obtener el estudiante seleccionado
                         var estudianteSeleccionado = cmbEstudiantes.SelectedItem as Estudiantes;
                         if (estudianteSeleccionado != null)
                         {
-                            // Mostrar cuadro para guardar el archivo
                             SaveFileDialog sfd = new SaveFileDialog
                             {
                                 Filter = "PDF files (*.pdf)|*.pdf",
                                 FileName = $"Asistencia_{estudianteSeleccionado.nombre_estudiante}_{estudianteSeleccionado.primer_apellido}.pdf"
                             };
 
-                            // Si el usuario confirma guardar
                             if (sfd.ShowDialog() == DialogResult.OK)
                             {
-                                // Generar el reporte para el estudiante seleccionado
                                 GenerarReporteAsistenciaPorEstudiante(estudianteSeleccionado, sfd.FileName);
                             }
                         }
@@ -495,25 +484,23 @@ namespace Registro_Docente_360.ControlesUsuario
             }
             else if (seleccion == "Periodo académico")
             {
-                // Obtener el periodo seleccionado
-                string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString(); // Ejemplo: "Periodo 1" o "Periodo 2"
+                string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
 
-                // Definir los meses que corresponden a cada periodo
-                List<int> mesesPeriodo = new List<int>();
+                // Definir fechas exactas del periodo
+                DateTime fechaInicioPeriodo = periodoSeleccionado == "Primer Periodo"
+                    ? new DateTime(anhoSeleccionado, 2, 3)  // Primer Periodo: 3 de febrero
+                    : new DateTime(anhoSeleccionado, 5, 26); // Segundo Periodo: 26 de mayo
 
-                if (periodoSeleccionado == "Primer Periodo") // Febrero a Junio
-                {
-                    mesesPeriodo.AddRange(new List<int> { 2, 3, 4, 5, 6 });
-                }
-                else if (periodoSeleccionado == "Segundo Periodo") // Julio a Diciembre
-                {
-                    mesesPeriodo.AddRange(new List<int> { 7, 8, 9, 10, 11, 12 });
-                }
+                DateTime fechaFinPeriodo = periodoSeleccionado == "Primer Periodo"
+                    ? new DateTime(anhoSeleccionado, 5, 25)  // Primer Periodo hasta 25 de mayo
+                    : new DateTime(anhoSeleccionado, 12, 10); // Segundo Periodo hasta 10 de diciembre
 
-                // Obtener los datos de la base de datos para la materia seleccionada
+                // Obtener los meses involucrados en el periodo
+                List<int> mesesPeriodo = Enumerable.Range(fechaInicioPeriodo.Month,
+                    (fechaFinPeriodo.Month - fechaInicioPeriodo.Month) + 1).ToList();
+
                 using (var contexto = new RegistroDocenteEntities())
                 {
-                    // Obtener los estudiantes en esta materia
                     var estudiantes = contexto.Clases
                         .Where(c => c.id_materia == materia.id_materia && c.id_usuario == idDocente)
                         .Select(c => c.Estudiantes)
@@ -525,37 +512,50 @@ namespace Registro_Docente_360.ControlesUsuario
                         MessageBox.Show("No hay estudiantes en esta materia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    // Obtener la sección del docente
+
                     var docente = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == idDocente);
                     var seccion = docente != null ? contexto.Secciones.FirstOrDefault(s => s.id_seccion == docente.id_seccion)?.nombre_seccion : "No asignada";
 
+                    // Lista para almacenar todos los días laborables del periodo completo
+                    var diasDelPeriodo = new List<DateTime>();
+
+                    // Procesar cada mes del periodo
                     foreach (var mes in mesesPeriodo)
                     {
-                        // Obtener el primer día de cada mes
+                        // Determinar el primer y último día del mes que caen dentro del periodo
                         DateTime primerDiaMes = new DateTime(anhoSeleccionado, mes, 1);
+                        DateTime ultimoDiaMes = new DateTime(anhoSeleccionado, mes, DateTime.DaysInMonth(anhoSeleccionado, mes));
 
-                        // Obtener todos los días laborables del mes (lunes a viernes)
-                        var diasDelMes = new List<DateTime>();
-                        for (DateTime dia = primerDiaMes; dia.Month == mes; dia = dia.AddDays(1))
+                        // Ajustar para que no salgan del rango del periodo
+                        DateTime inicioMes = primerDiaMes < fechaInicioPeriodo ? fechaInicioPeriodo : primerDiaMes;
+                        DateTime finMes = ultimoDiaMes > fechaFinPeriodo ? fechaFinPeriodo : ultimoDiaMes;
+
+                        // Obtener días laborables del mes dentro del periodo
+                        for (DateTime dia = inicioMes; dia <= finMes; dia = dia.AddDays(1))
                         {
-                            if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday) // Lunes a Viernes
+                            if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
                             {
-                                diasDelMes.Add(dia);
+                                diasDelPeriodo.Add(dia);
                             }
                         }
-
-                        // Generar el PDF para todos los estudiantes en esta materia y para cada mes del periodo
-                        string mesSeleccionado = new DateTime(anhoSeleccionado, mes, 1).ToString("MMMM");
-                        ExportadorPDF.ExportarAsistenciaPorGrupo(estudiantes, materia, filePath, new DateTime(anhoSeleccionado, 1, 1), null, seccion, docente.nombre_usuario, docente.apellido_usuario, periodoSeleccionado, "Periodo académico", mesesPeriodo);
-
                     }
-                    // Confirmación
-                    MessageBox.Show("PDF exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Abrir el archivo automáticamente
+                    // Generar un solo PDF con todos los días del periodo
+                    ExportadorPDF.ExportarAsistenciaPorGrupo(
+                        estudiantes,
+                        materia,
+                        filePath,
+                        fechaInicioPeriodo,  // Fecha de inicio real del periodo
+                        diasDelPeriodo,      // Todos los días laborables del periodo
+                        seccion,
+                        docente.nombre_usuario,
+                        docente.apellido_usuario,
+                        periodoSeleccionado,
+                        "Periodo académico");
+
+                    MessageBox.Show("PDF exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     System.Diagnostics.Process.Start(filePath);
                 }
-
             }
         }
 
@@ -650,25 +650,24 @@ namespace Registro_Docente_360.ControlesUsuario
             }
             else if (seleccion == "Periodo académico")
             {
-                // Obtener el periodo seleccionado
-                string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString(); // Ejemplo: "Periodo 1" o "Periodo 2"
+                string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
 
-                // Definir los meses que corresponden a cada periodo
-                List<int> mesesPeriodo = new List<int>();
+                
+                DateTime fechaInicioPeriodo = periodoSeleccionado == "Primer Periodo"
+                    ? new DateTime(anhoSeleccionado, 2, 3)
+                    : new DateTime(anhoSeleccionado, 5, 26);
 
-                if (periodoSeleccionado == "Primer Periodo") // Febrero a Junio
-                {
-                    mesesPeriodo.AddRange(new List<int> { 2, 3, 4, 5, 6 });
-                }
-                else if (periodoSeleccionado == "Segundo Periodo") // Julio a Diciembre
-                {
-                    mesesPeriodo.AddRange(new List<int> { 7, 8, 9, 10, 11, 12 });
-                }
+                DateTime fechaFinPeriodo = periodoSeleccionado == "Primer Periodo"
+                    ? new DateTime(anhoSeleccionado, 5, 25)
+                    : new DateTime(anhoSeleccionado, 12, 10);
 
-                // Obtener los datos de la base de datos para la materia seleccionada
+                List<int> mesesPeriodo = Enumerable.Range(fechaInicioPeriodo.Month,
+                    (fechaFinPeriodo.Month - fechaInicioPeriodo.Month) + 1).ToList();
+               
+
+                // El resto del código se mantiene EXACTAMENTE igual
                 using (var contexto = new RegistroDocenteEntities())
                 {
-                    // Obtener los estudiantes en esta materia
                     var clases = contexto.Clases
                          .Where(c => c.id_estudiante == estudiante.id_estudiante)
                          .ToList();
@@ -678,34 +677,29 @@ namespace Registro_Docente_360.ControlesUsuario
                         MessageBox.Show("No hay estudiantes en esta materia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    // Obtener la sección del docente
+
                     var docente = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == idDocente);
                     var seccion = docente != null ? contexto.Secciones.FirstOrDefault(s => s.id_seccion == docente.id_seccion)?.nombre_seccion : "No asignada";
                     var estudiantes = clases.Select(c => c.Estudiantes).ToList();
 
                     foreach (var mes in mesesPeriodo)
                     {
-                        // Obtener el primer día de cada mes
                         DateTime primerDiaMes = new DateTime(anhoSeleccionado, mes, 1);
 
-                        // Obtener todos los días laborables del mes (lunes a viernes)
                         var diasDelMes = new List<DateTime>();
                         for (DateTime dia = primerDiaMes; dia.Month == mes; dia = dia.AddDays(1))
                         {
-                            if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday) // Lunes a Viernes
+                            if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
                             {
                                 diasDelMes.Add(dia);
                             }
                         }
 
-                        // Generar el PDF para todos los estudiantes en esta materia y para cada mes del periodo
                         string mesSeleccionado = new DateTime(anhoSeleccionado, mes, 1).ToString("MMMM");
                         ExportadorPDF.ExportarAsistenciaPorEstudiante(estudiantes, filePath, new DateTime(anhoSeleccionado, 1, 1), null, seccion, docente.nombre_usuario, docente.apellido_usuario, periodoSeleccionado, "Periodo académico", mesesPeriodo);
                     }
-                    // Confirmación
-                    MessageBox.Show("PDF exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Abrir el archivo automáticamente
+                    MessageBox.Show("PDF exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     System.Diagnostics.Process.Start(filePath);
                 }
             }
@@ -740,37 +734,33 @@ namespace Registro_Docente_360.ControlesUsuario
         {
             string seleccion = cmbTipoReporte.SelectedItem?.ToString();
 
+            // Ocultar controles por defecto
+            cmbMaterias.Visible = false;
+            lblMateria.Visible = false;
+
             if (seleccion == "Notas")
             {
                 PanelFechas.Visible = false;
                 panelPeriodo.Visible = true;
                 panelTiempoReport.Visible = false;
-
             }
-            else
-            {
-                PanelFechas.Visible = true;
-                panelPeriodo.Visible = false;
-                lblTiempoReporte.Visible = true;
-                cmbTiempo.Visible = true;
-            }
-
-            if (seleccion == "Asistencia")
+            else if (seleccion == "Asistencia")
             {
                 PanelFechas.Visible = false;
                 panelTiempoReport.Visible = true;
                 cmbTiempo.SelectedIndex = 0;
 
-                if(cmbTiempo.SelectedIndex == 0)
+                if (cmbTiempo.SelectedIndex == 0)
                 {
                     panelPeriodo.Visible = true;
                 }
-
             }
+
+            // Forzar actualización del filtro
+            cmbFiltro_SelectedIndexChanged(sender, e);
 
             AjustarCentradoFechas();
         }
-
         private void cbTiempoReporte_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -809,30 +799,36 @@ namespace Registro_Docente_360.ControlesUsuario
 
             AjustarCentradoFechas();
         }
-
         private void cmbFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Mostrar u ocultar los ComboBox según el filtro seleccionado
-            if (cmbFiltro.SelectedItem.ToString() == "Por Grupo")
+            if (cmbFiltro.SelectedItem == null) return;
+
+            string tipoReporte = cmbTipoReporte.SelectedItem?.ToString();
+            string filtroSeleccionado = cmbFiltro.SelectedItem.ToString();
+
+            // Ocultar todos los controles primero
+            cmbMaterias.Visible = false;
+            lblMateria.Visible = false;
+            cmbEstudiantes.Visible = false;
+            lblEstudiante.Visible = false;
+
+            // Mostrar los controles según el filtro seleccionado
+            if (filtroSeleccionado == "Por Grupo")
             {
-                cmbEstudiantes.Visible = false;
-                lblEstudiante.Visible = false;
-
-                cmbMaterias.Visible = true;
-                lblMateria.Visible = true;
-
-
+                // Solo mostrar materias si es reporte de Notas
+                if (tipoReporte == "Notas")
+                {
+                    cmbMaterias.Visible = true;
+                    lblMateria.Visible = true;
+                }
             }
-            else if (cmbFiltro.SelectedItem.ToString() == "Por Estudiante")
+            else if (filtroSeleccionado == "Por Estudiante")
             {
-                cmbMaterias.Visible = false;
-                lblMateria.Visible = false;
+                // Mostrar estudiantes para ambos tipos de reporte
                 cmbEstudiantes.Visible = true;
                 lblEstudiante.Visible = true;
-
             }
         }
-
         private void UcReportes_Load(object sender, EventArgs e)
         {
             cmbTipoReporte.Items.Add("Notas");

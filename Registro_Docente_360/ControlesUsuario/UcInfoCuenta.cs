@@ -74,7 +74,7 @@ namespace Registro_Docente_360.ControlesUsuario
             pnConfirmContra.Visible = true;
             txtContra.Clear();
             txtContra.Focus();
-            
+
         }
 
         private void cbMostrarContra_CheckedChanged(object sender, EventArgs e)
@@ -115,7 +115,6 @@ namespace Registro_Docente_360.ControlesUsuario
                 }
                 else
                 {
-                    MessageBox.Show("La contraseña actual es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     MessageBox.Show("Contraseña incorrecta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtContra.Clear();
                     txtContra.Focus();

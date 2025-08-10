@@ -17,6 +17,12 @@ namespace Registro_Docente_360.ControlesUsuario
         private ToolTip tooltipNotas = new ToolTip();
         private bool huboCambios = false;
 
+        private string periodoAnterior;
+        private Materias materiaAnterior;
+        private bool evitandoEvento = false;
+
+        private bool alertaMostrada = false;
+
         public bool EstaEnModoEdicion => modoEdicion;
 
         public void CancelarModoEdicion()
@@ -56,6 +62,7 @@ namespace Registro_Docente_360.ControlesUsuario
             tablaNotas.Grid.Columns["colNotaFinal"].ReadOnly = true;
             tablaNotas.Grid.Columns["colAsistencia"].ReadOnly = true; // 👈 SIEMPRE solo lectura
             tablaNotas.Grid.Columns["colNotaFinal"].DefaultCellStyle.BackColor = Color.LightGray;
+            tablaNotas.Grid.CellValidating += Grid_CellValidating;
 
             cmbPeriodo.Items.Clear();
             cmbPeriodo.Items.Add("Primer Periodo");
@@ -63,6 +70,12 @@ namespace Registro_Docente_360.ControlesUsuario
             cmbPeriodo.SelectedIndex = 0;  // Asignamos "Primer Periodo" como valor por defecto
             cmbPeriodo.SelectedIndexChanged += CmbPeriodo_SelectedIndexChanged;
             PanelAcciones.Visible = false;
+
+            // Inicializar variables de control
+            huboCambios = false;
+            evitandoEvento = false;
+            periodoAnterior = cmbPeriodo.SelectedItem?.ToString();
+            materiaAnterior = cmbMateria.SelectedItem as Materias;
 
             bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
 
@@ -119,58 +132,47 @@ namespace Registro_Docente_360.ControlesUsuario
         {
             if (!modoEdicion)
             {
+                // Entrar en modo edición
+                modoEdicion = true;
                 lblNotas.Text = "MODO GESTIÓN ACTIVADO";
                 lblNotas.ForeColor = Color.Black;
                 tablaNotas.Grid.ReadOnly = false;
 
                 foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
                 {
-                    // SOLO estas columnas pueden editarse (NO asistencia)
-                    if (col.Name == "colPrimerExamen" ||
-                        col.Name == "colSegundoExamen" ||
-                        col.Name == "colCotidiano" ||
-                        col.Name == "colTareas")
-                        col.ReadOnly = false;
-                    else
-                        col.ReadOnly = true; // Incluye asistencia, siempre solo lectura
+                    col.ReadOnly = !(col.Name == "colPrimerExamen" ||
+                                    col.Name == "colSegundoExamen" ||
+                                    col.Name == "colCotidiano" ||
+                                    col.Name == "colTareas");
                 }
 
                 btnGestionarNotas.Text = "Terminar Edición";
-                tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para terminar la edición");
                 PanelAcciones.Visible = true;
-                modoEdicion = true;
             }
             else
             {
+                // Salir del modo edición
                 if (huboCambios)
                 {
                     var confirm = MessageBox.Show(
                         "Hay cambios no guardados. ¿Estás seguro de que deseas salir del modo edición y perder los cambios?",
                         "Confirmar salida",
                         MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning
-                    );
-                    if (confirm == DialogResult.No)
-                    {
-                        return;
-                    }
+                        MessageBoxIcon.Warning);
+
+                    if (confirm == DialogResult.No) return;
                 }
+
+                modoEdicion = false;
+                huboCambios = false;
                 lblNotas.Text = "Listado de Notas";
                 lblNotas.ForeColor = Color.Teal;
                 tablaNotas.Grid.ReadOnly = true;
-                foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
-                    col.ReadOnly = true;
                 btnGestionarNotas.Text = "Gestionar Notas";
-                tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para editar las notas");
                 PanelAcciones.Visible = false;
-                modoEdicion = false;
-                huboCambios = false;
-                tablaNotas.Grid.Rows.Clear();
-                var materiaSeleccionada = cmbMateria.SelectedItem as Materias;
-                if (materiaSeleccionada != null)
-                {
-                    cmbMateria_SelectedIndexChanged(null, null);
-                }
+
+                // Recargar datos
+                CargarNotasAutomatico(cmbPeriodo.SelectedItem?.ToString());
             }
         }
 
@@ -178,42 +180,133 @@ namespace Registro_Docente_360.ControlesUsuario
         {
             if (huboCambios)
             {
-                var confirm = MessageBox.Show("Hay cambios no guardados. ¿Estás seguro de que deseas cancelar la edición y perder los cambios?",
-                                              "Confirmar cancelación",
-                                              MessageBoxButtons.YesNo,
-                                              MessageBoxIcon.Warning);
-                if (confirm == DialogResult.No)
-                    return;
+                var confirm = MessageBox.Show(
+                    "Hay cambios no guardados. ¿Estás seguro de que deseas cancelar la edición y perder los cambios?",
+                    "Confirmar cancelación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.No) return;
             }
-            lblNotas.Text = "Listado de Notas";
-            lblNotas.ForeColor = Color.Teal;
-            tablaNotas.Grid.ReadOnly = true;
-            foreach (DataGridViewColumn col in tablaNotas.Grid.Columns)
-                col.ReadOnly = true;
-            btnGestionarNotas.Text = "Gestionar Notas";
-            tooltipNotas.SetToolTip(btnGestionarNotas, "Haz clic para editar las notas");
-            PanelAcciones.Visible = false;
+
             modoEdicion = false;
             huboCambios = false;
-            tablaNotas.Grid.Rows.Clear();
-            var materiaSeleccionada = cmbMateria.SelectedItem as Materias;
-            if (materiaSeleccionada != null)
+            tablaNotas.Grid.ReadOnly = true;
+            PanelAcciones.Visible = false;
+
+            // Restaurar valores
+            evitandoEvento = true;
+            cmbPeriodo.SelectedItem = periodoAnterior;
+            cmbMateria.SelectedItem = materiaAnterior;
+            evitandoEvento = false;
+
+            // Recargar datos originales
+            CargarNotasAutomatico(periodoAnterior);
+        }
+
+
+        private void CmbPeriodo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (evitandoEvento) return;
+
+            string nuevoPeriodo = cmbPeriodo.SelectedItem?.ToString();
+            if (nuevoPeriodo == periodoAnterior) return;
+
+            if (huboCambios && modoEdicion)
             {
-                cmbMateria_SelectedIndexChanged(null, null);
+                var resultado = MessageBox.Show(
+                    "Hay cambios no guardados. ¿Estás seguro de que deseas cambiar el período y perder los cambios?",
+                    "Confirmar cambio de período",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.No)
+                {
+                    evitandoEvento = true;
+                    cmbPeriodo.SelectedItem = periodoAnterior;
+                    evitandoEvento = false;
+                    return;
+                }
+                huboCambios = false;
             }
+
+            periodoAnterior = nuevoPeriodo;
+            CargarNotasAutomatico(nuevoPeriodo);
         }
 
         private void cmbMateria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
-            CargarNotasAutomatico(periodoSeleccionado);  // Aseguramos pasar el argumento adecuado
+            if (evitandoEvento) return;
+
+            var nuevaMateria = cmbMateria.SelectedItem as Materias;
+            if (nuevaMateria?.id_materia == materiaAnterior?.id_materia) return;
+
+            if (huboCambios && modoEdicion)
+            {
+                var resultado = MessageBox.Show(
+                    "Hay cambios no guardados. ¿Estás seguro de que deseas cambiar la materia y perder los cambios?",
+                    "Confirmar cambio de materia",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.No)
+                {
+                    evitandoEvento = true;
+                    cmbMateria.SelectedItem = materiaAnterior;
+                    evitandoEvento = false;
+                    return;
+                }
+                huboCambios = false;
+            }
+
+            materiaAnterior = nuevaMateria;
+            CargarNotasAutomatico(cmbPeriodo.SelectedItem?.ToString());
         }
 
-        private void CmbPeriodo_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void CargarMateriasDocente(int idDocente)
         {
-            string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
-            CargarNotasAutomatico(periodoSeleccionado);  // Aseguramos pasar el argumento adecuado
+            try
+            {
+                using (var contexto = new RegistroDocenteEntities())
+                {
+                    var materias = (from h in contexto.Horarios
+                                    join m in contexto.Materias on h.id_materia equals m.id_materia
+                                    where h.id_usuario == idDocente
+                                    select m)
+                                  .Distinct()
+                                  .OrderBy(m => m.nombre_materia)
+                                  .ToList();
+
+                    // Guardar selección actual
+                    var materiaActual = cmbMateria.SelectedItem as Materias;
+                    int? idMateriaActual = materiaActual?.id_materia;
+
+                    cmbMateria.DataSource = materias;
+                    cmbMateria.DisplayMember = "nombre_materia";
+                    cmbMateria.ValueMember = "id_materia";
+
+                    // Restaurar selección si existe
+                    if (idMateriaActual != null && materias.Any(m => m.id_materia == idMateriaActual))
+                    {
+                        cmbMateria.SelectedValue = idMateriaActual;
+                    }
+                    else if (materias.Count > 0)
+                    {
+                        cmbMateria.SelectedIndex = 0;
+                    }
+
+                    materiaAnterior = cmbMateria.SelectedItem as Materias;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar materias: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
 
         private void CargarNotasAutomatico(string periodoSeleccionado)
@@ -336,7 +429,6 @@ namespace Registro_Docente_360.ControlesUsuario
                         var periodo = cmbPeriodo.SelectedItem?.ToString();
                         if (string.IsNullOrEmpty(periodo)) continue;
 
-                        // ASISTENCIA viene calculada, así que tomar la del grid
                         decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
                         decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
                         decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal tareas);
@@ -383,26 +475,132 @@ namespace Registro_Docente_360.ControlesUsuario
                     }
                 }
                 contexto.SaveChanges();
-                MessageBox.Show("Notas guardadas y sincronizadas correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Después de guardar exitosamente:
+                huboCambios = false;
+                periodoAnterior = cmbPeriodo.SelectedItem?.ToString();
+                materiaAnterior = cmbMateria.SelectedItem as Materias;
+
+                MessageBox.Show("Notas guardadas correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            // Después de guardar:
             huboCambios = false;
+
+            // Actualizar estado de las notas guardadas
+            periodoAnterior = cmbPeriodo.SelectedItem?.ToString();
+            materiaAnterior = cmbMateria.SelectedItem as Materias;
+
+            // Opcional: Recargar datos para asegurar consistencia
+            CargarNotasAutomatico(periodoAnterior);
         }
 
 
         // El resto de eventos siguen igual (NO se puede editar asistencia, y todo se recalcula)
         private void Grid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            huboCambios = true;
+            if (e.RowIndex < 0 || !modoEdicion) return;
+
             var fila = tablaNotas.Grid.Rows[e.RowIndex];
-            decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
-            decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
-            decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal tareas);
-            decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal asistencia);
-            decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal cotidiano);
-            decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
-            fila.Cells["colNotaFinal"].Value = Math.Round(notaFinal, 2);
+            var celda = fila.Cells[e.ColumnIndex];
+
+            // Solo marcar cambios en columnas editables
+            if (celda.OwningColumn.Name == "colPrimerExamen" ||
+                celda.OwningColumn.Name == "colSegundoExamen" ||
+                celda.OwningColumn.Name == "colTareas" ||
+                celda.OwningColumn.Name == "colCotidiano")
+            {
+                huboCambios = true;
+                alertaMostrada = false;  // Reiniciar la bandera al finalizar la edición de la celda
+
+                // Recalcular nota final
+                decimal.TryParse(fila.Cells["colPrimerExamen"].Value?.ToString(), out decimal examen1);
+                decimal.TryParse(fila.Cells["colSegundoExamen"].Value?.ToString(), out decimal examen2);
+                decimal.TryParse(fila.Cells["colTareas"].Value?.ToString(), out decimal tareas);
+                decimal.TryParse(fila.Cells["colAsistencia"].Value?.ToString(), out decimal asistencia);
+                decimal.TryParse(fila.Cells["colCotidiano"].Value?.ToString(), out decimal cotidiano);
+
+                decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
+                fila.Cells["colNotaFinal"].Value = Math.Round(notaFinal, 2);
+            }
         }
+
+        private void Grid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // Verifica si el valor está siendo editado en las celdas de los exámenes, tareas o cotidiano
+            if (e.ColumnIndex == tablaNotas.Grid.Columns["colPrimerExamen"].Index ||
+                e.ColumnIndex == tablaNotas.Grid.Columns["colSegundoExamen"].Index ||
+                e.ColumnIndex == tablaNotas.Grid.Columns["colTareas"].Index ||
+                e.ColumnIndex == tablaNotas.Grid.Columns["colCotidiano"].Index)
+            {
+                // Intenta convertir el valor a decimal
+                if (decimal.TryParse(e.FormattedValue.ToString(), out decimal valor))
+                {
+                    bool esValido = true;
+                    string mensaje = string.Empty;
+
+                    // Comprobar los límites para los exámenes, tareas y cotidiano
+                    if (e.ColumnIndex == tablaNotas.Grid.Columns["colPrimerExamen"].Index ||
+                        e.ColumnIndex == tablaNotas.Grid.Columns["colSegundoExamen"].Index)
+                    {
+                        // Limitar el valor a 10 para los exámenes
+                        if (valor < 0 || valor > 10)
+                        {
+                            esValido = false;
+                            mensaje = "La nota debe estar entre 0 y 10";
+                        }
+                    }
+                    else if (e.ColumnIndex == tablaNotas.Grid.Columns["colTareas"].Index)
+                    {
+                        // Limitar el valor a 10 para las tareas
+                        if (valor < 0 || valor > 10)
+                        {
+                            esValido = false;
+                            mensaje = "La tarea debe estar entre 0 y 10";
+                        }
+                    }
+                    else if (e.ColumnIndex == tablaNotas.Grid.Columns["colCotidiano"].Index)
+                    {
+                        // Limitar el valor a 60 para el cotidiano
+                        if (valor < 0 || valor > 60)
+                        {
+                            esValido = false;
+                            mensaje = "La nota de cotidiano debe estar entre 0 y 60";
+                        }
+                    }
+
+                    if (!esValido)
+                    {
+                        e.Cancel = true;  // Cancelar el cambio
+                        tablaNotas.Grid.CancelEdit();  // Asegurarse de que no se guarde el valor incorrecto
+
+                        // Solo mostrar la alerta una vez
+                        if (!alertaMostrada)
+                        {
+                            alertaMostrada = true; // Evitar mostrar la alerta más de una vez
+                            MessageBox.Show(mensaje, "Valor no válido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                else
+                {
+                    // Si no es un número válido, cancelar el cambio
+                    e.Cancel = true;
+                    tablaNotas.Grid.CancelEdit();  // Asegurarse de que no se guarde el valor incorrecto
+
+                    // Solo mostrar la alerta una vez
+                    if (!alertaMostrada)
+                    {
+                        alertaMostrada = true; // Evitar mostrar la alerta más de una vez
+                        MessageBox.Show("Por favor ingrese un valor numérico", "Valor no válido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
+
+
+
+
+
 
         private void Grid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -469,12 +667,11 @@ namespace Registro_Docente_360.ControlesUsuario
             if (cmbDocentes.SelectedItem != null)
             {
                 int idDocenteSeleccionado = (int)cmbDocentes.SelectedValue;
+                CargarMateriasDocente(idDocenteSeleccionado);
 
-                // Obtener el periodo seleccionado
+                // Cargar notas con el período actual
                 string periodoSeleccionado = cmbPeriodo.SelectedItem?.ToString();
-
-                // Llamamos a CargarNotasDocente pasando el periodoSeleccionado
-                CargarNotasDocente(idDocenteSeleccionado, periodoSeleccionado);
+                CargarNotasAutomatico(periodoSeleccionado);
             }
         }
 

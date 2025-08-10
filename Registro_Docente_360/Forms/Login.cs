@@ -147,7 +147,7 @@ namespace Registro_Docente_360
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit(); // Cierra toda la aplicación
         }
     }
 }

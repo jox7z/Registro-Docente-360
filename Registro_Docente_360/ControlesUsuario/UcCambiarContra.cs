@@ -44,7 +44,7 @@ namespace Registro_Docente_360.ControlesUsuario
             pnNuevaContra.Visible = false;
         }
 
- 
+
         private void cbMostrarContra_CheckedChanged(object sender, EventArgs e)
         {
             bool mostrar = cbMostrarContra.Checked;
@@ -97,12 +97,21 @@ namespace Registro_Docente_360.ControlesUsuario
             string nueva = txtNuevaContra.Text;
             string confirmar = txtConfirmacion.Text;
 
+            // Validar si las contraseñas coinciden
             if (nueva != confirmar)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            // Validar si la nueva contraseña tiene al menos 6 caracteres
+            if (nueva.Length < 6)
+            {
+                MessageBox.Show("La nueva contraseña debe tener al menos 6 caracteres.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar si la nueva contraseña está vacía
             if (string.IsNullOrWhiteSpace(nueva))
             {
                 MessageBox.Show("La nueva contraseña no puede estar vacía.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -127,13 +136,14 @@ namespace Registro_Docente_360.ControlesUsuario
 
                 MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // Registrar la acción realizada
                 string accion = "Actualizar contraseña";
-                string descripcion = $"Actualizacion contraseña del usuario: {usuario.nombre_usuario}";
+                string descripcion = $"Actualización de contraseña del usuario: {usuario.nombre_usuario}";
                 string modulo = "Alumnos";
                 controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
             }
 
-            // Limpiar campos
+            // Limpiar campos después de la actualización
             txtContraActual.Clear();
             txtNuevaContra.Clear();
             txtConfirmacion.Clear();
@@ -148,6 +158,6 @@ namespace Registro_Docente_360.ControlesUsuario
             OnVolverAConfiguracion?.Invoke(this, EventArgs.Empty);
         }
 
-        
+
     }
 }

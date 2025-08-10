@@ -479,7 +479,15 @@ namespace Registro_Docente_360.Controladores
             return false;
         }
 
-      
+        public bool ExisteUsuario(string cedula)
+        {
+            using (var context = new RegistroDocenteEntities())
+            {
+                return context.Usuarios.Any(u => u.cedula_usuario == cedula);
+            }
+        }
+
+
 
     }
 }

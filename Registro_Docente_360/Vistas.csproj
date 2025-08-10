@@ -158,7 +158,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlesUsuario\AlumnoController.cs" />
     <Compile Include="ControlesUsuario\dataGridPerso.cs">
       <SubType>UserControl</SubType>
     </Compile>
