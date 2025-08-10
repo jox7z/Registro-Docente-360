@@ -865,13 +865,16 @@ namespace Registro_Docente_360.ControlesUsuario
 
                     // Cargar docentes
                     var docentes = contexto.Usuarios
-                        .Where(u => u.Roles.nombre_rol == "Docente")
-                        .Select(u => new
-                        {
-                            u.id_usuario,
-                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
-                        })
-                        .ToList();
+                    .Where(u => u.Roles != null &&
+                               u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 1) && 
+                               !u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 2))   
+                    .Select(u => new
+                    {
+                        u.id_usuario,
+                        NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                    })
+                    .OrderBy(d => d.NombreCompleto)
+                    .ToList();
 
                     cmbDocentes.DisplayMember = "NombreCompleto";
                     cmbDocentes.ValueMember = "id_usuario";

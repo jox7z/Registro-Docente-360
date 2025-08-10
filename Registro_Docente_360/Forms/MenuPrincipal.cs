@@ -525,6 +525,16 @@ namespace Registro_Docente_360
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
+            // Verificar permisos antes de continuar
+            if (!AlumnoController.VerificarSiAccedeConfig(Sesion.IdUsuario))
+            {
+                MessageBox.Show("No tienes permisos para acceder a esta configuración.",
+                               "Acceso denegado",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+                return; // Salir del método si no tiene permisos
+            }
+
             if (ucConfiguracion == null)
             {
                 ucConfiguracion = new UcConfiguracion();
@@ -579,6 +589,16 @@ namespace Registro_Docente_360
 
         private void btnAccesos_Click(object sender, EventArgs e)
         {
+            // Validar permiso para bitácoras
+            if (!AlumnoController.VerificarSiAccedeBitacoras(Sesion.IdUsuario))
+            {
+                MessageBox.Show("No tienes permiso para acceder a las bitácoras",
+                               "Acceso denegado",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+                return;
+            }
+
             if (ucRegistroAccesos == null)
                 ucRegistroAccesos = new UcRegistroAccesos();
 
@@ -587,6 +607,16 @@ namespace Registro_Docente_360
 
         private void btnAccionesUsuario_Click(object sender, EventArgs e)
         {
+            // Validar permiso para bitácoras (misma validación que el anterior)
+            if (!AlumnoController.VerificarSiAccedeBitacoras(Sesion.IdUsuario))
+            {
+                MessageBox.Show("No tienes permiso para acceder a las bitácoras",
+                               "Acceso denegado",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+                return;
+            }
+
             if (ucAccionesUsuario == null)
                 ucAccionesUsuario = new UcAccionesUsuario();
 
@@ -594,6 +624,16 @@ namespace Registro_Docente_360
         }
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            // Validar permiso para modificar usuarios
+            if (!AlumnoController.VerificarSiModificaUsuario(Sesion.IdUsuario))
+            {
+                MessageBox.Show("No tienes permiso para modificar usuarios",
+                               "Acceso denegado",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+                return;
+            }
+
             if (ucUsuarios == null)
                 ucUsuarios = new UcUsuarios();
 

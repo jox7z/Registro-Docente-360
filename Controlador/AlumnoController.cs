@@ -438,6 +438,8 @@ namespace Registro_Docente_360.Controladores
             }
             return false;
         }
+     
+
 
         // Función para verificar si el usuario puede modificar usuarios
         public static bool VerificarSiModificaUsuario(int idUsuario)
@@ -449,6 +451,11 @@ namespace Registro_Docente_360.Controladores
             }
             return false;
         }
+        public static void TestMethod()
+        {
+            Console.WriteLine("Método de prueba");
+        }
+
 
         // Función para verificar si el usuario puede acceder a las configuraciones
         public static bool VerificarSiAccedeConfig(int idUsuario)

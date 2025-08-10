@@ -1,13 +1,13 @@
-﻿using Modelos.EntityFramework;
-using Registro_Docente_360.Controladores;
-using Registro_Docente_360.Eventos;
-using Registro_Docente_360.Interfaces;
-using Registro_Docente_360.Utilidades;
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Modelos.EntityFramework;
+using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
+using Registro_Docente_360.Interfaces;
+using Registro_Docente_360.Utilidades;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -79,13 +79,16 @@ namespace Registro_Docente_360.ControlesUsuario
                     lblSeccion.Text = "Materia: ";
 
                     var docentes = contexto.Usuarios
-                        .Where(u => u.Roles.nombre_rol == "Docente")
-                        .Select(u => new
-                        {
-                            u.id_usuario,
-                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
-                        })
-                        .ToList();
+                   .Where(u => u.Roles != null &&
+                              u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 1) &&  // Permiso docente
+                              !u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 2))   // No es admin
+                   .Select(u => new
+                   {
+                       u.id_usuario,
+                       NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
+                   })
+                   .OrderBy(d => d.NombreCompleto)  // Orden alfabético
+                   .ToList();
 
                     cmbDocentes.DisplayMember = "NombreCompleto";
                     cmbDocentes.ValueMember = "id_usuario";

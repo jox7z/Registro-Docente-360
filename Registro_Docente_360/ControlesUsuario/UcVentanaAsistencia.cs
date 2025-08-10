@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Registro_Docente_360.ControlesUsuario
 {
@@ -27,6 +29,63 @@ namespace Registro_Docente_360.ControlesUsuario
             InitializeComponent();
             this.Load += UcVentanaAsistencia_Load;
             dataGridPerso1.Grid.EditingControlShowing += Grid_EditingControlShowing;
+        }
+
+        private void UcVentanaAsistencia_Load(object sender, EventArgs e)
+        {
+            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
+
+            using (var contexto = new RegistroDocenteEntities())
+            {
+                var usuario = contexto.Usuarios
+                    .Include(u => u.Roles)
+                    .FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
+
+                if (esAdministrador)
+                {
+                    // Configuración UI para administradores
+                    cmbDocentes.Visible = true;
+                    lblGrupo.Visible = false;
+
+                    // Carga optimizada de docentes (por permiso ID 1)
+                    var docentes = contexto.Usuarios
+                        .Include("Roles.Roles_Permisos")
+                        .Include(u => u.Secciones) // Asegurar que carga la relación secciones
+                        .Where(u =>
+                         u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 1) && // Tiene permiso docente
+                        !u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 2) && // No es admin
+                         u.id_seccion != null // Tiene sección asignada
+                        )
+                        .Select(u => new
+                         {
+                         u.id_usuario,
+                         NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario,
+                         Seccion = u.Secciones.nombre_seccion
+                         })
+                         .OrderBy(d => d.NombreCompleto)
+                         .ToList();
+
+                    // Configurar ComboBox
+                    cmbDocentes.DisplayMember = "NombreCompleto";
+                    cmbDocentes.ValueMember = "id_usuario";
+                    cmbDocentes.DataSource = docentes;
+                    cmbDocentes.SelectedIndexChanged += cmbDocentes_SelectedIndexChanged;
+
+                    if (docentes.Any())
+                    {
+                        cmbDocentes.SelectedIndex = 0;
+                        // Disparar carga inicial de asistencia
+                        CargarAsistenciaDesdeBD((int)cmbDocentes.SelectedValue);
+                    }
+                }
+                else
+                {
+                    // Configuración para docentes
+                    cmbDocentes.Visible = false;
+                    CargarAsistenciaDesdeBD(Sesion.IdUsuario);
+                    dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
+                }
+            }
         }
 
         private void CargarAsistenciaDesdeBD(int docente)
@@ -118,10 +177,6 @@ namespace Registro_Docente_360.ControlesUsuario
             }
         }
 
-
-
-
-
         public void ActualizarCabecera(int anho, string fechaInicio, string fechaFin)
         {
             using (var contexto = new RegistroDocenteEntities())
@@ -191,55 +246,6 @@ namespace Registro_Docente_360.ControlesUsuario
             else cell.Style.BackColor = Color.White;
         }
 
-
-
-        private void UcVentanaAsistencia_Load(object sender, EventArgs e)
-        {
-            //CargarAsistenciaDesdeBD();
-            //dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
-
-            bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
-
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                var usuario = contexto.Usuarios.FirstOrDefault(u => u.id_usuario == Sesion.IdUsuario);
-                AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
-                if (esAdministrador) //administrador
-                {
-                    // Mostrar ComboBox y ocultar Label
-                    cmbDocentes.Visible = true;
-                    lblGrupo.Visible= false;
-
-                    // Cargar docentes
-                    var docentes = contexto.Usuarios
-                        .Where(u => u.Roles.nombre_rol == "Docente")
-                        .Select(u => new
-                        {
-                            u.id_usuario,
-                            NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
-                        })
-                        .ToList();
-
-                    cmbDocentes.DisplayMember = "NombreCompleto";
-                    cmbDocentes.ValueMember = "id_usuario";
-                    cmbDocentes.DataSource = docentes;
-
-                    cmbDocentes.SelectedIndexChanged += cmbDocentes_SelectedIndexChanged;
-
-                    if (cmbDocentes.Items.Count > 0)
-                    {
-                        cmbDocentes.SelectedIndex = 0; // Dispara carga automática
-                    }
-                }
-                else
-                {
-                    // Usuario docente
-                    cmbDocentes.Visible = false;
-                    CargarAsistenciaDesdeBD(Sesion.IdUsuario);
-                    dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_Grid_CellValueChanged;
-                }
-            }
-        }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {

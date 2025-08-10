@@ -236,6 +236,7 @@
             // cmbMateria
             // 
             this.cmbMateria.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbMateria.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMateria.FormattingEnabled = true;
@@ -248,6 +249,7 @@
             // cmbPeriodo
             // 
             this.cmbPeriodo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbPeriodo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPeriodo.FormattingEnabled = true;
@@ -351,6 +353,7 @@
             // cmbDocentes
             // 
             this.cmbDocentes.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbDocentes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;

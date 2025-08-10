@@ -292,11 +292,11 @@ namespace Registro_Docente_360.Controladores
             }
         }
 
-        public bool ExisteUsuarioPorCedula(string cedula)
+        public bool ExisteUsuario(string cedula)
         {
-            using (var contexto = new RegistroDocenteEntities())
+            using (var context = new RegistroDocenteEntities())
             {
-                return contexto.Usuarios.Any(u => u.cedula_usuario == cedula);
+                return context.Usuarios.Any(u => u.cedula_usuario == cedula);
             }
         }
 
@@ -420,12 +420,13 @@ namespace Registro_Docente_360.Controladores
         // Función para verificar si el usuario es administrador
         public static bool VerificarSiEsAdministrador(int idUsuario)
         {
-            AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
-            if (AlumnoController.PermisosRolActual.Contains(2))
+            using (var contexto = new RegistroDocenteEntities())
             {
-                return true;
+                return contexto.Usuarios
+                    .Include(u => u.Roles.Roles_Permisos)
+                    .Any(u => u.id_usuario == idUsuario &&
+                           u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 2));
             }
-            return false;
         }
 
         // Función para verificar si el usuario es administrador

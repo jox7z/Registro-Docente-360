@@ -25,25 +25,38 @@ namespace Registro_Docente_360.ControlesUsuario
 
         private void UcHorario_Load(object sender, EventArgs e)
         {
+            // Configuración inicial de eventos del DataGridView
             dataGridPerso1.Grid.CellValueChanged += dataGridPerso1_CellValueChanged;
             dataGridPerso1.Grid.CellEndEdit += dataGridPerso1_CellEndEdit;
             dataGridPerso1.Grid.CellMouseMove += Grid_CellMouseMove;
 
+            // Definición de horarios, materias y días
             string[] horas = {
-                "7:00 A 7:40", "7:40 A 8:20", "8:35 A 9:15", "9:15 A 9:55",
-                "10:05 A 10:45", "10:45 A 11:25", "11:30 A 12:10",
-                "12:30 A 1:10", "1:10 A 1:50", "2:00 A 2:40",
-                "2:40 A 3:20", "3:35 A 4:15", "4:15 A 4:55", "5:00 A 5:40"
-            };
+        "7:00 A 7:40", "7:40 A 8:20", "8:35 A 9:15", "9:15 A 9:55",
+        "10:05 A 10:45", "10:45 A 11:25", "11:30 A 12:10",
+        "12:30 A 1:10", "1:10 A 1:50", "2:00 A 2:40",
+        "2:40 A 3:20", "3:35 A 4:15", "4:15 A 4:55", "5:00 A 5:40"
+    };
 
             string[] materias = { "", "Español", "Matemáticas", "Ciencias", "Estudios Sociales", "Complementarias" };
             string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
 
+            // Configuración de columnas del DataGridView
             dataGridPerso1.Grid.Columns.Clear();
+            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Lección",
+                Name = "colLeccion",
+                ReadOnly = true
+            });
+            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Horario",
+                Name = "colHorario",
+                ReadOnly = true
+            });
 
-            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Lección", Name = "colLeccion", ReadOnly = true });
-            dataGridPerso1.Grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Horario", Name = "colHorario", ReadOnly = true });
-
+            // Agregar columnas de días con ComboBox de materias
             foreach (var dia in dias)
             {
                 dataGridPerso1.Grid.Columns.Add(new DataGridViewComboBoxColumn
@@ -55,21 +68,24 @@ namespace Registro_Docente_360.ControlesUsuario
                 });
             }
 
+            // Llenar filas con horarios
             dataGridPerso1.Grid.Rows.Clear();
             for (int i = 0; i < horas.Length; i++)
             {
                 var fila = new DataGridViewRow();
                 fila.CreateCells(dataGridPerso1.Grid);
-                fila.Cells[0].Value = (i + 1);
-                fila.Cells[1].Value = horas[i];
+                fila.Cells[0].Value = (i + 1); // Número de lección
+                fila.Cells[1].Value = horas[i]; // Horario
                 dataGridPerso1.Grid.Rows.Add(fila);
             }
 
+            // Estilo para filas específicas (ejemplo: después de la 7ma fila)
             for (int i = 7; i < dataGridPerso1.Grid.Rows.Count; i++)
                 dataGridPerso1.Grid.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;
 
             dataGridPerso1.Grid.ReadOnly = true;
 
+            // Verificar si el usuario es administrador
             bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
 
             using (var contexto = new RegistroDocenteEntities())
@@ -78,33 +94,56 @@ namespace Registro_Docente_360.ControlesUsuario
 
                 if (esAdministrador)
                 {
-                    // Modo administrador
+                    // Configuración UI para administradores
                     lblNomDocente.Visible = false;
                     lblSecc.Visible = false;
                     cmbDocentes.Visible = true;
                     lblSeccion.Visible = false;
 
-                    // Cargar docentes
+                    // Cargar docentes (excluyendo administradores)
                     var docentes = contexto.Usuarios
-                        .Where(u => u.Roles.nombre_rol == "Docente" && u.estado_usuario == "A") //cambiar a que agarre el permiso no el rol
+                        .Where(u => u.Roles != null &&
+                                   u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 1) &&  // Permiso docente
+                                   !u.Roles.Roles_Permisos.Any(rp => rp.id_permiso == 2))   // No es admin
                         .Select(u => new
                         {
                             u.id_usuario,
                             NombreCompleto = u.nombre_usuario + " " + u.apellido_usuario
-                        }).ToList();
+                        })
+                        .OrderBy(d => d.NombreCompleto)
+                        .ToList();
 
+                    // Configurar ComboBox
                     cmbDocentes.DataSource = docentes;
                     cmbDocentes.DisplayMember = "NombreCompleto";
                     cmbDocentes.ValueMember = "id_usuario";
+
+                    // Cargar horario del primer docente (si existe)
+                    if (docentes.Any())
+                    {
+                        cmbDocentes.SelectedIndex = 0;
+                        CargarHorario((int)cmbDocentes.SelectedValue);
+                    }
                 }
                 else
                 {
-                    var seccion = contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion);
-                    lblNomDocente.Text = usuario.nombre_usuario;
-                    lblSecc.Text = seccion?.nombre_seccion ?? "";
+                    // Configuración para docentes no administradores
                     cmbDocentes.Visible = false;
+                    lblNomDocente.Visible = true;
 
-                    CargarHorario(usuario.id_usuario);
+                    if (usuario != null)
+                    {
+                        lblNomDocente.Text = usuario.nombre_usuario;
+
+                        // Cargar sección del docente
+                        var seccion = usuario.id_seccion != null
+                            ? contexto.Secciones.FirstOrDefault(s => s.id_seccion == usuario.id_seccion)
+                            : null;
+                        lblSecc.Text = seccion?.nombre_seccion ?? "Sin sección asignada";
+
+                        // Cargar horario del docente actual
+                        CargarHorario(usuario.id_usuario);
+                    }
                 }
             }
         }

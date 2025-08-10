@@ -138,6 +138,7 @@
             // 
             // cmbDocentes
             // 
+            this.cmbDocentes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocentes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDocentes.FormattingEnabled = true;
