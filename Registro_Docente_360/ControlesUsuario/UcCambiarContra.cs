@@ -139,7 +139,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 // Registrar la acción realizada
                 string accion = "Actualizar contraseña";
                 string descripcion = $"Actualización de contraseña del usuario: {usuario.nombre_usuario}";
-                string modulo = "Alumnos";
+                string modulo = "InfoCuenta";
                 controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
             }
 

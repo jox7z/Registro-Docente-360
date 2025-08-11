@@ -259,17 +259,47 @@ namespace Registro_Docente_360.ControlesUsuario
         }
 
 
+
+
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
-                DateTime fechaInicio = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
-                int cambiosRealizados = 0;
+                // Fechas de los periodos
+                DateTime fechaInicioPrimerPeriodo = new DateTime(2025, 2, 3); // 3 de febrero
+                DateTime fechaFinPrimerPeriodo = new DateTime(2025, 5, 25);  // 25 de mayo
+                DateTime fechaInicioSegundoPeriodo = new DateTime(2025, 5, 26); // 26 de mayo
+                DateTime fechaFinSegundoPeriodo = new DateTime(2025, 12, 10);  // 10 de diciembre
 
-                // Verificar si el usuario es administrador o docente
-                bool esAdministrador = AlumnoController.VerificarSiEsAdministrador(Sesion.IdUsuario);
-                int docenteId = esAdministrador ? (int)cmbDocentes.SelectedValue : Sesion.IdUsuario;
+                // La fecha seleccionada para la semana (debe ser calculada correctamente)
+                DateTime fechaInicioSemanaSeleccionada = DateTime.ParseExact(fechaInicioSeleccionada, "dd/MM/yyyy", null);
+
+                // Determinar el periodo según la fecha seleccionada
+                string periodoSeleccionado = "";
+                DateTime fechaInicio = DateTime.MinValue;
+                DateTime fechaFin = DateTime.MinValue;
+
+                if (fechaInicioSemanaSeleccionada >= fechaInicioPrimerPeriodo && fechaInicioSemanaSeleccionada <= fechaFinPrimerPeriodo)
+                {
+                    periodoSeleccionado = "Primer Periodo";
+                    fechaInicio = fechaInicioPrimerPeriodo;
+                    fechaFin = fechaFinPrimerPeriodo;
+                }
+                else if (fechaInicioSemanaSeleccionada >= fechaInicioSegundoPeriodo && fechaInicioSemanaSeleccionada <= fechaFinSegundoPeriodo)
+                {
+                    periodoSeleccionado = "Segundo Periodo";
+                    fechaInicio = fechaInicioSegundoPeriodo;
+                    fechaFin = fechaFinSegundoPeriodo;
+                }
+                else
+                {
+                    MessageBox.Show("La fecha seleccionada está fuera de los periodos definidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Variables para contabilizar cambios
+                int cambiosRealizados = 0;
 
                 using (SqlConnection conn = new SqlConnection("data source=192.168.195.168\\SQLEXPRESS;Initial Catalog=RegistroDocente;User Id=Admin;Password=12345;MultipleActiveResultSets=True;Encrypt=False;Application Name=EntityFramework"))
                 {
@@ -289,62 +319,106 @@ namespace Registro_Docente_360.ControlesUsuario
                             continue;
                         }
 
-                        var clases = alumnoController.ObtenerClasesDelDocenteYEstudiante(docenteId, estudiante.id_estudiante);
-
-                        foreach (var clase in clases)
+                        // 1. Guardar o actualizar las asistencias
+                        for (int i = 1; i <= 5; i++) // 5 días de la semana
                         {
-                            for (int i = 1; i <= 5; i++)
+                            string estado = fila.Cells[i].Value?.ToString()?.Trim(); // Obtener el estado de cada celda
+
+                            if (!string.IsNullOrEmpty(estado))
                             {
-                                string estado = fila.Cells[i].Value?.ToString();
-                                if (string.IsNullOrEmpty(estado)) continue;
+                                // Aquí calculamos la fecha de cada día de la semana basado en la semana seleccionada
+                                DateTime fechaDia = fechaInicioSemanaSeleccionada.AddDays(i - 1); // Ajustamos para cada día de la semana (Lunes-Viernes)
 
-                                DateTime fechaDia = fechaInicio.AddDays(i - 1);
-
-                                using (SqlCommand check = new SqlCommand(
+                                // Verificar si ya existe un registro de asistencia para ese estudiante y fecha
+                                using (SqlCommand checkAsistencia = new SqlCommand(
                                     "SELECT COUNT(*) FROM Asistencia WHERE id_estudiante = @idest AND fecha = @fecha", conn))
                                 {
-                                    check.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
-                                    check.Parameters.AddWithValue("@fecha", fechaDia);
+                                    checkAsistencia.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
+                                    checkAsistencia.Parameters.AddWithValue("@fecha", fechaDia);
 
-                                    int count = (int)check.ExecuteScalar();
+                                    int count = (int)checkAsistencia.ExecuteScalar();
 
-                                    // Si ya existe el registro, se actualiza
-                                    if (count > 0)
+                                    if (count > 0) // Si ya existe, actualizamos
                                     {
-                                        using (SqlCommand update = new SqlCommand(
+                                        using (SqlCommand updateAsistencia = new SqlCommand(
                                             "UPDATE Asistencia SET estado = @estado WHERE id_estudiante = @idest AND fecha = @fecha", conn))
                                         {
-                                            update.Parameters.AddWithValue("@estado", estado);
-                                            update.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
-                                            update.Parameters.AddWithValue("@fecha", fechaDia);
-                                            cambiosRealizados += update.ExecuteNonQuery();
+                                            updateAsistencia.Parameters.AddWithValue("@estado", estado);
+                                            updateAsistencia.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
+                                            updateAsistencia.Parameters.AddWithValue("@fecha", fechaDia);
+
+                                            int filasAfectadas = updateAsistencia.ExecuteNonQuery();
+                                            if (filasAfectadas > 0)
+                                            {
+                                                cambiosRealizados += filasAfectadas;
+                                            }
                                         }
                                     }
-                                    else
+                                    else // Si no existe, insertamos
                                     {
-                                        // Si no existe, se inserta un nuevo registro de asistencia
-                                        using (SqlCommand insert = new SqlCommand(
+                                        using (SqlCommand insertAsistencia = new SqlCommand(
                                             "INSERT INTO Asistencia (id_estudiante, fecha, estado) VALUES (@idest, @fecha, @estado)", conn))
                                         {
-                                            insert.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
-                                            insert.Parameters.AddWithValue("@fecha", fechaDia);
-                                            insert.Parameters.AddWithValue("@estado", estado);
-                                            cambiosRealizados += insert.ExecuteNonQuery();
+                                            insertAsistencia.Parameters.AddWithValue("@estado", estado);
+                                            insertAsistencia.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
+                                            insertAsistencia.Parameters.AddWithValue("@fecha", fechaDia);
+
+                                            int filasInsertadas = insertAsistencia.ExecuteNonQuery();
+                                            if (filasInsertadas > 0)
+                                            {
+                                                cambiosRealizados += filasInsertadas;
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+
+                        // 2. Calcular la penalización y la nueva nota de asistencia
+                        string[] estadosDeAsistencia = { "Ausente", "Tarde" };
+                        int penalizaciones = 0;
+
+                        // Consultar las asistencias del estudiante en el rango de fechas
+                        using (SqlCommand cmd = new SqlCommand(
+                            "SELECT COUNT(*) FROM Asistencia WHERE id_estudiante = @idest AND fecha >= @fechaInicio AND fecha <= @fechaFin AND estado IN ('Ausente', 'Tarde')", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
+                            cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                            cmd.Parameters.AddWithValue("@fechaFin", fechaFin);
+
+                            penalizaciones = (int)cmd.ExecuteScalar();
+                        }
+
+                        // 3. Calcular la nueva nota de asistencia
+                        decimal asistenciaFinal = Math.Max(10 - (penalizaciones * 0.2m), 0); // Penalización
+
+                        // 4. Actualizar la nota de asistencia en la tabla Notas
+                        using (SqlCommand updateNota = new SqlCommand(
+                            "UPDATE Notas SET asistencia = @asistencia WHERE id_estudiante = @idest AND periodo = @periodo", conn))
+                        {
+                            updateNota.Parameters.AddWithValue("@asistencia", asistenciaFinal);
+                            updateNota.Parameters.AddWithValue("@idest", estudiante.id_estudiante);
+                            updateNota.Parameters.AddWithValue("@periodo", periodoSeleccionado);
+
+                            int filasAfectadasNota = updateNota.ExecuteNonQuery();
+                            if (filasAfectadasNota > 0)
+                            {
+                                cambiosRealizados += filasAfectadasNota;
+                            }
+                        }
                     }
 
-                    MessageBox.Show("Asistencia guardada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Asistencia guardada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar asistencia: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar asistencia y actualizar la nota: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
 
 

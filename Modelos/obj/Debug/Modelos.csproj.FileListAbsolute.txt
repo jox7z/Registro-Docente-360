@@ -254,3 +254,7 @@ Z:\Repos Progra IV\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.CoreCom
 Z:\Repos Progra IV\Registro-Docente-360\Modelos\obj\Debug\Modelos.csproj.Up2Date
 Z:\Repos Progra IV\Registro-Docente-360\Modelos\obj\Debug\Modelos.dll
 Z:\Repos Progra IV\Registro-Docente-360\Modelos\obj\Debug\Modelos.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\itextsharp.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Modelos\bin\Debug\itextsharp.xml

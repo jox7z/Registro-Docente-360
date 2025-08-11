@@ -81,36 +81,36 @@ namespace Registro_Docente_360.Utilidades
         {
             try
             {
-                // Crear el documento PDF
-                Document doc = new Document(PageSize.A4);
+                // SOLO CAMBIO 1: Documento en horizontal (Rotate)
+                Document doc = new Document(PageSize.A4.Rotate(), 10f, 10f, 20f, 20f);
                 PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
                 writer.PageEvent = new FooterHelper();
                 doc.Open();
 
-                // Encabezado con nombre, sección y materia
+                // Encabezado (igual que antes)
                 Paragraph encabezado = new Paragraph(
                     "Reporte de notas\n" +
-                    $"Periodo: {periodoSeleccionado}\n"+
+                    $"Periodo: {periodoSeleccionado}\n" +
                     $"Docente: {nomDocente} {apeDocente}\n" +
                     $"Sección: {Seccion}\n\n",
                     FontFactory.GetFont("Arial", 12, Font.BOLD)
                 );
-
                 encabezado.Alignment = Element.ALIGN_LEFT;
                 doc.Add(encabezado);
 
-                // Línea divisoria
+                // Línea divisoria (igual que antes)
                 doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
                 doc.Add(new Paragraph(" "));
 
-                // Crear la tabla
-                PdfPTable table = new PdfPTable(9);
+                // Tabla ORIGINAL (sin cambios en estructura)
+                PdfPTable table = new PdfPTable(9); // Mismas 9 columnas
                 table.WidthPercentage = 100;
                 float alturaFila = 20f;
 
-                // Agregar encabezados de columna para las notas
+                // Encabezados (igual que antes)
                 string[] titulos = new string[] {
-            "Cedula","Nombre estudiante","Primer apellido","Primer Examen", "Segundo Examen", "Tareas", "Asistencia", "Cotidiano", "Nota Final"};
+            "Cedula","Nombre estudiante","Primer apellido","Primer Examen", "Segundo Examen", "Tareas", "Asistencia", "Cotidiano", "Nota Final"
+        };
 
                 foreach (var titulo in titulos)
                 {
@@ -120,10 +120,10 @@ namespace Registro_Docente_360.Utilidades
                     table.AddCell(celdaEncabezado);
                 }
 
-                // Lógica para manejar los periodos
+                // Datos (igual que antes)
                 foreach (var estudiante in estudiantes)
                 {
-                    var nota = ObtenerNotaPorEstudianteYMateria(estudiante, materia, periodoSeleccionado); // Llamada para obtener las notas del periodo seleccionado
+                    var nota = ObtenerNotaPorEstudianteYMateria(estudiante, materia, periodoSeleccionado);
 
                     // Cedula
                     PdfPCell celdaCedula = new PdfPCell(new Phrase(estudiante.cedula_estudiante));
@@ -171,20 +171,17 @@ namespace Registro_Docente_360.Utilidades
                     table.AddCell(celdaNotaFinal);
                 }
 
-                // Agregar la tabla al documento
+                // SOLO CAMBIO 2: Ajustar ancho de columnas para mejor visualización en horizontal
+                float[] columnWidths = new float[] { 8f, 15f, 15f, 10f, 10f, 8f, 8f, 8f, 8f };
+                table.SetWidths(columnWidths);
+
                 doc.Add(table);
                 doc.Close();
-
                 MessageBox.Show("PDF generado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al generar el PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            foreach (var estudiante in estudiantes)
-            {
-                var nota = ObtenerNotaPorEstudianteYMateria(estudiante, materia, periodoSeleccionado);
             }
         }
 
@@ -193,87 +190,59 @@ namespace Registro_Docente_360.Utilidades
 
         public static void ExportarNotasPorEstudiante(List<Clases> clases, Estudiantes estudiante, string filePath, string Seccion, string nomDocente, string apeDocente, string periodoSeleccionado)
         {
-            // Crear el documento PDF
-            Document doc = new Document(PageSize.A4);
+            // Crear documento en horizontal
+            Document doc = new Document(PageSize.A4.Rotate(), 10f, 10f, 20f, 20f);
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
             writer.PageEvent = new FooterHelper();
             doc.Open();
 
-       
-
-            // Encabezado con nombre, sección y materia
+            // Encabezado
             Paragraph encabezado = new Paragraph(
-                "Reporte de notas del " + $"estudiante: {estudiante.nombre_estudiante} {estudiante.primer_apellido}\n" +
-                $"{periodoSeleccionado}\n"+
-                $"Cedula estudiante: {estudiante.cedula_estudiante}\n" +
+                $"Reporte de notas - {estudiante.nombre_estudiante} {estudiante.primer_apellido}\n" +
+                $"Cédula: {estudiante.cedula_estudiante}\n" +
                 $"Docente: {nomDocente} {apeDocente}\n" +
-                $"Sección: {Seccion}\n\n",
+                $"Sección: {Seccion}\n" +
+                $"Periodo: {periodoSeleccionado}\n\n",
                 FontFactory.GetFont("Arial", 12, Font.BOLD)
             );
-
-            encabezado.Alignment = Element.ALIGN_LEFT;
             doc.Add(encabezado);
 
-            // Línea divisoria
+            // Tabla principal: Materias en filas, evaluaciones en columnas
+            PdfPTable table = new PdfPTable(7); // 6 evaluaciones + columna de materias
+            table.WidthPercentage = 100;
+
+            // Línea divisoria (se mantiene igual)
             doc.Add(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.5f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
             doc.Add(new Paragraph(" "));
 
-            // Crear la tabla
-            PdfPTable table = new PdfPTable(7);
-            table.WidthPercentage = 100;
-            float alturaFila = 20f;
-
-            // Agregar encabezados de columna para las notas
-            string[] titulos = new string[]
+            // Encabezados
+            string[] headers = { "Materia", "Primer Examen", "Segundo Examen", "Tareas", "Asistencia", "Cotidiano", "Nota Final" };
+            foreach (string header in headers)
             {
-        "Materia", "Primer Examen", "Segundo Examen", "Tareas", "Asistencia", "Cotidiano", "Nota Final"
-            };
-
-            foreach (var titulo in titulos)
-            {
-                PdfPCell celdaEncabezado = new PdfPCell(new Phrase(titulo, FontFactory.GetFont("Arial", 10, Font.BOLD)));
-                celdaEncabezado.BackgroundColor = BaseColor.LIGHT_GRAY;
-                celdaEncabezado.FixedHeight = alturaFila;  // Aquí aplicamos el mismo FixedHeight para los encabezados
-                table.AddCell(celdaEncabezado);
+                PdfPCell cell = new PdfPCell(new Phrase(header, FontFactory.GetFont("Arial", 10, Font.BOLD)));
+                cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell);
             }
 
-            // Agregar las clases del estudiante
+            // Datos
             foreach (var clase in clases)
             {
-                var materia = ObtenerMateriaPorClase(clase); // Obtener la materia asociada a la clase
-                var nota = ObtenerNotaPorClase(clase, periodoSeleccionado); // Obtener la nota de la clase
+                var materia = ObtenerMateriaPorClase(clase);
+                var nota = ObtenerNotaPorClase(clase, periodoSeleccionado);
 
-                // Agregar cada celda para el estudiante
-                PdfPCell celdaMateria = new PdfPCell(new Phrase(materia?.nombre_materia ?? "Sin materia"));
-                celdaMateria.FixedHeight = alturaFila;
-                table.AddCell(celdaMateria);
+                // Materia
+                table.AddCell(new Phrase(materia?.nombre_materia ?? "Sin nombre", FontFactory.GetFont("Arial", 9)));
 
-                PdfPCell celdaPrimerExamen = new PdfPCell(new Phrase(nota?.primer_examen.ToString() ?? "0"));
-                celdaPrimerExamen.FixedHeight = alturaFila;
-                table.AddCell(celdaPrimerExamen);
-
-                PdfPCell celdaSegundoExamen = new PdfPCell(new Phrase(nota?.segundo_examen.ToString() ?? "0"));
-                celdaSegundoExamen.FixedHeight = alturaFila;
-                table.AddCell(celdaSegundoExamen);
-
-                PdfPCell celdaTareas = new PdfPCell(new Phrase(nota?.tareas.ToString() ?? "0"));
-                celdaTareas.FixedHeight = alturaFila;
-                table.AddCell(celdaTareas);
-
-                PdfPCell celdaAsistencia = new PdfPCell(new Phrase(nota?.asistencia.ToString() ?? "0"));
-                celdaAsistencia.FixedHeight = alturaFila;
-                table.AddCell(celdaAsistencia);
-
-                PdfPCell celdaCotidiano = new PdfPCell(new Phrase(nota?.cotidiano.ToString() ?? "0"));
-                celdaCotidiano.FixedHeight = alturaFila;
-                table.AddCell(celdaCotidiano);
-
-                PdfPCell celdaNotaFinal = new PdfPCell(new Phrase(nota?.nota_final.ToString() ?? "0"));
-                celdaNotaFinal.FixedHeight = alturaFila;
-                table.AddCell(celdaNotaFinal);
+                // Evaluaciones
+                table.AddCell(new Phrase(nota?.primer_examen.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
+                table.AddCell(new Phrase(nota?.segundo_examen.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
+                table.AddCell(new Phrase(nota?.tareas.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
+                table.AddCell(new Phrase(nota?.asistencia.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
+                table.AddCell(new Phrase(nota?.cotidiano.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
+                table.AddCell(new Phrase(nota?.nota_final.ToString() ?? "0", FontFactory.GetFont("Arial", 9)));
             }
 
-            // Agregar la tabla al documento
             doc.Add(table);
             doc.Close();
             MessageBox.Show("PDF generado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -477,6 +446,7 @@ namespace Registro_Docente_360.Utilidades
             }
             else if (Tiempo == "Periodo académico")
             {
+
                 // Obtener las fechas exactas del periodo
                 DateTime fechaInicioPeriodo = mesSeleccionado == "Primer Periodo"
                     ? new DateTime(fechaInicioSemana.Year, 2, 3)
@@ -775,24 +745,37 @@ namespace Registro_Docente_360.Utilidades
             }
             else if (Tiempo == "Periodo académico")
             {
-                // DEFINIR MESES DEL PERIODO
-                List<int> mesesDelPeriodo = mesSeleccionado == "Primer Periodo" ?
-                    new List<int> { 2, 3, 4, 5 } : // Febrero a Mayo
-                    new List<int> { 8, 9, 10, 11 }; // Agosto a Noviembre
+                // DEFINIR FECHAS EXACTAS DEL PERIODO
+                DateTime fechaInicioPeriodo = mesSeleccionado == "Primer Periodo"
+                    ? new DateTime(anho, 2, 3)   // Primer Periodo: 3 de febrero
+                    : new DateTime(anho, 5, 26); // Segundo Periodo: 26 de mayo
+
+                DateTime fechaFinPeriodo = mesSeleccionado == "Primer Periodo"
+                    ? new DateTime(anho, 5, 25)   // Primer Periodo hasta 25 de mayo
+                    : new DateTime(anho, 12, 10); // Segundo Periodo hasta 10 de diciembre
+
+                // Obtener los meses involucrados en el periodo
+                List<int> mesesDelPeriodo = Enumerable.Range(
+                    fechaInicioPeriodo.Month,
+                    (fechaFinPeriodo.Month - fechaInicioPeriodo.Month) + 1).ToList();
 
                 foreach (var mes in mesesDelPeriodo)
                 {
                     // TÍTULO DEL MES
                     doc.Add(new Paragraph($"MES: {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes).ToUpper()}",
-                        FontFactory.GetFont("Arial", 11, Font.BOLD)));
+                    FontFactory.GetFont("Arial", 11, Font.BOLD)));
                     doc.Add(new Paragraph(" "));
 
-                    // OBTENER DÍAS LABORABLES DEL MES
+
+                    // Calcular el rango de fechas válido para este mes dentro del periodo
                     DateTime primerDiaMes = new DateTime(anho, mes, 1);
                     DateTime ultimoDiaMes = new DateTime(anho, mes, DateTime.DaysInMonth(anho, mes));
 
+                    DateTime inicioMes = primerDiaMes < fechaInicioPeriodo ? fechaInicioPeriodo : primerDiaMes;
+                    DateTime finMes = ultimoDiaMes > fechaFinPeriodo ? fechaFinPeriodo : ultimoDiaMes;
+
                     var diasLaborables = new List<DateTime>();
-                    for (DateTime dia = primerDiaMes; dia <= ultimoDiaMes; dia = dia.AddDays(1))
+                    for (DateTime dia = inicioMes; dia <= finMes; dia = dia.AddDays(1))
                     {
                         if (dia.DayOfWeek != DayOfWeek.Saturday && dia.DayOfWeek != DayOfWeek.Sunday)
                         {

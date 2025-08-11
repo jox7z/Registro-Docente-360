@@ -483,3 +483,17 @@ Z:\Repos Progra IV\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_
 Z:\Repos Progra IV\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vistas.csproj.Up2Date
 Z:\Repos Progra IV\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
 Z:\Repos Progra IV\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.exe.manifest
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\Registro_Docente_360.application
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\itextsharp.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\bin\Debug\itextsharp.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormAgregarRol.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormCambioContraseña.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcAccionesUsuario.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRegistroAccesos.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcRolesyPermisos.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.UcUsuarios.resources
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe.manifest
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.application

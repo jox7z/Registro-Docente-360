@@ -243,7 +243,7 @@ namespace Registro_Docente_360.ControlesUsuario
                             {
                                 Filter = "PDF files (*.pdf)|*.pdf",
                                 // Nombre del archivo basado en el periodo: "Asistencia_PrimerPeriodo.pdf"
-                                FileName = $"Asistencia_{periodoSeleccionado.Replace(" ", "")}.pdf"
+                                FileName = $"Asistencia_Por_Grupo.pdf"
                             };
 
                             if (sfd.ShowDialog() == DialogResult.OK)

@@ -272,3 +272,7 @@ Z:\Repos Progra IV\Registro-Docente-360\Controlador\obj\Debug\Controladores.cspr
 Z:\Repos Progra IV\Registro-Docente-360\Controlador\obj\Debug\Controla.588FD378.Up2Date
 Z:\Repos Progra IV\Registro-Docente-360\Controlador\obj\Debug\Controlador.dll
 Z:\Repos Progra IV\Registro-Docente-360\Controlador\obj\Debug\Controlador.pdb
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\itextsharp.dll
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\leand\Documents\utc\proyecto\Registro-Docente-360\Controlador\bin\Debug\itextsharp.xml

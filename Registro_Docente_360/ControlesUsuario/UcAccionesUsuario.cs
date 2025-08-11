@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -54,10 +55,7 @@ namespace Registro_Docente_360.Forms
             CargarMovimientos();
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            CargarMovimientos();
-        }
+        
 
         private void CargarMovimientos()
         {
@@ -65,16 +63,19 @@ namespace Registro_Docente_360.Forms
 
             using (var contexto = new RegistroDocenteEntities())
             {
+                // Traemos los movimientos filtrados por usuario directamente desde la base de datos
                 var movimientos = contexto.Bitacora_Movimientos
-                    .Include("Usuarios")
-                    .OrderByDescending(m => m.fecha_hora)
-                    .ToList();
+                    .Include(m => m.Usuarios) // Aseguramos que cargue los usuarios
+                    .Where(m => string.IsNullOrEmpty(filtro) || m.Usuarios.nombre_usuario.ToLower().Contains(filtro)) // Filtramos por el nombre de usuario
+                    .OrderByDescending(m => m.fecha_hora) // Ordenamos por fecha de la más reciente a la más antigua
+                    .ToList(); // Cargamos los datos a memoria
 
+                // Convertimos los datos a una lista de objetos MovimientoUsuario
                 var lista = movimientos
                     .Select(m => new MovimientoUsuario
                     {
                         ID = m.id_movimiento,
-                        Usuario = m.Usuarios?.nombre_usuario ?? "Desconocido",
+                        Usuario = m.Usuarios?.nombre_usuario ?? "Desconocido", // Si el usuario es null, mostrar "Desconocido"
                         Accion = m.accion,
                         Descripcion = m.descripcion,
                         FechaHora = m.fecha_hora,
@@ -82,17 +83,15 @@ namespace Registro_Docente_360.Forms
                     })
                     .ToList();
 
-                if (!string.IsNullOrEmpty(filtro))
-                {
-                    lista = lista
-                        .Where(x => x.Usuario.ToLower().Contains(filtro))
-                        .ToList();
-                }
-
+                // Asignamos la lista al DataGridView
                 dgMovimientos.DataSource = lista;
 
             }
         }
+
+
+
+
 
         // Clase auxiliar para mostrar los datos en el grid
         public class MovimientoUsuario
@@ -103,6 +102,11 @@ namespace Registro_Docente_360.Forms
             public string Descripcion { get; set; }
             public DateTime? FechaHora { get; set; }
             public string Modulo { get; set; }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarMovimientos();
         }
     }
 }

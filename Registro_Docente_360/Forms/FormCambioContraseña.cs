@@ -216,20 +216,31 @@ namespace Registro_Docente_360.Forms
                 return;
             }
 
-            // Verificar si el correo existe y obtener el ID
-            string correo = txtCorreo.Text; // Usamos el correo del formulario
+            // Obtener el correo del formulario
+            string correo = txtCorreo.Text;
+
+            // Verificar si el correo existe y obtener el ID del usuario
             using (var contexto = new RegistroDocenteEntities())
             {
                 var usuario = contexto.Usuarios.FirstOrDefault(u => u.correo == correo);
 
                 if (usuario != null)
                 {
-                    // Encriptar la nueva contraseña usando el controlador
+                    // Encriptar la nueva contraseña
                     AlumnoController controlador = new AlumnoController();
                     string contrasenaEncriptada = controlador.EncriptarContrasena(nuevaContraseña);
 
-                    // Actualizar la contraseña
+                    // Actualizar la contraseña en la base de datos
                     ActualizarContraseña(usuario.id_usuario, contrasenaEncriptada);
+
+                    // Registrar la acción de actualización de contraseña en la bitácora
+                    string accion = "Actualizar contraseña";
+                    string descripcion = $"Actualización de contraseña del usuario con correo: {correo}";
+                    string modulo = "OlvidarContra";
+
+                    // Registrar la acción con el ID del usuario
+                    controlador.RegistrarMovimiento(usuario.id_usuario, accion, descripcion, modulo);
+
                     MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -239,6 +250,7 @@ namespace Registro_Docente_360.Forms
                 }
             }
         }
+
 
 
 

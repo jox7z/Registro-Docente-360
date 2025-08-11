@@ -32,9 +32,9 @@
             this.panelminiContenedor = new System.Windows.Forms.Panel();
             this.panelContenido = new SiticoneNetFrameworkUI.SiticonePanel();
             this.panelbottom = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -47,10 +47,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblAcercaDe1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.panelminiContenedor.SuspendLayout();
             this.panelContenido.SuspendLayout();
             this.panelbottom.SuspendLayout();
@@ -127,6 +127,18 @@
             this.panelbottom.Size = new System.Drawing.Size(415, 66);
             this.panelbottom.TabIndex = 14;
             // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(3, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(409, 57);
+            this.label16.TabIndex = 0;
+            this.label16.Text = resources.GetString("label16.Text");
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -173,18 +185,6 @@
             this.label10.Size = new System.Drawing.Size(130, 21);
             this.label10.TabIndex = 23;
             this.label10.Text = "Jose Hernández";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(23, 280);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 21);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Desarrollado por:";
             // 
             // label8
             // 
@@ -331,6 +331,18 @@
             this.label14.TabIndex = 27;
             this.label14.Text = "C# .NET ";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(23, 280);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(143, 21);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Desarrollado por:";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblAcercaDe1);
@@ -365,21 +377,6 @@
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
             // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(3, 9);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(407, 39);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Este sistema fue desarrollado como parte del curso Proyecto Profesional Informáti" +
-    "co. \r\nSu objetivo principal es automatizar el control de asistencia, \r\ngenerando" +
-    " reportes precisos de forma eficiente.";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // UcAcercaDe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,7 +389,6 @@
             this.panelminiContenedor.ResumeLayout(false);
             this.panelContenido.ResumeLayout(false);
             this.panelbottom.ResumeLayout(false);
-            this.panelbottom.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);

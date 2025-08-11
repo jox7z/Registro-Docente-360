@@ -191,18 +191,20 @@ namespace Registro_Docente_360.ControlesUsuario
 
             modoEdicion = false;
             huboCambios = false;
+
+            // Cambiar texto de la etiqueta y el botón
+            lblNotas.Text = "Listado de Notas";
+            lblNotas.ForeColor = Color.Teal;
+            btnGestionarNotas.Text = "Gestionar Notas";
+
+            // Volver a modo solo lectura en el DataGrid
             tablaNotas.Grid.ReadOnly = true;
             PanelAcciones.Visible = false;
 
-            // Restaurar valores
-            evitandoEvento = true;
-            cmbPeriodo.SelectedItem = periodoAnterior;
-            cmbMateria.SelectedItem = materiaAnterior;
-            evitandoEvento = false;
-
-            // Recargar datos originales
+            // Recargar los datos si es necesario
             CargarNotasAutomatico(periodoAnterior);
         }
+
 
 
         private void CmbPeriodo_SelectedIndexChanged(object sender, EventArgs e)
