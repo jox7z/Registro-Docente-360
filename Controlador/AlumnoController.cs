@@ -101,10 +101,14 @@ namespace Registro_Docente_360.Controladores
                 return contexto.Clases
                     .Where(c => c.id_usuario == idDocente)
                     .Select(c => c.Estudiantes)
-                    .Distinct()
+                    .Distinct() // Elimina duplicados
+                    .OrderBy(e => e.primer_apellido)
                     .ToList();
             }
         }
+
+
+
 
         public Estudiantes ObtenerEstudiantesPorCedula(string cedula)
         {

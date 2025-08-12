@@ -320,15 +320,13 @@ namespace Registro_Docente_360.ControlesUsuario
 
             using (var contexto = new RegistroDocenteEntities())
             {
-                int idDocente = Sesion.IdUsuario; // Por defecto es el usuario actual
+                int idDocente = Sesion.IdUsuario;  // Por defecto es el usuario actual
 
-                // Si es admin y hay un docente seleccionado, usar ese ID
                 if (cmbDocentes.Visible && cmbDocentes.SelectedItem != null)
                 {
                     idDocente = (int)cmbDocentes.SelectedValue;
                 }
 
-                // Obtener las clases del docente para la materia seleccionada
                 var clases = (from c in contexto.Clases
                               join est in contexto.Estudiantes on c.id_estudiante equals est.id_estudiante
                               where c.id_usuario == idDocente
@@ -338,56 +336,24 @@ namespace Registro_Docente_360.ControlesUsuario
                                   Clase = c,
                                   Estudiante = est,
                                   Nota = contexto.Notas.FirstOrDefault(n => n.id_clase == c.id_clase && n.periodo == periodoSeleccionado) // Filtrar por el periodo seleccionado
-                              }).ToList();
+                              })
+                              .OrderBy(e => e.Estudiante.primer_apellido)  // Ordenar por el primer apellido
+                              .ToList();
 
                 foreach (var item in clases)
                 {
                     string cedula = item.Estudiante.cedula_estudiante;
 
-                    // 1. Calcular la asistencia automática
-                    // 1.1 Obtener todas las asistencias de ese estudiante en ese periodo
-                    var fechaInicio = periodoSeleccionado == "Primer Periodo" ? new DateTime(2025, 2, 3) : new DateTime(2025, 5, 26);
-                    var fechaFin = periodoSeleccionado == "Primer Periodo" ? new DateTime(2025, 5, 25) : new DateTime(2025, 12, 10);
-
-                    var clasesDocente = contexto.Clases
-                        .Where(c => c.id_usuario == idDocente && c.id_materia == materiaSeleccionada.id_materia)
-                        .Select(c => c.id_clase)
-                        .ToList();
-
-                    // Obtener las asistencias de ese estudiante en ese periodo
-                    var asistencias = contexto.Asistencia
-                        .Where(a => a.id_estudiante == item.Estudiante.id_estudiante
-                                    && a.fecha >= fechaInicio && a.fecha <= fechaFin)  // Filtrar por fechas del periodo
-                        .ToList();
-
-
-                    // 2. Filtrar por día (solo un registro por fecha, el peor es "Ausente" > "Tarde" > "Presente")
-                    var estadosPorDia = asistencias
-                        .GroupBy(a => a.fecha.Value.Date)  // Usamos .Value para acceder al valor de fecha, ya que es nullable
-                        .Select(g =>
-                        {
-                            if (g.Any(a => a.estado == "Ausente")) return "Ausente";
-                            if (g.Any(a => a.estado == "Tarde")) return "Tarde";
-                            return "Presente";
-                        })
-                        .ToList();
-
-
-                    // 3. Calcular penalizaciones
-                    int penalizaciones = estadosPorDia.Count(e => e == "Ausente" || e == "Tarde");
-                    decimal asistenciaFinal = Math.Max(10 - (penalizaciones * 0.2m), 0);
-
-                    // 4. Calcular las notas
-                    decimal examen1 = item.Nota?.primer_examen ?? 0;
-                    decimal examen2 = item.Nota?.segundo_examen ?? 0;
+                    // Si no existen notas para el periodo seleccionado, inicializar con los valores máximos
                     decimal tareas = item.Nota?.tareas ?? 10;
-                    decimal asistencia = asistenciaFinal;  // Asistencia ya calculada
+                    decimal asistencia = item.Nota?.asistencia ?? 10;
                     decimal cotidiano = item.Nota?.cotidiano ?? 60;
 
-                    // Calcular la nota final
+                    decimal examen1 = item.Nota?.primer_examen ?? 0;
+                    decimal examen2 = item.Nota?.segundo_examen ?? 0;
                     decimal notaFinal = examen1 + examen2 + tareas + asistencia + cotidiano;
 
-                    // 5. Agregar los datos al DataGridView
+                    // Agregar los datos al DataGridView
                     tablaNotas.Grid.Rows.Add(
                         cedula,
                         $"{item.Estudiante.nombre_estudiante} {item.Estudiante.primer_apellido}",
@@ -401,6 +367,7 @@ namespace Registro_Docente_360.ControlesUsuario
                 }
             }
         }
+
 
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -733,8 +700,10 @@ namespace Registro_Docente_360.ControlesUsuario
                                   Clase = c,
                                   Estudiante = est,
                                   Nota = contexto.Notas
-                                          .FirstOrDefault(n => n.id_clase == c.id_clase && n.periodo == periodoSeleccionado)
-                              }).ToList();
+                                                  .FirstOrDefault(n => n.id_clase == c.id_clase && n.periodo == periodoSeleccionado)
+                              })
+                              .OrderBy(e => e.Estudiante.primer_apellido)  // Ordena los estudiantes por su primer apellido
+                              .ToList(); // Aseguramos que la lista esté completamente cargada y ordenada
 
                 foreach (var item in clases)
                 {
@@ -771,6 +740,8 @@ namespace Registro_Docente_360.ControlesUsuario
                 }
             }
         }
+
+
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {

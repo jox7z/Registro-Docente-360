@@ -199,6 +199,28 @@ namespace Registro_Docente_360.Forms
                     erroresFila.AppendLine("- Cédula es obligatoria");
                 }
 
+                string cedula = fila.Cells["colCedula"].Value.ToString();
+
+                // Verificar si la cédula ya existe en la base de datos (solo si es un usuario nuevo o se está cambiando la cédula)
+                if (filaValida)
+                {
+                    string cedulaIngresada = cedula;
+
+                    // Si no se está editando el registro, y si la cédula ya existe en la base de datos, mostrar el mensaje
+                    var usuarioExistente = controlador.ObtenerUsuarioPorCedula(cedulaIngresada);
+
+                    if (usuarioExistente != null)
+                    {
+                        // Verificar si el usuario está editando su propia cédula o si es un duplicado
+                        string cedulaUsuarioActual = fila.Cells["colCedula"].Value?.ToString();
+                        if (usuarioExistente.cedula_usuario != cedulaUsuarioActual)
+                        {
+                            MessageBox.Show($"El usuario con cédula {cedula} ya está registrado.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;  // Detener la ejecución y no guardar nada
+                        }
+                    }
+                }
+
                 if (!filaValida)
                 {
                     MessageBox.Show(erroresFila.ToString(), "Error en los datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -273,7 +295,7 @@ namespace Registro_Docente_360.Forms
                 if (existente == null)
                 {
                     controlador.RegistrarMovimiento(Sesion.IdUsuario, "Registro de nuevo usuario",
-                                                   $"Se registró el usuario con cédula: {cedula}", "Usuarios");
+                                                       $"Se registró el usuario con cédula: {cedula}", "Usuarios");
                 }
                 else
                 {
@@ -289,7 +311,7 @@ namespace Registro_Docente_360.Forms
                     if (haCambiado)
                     {
                         controlador.RegistrarMovimiento(Sesion.IdUsuario, "Actualización de usuario",
-                                                      $"Se actualizó el usuario con cédula: {cedula}", "Usuarios");
+                                                        $"Se actualizó el usuario con cédula: {cedula}", "Usuarios");
                     }
                 }
             }
@@ -305,6 +327,11 @@ namespace Registro_Docente_360.Forms
                 MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
 
         private void CargarUsuarios(string filtro = "")
         {
