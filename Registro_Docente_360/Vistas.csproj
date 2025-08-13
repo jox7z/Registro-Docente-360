@@ -249,6 +249,12 @@
     <Compile Include="ControlesUsuario\BotonAyuda.Designer.cs">
       <DependentUpon>BotonAyuda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormAgregarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAgregarUsuario.Designer.cs">
+      <DependentUpon>FormAgregarUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAgregarRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesUsuario\WindowBarControl.resx">
       <DependentUpon>WindowBarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAgregarUsuario.resx">
+      <DependentUpon>FormAgregarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAgregarRol.resx">
       <DependentUpon>FormAgregarRol.cs</DependentUpon>

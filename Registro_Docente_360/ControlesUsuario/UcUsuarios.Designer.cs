@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblNotas = new System.Windows.Forms.Label();
             this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
-            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -74,7 +74,7 @@
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.PanelAcciones.Controls.Add(this.btnGuardar, 2, 0);
+            this.PanelAcciones.Controls.Add(this.btnModificar, 2, 0);
             this.PanelAcciones.Controls.Add(this.btnEliminar, 1, 0);
             this.PanelAcciones.Controls.Add(this.btnAgregar, 0, 0);
             this.PanelAcciones.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -86,26 +86,26 @@
             this.PanelAcciones.Size = new System.Drawing.Size(1005, 90);
             this.PanelAcciones.TabIndex = 21;
             // 
-            // btnGuardar
+            // btnModificar
             // 
-            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGuardar.BackColor = System.Drawing.Color.Teal;
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.FlatAppearance.BorderSize = 0;
-            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(732, 25);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(143, 40);
-            this.btnGuardar.TabIndex = 28;
-            this.btnGuardar.Text = "      Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.btnModificar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnModificar.BackColor = System.Drawing.Color.Teal;
+            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModificar.FlatAppearance.BorderSize = 0;
+            this.btnModificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(732, 25);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(143, 40);
+            this.btnModificar.TabIndex = 28;
+            this.btnModificar.Text = "     Modificar";
+            this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -262,8 +262,8 @@
             this.datagridRoles.RowHeadersVisible = false;
             this.datagridRoles.Size = new System.Drawing.Size(1005, 490);
             this.datagridRoles.TabIndex = 22;
-            this.datagridRoles.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.datagridRoles_CellBeginEdit);
-            this.datagridRoles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridRoles_CellValueChanged_1);
+            this.datagridRoles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridRoles_CellClick);
+            this.datagridRoles.SelectionChanged += new System.EventHandler(this.datagridRoles_SelectionChanged);
             // 
             // Column1
             // 
@@ -342,7 +342,7 @@
 
         private System.Windows.Forms.Label lblNotas;
         private System.Windows.Forms.TableLayoutPanel PanelAcciones;
-        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

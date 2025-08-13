@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Registro_Docente_360.Controladores;
-using System.Text;
 
 
 
@@ -34,15 +32,19 @@ namespace Registro_Docente_360.Forms
 
         private void btnAgregar_Click(object sender, System.EventArgs e)
         {
-            // Agregar nueva fila
-            int rowIndex = datagridRoles.Rows.Add();
-
-            // Establecer el estado "A" por defecto
-            datagridRoles.Rows[rowIndex].Cells["colEstado"].Value = "A";
-
-            // Posicionar el cursor en la celda de nombre y comenzar edición
-            datagridRoles.CurrentCell = datagridRoles.Rows[rowIndex].Cells["colNombre"];
-            datagridRoles.BeginEdit(true);
+            using (var frm = new FormAgregarUsuario())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    using (var contexto = new RegistroDocenteEntities())
+                    {
+                        contexto.Usuarios.Add(frm._usuario);
+                        contexto.SaveChanges();
+                        CargarUsuarios(); // Recargar datos
+                        MessageBox.Show("Usuario creado correctamente");
+                    }
+                }
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -59,13 +61,6 @@ namespace Registro_Docente_360.Forms
             var fila = datagridRoles.CurrentRow;
             string cedula = fila.Cells["colCedula"].Value?.ToString();
 
-            // Caso 1: Fila nueva sin datos (vacía)
-            if (EsFilaVacia(fila))
-            {
-                datagridRoles.Rows.Remove(fila);
-                MessageBox.Show("Fila vacía eliminada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
 
             // Caso 2: Fila con datos (guardada o no guardada)
             bool esUsuarioNuevoNoGuardado = string.IsNullOrEmpty(cedula) ||
@@ -109,229 +104,56 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-        private bool EsFilaVacia(DataGridViewRow fila)
+        private void btnModificar_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewCell cell in fila.Cells)
+            if (datagridRoles.SelectedRows.Count == 0)
             {
-                if (cell.Value != null && !string.IsNullOrWhiteSpace(cell.Value.ToString()))
-                {
-                    return false;
-                }
+                MessageBox.Show("Seleccione un usuario para modificar");
+                return;
             }
-            return true;
-        }
-
-        private bool EsCorreoValido(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
 
             try
             {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+                var fila = datagridRoles.SelectedRows[0];
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            AlumnoController controlador = new AlumnoController();
-            List<(Usuarios usuario, string nombreSeccion)> usuariosConSeccion = new List<(Usuarios, string)>();
+                // Obtener ID del usuario
+                int idUsuario = Convert.ToInt32(fila.Cells["colID"].Value);
 
-            // Validar todas las filas primero
-            foreach (DataGridViewRow fila in datagridRoles.Rows)
-            {
-                if (fila.IsNewRow || EsFilaVacia(fila)) continue;
-
-                StringBuilder erroresFila = new StringBuilder();
-                erroresFila.AppendLine($"Errores en fila {fila.Index + 1}:");
-
-                bool filaValida = true;
-
-                // Validar campos obligatorios
-                if (fila.Cells["colNombre"].Value == null || string.IsNullOrWhiteSpace(fila.Cells["colNombre"].Value.ToString()))
+                using (var contexto = new RegistroDocenteEntities())
                 {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Nombre es obligatorio");
-                }
+                    var usuario = contexto.Usuarios.Find(idUsuario);
 
-                if (fila.Cells["colApellido"].Value == null || string.IsNullOrWhiteSpace(fila.Cells["colApellido"].Value.ToString()))
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Apellido es obligatorio");
-                }
-
-                if (fila.Cells["colCorreo"].Value == null || string.IsNullOrWhiteSpace(fila.Cells["colCorreo"].Value.ToString()))
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Correo electrónico es obligatorio");
-                }
-                else if (!EsCorreoValido(fila.Cells["colCorreo"].Value.ToString()))
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Formato de correo electrónico no válido");
-                }
-
-                if (fila.Cells["colContra"].Value == null || string.IsNullOrWhiteSpace(fila.Cells["colContra"].Value.ToString()))
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Contraseña es obligatoria");
-                }
-                else if (fila.Cells["colContra"].Value.ToString().Length < 6)
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- La contraseña debe tener al menos 6 caracteres");
-                }
-
-                if (fila.Cells["colEstado"].Value == null)
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Estado es obligatorio");
-                }
-
-                if (fila.Cells["colCedula"].Value == null || string.IsNullOrWhiteSpace(fila.Cells["colCedula"].Value.ToString()))
-                {
-                    filaValida = false;
-                    erroresFila.AppendLine("- Cédula es obligatoria");
-                }
-
-                string cedula = fila.Cells["colCedula"].Value.ToString();
-
-                // Verificar si la cédula ya existe en la base de datos (solo si es un usuario nuevo o se está cambiando la cédula)
-                if (filaValida)
-                {
-                    string cedulaIngresada = cedula;
-
-                    // Si no se está editando el registro, y si la cédula ya existe en la base de datos, mostrar el mensaje
-                    var usuarioExistente = controlador.ObtenerUsuarioPorCedula(cedulaIngresada);
-
-                    if (usuarioExistente != null)
+                    if (usuario == null)
                     {
-                        // Verificar si el usuario está editando su propia cédula o si es un duplicado
-                        string cedulaUsuarioActual = fila.Cells["colCedula"].Value?.ToString();
-                        if (usuarioExistente.cedula_usuario != cedulaUsuarioActual)
+                        MessageBox.Show("Usuario no encontrado");
+                        return;
+                    }
+
+                    // Obtener el nombre del rol desde el DataGridView
+                    string nombreRol = fila.Cells["colRol"].Value?.ToString();
+
+                    // Convertir nombre de rol a ID usando tu método existente
+                    if (!string.IsNullOrEmpty(nombreRol))
+                    {
+                        usuario.id_rol = new AlumnoController().ObtenerIdRolDesdeNombre(nombreRol);
+                    }
+
+                    using (var frm = new FormAgregarUsuario(usuario))
+                    {
+                        if (frm.ShowDialog() == DialogResult.OK)
                         {
-                            MessageBox.Show($"El usuario con cédula {cedula} ya está registrado.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;  // Detener la ejecución y no guardar nada
+                            contexto.SaveChanges();
+                            CargarUsuarios();
+                            MessageBox.Show("Usuario actualizado correctamente");
                         }
                     }
                 }
-
-                if (!filaValida)
-                {
-                    MessageBox.Show(erroresFila.ToString(), "Error en los datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-
-            // Si todas las validaciones pasan, procesar los datos
-            foreach (DataGridViewRow fila in datagridRoles.Rows)
-            {
-                if (fila.IsNewRow || EsFilaVacia(fila)) continue;
-
-                string cedula = fila.Cells["colCedula"].Value.ToString();
-                string contraIngresada = fila.Cells["colContra"].Value.ToString();
-
-                var existente = controlador.ObtenerUsuarioPorCedula(cedula);
-
-                string contraseñaFinal = contraIngresada;
-                if (existente == null || existente.contraseña != contraIngresada)
-                {
-                    contraseñaFinal = controlador.EncriptarContrasena(contraIngresada);
-                }
-
-                // Datos nuevos del formulario
-                var nuevo = new Usuarios
-                {
-                    nombre_usuario = fila.Cells["colNombre"].Value.ToString(),
-                    apellido_usuario = fila.Cells["colApellido"].Value.ToString(),
-                    correo = fila.Cells["colCorreo"].Value.ToString(),
-                    contraseña = contraseñaFinal,
-                    estado_usuario = fila.Cells["colEstado"].Value.ToString(),
-                    cedula_usuario = cedula,
-                    id_rol = controlador.ObtenerIdRolDesdeNombre(fila.Cells["colRol"].Value?.ToString()),
-                    fecha_registro = existente?.fecha_registro ?? DateTime.Now
-                };
-
-                string rolNombre = fila.Cells["colRol"].Value?.ToString();
-                string nombreSeccion = "";
-
-                int idRol = controlador.ObtenerIdRolDesdeNombre(rolNombre);
-                AlumnoController.CargarPermisosRolActual(idRol);
-
-                if (AlumnoController.PermisosRolActual.Contains(1)) // Permiso docente
-                {
-                    nombreSeccion = fila.Cells["colSeccion"].Value?.ToString();
-                    nuevo.id_seccion = controlador.ObtenerIdSeccionDesdeNombre(nombreSeccion);
-
-                    using (var contexto = new RegistroDocenteEntities())
-                    {
-                        var seccionExistente = contexto.Usuarios
-                            .Any(u => u.id_seccion == nuevo.id_seccion && u.cedula_usuario != cedula);
-
-                        if (seccionExistente)
-                        {
-                            MessageBox.Show($"La sección {nombreSeccion} ya está asignada a otro usuario.",
-                                          "Sección duplicada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            continue;
-                        }
-                    }
-                }
-                else if (AlumnoController.PermisosRolActual.Contains(2)) // Administrador
-                {
-                    nuevo.id_seccion = null;
-                }
-                else
-                {
-                    nuevo.id_seccion = null;
-                }
-
-                usuariosConSeccion.Add((nuevo, nombreSeccion));
-
-                if (existente == null)
-                {
-                    controlador.RegistrarMovimiento(Sesion.IdUsuario, "Registro de nuevo usuario",
-                                                       $"Se registró el usuario con cédula: {cedula}", "Usuarios");
-                }
-                else
-                {
-                    bool haCambiado =
-                        existente.nombre_usuario != nuevo.nombre_usuario ||
-                        existente.apellido_usuario != nuevo.apellido_usuario ||
-                        existente.correo != nuevo.correo ||
-                        existente.contraseña != nuevo.contraseña ||
-                        existente.estado_usuario != nuevo.estado_usuario ||
-                        existente.id_rol != nuevo.id_rol ||
-                        existente.id_seccion != nuevo.id_seccion;
-
-                    if (haCambiado)
-                    {
-                        controlador.RegistrarMovimiento(Sesion.IdUsuario, "Actualización de usuario",
-                                                        $"Se actualizó el usuario con cédula: {cedula}", "Usuarios");
-                    }
-                }
-            }
-
-            // Guardar solo si todo está correcto
-            try
-            {
-                controlador.GuardarUsuarios(usuariosConSeccion);
-                MessageBox.Show("Cambios guardados correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al modificar usuario: {ex.Message}");
             }
         }
-
-
-
-
-
 
         private void CargarUsuarios(string filtro = "")
         {
@@ -352,10 +174,11 @@ namespace Registro_Docente_360.Forms
             foreach (var u in usuarios)
             {
                 datagridRoles.Rows.Add(
+                    u.id_usuario,
                     u.nombre_usuario,
                     u.apellido_usuario,
                     u.correo,
-                    u.contraseña,
+                    "*******",
                     u.cedula_usuario,
                     u.Secciones?.nombre_seccion ?? "",
                     u.estado_usuario,
@@ -366,6 +189,19 @@ namespace Registro_Docente_360.Forms
         private void ConfigurarTabla()
         {
             datagridRoles.Columns.Clear();
+            // Hacer que todo el DataGridView sea de solo lectura
+            datagridRoles.ReadOnly = true;
+
+            // Opcional: Deshabilitar la edición de celdas
+            datagridRoles.EditMode = DataGridViewEditMode.EditProgrammatically;
+
+            // Deshabilitar la adición de nuevas filas
+            datagridRoles.AllowUserToAddRows = false;
+
+            // Deshabilitar la eliminación de filas
+            datagridRoles.AllowUserToDeleteRows = false;
+            datagridRoles.Columns.Add("colID", "ID");
+            datagridRoles.Columns["colID"].DataPropertyName = "id_usuario";
 
             datagridRoles.Columns.Add("colNombre", "Nombre");
             datagridRoles.Columns["colNombre"].DataPropertyName = "nombre_usuario";
@@ -381,6 +217,9 @@ namespace Registro_Docente_360.Forms
 
             datagridRoles.Columns.Add("colCedula", "Cédula");
             datagridRoles.Columns["colCedula"].DataPropertyName = "cedula_usuario";
+
+            datagridRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            datagridRoles.MultiSelect = false;
 
             var secciones = new AlumnoController().ObtenerSecciones();
             var colSeccion = new DataGridViewComboBoxColumn
@@ -425,76 +264,20 @@ namespace Registro_Docente_360.Forms
             CargarUsuarios(texto);
         }
 
-
-
-        private void datagridRoles_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void datagridRoles_SelectionChanged(object sender, EventArgs e)
         {
-            // Verificamos si la edición es en la columna de Sección
-            if (datagridRoles.Columns[e.ColumnIndex].Name == "colSeccion")
-            {
-                var fila = datagridRoles.Rows[e.RowIndex];
-                var rolNombre = fila.Cells["colRol"].Value?.ToString();  // Obtenemos el nombre del rol
+            // Verificar si hay una fila válida seleccionada
+            bool filaValidaSeleccionada = datagridRoles.CurrentRow != null &&
+                                         !datagridRoles.CurrentRow.IsNewRow &&
+                                         datagridRoles.CurrentRow.Cells["colID"].Value != null;
 
-                if (string.IsNullOrEmpty(rolNombre)) return;
-
-                // Obtener el ID del rol a partir del nombre
-                int idRol = 0;
-                using (var contexto = new RegistroDocenteEntities())
-                {
-                    var rol = contexto.Roles.FirstOrDefault(r => r.nombre_rol == rolNombre);
-                    if (rol != null)
-                    {
-                        idRol = rol.id_rol;
-                    }
-                }
-
-                // Si no encontramos el rol, cancelamos la edición
-                if (idRol == 0)
-                {
-                    MessageBox.Show($"Rol '{rolNombre}' no encontrado.", "Error de rol", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e.Cancel = true;
-                    return;
-                }
-
-                // Cargar los permisos del rol actual usando el ID del rol
-                AlumnoController.CargarPermisosRolActual(idRol);
-
-                // Verificar si el usuario es administrador (permiso 2)
-                if (AlumnoController.PermisosRolActual.Contains(2))  // Si es administrador
-                {
-                    // Administradores no pueden asignar sección a otros administradores
-                    MessageBox.Show("Los administradores no pueden asignar sección a otros administradores.",
-                                    "Acción no permitida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e.Cancel = true;  // Cancelamos la edición si el rol es administrador
-                }
-                else if (!AlumnoController.PermisosRolActual.Contains(1))  // Si no tiene el permiso docente (id_permiso != 1)
-                {
-                    // No permitir asignar una sección a alguien sin el permiso docente
-                    MessageBox.Show($"Solo los usuarios con el permiso docente (ID: 1) pueden ser asignados a una sección.",
-                                    "Permiso requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e.Cancel = true;  // Cancelamos la edición si el rol no tiene permiso docente
-                }
-            }
+            btnModificar.Enabled = filaValidaSeleccionada;
         }
 
-        private void datagridRoles_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        private void datagridRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && datagridRoles.Columns[e.ColumnIndex].Name == "colRol")
-            {
-                var fila = datagridRoles.Rows[e.RowIndex];
-                var rolNombre = fila.Cells["colRol"].Value?.ToString();
-                int idRol = new AlumnoController().ObtenerIdRolDesdeNombre(rolNombre);
-
-                if (idRol > 0)
-                {
-                    AlumnoController.CargarPermisosRolActual(idRol);
-
-                    if (AlumnoController.PermisosRolActual.Contains(2)) // Si es admin
-                    {
-                        fila.Cells["colSeccion"].Value = null; // Limpiar sin ToolTip
-                    }
-                }
-            }
+            // Alternativa: Habilitar solo si se hace clic en una celda válida (no en encabezados)
+            btnModificar.Enabled = e.RowIndex >= 0;
         }
 
 
