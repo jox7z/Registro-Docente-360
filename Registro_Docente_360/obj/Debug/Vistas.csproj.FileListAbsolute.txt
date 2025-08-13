@@ -584,3 +584,4 @@ D:\U\C#net\proyecto rd360\Registro-Docente-360\Registro_Docente_360\obj\Debug\Vi
 D:\U\C#net\proyecto rd360\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.exe
 D:\U\C#net\proyecto rd360\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.pdb
 D:\U\C#net\proyecto rd360\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormAgregarUsuario.resources
+D:\U\C#net\proyecto rd360\Registro-Docente-360\Registro_Docente_360\obj\Debug\Registro_Docente_360.Forms.FormAgregarAlumno.resources

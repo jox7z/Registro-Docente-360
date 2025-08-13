@@ -743,13 +743,16 @@ namespace Registro_Docente_360.ControlesUsuario
                 PanelFechas.Visible = false;
                 panelPeriodo.Visible = true;
                 panelTiempoReport.Visible = false;
+                lblAnho2.Visible = false;  
+                cmbAnhos2.Visible = false;
             }
             else if (seleccion == "Asistencia")
             {
                 PanelFechas.Visible = false;
                 panelTiempoReport.Visible = true;
                 cmbTiempo.SelectedIndex = 0;
-
+                lblAnho2.Visible = true;
+                cmbAnhos2.Visible = true;
                 if (cmbTiempo.SelectedIndex == 0)
                 {
                     panelPeriodo.Visible = true;

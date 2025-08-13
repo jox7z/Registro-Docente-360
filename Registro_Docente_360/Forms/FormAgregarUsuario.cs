@@ -20,7 +20,20 @@ namespace Registro_Docente_360.Forms
             _usuario = usuario ?? new Usuarios
             {
                 fecha_registro = DateTime.Now
+
             };
+
+
+            if (usuario != null)
+            {
+                Text = "Editar Usuario";
+                lblAgregarUsuario.Text = "Editar Usuario";
+            }
+            else
+            {
+                Text = "Agregar Usuario";
+            }
+
             CargarComboboxes();
             MostrarDatosUsuario();
 
@@ -131,10 +144,12 @@ namespace Registro_Docente_360.Forms
                 _usuario.apellido_usuario = txtApellido.Text.Trim();
                 _usuario.correo = txtCorreo.Text.Trim();
                 _usuario.estado_usuario = cmbEstado.SelectedItem.ToString();
-                _usuario.id_rol = (int)cmbRol.SelectedValue;
+                _usuario.id_rol = cmbRol.SelectedValue != null ? (int)cmbRol.SelectedValue : (int?)null;
 
                 // Asignar sección solo si es docente puro
-                if (EsDocentePuro(_usuario.id_rol.Value,_contexto) && cmbSeccion.SelectedValue != null)
+                if (cmbRol.SelectedValue != null &&
+            EsDocentePuro((int)cmbRol.SelectedValue, _contexto) &&
+            cmbSeccion.SelectedValue != null)
                 {
                     _usuario.id_seccion = (int?)cmbSeccion.SelectedValue;
                 }
@@ -160,11 +175,22 @@ namespace Registro_Docente_360.Forms
 
         private bool ValidarDatos()
         {
+            // Validar campos básicos primero
             if (!ValidarCamposObligatorios() || !ValidarCedula() || !ValidarCorreo() || !ValidarContrasena())
                 return false;
 
-            // Validación para docentes
-            if (EsDocentePuro(_usuario.id_rol.Value, _contexto))
+            // Verificar que se haya seleccionado un rol válido
+            if (cmbRol.SelectedValue == null)
+            {
+                MessageBox.Show("Seleccione un rol válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            int idRolSeleccionado = (int)cmbRol.SelectedValue;
+            bool esDocentePuro = EsDocentePuro(idRolSeleccionado, _contexto);
+
+            // Validación específica para docentes puros
+            if (esDocentePuro)
             {
                 if (cmbSeccion.SelectedValue == null)
                 {
@@ -173,12 +199,24 @@ namespace Registro_Docente_360.Forms
                 }
 
                 int idSeccionSeleccionada = (int)cmbSeccion.SelectedValue;
-                if (SeccionAsignadaAOtroDocente(idSeccionSeleccionada))
+
+                // Verificar si la sección está asignada a otro docente
+                using (var contexto = new RegistroDocenteEntities())
                 {
-                    string nombreSeccion = cmbSeccion.Text;
-                    MessageBox.Show($"La sección {nombreSeccion} ya está asignada a otro docente",
-                                  "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
+                    bool seccionAsignada = contexto.Usuarios
+                        .Any(u => u.id_seccion == idSeccionSeleccionada &&
+                               u.id_usuario != _usuario.id_usuario &&
+                               EsDocentePuro(u.id_rol, contexto));
+
+                    if (seccionAsignada)
+                    {
+                        string nombreSeccion = cmbSeccion.Text;
+                        MessageBox.Show($"La sección {nombreSeccion} ya está asignada a otro docente",
+                                      "Error",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Error);
+                        return false;
+                    }
                 }
             }
 
@@ -215,19 +253,14 @@ namespace Registro_Docente_360.Forms
             }
         }
 
-        // Versión modificada SIN parámetro opcional
         private bool EsDocentePuro(int? idRol, RegistroDocenteEntities contexto)
         {
-            if (!idRol.HasValue)
-                return false;
+            if (!idRol.HasValue) return false;
 
-            bool tienePermisoDocente = contexto.Roles_Permisos
-                .Any(rp => rp.id_rol == idRol.Value && rp.id_permiso == 1);
-
-            bool tienePermisoAdmin = contexto.Roles_Permisos
-                .Any(rp => rp.id_rol == idRol.Value && rp.id_permiso == 2);
-
-            return tienePermisoDocente && !tienePermisoAdmin;
+            return contexto.Roles_Permisos
+                .Any(rp => rp.id_rol == idRol.Value && rp.id_permiso == 1) &&
+                   !contexto.Roles_Permisos
+                       .Any(rp => rp.id_rol == idRol.Value && rp.id_permiso == 2);
         }
 
         private bool ValidarCedula()
@@ -242,9 +275,9 @@ namespace Registro_Docente_360.Forms
             }
 
             // Validar longitud máxima
-            if (cedula.Length > 20)
+            if (cedula.Length > 9)
             {
-                MessageBox.Show("La cédula no puede tener más de 20 caracteres", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La cédula no puede tener más de 9 caracteres", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

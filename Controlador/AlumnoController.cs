@@ -48,109 +48,31 @@ namespace Registro_Docente_360.Controladores
             return true;
         }
 
-     
-
-        public List<Estudiantes> GuardarEstudiantes(List<Estudiantes> estudiantes, int idSeccion,int docente)
-        {
-            var nuevosEstudiantes = new List<Estudiantes>();
-
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                foreach (var estudiante in estudiantes)
-                {
-                    estudiante.id_seccion = idSeccion;
-                    var existe = contexto.Estudiantes
-                        .FirstOrDefault(e => e.cedula_estudiante == estudiante.cedula_estudiante);
-
-                    if (existe == null)
-                    {
-                        contexto.Estudiantes.Add(estudiante);
-                        contexto.SaveChanges();
-
-                        var materiasDocente = contexto.Horarios
-                            .Where(h => h.id_usuario == docente)
-                            .Select(h => h.id_materia)
-                            .Distinct()
-                            .ToList();
-
-                        foreach (var idMateria in materiasDocente)
-                        {
-                            contexto.Clases.Add(new Clases
-                            {
-                                id_usuario = docente,
-                                id_materia = idMateria,
-                                id_estudiante = estudiante.id_estudiante
-                            });
-                        }
-
-                        nuevosEstudiantes.Add(estudiante);
-                    }
-                }
-
-                contexto.SaveChanges(); // Guardar clases nuevas
-            }
-
-            return nuevosEstudiantes;
-        }
-
-
         public List<Estudiantes> ObtenerEstudiantesPorDocente(int idDocente)
         {
             using (var contexto = new RegistroDocenteEntities())
             {
-                return contexto.Clases
-                    .Where(c => c.id_usuario == idDocente)
-                    .Select(c => c.Estudiantes)
-                    .Distinct() // Elimina duplicados
+                // Primero obtenemos la sección del docente
+                var idSeccion = contexto.Usuarios
+                    .Where(u => u.id_usuario == idDocente)
+                    .Select(u => u.id_seccion)
+                    .FirstOrDefault();
+
+                if (idSeccion == null)
+                    return new List<Estudiantes>();
+
+                // Luego obtenemos los estudiantes de esa sección
+                return contexto.Estudiantes
+                    .Where(e => e.id_seccion == idSeccion)
                     .OrderBy(e => e.primer_apellido)
+                    .ThenBy(e => e.segundo_apellido)
+                    .ThenBy(e => e.nombre_estudiante)
                     .ToList();
             }
         }
 
 
 
-
-        public Estudiantes ObtenerEstudiantesPorCedula(string cedula)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                return contexto.Estudiantes.FirstOrDefault(e => e.cedula_estudiante == cedula);
-            }
-        }
-
-
-
-
-        public bool EliminarEstudiantePorCedula(string cedula)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                var estudiante = contexto.Estudiantes.FirstOrDefault(e => e.cedula_estudiante == cedula);
-                if (estudiante == null) return false;
-
-                var clases = contexto.Clases
-                    .Where(c => c.id_estudiante == estudiante.id_estudiante)
-                    .ToList();
-
-                foreach (var clase in clases)
-                {
-                    // ✅ 1. Eliminar asistencias
-
-                    // ✅ 2. Eliminar notas
-                    var notas = contexto.Notas.Where(n => n.id_clase == clase.id_clase).ToList();
-                    contexto.Notas.RemoveRange(notas);
-                }
-
-                // ✅ 3. Eliminar clases
-                contexto.Clases.RemoveRange(clases);
-
-                // ✅ 4. Eliminar estudiante
-                contexto.Estudiantes.Remove(estudiante);
-
-                contexto.SaveChanges();
-                return true;
-            }
-        }
 
         //usuario
         public List<Clases> ObtenerClasesDelDocenteYEstudiante(int idDocente, int idEstudiante)
@@ -239,16 +161,6 @@ namespace Registro_Docente_360.Controladores
         }
 
 
-        public int ObtenerIdSeccionDesdeNombre(string nombreSeccion)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                var seccion = contexto.Secciones.FirstOrDefault(s => s.nombre_seccion == nombreSeccion);
-                return seccion?.id_seccion ?? 0;
-            }
-
-        }
-
 
         public string EncriptarContrasena(string contrasena)
         {
@@ -287,31 +199,7 @@ namespace Registro_Docente_360.Controladores
             }
         }
 
-        public string ObtenerContrasenaPorCedula(string cedula)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                var usuario = contexto.Usuarios.FirstOrDefault(u => u.cedula_usuario == cedula);
-                return usuario?.contraseña ?? "";
-            }
-        }
-
-        public bool ExisteUsuarioPorCedula(string cedula)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                return contexto.Usuarios.Any(u => u.cedula_usuario == cedula);
-            }
-        }
-
-        public Usuarios ObtenerUsuarioPorCedula(string cedula)
-        {
-            using (var contexto = new RegistroDocenteEntities())
-            {
-                return contexto.Usuarios.FirstOrDefault(u => u.cedula_usuario == cedula);
-            }
-        }
-
+      
         public void MarcarUsuarioComoInactivo(string cedula)
         {
             using (var contexto = new RegistroDocenteEntities())
@@ -332,72 +220,6 @@ namespace Registro_Docente_360.Controladores
                 return contexto.Secciones.ToList();
             }
         }
-
-        public void AsignarPermisoARol(int rolId, int permisoId)
-        {
-            try
-            {
-                using (var contexto = new RegistroDocenteEntities())
-                {
-                    // Ejecutar el procedimiento almacenado AgregarPermisoARol
-                    contexto.Database.ExecuteSqlCommand(
-                        "EXEC AgregarPermisoARol @RolId, @PermisoId",
-                        new SqlParameter("@RolId", rolId),
-                        new SqlParameter("@PermisoId", permisoId)
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejo de excepciones (puedes hacer logging aquí si lo deseas)
-                MessageBox.Show("Ocurrió un error al asignar el permiso: " + ex.Message);
-            }
-        }
-
-        public List<int> ObtenerPermisosPorRol(int rolId)
-        {
-            try
-            {
-                using (var contexto = new RegistroDocenteEntities())
-                {
-                    // Ejecutar el procedimiento almacenado ObtenerPermisosPorRol
-                    var permisos = contexto.Database.SqlQuery<int>(
-                        "EXEC ObtenerPermisosPorRol @RolId",
-                        new SqlParameter("@RolId", rolId)
-                    ).ToList();
-
-                    return permisos;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejo de excepciones (puedes hacer logging aquí si lo deseas)
-                MessageBox.Show("Ocurrió un error al obtener los permisos: " + ex.Message);
-                return new List<int>(); // Retorna una lista vacía en caso de error
-            }
-        }
-
-        public void EliminarPermisosDeRol(int rolId)
-        {
-            try
-            {
-                using (var contexto = new RegistroDocenteEntities())
-                {
-                    // Ejecutar el procedimiento almacenado EliminarPermisosDeRol
-                    contexto.Database.ExecuteSqlCommand(
-                        "EXEC EliminarPermisosDeRol @RolId",
-                        new SqlParameter("@RolId", rolId)
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejo de excepciones
-                MessageBox.Show("Ocurrió un error al eliminar los permisos: " + ex.Message);
-            }
-        }
-
-
         public static List<int> PermisosRolActual { get; private set; } = new List<int>();
 
         public static void CargarPermisosRolActual(int idRol)
@@ -454,10 +276,6 @@ namespace Registro_Docente_360.Controladores
                 return true;
             }
             return false;
-        }
-        public static void TestMethod()
-        {
-            Console.WriteLine("Método de prueba");
         }
 
 

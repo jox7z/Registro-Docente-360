@@ -42,25 +42,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblAlumnos = new System.Windows.Forms.Label();
             this.tablaAlumnos = new Registro_Docente_360.ControlesUsuario.dataGridPerso2();
-            this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
-            this.pnCancelar = new System.Windows.Forms.Panel();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.pnGuardar = new System.Windows.Forms.Panel();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.pnEliminar = new System.Windows.Forms.Panel();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.pnAgregar = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.pnEliminar = new System.Windows.Forms.Panel();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.pnGuardar = new System.Windows.Forms.Panel();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.PanelAcciones = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.pnEditarHorario.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.PanelAcciones.SuspendLayout();
-            this.pnCancelar.SuspendLayout();
-            this.pnGuardar.SuspendLayout();
-            this.pnEliminar.SuspendLayout();
             this.pnAgregar.SuspendLayout();
+            this.pnEliminar.SuspendLayout();
+            this.pnGuardar.SuspendLayout();
+            this.PanelAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -249,88 +246,35 @@
             this.tablaAlumnos.Size = new System.Drawing.Size(991, 353);
             this.tablaAlumnos.TabIndex = 20;
             // 
-            // PanelAcciones
+            // pnAgregar
             // 
-            this.PanelAcciones.BackColor = System.Drawing.Color.Gainsboro;
-            this.PanelAcciones.ColumnCount = 4;
-            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.PanelAcciones.Controls.Add(this.pnCancelar, 3, 0);
-            this.PanelAcciones.Controls.Add(this.pnGuardar, 2, 0);
-            this.PanelAcciones.Controls.Add(this.pnEliminar, 1, 0);
-            this.PanelAcciones.Controls.Add(this.pnAgregar, 0, 0);
-            this.PanelAcciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelAcciones.Location = new System.Drawing.Point(3, 482);
-            this.PanelAcciones.Name = "PanelAcciones";
-            this.PanelAcciones.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.PanelAcciones.RowCount = 1;
-            this.PanelAcciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.PanelAcciones.Size = new System.Drawing.Size(991, 64);
-            this.PanelAcciones.TabIndex = 21;
+            this.pnAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnAgregar.BackColor = System.Drawing.Color.Transparent;
+            this.pnAgregar.Controls.Add(this.btnAgregar);
+            this.pnAgregar.ForeColor = System.Drawing.Color.Transparent;
+            this.pnAgregar.Location = new System.Drawing.Point(126, 9);
+            this.pnAgregar.Name = "pnAgregar";
+            this.pnAgregar.Size = new System.Drawing.Size(144, 46);
+            this.pnAgregar.TabIndex = 9;
             // 
-            // pnCancelar
+            // btnAgregar
             // 
-            this.pnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnCancelar.BackColor = System.Drawing.Color.Transparent;
-            this.pnCancelar.Controls.Add(this.btnCancelar);
-            this.pnCancelar.ForeColor = System.Drawing.Color.Transparent;
-            this.pnCancelar.Location = new System.Drawing.Point(756, 9);
-            this.pnCancelar.Name = "pnCancelar";
-            this.pnCancelar.Size = new System.Drawing.Size(145, 46);
-            this.pnCancelar.TabIndex = 12;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelar.BackColor = System.Drawing.Color.Teal;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(-15, -39);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnCancelar.Size = new System.Drawing.Size(166, 124);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "          Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // pnGuardar
-            // 
-            this.pnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnGuardar.BackColor = System.Drawing.Color.Transparent;
-            this.pnGuardar.Controls.Add(this.btnGuardar);
-            this.pnGuardar.ForeColor = System.Drawing.Color.Transparent;
-            this.pnGuardar.Location = new System.Drawing.Point(529, 9);
-            this.pnGuardar.Name = "pnGuardar";
-            this.pnGuardar.Size = new System.Drawing.Size(152, 46);
-            this.pnGuardar.TabIndex = 11;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGuardar.BackColor = System.Drawing.Color.Teal;
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(-13, -39);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnGuardar.Size = new System.Drawing.Size(171, 124);
-            this.btnGuardar.TabIndex = 2;
-            this.btnGuardar.Text = "            Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.btnAgregar.BackColor = System.Drawing.Color.Teal;
+            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(-17, -36);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.btnAgregar.Size = new System.Drawing.Size(171, 115);
+            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.Text = "          Agregar";
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // pnEliminar
             // 
@@ -338,7 +282,7 @@
             this.pnEliminar.BackColor = System.Drawing.Color.Transparent;
             this.pnEliminar.Controls.Add(this.btnEliminar);
             this.pnEliminar.ForeColor = System.Drawing.Color.Transparent;
-            this.pnEliminar.Location = new System.Drawing.Point(309, 9);
+            this.pnEliminar.Location = new System.Drawing.Point(421, 9);
             this.pnEliminar.Name = "pnEliminar";
             this.pnEliminar.Size = new System.Drawing.Size(148, 46);
             this.pnEliminar.TabIndex = 10;
@@ -363,35 +307,55 @@
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // pnAgregar
+            // pnGuardar
             // 
-            this.pnAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnAgregar.BackColor = System.Drawing.Color.Transparent;
-            this.pnAgregar.Controls.Add(this.btnAgregar);
-            this.pnAgregar.ForeColor = System.Drawing.Color.Transparent;
-            this.pnAgregar.Location = new System.Drawing.Point(89, 9);
-            this.pnAgregar.Name = "pnAgregar";
-            this.pnAgregar.Size = new System.Drawing.Size(144, 46);
-            this.pnAgregar.TabIndex = 9;
+            this.pnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnGuardar.BackColor = System.Drawing.Color.Transparent;
+            this.pnGuardar.Controls.Add(this.btnEditar);
+            this.pnGuardar.ForeColor = System.Drawing.Color.Transparent;
+            this.pnGuardar.Location = new System.Drawing.Point(716, 9);
+            this.pnGuardar.Name = "pnGuardar";
+            this.pnGuardar.Size = new System.Drawing.Size(152, 46);
+            this.pnGuardar.TabIndex = 11;
             // 
-            // btnAgregar
+            // btnEditar
             // 
-            this.btnAgregar.BackColor = System.Drawing.Color.Teal;
-            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(-17, -36);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.btnAgregar.Size = new System.Drawing.Size(171, 115);
-            this.btnAgregar.TabIndex = 2;
-            this.btnAgregar.Text = "          Agregar";
-            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEditar.BackColor = System.Drawing.Color.Teal;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.White;
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditar.Location = new System.Drawing.Point(-13, -39);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.btnEditar.Size = new System.Drawing.Size(171, 124);
+            this.btnEditar.TabIndex = 2;
+            this.btnEditar.Text = "            Editar";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // PanelAcciones
+            // 
+            this.PanelAcciones.BackColor = System.Drawing.Color.Gainsboro;
+            this.PanelAcciones.ColumnCount = 3;
+            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PanelAcciones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PanelAcciones.Controls.Add(this.pnGuardar, 2, 0);
+            this.PanelAcciones.Controls.Add(this.pnEliminar, 1, 0);
+            this.PanelAcciones.Controls.Add(this.pnAgregar, 0, 0);
+            this.PanelAcciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelAcciones.Location = new System.Drawing.Point(3, 482);
+            this.PanelAcciones.Name = "PanelAcciones";
+            this.PanelAcciones.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
+            this.PanelAcciones.RowCount = 1;
+            this.PanelAcciones.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.PanelAcciones.Size = new System.Drawing.Size(991, 64);
+            this.PanelAcciones.TabIndex = 21;
             // 
             // UcAlumnos
             // 
@@ -409,11 +373,10 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.PanelAcciones.ResumeLayout(false);
-            this.pnCancelar.ResumeLayout(false);
-            this.pnGuardar.ResumeLayout(false);
-            this.pnEliminar.ResumeLayout(false);
             this.pnAgregar.ResumeLayout(false);
+            this.pnEliminar.ResumeLayout(false);
+            this.pnGuardar.ResumeLayout(false);
+            this.PanelAcciones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -428,19 +391,17 @@
         private System.Windows.Forms.Label lblAlumnos;
         private System.Windows.Forms.Label label1;
         private ControlesUsuario.dataGridPerso2 tablaAlumnos;
-        private System.Windows.Forms.TableLayoutPanel PanelAcciones;
-        private System.Windows.Forms.Panel pnAgregar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Panel pnEliminar;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Panel pnCancelar;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Panel pnGuardar;
-        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel pnEditarHorario;
         private System.Windows.Forms.Button btnEditarAlumnos;
         private System.Windows.Forms.ComboBox cmbDocentes;
         private System.Windows.Forms.Label lblNomDocente;
+        private System.Windows.Forms.TableLayoutPanel PanelAcciones;
+        private System.Windows.Forms.Panel pnGuardar;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Panel pnEliminar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Panel pnAgregar;
+        private System.Windows.Forms.Button btnAgregar;
     }
 }

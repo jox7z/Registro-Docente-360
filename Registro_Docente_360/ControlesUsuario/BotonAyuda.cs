@@ -36,7 +36,7 @@ namespace Registro_Docente_360.Forms
 
         private void pictureAyuda_Click(object sender, EventArgs e)
         {
-            string urlArchivo = "https://drive.google.com/drive/folders/1VFuMI5kD7_Qa-1l3HJzJJz_PoyHMol8u?usp=drive_link"; // URL pública del manual
+            string urlArchivo = "https://drive.google.com/drive/folders/1ncZF99F_bqLWfAaI4VsWkULYFn9qAZOn?usp=drive_link"; // URL pública del manual
 
             try
             {
