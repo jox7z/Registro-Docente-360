@@ -120,7 +120,7 @@ namespace Registro_Docente_360.Forms
                 if (cmbRol.SelectedValue == null) return;
 
                 int idRol = (int)cmbRol.SelectedValue;
-                bool esDocentePuro = EsDocentePuro(idRol,_contexto);
+                bool esDocentePuro = EsDocentePuro(idRol, _contexto);
 
                 label5.Visible = esDocentePuro;
                 cmbSeccion.Visible = esDocentePuro;
@@ -200,23 +200,15 @@ namespace Registro_Docente_360.Forms
 
                 int idSeccionSeleccionada = (int)cmbSeccion.SelectedValue;
 
-                // Verificar si la sección está asignada a otro docente
-                using (var contexto = new RegistroDocenteEntities())
+                // Usar la función existente SeccionAsignadaAOtroDocente
+                if (SeccionAsignadaAOtroDocente(idSeccionSeleccionada))
                 {
-                    bool seccionAsignada = contexto.Usuarios
-                        .Any(u => u.id_seccion == idSeccionSeleccionada &&
-                               u.id_usuario != _usuario.id_usuario &&
-                               EsDocentePuro(u.id_rol, contexto));
-
-                    if (seccionAsignada)
-                    {
-                        string nombreSeccion = cmbSeccion.Text;
-                        MessageBox.Show($"La sección {nombreSeccion} ya está asignada a otro docente",
-                                      "Error",
-                                      MessageBoxButtons.OK,
-                                      MessageBoxIcon.Error);
-                        return false;
-                    }
+                    string nombreSeccion = cmbSeccion.Text;
+                    MessageBox.Show($"La sección {nombreSeccion} ya está asignada a otro docente",
+                                  "Error",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Error);
+                    return false;
                 }
             }
 
@@ -407,6 +399,5 @@ namespace Registro_Docente_360.Forms
                         rp.id_permiso == 2));
             }
         }
-
-    } 
+    }
 }

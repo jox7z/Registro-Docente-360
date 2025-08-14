@@ -189,6 +189,7 @@ namespace Registro_Docente_360.Forms
         private void ConfigurarTabla()
         {
             datagridRoles.Columns.Clear();
+
             // Hacer que todo el DataGridView sea de solo lectura
             datagridRoles.ReadOnly = true;
 
@@ -200,6 +201,8 @@ namespace Registro_Docente_360.Forms
 
             // Deshabilitar la eliminación de filas
             datagridRoles.AllowUserToDeleteRows = false;
+
+            // Agregar columnas de texto normal (ya no con ComboBox)
             datagridRoles.Columns.Add("colID", "ID");
             datagridRoles.Columns["colID"].DataPropertyName = "id_usuario";
 
@@ -218,45 +221,25 @@ namespace Registro_Docente_360.Forms
             datagridRoles.Columns.Add("colCedula", "Cédula");
             datagridRoles.Columns["colCedula"].DataPropertyName = "cedula_usuario";
 
+           
+            datagridRoles.Columns.Add("colSeccion", "Sección");
+            datagridRoles.Columns["colSeccion"].DataPropertyName = "nombre_seccion";  // Mostrar el nombre de la sección
+
+            datagridRoles.Columns.Add("colEstado", "Estado");
+            datagridRoles.Columns["colEstado"].DataPropertyName = "estado_usuario";  // Mostrar el estado del usuario (A/Inactivo)
+
+            datagridRoles.Columns.Add("colRol", "Rol");
+            datagridRoles.Columns["colRol"].DataPropertyName = "nombre_rol";  // Mostrar el nombre del rol
+
+            // Configurar selección de filas
             datagridRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             datagridRoles.MultiSelect = false;
 
-            var secciones = new AlumnoController().ObtenerSecciones();
-            var colSeccion = new DataGridViewComboBoxColumn
-            {
-                Name = "colSeccion",
-                HeaderText = "Sección",
-                DataSource = secciones,
-                DisplayMember = "nombre_seccion",
-                ValueMember = "nombre_seccion",
-                DataPropertyName = "nombre_seccion"
-            };
-            datagridRoles.Columns.Add(colSeccion);
-
-            var colEstado = new DataGridViewComboBoxColumn
-            {
-                Name = "colEstado",
-                HeaderText = "Estado",
-                DataSource = new List<string> { "A", "I" },
-                DataPropertyName = "estado_usuario"
-            };
-            datagridRoles.Columns.Add(colEstado);
-
-            var roles = new AlumnoController().ObtenerRoles();
-            var colRol = new DataGridViewComboBoxColumn
-            {
-                Name = "colRol",
-                HeaderText = "Rol",
-                DataSource = roles,
-                DisplayMember = "nombre_rol",
-                ValueMember = "nombre_rol",
-                DataPropertyName = "nombre_rol"
-            };
-            datagridRoles.Columns.Add(colRol);
-
+            // Deshabilitar la adición de nuevas filas
             datagridRoles.AllowUserToAddRows = false;
-            datagridRoles.ReadOnly = false;
+            datagridRoles.ReadOnly = true;  
         }
+
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
