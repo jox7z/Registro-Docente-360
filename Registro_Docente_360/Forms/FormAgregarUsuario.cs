@@ -1,5 +1,6 @@
 ﻿using Modelos.EntityFramework;
 using Registro_Docente_360.Controladores;
+using Registro_Docente_360.Eventos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,6 +139,7 @@ namespace Registro_Docente_360.Forms
 
             try
             {
+                bool esNuevoUsuario = _usuario.id_usuario == 0;
                 // Actualizar objeto usuario
                 _usuario.cedula_usuario = txtCedula.Text.Trim();
                 _usuario.nombre_usuario = txtNombre.Text.Trim();
@@ -162,6 +164,25 @@ namespace Registro_Docente_360.Forms
                 if (!string.IsNullOrEmpty(txtContra.Text))
                 {
                     _usuario.contraseña = new AlumnoController().EncriptarContrasena(txtContra.Text);
+                }
+
+                if (esNuevoUsuario == true)
+                {
+                    string descripcion = $"Nuevo usuario : {txtNombre.Text}";
+                    string accion = "Nuevo usuario";
+                    string modulo = "Usuarios";
+
+                    AlumnoController controlador = new AlumnoController();
+                    controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+                }
+                else if (esNuevoUsuario == false)
+                {
+                    string descripcion = $"Edicion usuario : {txtNombre.Text}";
+                    string accion = "Edicion usuario";
+                    string modulo = "Usuarios";
+
+                    AlumnoController controlador = new AlumnoController();
+                    controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
                 }
 
                 this.DialogResult = DialogResult.OK;

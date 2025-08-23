@@ -108,5 +108,14 @@ namespace Registro_Docente_360.Forms
         {
             CargarMovimientos();
         }
+
+        private void UcAccionesUsuario_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                CargarMovimientos();
+            }
+        }
+
     }
 }

@@ -232,8 +232,14 @@ namespace Registro_Docente_360.Forms
                             }
                             contexto.SaveChanges();
                         }
+                        string descripcion = $"Nuevo alumno: {txtNombre.Text}";
+                        string accion = "Nuevo alumno";
+                        string modulo = "Alumnos";
 
-                        MessageBox.Show("Alumno guardado correctamente con sus clases asignadas",
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+
+                        MessageBox.Show("Alumno guardado correctamente",
                                       "Éxito",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
@@ -246,6 +252,13 @@ namespace Registro_Docente_360.Forms
                         existe.segundo_apellido = Alumno.segundo_apellido;
                         existe.telefono_encargado = Alumno.telefono_encargado;
                         contexto.SaveChanges();
+
+                        string descripcion = $"Edicion alumno: {txtNombre.Text}";
+                        string accion = "Edicion alumno";
+                        string modulo = "Alumnos";
+
+                        AlumnoController controlador = new AlumnoController();
+                        controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
 
                         MessageBox.Show("Datos del alumno actualizados correctamente",
                                       "Éxito",

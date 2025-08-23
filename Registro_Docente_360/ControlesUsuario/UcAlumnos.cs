@@ -318,6 +318,13 @@ namespace Registro_Docente_360.Forms
             if (MessageBox.Show($"¿Eliminar al estudiante {nombre}?", "Confirmar",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                string descripcion = $"Eliminacion alumno: {nombre}";
+                string accion = "Eliminacion alumno";
+                string modulo = "Alumnos";
+
+                AlumnoController controlador = new AlumnoController();
+                controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
+
                 using (var contexto = new RegistroDocenteEntities())
                 {
                     var alumno = contexto.Estudiantes.Find(idEstudiante);

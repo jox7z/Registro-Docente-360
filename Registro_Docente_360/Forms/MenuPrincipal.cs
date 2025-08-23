@@ -142,7 +142,6 @@ namespace Registro_Docente_360
             // --- Mostrar btnMantenimiento SOLO si tiene admin, usuarios o bitácoras ---
             bool puedeVerMantenimiento =
                 AlumnoController.PermisosRolActual.Contains(2) || // Admin
-                AlumnoController.PermisosRolActual.Contains(3) || // Modificar Usuarios
                 AlumnoController.PermisosRolActual.Contains(6);   // Bitácoras
 
             btnMantenimiento.Visible = puedeVerMantenimiento;
@@ -151,8 +150,7 @@ namespace Registro_Docente_360
 
             // --- USUARIOS: Permiso de admin o modificar usuarios ---
             SetButtonState(btnUsuarios,
-                AlumnoController.PermisosRolActual.Contains(2) ||
-                AlumnoController.PermisosRolActual.Contains(3)
+                AlumnoController.PermisosRolActual.Contains(2)
             );
 
             // --- ROLES Y PERMISOS: Solo admin ---
@@ -622,18 +620,9 @@ namespace Registro_Docente_360
 
             MostrarUserControl(ucAccionesUsuario);
         }
+
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            // Validar permiso para modificar usuarios
-            if (!AlumnoController.VerificarSiModificaUsuario(Sesion.IdUsuario))
-            {
-                MessageBox.Show("No tienes permiso para modificar usuarios",
-                               "Acceso denegado",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Warning);
-                return;
-            }
-
             if (ucUsuarios == null)
                 ucUsuarios = new UcUsuarios();
 
@@ -698,10 +687,6 @@ namespace Registro_Docente_360
         // ========================
         // EVENTOS DE OTROS COMPONENTES
         // ========================
-        private void pictureAyuda_Click(object sender, EventArgs e)
-        {
-            // aquí va lo que vaya a cargar en Ayuda
-        }
 
         private void paneltop_MouseDown_1(object sender, MouseEventArgs e)
         {

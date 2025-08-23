@@ -27,8 +27,22 @@ namespace Registro_Docente_360.Forms
 
             datagridRoles.AllowUserToAddRows = false;
             datagridRoles.ReadOnly = false;
-      
+            ConfigurarPermisos();
+
         }
+        private void ConfigurarPermisos()
+        {
+            // Verificar SOLO el permiso 3 (Modificar Usuarios)
+            AlumnoController.CargarPermisosRolActual(Sesion.IdRol);
+            bool tienePermisoModificar = AlumnoController.PermisosRolActual.Contains(3);
+
+            // Si NO tiene permiso 3, desactivar TODOS los botones
+            btnAgregar.Enabled = tienePermisoModificar;
+            btnModificar.Enabled = tienePermisoModificar;
+            btnEliminar.Enabled = tienePermisoModificar;
+
+        }
+
 
         private void btnAgregar_Click(object sender, System.EventArgs e)
         {
@@ -99,13 +113,21 @@ namespace Registro_Docente_360.Forms
                 string modulo = "Usuarios";
                 controlador.RegistrarMovimiento(Sesion.IdUsuario, accion, descripcion, modulo);
 
-                MessageBox.Show("Usuario marcado como inactivo.", "Inactivado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Usuario marcado como inactivo.", "Inactivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarUsuarios(); // Refrescar la tabla
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            // Verificar permiso 3 nuevamente por seguridad
+            if (!AlumnoController.PermisosRolActual.Contains(3))
+            {
+                MessageBox.Show("No tiene permisos para gestionar usuarios", "Permiso denegado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (datagridRoles.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Seleccione un usuario para modificar");
@@ -262,9 +284,6 @@ namespace Registro_Docente_360.Forms
             // Alternativa: Habilitar solo si se hace clic en una celda válida (no en encabezados)
             btnModificar.Enabled = e.RowIndex >= 0;
         }
-
-
-
 
     }
 }
